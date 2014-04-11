@@ -19,10 +19,13 @@
     "url": "https://github.com/okize/blundercats/issues"
   },
   "dependencies": {
-    "express": "3.5.x",
-    "jade": "1.3.x",
-    "coffee-script": "1.7.x",
-    "mongoose": "3.8.x",
-    "mongoose-random": "0.0.2"
+    "express": "x",
+    "body-parser": "x",
+    "cookie-parser": "x",
+    "morgan": "x",
+    "jade": "x",
+    "coffee-script": "x",
+    "mongoose": "x",
+    "mongoose-random": "x"
   }
 }
