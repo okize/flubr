@@ -2,14 +2,19 @@ express = require 'express'
 mongoose = require 'mongoose'
 images = require './controller/images'
 
+path = require 'path'
+logger = require 'morgan'
+cookieParser = require 'cookie-parser'
+bodyParser = require 'body-parser'
+
 app = express()
 
-app.configure ->
-  app.set 'port', process.env.PORT or 3000
-  app.set 'storage-uri', process.env.MONGOHQ_URL or 'mongodb://localhost/images'
-  app.use express.json()
-  app.use express.urlencoded()
-  app.use express.methodOverride()
+app.set 'port', process.env.PORT or 3000
+app.set 'storage-uri', process.env.MONGOHQ_URL or 'mongodb://localhost/images'
+app.use logger('dev')
+app.use bodyParser.json()
+app.use bodyParser.urlencoded()
+app.use cookieParser()
 
 mongoose.connect app.get('storage-uri'), {db: {safe: true}}, (err) ->
   console.log 'Mongoose - connection error: ' + err if err?
