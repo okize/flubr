@@ -17,9 +17,9 @@ exports.retrieve = (req, res) ->
     Resource.find {kind: req.params.type}, (err, resource) ->
       res.send(500, { error: err }) if err?
       res.send(resource) if resource?
-      res.send(404)
   else
     Resource.find {}, (err, coll) ->
+      res.send(500, { error: err }) if err?
       res.send(coll)
 
 
