@@ -9,14 +9,14 @@ exports.create = (req, res)  ->
     res.send(500, {error: err}) if err?
     res.send(resource)
 
-
 exports.retrieve = (req, res) ->
   Resource = mongoose.model('Image')
 
+  # if url has fail/win then return a random win or fail url
   if req.params.type?
-    Resource.findRandom (err, resource) ->
+    Resource.find {kind: req.params.type}, (err, resource) ->
       res.send(500, { error: err }) if err?
-      res.send(resource.image_url) if resource?
+      res.send(resource) if resource?
   else
     Resource.find {}, (err, coll) ->
       res.send(500, { error: err }) if err?
