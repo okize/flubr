@@ -14,9 +14,9 @@ exports.retrieve = (req, res) ->
   Resource = mongoose.model('Image')
 
   if req.params.type?
-    Resource.find {kind: req.params.type}, (err, resource) ->
+    Resource.findRandom (err, resource) ->
       res.send(500, { error: err }) if err?
-      res.send(resource) if resource?
+      res.send(resource.image_url) if resource?
   else
     Resource.find {}, (err, coll) ->
       res.send(500, { error: err }) if err?

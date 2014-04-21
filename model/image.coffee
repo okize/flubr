@@ -1,4 +1,5 @@
 mongoose = require 'mongoose'
+random = require 'mongoose-random'
 
 Image = new mongoose.Schema(
   image_url: String
@@ -8,5 +9,6 @@ Image = new mongoose.Schema(
   randomizer: { type: Number, default: Math.random() }
   created_at: { type: Date, default: Date.now }
 )
+Image.plugin random()
 
 mongoose.model 'Image', Image
