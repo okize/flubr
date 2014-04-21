@@ -25,6 +25,7 @@
     "morgan": "x",
     "jade": "x",
     "coffee-script": "x",
-    "mongoose": "x"
+    "mongoose": "x",
+    "loadash": "x"
   }
 }
