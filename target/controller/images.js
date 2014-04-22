@@ -35,7 +35,7 @@ exports.retrieve = function(req, res) {
         });
       }
       if (randomImage != null) {
-        return res.json(randomImage);
+        return res.send(randomImage.image_url);
       }
     });
   } else {

@@ -18,7 +18,7 @@ exports.retrieve = (req, res) ->
     Resource.find {kind: req.params.type}, 'image_url randomizer', (err, resource) ->
       randomImage = _.sample(resource)
       res.send(500, { error: err }) if err?
-      res.json(randomImage) if randomImage?
+      res.send(randomImage.image_url) if randomImage?
   else
     Resource.find {}, (err, coll) ->
       res.send(500, { error: err }) if err?
