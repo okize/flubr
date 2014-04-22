@@ -34,8 +34,8 @@ exports.retrieve = function(req, res) {
           error: err
         });
       }
-      if (resource != null) {
-        return res.send(randomImage.image_url);
+      if (randomImage != null) {
+        return res.json(randomImage);
       }
     });
   } else {
