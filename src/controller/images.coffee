@@ -23,3 +23,23 @@ exports.retrieve = (req, res) ->
     Resource.find {}, (err, coll) ->
       res.send(500, { error: err }) if err?
       res.send(coll)
+
+
+
+# exports.update = (req, res) ->
+#   Resource = mongoose.model('Image')
+#   fields - req.body
+
+#   Resource.findByIdAndUpdate req.params.id, { $set: fields }, (err, resource) ->
+#     res.send(500, { error: err}) if err?
+#     res.send(resource) if resource?
+#     res.send(404)
+
+
+# exports.delete = (req, res) ->
+#   Resource = mongoose.model('Image')
+
+#   Resource.findByIdAndRemove req.params.id, (err, resource) ->
+#     res.send(500, {error: err}) if err?
+#     res.send(200) if resource?
+#     res.send(404)
