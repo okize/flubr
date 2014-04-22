@@ -1,2 +1,2 @@
-web: nodemon ./src/app.coffee
+web: nodemon src/app.coffee
 mongodb: mongod
