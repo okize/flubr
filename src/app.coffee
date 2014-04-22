@@ -11,7 +11,7 @@ app = express()
 
 app.set 'port', process.env.PORT or 3000
 
-app.set 'views', path.join(__dirname, 'views')
+app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
 app.set 'storage-uri', process.env.MONGOHQ_URL or 'mongodb://localhost/images'
 app.use logger('dev')
