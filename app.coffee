@@ -28,14 +28,9 @@ mongoose.connect app.get('storage-uri'), {db: {safe: true}}, (err) ->
 
 require './model/image'
 
-# app.get '/', (req, res) ->
-#   res.send 'Blundercats!'
-
 app.post    '/images',     images.create
 app.get     '/images',     images.retrieve
 app.get     '/images/:type', images.retrieve
-# app.put     '/images/:id', images.update
-# app.delete  '/images/:id', images.delete
 
 app.listen app.get('port'), ->
   console.log "Listening on port #{app.get('port')}"
