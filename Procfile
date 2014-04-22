@@ -1,1 +1,1 @@
-web: node app.coffee
+web: target/node app.js
