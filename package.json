@@ -26,6 +26,6 @@
     "jade": "x",
     "coffee-script": "x",
     "mongoose": "x",
-    "loadash": "x"
+    "lodash": "x"
   }
 }
