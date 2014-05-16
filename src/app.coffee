@@ -39,11 +39,11 @@ mongoose.connect app.get('storage-uri'), {db: {safe: true}}, (err) ->
 
 require './model/image'
 
-# 404s
-app.use (req, res, next) ->
-  err = new Error('Not Found')
-  err.status = 404
-  next(err)
+# # 404s
+# app.use (req, res, next) ->
+#   err = new Error('Not Found')
+#   err.status = 404
+#   next(err)
 
 app.post    '/images',     images.create
 app.get     '/images',     images.retrieve
