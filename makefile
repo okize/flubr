@@ -4,11 +4,11 @@ default:
 
 build:
 
-	coffee --compile --bare --output target src
+	coffee --compile --bare --map --output target src
 
 debug:
 
-	node-debug src/app.coffee
+	node-debug target/app.js
 
 pass:
 
