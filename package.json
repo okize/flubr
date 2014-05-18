@@ -31,10 +31,11 @@
     "nib": "x"
   },
   "devDependencies": {
+    "connect-livereload": "*",
     "gulp": "*",
+    "gulp-coffee": "*",
     "gulp-nodemon": "*",
     "gulp-util": "*",
-    "tiny-lr": "*",
-    "connect-livereload": "*"
+    "tiny-lr": "*"
   }
 }
