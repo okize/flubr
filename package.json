@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "body-parser": "x",
-    "coffee-middleware": "x",
     "coffee-script": "x",
+    "connect-coffee-script": "*",
     "cookie-parser": "x",
     "express": "x",
     "jade": "x",
