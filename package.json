@@ -32,6 +32,9 @@
   },
   "devDependencies": {
     "gulp": "*",
-    "gulp-nodemon": "*"
+    "gulp-nodemon": "*",
+    "gulp-util": "*",
+    "tiny-lr": "*",
+    "connect-livereload": "*"
   }
 }
