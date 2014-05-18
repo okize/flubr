@@ -31,7 +31,7 @@ app.use logger('dev')
 app.use bodyParser.json()
 app.use bodyParser.urlencoded()
 app.use cookieParser()
-qapp.use '/', home
+app.use '/', home
 
 mongoose.connect app.get('storage-uri'), {db: {safe: true}}, (err) ->
   console.log 'Mongoose - connection error: ' + err if err?

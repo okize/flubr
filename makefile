@@ -1,10 +1,14 @@
 default:
 
-	@echo "use either 'make pass' or 'make fail'"
+	@echo "use either 'make pass' or 'make fail' to send message to campfire"
 
 build:
 
 	coffee --compile --bare --output target src
+
+debug:
+
+	node-debug src/app.coffee
 
 pass:
 
