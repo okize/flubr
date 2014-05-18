@@ -25,7 +25,7 @@
     "cookie-parser": "x",
     "express": "x",
     "jade": "x",
-    "lodash": "x",
+    "lodash": "^2.4.1",
     "mongoose": "x",
     "morgan": "x",
     "nib": "x",
