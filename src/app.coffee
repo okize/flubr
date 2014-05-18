@@ -1,20 +1,23 @@
+path = require 'path'
 express = require 'express'
+logger = require 'morgan'
+cookieParser = require 'cookie-parser'
+bodyParser = require 'body-parser'
+livereload = require 'connect-livereload'
 mongoose = require 'mongoose'
 stylus = require 'stylus'
 nib = require 'nib'
 images = require './controller/images'
 home = require './routes/index'
-path = require 'path'
-logger = require 'morgan'
-cookieParser = require 'cookie-parser'
-bodyParser = require 'body-parser'
 
 app = express()
 
 app.set 'port', process.env.PORT or 3000
 app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
-app.set 'storage-uri', process.env.MONGOHQ_URL or 'mongodb://localhost/images'
+app.set 'db-url', process.env.MONGOHQ_URL or 'mongodb://localhost/images'
+
+app.use livereload() if process.env.NODE_ENV == 'development'
 app.use stylus.middleware
   src: path.join(__dirname, '..', 'views')
   dest: path.join(__dirname, '..', 'public')
@@ -32,7 +35,7 @@ app.use bodyParser.urlencoded()
 app.use cookieParser()
 app.use '/', home
 
-mongoose.connect app.get('storage-uri'), {db: {safe: true}}, (err) ->
+mongoose.connect app.get('db-url'), {db: {safe: true}}, (err) ->
   console.log 'Mongoose - connection error: ' + err if err?
   console.log 'Mongoose - connection OK'
 
