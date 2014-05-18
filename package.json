@@ -29,5 +29,9 @@
     "morgan": "x",
     "stylus": "x",
     "nib": "x"
+  },
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-nodemon": "*"
   }
 }
