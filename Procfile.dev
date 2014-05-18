@@ -1,2 +1,2 @@
-web: nodemon src/app.coffee
+web: gulp
 mongodb: mongod

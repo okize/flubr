@@ -29,5 +29,13 @@
     "morgan": "x",
     "stylus": "x",
     "nib": "x"
+  },
+  "devDependencies": {
+    "connect-livereload": "*",
+    "gulp": "*",
+    "gulp-coffee": "*",
+    "gulp-nodemon": "*",
+    "gulp-util": "*",
+    "tiny-lr": "*"
   }
 }
