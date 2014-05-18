@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "body-parser": "x",
+    "coffee-middleware": "x",
     "coffee-script": "x",
     "cookie-parser": "x",
     "express": "x",
@@ -27,8 +28,8 @@
     "lodash": "x",
     "mongoose": "x",
     "morgan": "x",
-    "stylus": "x",
-    "nib": "x"
+    "nib": "x",
+    "stylus": "x"
   },
   "devDependencies": {
     "connect-livereload": "*",
