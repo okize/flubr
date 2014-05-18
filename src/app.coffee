@@ -20,7 +20,6 @@ app.use stylus.middleware
   dest: path.join(__dirname, '..', 'public')
   debug: true
   compile: (str, _path) ->
-    console.log 'compile'
     stylus(str)
       .set('filename', _path)
       .set('compress', true)

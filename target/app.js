@@ -36,7 +36,6 @@ app.use(stylus.middleware({
   dest: path.join(__dirname, '..', 'public'),
   debug: true,
   compile: function(str, _path) {
-    console.log('compile');
     return stylus(str).set('filename', _path).set('compress', true).use(nib())["import"]('nib');
   }
 }));
@@ -66,13 +65,6 @@ mongoose.connect(app.get('storage-uri'), {
 
 require('./model/image');
 
-app.use(function(req, res, next) {
-  var err;
-  err = new Error('Not Found');
-  err.status = 404;
-  return next(err);
-});
-
 app.post('/images', images.create);
 
 app.get('/images', images.retrieve);
@@ -82,3 +74,5 @@ app.get('/images/:type', images.retrieve);
 app.listen(app.get('port'), function() {
   return console.log("Listening on port " + (app.get('port')));
 });
+
+//# sourceMappingURL=app.map
