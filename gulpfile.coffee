@@ -1,5 +1,6 @@
 # modules
 path = require 'path'
+_ = require 'lodash'
 gulp = require 'gulp'
 gutil = require 'gulp-util'
 watch = require 'gulp-watch'
@@ -20,6 +21,11 @@ sources =
   app: 'src/*.*'
   jade: 'views/*.jade'
   css: 'views/stylesheets/*.styl'
+  coffee: 'views/javascripts/*.coffee'
+
+# returns an array of the source folders in sources object
+getSources = ->
+  _.values sources
 
 # sends updated files to LiveReload server
 refresh = (event) ->
@@ -56,7 +62,7 @@ gulp.task 'start', ->
 # watches source files and triggers refresh on change
 gulp.task 'watch', ->
   log 'watching files...'
-  gulp.watch ['src/*.coffee', 'views/*.jade','views/stylesheets/*.styl'], refresh
+  gulp.watch getSources(), refresh
 
 # builds coffeescript source into deployable javascript
 gulp.task 'build', ->
