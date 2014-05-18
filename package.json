@@ -21,14 +21,15 @@
   "dependencies": {
     "body-parser": "x",
     "coffee-script": "x",
+    "connect-coffee-script": "*",
     "cookie-parser": "x",
     "express": "x",
     "jade": "x",
     "lodash": "x",
     "mongoose": "x",
     "morgan": "x",
-    "stylus": "x",
-    "nib": "x"
+    "nib": "x",
+    "stylus": "x"
   },
   "devDependencies": {
     "connect-livereload": "*",

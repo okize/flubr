@@ -5,6 +5,8 @@ cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 livereload = require 'connect-livereload'
 mongoose = require 'mongoose'
+coffee = require 'coffee-script'
+coffeeScript = require 'connect-coffee-script'
 stylus = require 'stylus'
 nib = require 'nib'
 images = require './controller/images'
@@ -28,6 +30,11 @@ app.use stylus.middleware
       .set('compress', true)
       .use(nib())
       .import('nib')
+app.use coffeeScript
+  src: path.join(__dirname, '..', 'views')
+  dest: path.join(__dirname, '..', 'public')
+  bare: true
+  compress: true
 app.use express.static(path.join(__dirname, '..', 'public'))
 app.use logger('dev')
 app.use bodyParser.json()
