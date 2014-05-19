@@ -4,28 +4,30 @@ _ = require 'lodash'
 gulp = require 'gulp'
 gutil = require 'gulp-util'
 watch = require 'gulp-watch'
+liveReload = require('tiny-lr')()
 nodemon = require 'gulp-nodemon'
 coffee = require 'gulp-coffee'
-liveReload = require('tiny-lr')()
+clean = require 'gulp-clean'
 
 # configuration
 appRoot = __dirname
-liveReloadPort = 35729
-
-# small wrapper around gulp util logging
-log = (msg) ->
-  gutil.log '[gulpfile]', gutil.colors.blue(msg)
-
-# list of folders that need to be compiled
+mainScript = path.join(appRoot, 'src', 'app.coffee')
+buildDir = path.join(appRoot, 'build')
 sources =
-  app: 'src/*.coffee'
+  app: 'src/**/*.coffee'
   jade: 'views/*.jade'
   css: 'views/stylesheets/*.styl'
   coffee: 'views/javascripts/*.coffee'
+liveReloadPort = 35729
+
 
 # returns an array of the source folders in sources object
 getSources = ->
   _.values sources
+
+# small wrapper around gulp util logging
+log = (msg) ->
+  gutil.log '[gulpfile]', gutil.colors.blue(msg)
 
 # sends updated files to LiveReload server
 refresh = (event) ->
@@ -43,7 +45,7 @@ gulp.task 'default', [
 # starts up LiveReload server and the app with nodemon
 gulp.task 'start', ->
   nodemon(
-    script: path.join(appRoot, 'src/app.coffee')
+    script: mainScript
     ext: 'coffee'
     env:
       'NODE_ENV': 'development'
@@ -64,10 +66,26 @@ gulp.task 'watch', ->
   log 'watching files...'
   gulp.watch getSources(), refresh
 
+# removes distribution folder
+gulp.task 'clean', ->
+  gulp
+    .src(buildDir, read: false)
+    .pipe(clean())
+
 # builds coffeescript source into deployable javascript
 gulp.task 'build', ->
-  log 'todo!'
+  gulp
+    .src(sources.app)
+    .pipe(coffee(
+      bare: true
+      sourceMap: false
+    ).on('error', gutil.log))
+    .pipe(
+      gulp.dest(buildDir)
+    )
 
 # deploys application
-gulp.task 'deploy', ->
-  log 'todo!'
+gulp.task 'deploy', [
+  'clean',
+  'build'
+]
