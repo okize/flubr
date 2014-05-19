@@ -18,7 +18,7 @@ log = (msg) ->
 
 # list of folders that need to be compiled
 sources =
-  app: 'src/*.*'
+  app: 'src/*.coffee'
   jade: 'views/*.jade'
   css: 'views/stylesheets/*.styl'
   coffee: 'views/javascripts/*.coffee'
@@ -66,13 +66,7 @@ gulp.task 'watch', ->
 
 # builds coffeescript source into deployable javascript
 gulp.task 'build', ->
-  gulp
-    .src(sources.app)
-    .pipe(coffee(
-      bare: true
-      sourceMap: true
-    ).on('error', gutil.log))
-    .pipe(gulp.dest(path.join(appRoot, 'dist')))
+  log 'todo!'
 
 # deploys application
 gulp.task 'deploy', ->

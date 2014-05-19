@@ -43,8 +43,10 @@ app.use cookieParser()
 app.use '/', home
 
 mongoose.connect app.get('db-url'), {db: {safe: true}}, (err) ->
-  console.log 'Mongoose - connection error: ' + err if err?
-  console.log 'Mongoose - connection OK'
+  unless err?
+    console.log 'Mongoose - connection OK'
+  else
+    console.log 'Mongoose - connection error: ' + err if err?
 
 require './model/image'
 
