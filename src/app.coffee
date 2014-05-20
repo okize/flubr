@@ -2,6 +2,7 @@
 path = require 'path'
 express = require 'express'
 logger = require 'morgan'
+session = require 'express-session'
 cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 livereload = require 'connect-livereload'
@@ -11,7 +12,7 @@ coffeescriptMiddleware = require 'connect-coffee-script'
 stylus = require 'stylus'
 nib = require 'nib'
 
-# init application
+# create application instance
 app = express()
 
 # configuration
@@ -22,8 +23,15 @@ app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
 app.set 'db-url', process.env.MONGOHQ_URL or 'mongodb://localhost/images'
 
+# database connection
+mongoose.connect app.get('db-url'), {db: {safe: true}}, (err) ->
+  unless err?
+    console.log 'Mongoose - connection OK'
+  else
+    console.log 'Mongoose - connection error: ' + err if err?
+
 # dev middleware
-if app.get 'env' is 'development'
+if app.get('env') == 'development'
   app.use livereload()
 
 # middleware
@@ -42,19 +50,27 @@ app.use coffeescriptMiddleware
   dest: path.join(__dirname, '..', 'public')
   bare: true
   compress: true
-app.use express.static(path.join(__dirname, '..', 'public'))
 app.use logger('dev')
-app.use bodyParser.json()
-app.use bodyParser.urlencoded()
-app.use cookieParser()
-app.use '/', require './routes/index'
 
-# database connection
-mongoose.connect app.get('db-url'), {db: {safe: true}}, (err) ->
-  unless err?
-    console.log 'Mongoose - connection OK'
-  else
-    console.log 'Mongoose - connection error: ' + err if err?
+# assets
+app.use express.static(path.join(__dirname, '..', 'public'))
+
+# sessions
+console.log 'Setting session/cookie'
+app.use cookieParser()
+app.use session(
+  secret: 'blundercats'
+  key: 'sid'
+  cookie:
+    secure: true
+)
+
+# parses json & xml
+app.use bodyParser()
+
+# routes
+routes = require './routes'
+routes(app)
 
 app.listen app.get('port'), ->
   console.log "#{app.get('app name')} running on port #{app.get('port')}"
