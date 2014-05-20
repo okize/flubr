@@ -2,7 +2,7 @@
   "name": "blundercats",
   "version": "0.0.1",
   "private": true,
-  "description": "fail/win images for campfire, etc. moderated by your team members",
+  "description": "pass/fail images for campfire, etc. moderated by your team members",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
