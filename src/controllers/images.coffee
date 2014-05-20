@@ -4,6 +4,7 @@ Image = require path.join('..', 'models', 'image')
 
 errors =
   noIdError: "Please specify image type (pass/fail) in request url"
+  noImageError: "No image found"
 
 # image model's CRUD controller.
 module.exports =
@@ -20,7 +21,10 @@ module.exports =
     Image.find {kind: req.params.id}, 'image_url randomizer', (err, results) ->
       res.send(500, { error: err }) if err?
       randomImage = _.sample(results)
-      res.send(randomImage.image_url) if randomImage?
+      unless !randomImage?
+        res.send(randomImage.image_url)
+      else
+        res.send 500, error: errors.noImageError
 
   # creates new image record
   create: (req, res)  ->
@@ -40,5 +44,5 @@ module.exports =
   delete: (req, res) ->
     Image.findByIdAndRemove req.params.id, (err, results) ->
       res.send(500, {error: err}) if err?
-      res.send(200) if results?
+      res.send(200, results) if results?
       res.send(404)
