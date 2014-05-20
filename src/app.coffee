@@ -1,25 +1,40 @@
+# modules
 path = require 'path'
 express = require 'express'
 logger = require 'morgan'
+session = require 'express-session'
 cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 livereload = require 'connect-livereload'
 mongoose = require 'mongoose'
 coffee = require 'coffee-script'
-coffeeScript = require 'connect-coffee-script'
+coffeescriptMiddleware = require 'connect-coffee-script'
 stylus = require 'stylus'
 nib = require 'nib'
-images = require './controller/images'
-home = require './routes/index'
 
+# create application instance
 app = express()
 
-app.set 'port', process.env.PORT or 3000
+# configuration
+app.set 'app name', 'Blundercats'
+app.set 'env', process.env.NODE_ENV or 'development'
+app.set 'port', process.env.PORT or 2000
 app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
 app.set 'db-url', process.env.MONGOHQ_URL or 'mongodb://localhost/images'
 
-app.use livereload() if process.env.NODE_ENV == 'development'
+# database connection
+mongoose.connect app.get('db-url'), {db: {safe: true}}, (err) ->
+  unless err?
+    console.log 'Mongoose - connection OK'
+  else
+    console.log 'Mongoose - connection error: ' + err if err?
+
+# dev middleware
+if app.get('env') == 'development'
+  app.use livereload()
+
+# middleware
 app.use stylus.middleware
   src: path.join(__dirname, '..', 'views')
   dest: path.join(__dirname, '..', 'public')
@@ -30,37 +45,32 @@ app.use stylus.middleware
       .set('compress', true)
       .use(nib())
       .import('nib')
-app.use coffeeScript
+app.use coffeescriptMiddleware
   src: path.join(__dirname, '..', 'views')
   dest: path.join(__dirname, '..', 'public')
   bare: true
   compress: true
-app.use express.static(path.join(__dirname, '..', 'public'))
 app.use logger('dev')
-app.use bodyParser.json()
-app.use bodyParser.urlencoded()
+
+# assets
+app.use express.static(path.join(__dirname, '..', 'public'))
+
+# sessions
+console.log 'Setting session/cookie'
 app.use cookieParser()
-app.use '/', home
+app.use session(
+  secret: 'blundercats'
+  key: 'sid'
+  cookie:
+    secure: true
+)
 
-mongoose.connect app.get('db-url'), {db: {safe: true}}, (err) ->
-  unless err?
-    console.log 'Mongoose - connection OK'
-  else
-    console.log 'Mongoose - connection error: ' + err if err?
+# parses json & xml
+app.use bodyParser()
 
-require './model/image'
-
-# # 404s
-# app.use (req, res, next) ->
-#   err = new Error('Not Found')
-#   err.status = 404
-#   next(err)
-
-app.post    '/images',     images.create
-app.get     '/images',     images.retrieve
-app.get     '/images/:type', images.retrieve
-# app.put     '/images/:id', images.update
-# app.delete  '/images/:id', images.delete
+# routes
+routes = require './routes'
+routes(app)
 
 app.listen app.get('port'), ->
-  console.log "Listening on port #{app.get('port')}"
+  console.log "#{app.get('app name')} running on port #{app.get('port')}"

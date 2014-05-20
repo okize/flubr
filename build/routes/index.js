@@ -1,4 +1,6 @@
-var express, router;
+var express, path, router;
+
+path = require('path');
 
 express = require('express');
 
@@ -9,5 +11,13 @@ router.get('/', function(req, res) {
     title: 'Blundercats!'
   });
 });
+
+require(path.join('./model/image'));
+
+router.post('/images', images.create);
+
+router.get('/images', images.retrieve);
+
+router.get('/images/:type', images.retrieve);
 
 module.exports = router;

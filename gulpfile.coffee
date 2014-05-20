@@ -3,7 +3,6 @@ path = require 'path'
 _ = require 'lodash'
 gulp = require 'gulp'
 gutil = require 'gulp-util'
-watch = require 'gulp-watch'
 liveReload = require('tiny-lr')()
 nodemon = require 'gulp-nodemon'
 coffee = require 'gulp-coffee'
