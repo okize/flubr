@@ -4,7 +4,6 @@ express = require 'express'
 logger = require 'morgan'
 cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
-methodOverride = require 'method-override'
 livereload = require 'connect-livereload'
 mongoose = require 'mongoose'
 coffee = require 'coffee-script'
@@ -45,7 +44,6 @@ app.use coffeescriptMiddleware
   compress: true
 app.use express.static(path.join(__dirname, '..', 'public'))
 app.use logger('dev')
-app.use methodOverride()
 app.use bodyParser.json()
 app.use bodyParser.urlencoded()
 app.use cookieParser()
