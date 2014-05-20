@@ -24,6 +24,7 @@
     "connect-coffee-script": "*",
     "cookie-parser": "x",
     "express": "x",
+    "express-session": "*",
     "jade": "x",
     "lodash": "*",
     "method-override": "*",
