@@ -1,4 +1,4 @@
-var app, bodyParser, coffee, coffeeScript, cookieParser, express, home, images, livereload, logger, mongoose, nib, path, stylus;
+var app, bodyParser, coffee, coffeescriptMiddleware, cookieParser, express, images, livereload, logger, methodOverride, mongoose, nib, path, stylus;
 
 path = require('path');
 
@@ -10,13 +10,15 @@ cookieParser = require('cookie-parser');
 
 bodyParser = require('body-parser');
 
+methodOverride = require('method-override');
+
 livereload = require('connect-livereload');
 
 mongoose = require('mongoose');
 
 coffee = require('coffee-script');
 
-coffeeScript = require('connect-coffee-script');
+coffeescriptMiddleware = require('connect-coffee-script');
 
 stylus = require('stylus');
 
@@ -24,11 +26,13 @@ nib = require('nib');
 
 images = require('./controller/images');
 
-home = require('./routes/index');
-
 app = express();
 
-app.set('port', process.env.PORT || 3000);
+app.set('app name', 'Blundercats');
+
+app.set('env', process.env.NODE_ENV || 'development');
+
+app.set('port', process.env.PORT || 2000);
 
 app.set('views', path.join(__dirname, '..', 'views'));
 
@@ -36,7 +40,7 @@ app.set('view engine', 'jade');
 
 app.set('db-url', process.env.MONGOHQ_URL || 'mongodb://localhost/images');
 
-if (process.env.NODE_ENV === 'development') {
+if (app.get('env' === 'development')) {
   app.use(livereload());
 }
 
@@ -49,7 +53,7 @@ app.use(stylus.middleware({
   }
 }));
 
-app.use(coffeeScript({
+app.use(coffeescriptMiddleware({
   src: path.join(__dirname, '..', 'views'),
   dest: path.join(__dirname, '..', 'public'),
   bare: true,
@@ -66,7 +70,7 @@ app.use(bodyParser.urlencoded());
 
 app.use(cookieParser());
 
-app.use('/', home);
+app.use('/', require('./routes/index'));
 
 mongoose.connect(app.get('db-url'), {
   db: {
@@ -82,14 +86,6 @@ mongoose.connect(app.get('db-url'), {
   }
 });
 
-require('./model/image');
-
-app.post('/images', images.create);
-
-app.get('/images', images.retrieve);
-
-app.get('/images/:type', images.retrieve);
-
 app.listen(app.get('port'), function() {
-  return console.log("Listening on port " + (app.get('port')));
+  return console.log("" + (app.get('app name')) + " running on port " + (app.get('port')));
 });
