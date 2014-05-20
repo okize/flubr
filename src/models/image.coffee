@@ -8,4 +8,4 @@ Image = new mongoose.Schema(
   created_at: { type: Date, default: Date.now }
 )
 
-mongoose.model 'Image', Image
+module.exports = mongoose.model 'Image', Image
