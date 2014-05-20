@@ -21,3 +21,24 @@ module.exports =
       res.send(500, { error: err }) if err?
       randomImage = _.sample(results)
       res.send(randomImage.image_url) if randomImage?
+
+  # creates new image record
+  create: (req, res)  ->
+    img = new Image(req.body)
+    img.save (err, results) ->
+      res.send(500, {error: err}) if err?
+      res.send(results)
+
+  # updates existing image record
+  update: (req, res) ->
+    Image.findByIdAndUpdate req.params.id, { $set: req.body }, (err, results) ->
+      res.send(500, { error: err}) if err?
+      res.send(results) if results?
+      res.send(404)
+
+  # deletes image record
+  delete: (req, res) ->
+    Image.findByIdAndRemove req.params.id, (err, results) ->
+      res.send(500, {error: err}) if err?
+      res.send(200) if results?
+      res.send(404)
