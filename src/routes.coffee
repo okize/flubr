@@ -5,6 +5,9 @@ module.exports = (app) ->
     routeMvc('index', 'index', req, res, next)
 
   # api
+  app.all '/api', (req, res, next) ->
+    res.redirect('/');
+
   app.all '/api/:controller', (req, res, next) ->
     routeMvc(req.params.controller, 'index', req, res, next)
 
