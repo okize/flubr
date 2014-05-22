@@ -1,8 +1,25 @@
-var routeMvc;
+var ensureAuthenticated, routeMvc;
 
-module.exports = function(app) {
-  app.all('/', function(req, res, next) {
-    return routeMvc('index', 'index', req, res, next);
+module.exports = function(app, passport) {
+  app.get('/', function(req, res, next) {
+    if (!req.isAuthenticated()) {
+      return routeMvc('index', 'index', req, res, next);
+    } else {
+      return res.redirect('/admin');
+    }
+  });
+  app.all('/admin', ensureAuthenticated, function(req, res, next) {
+    return routeMvc('admin', 'index', req, res, next);
+  });
+  app.get('/login', passport.authenticate('twitter'), function(req, res, next) {});
+  app.get('/auth/callback', passport.authenticate('twitter', {
+    failureRedirect: '/'
+  }), function(req, res, next) {
+    return res.redirect('/admin');
+  });
+  app.all('/logout', function(req, res, next) {
+    req.logout();
+    return res.redirect('/');
   });
   app.all('/api', function(req, res, next) {
     return res.redirect('/');
@@ -45,4 +62,11 @@ routeMvc = function(controllerName, methodName, req, res, next) {
     console.warn('method not found: ' + methodName);
     return next();
   }
+};
+
+ensureAuthenticated = function(req, res, next) {
+  if (!!req.isAuthenticated()) {
+    return next();
+  }
+  return res.redirect('/');
 };
