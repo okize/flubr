@@ -1,0 +1,6 @@
+extends layout
+
+block content
+  h1=title
+  h2 Signed in as: #{user.name} (#{user.screen_name})
+  a(href='/logout') Sign out
