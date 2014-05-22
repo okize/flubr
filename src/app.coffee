@@ -64,6 +64,7 @@ app.use bodyParser()
 app.use session(
   secret: 'blundercats'
   key: 'sid'
+  maxAge: 360*5
 )
 
 # passport config (see also authentication.coffee)
