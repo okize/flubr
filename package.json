@@ -25,6 +25,7 @@
     "cookie-parser": "x",
     "express": "x",
     "express-session": "*",
+    "gulp-stylus": "*",
     "jade": "x",
     "lodash": "*",
     "method-override": "*",
