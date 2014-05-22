@@ -1,8 +1,0 @@
-extends layout
-
-block content
-  h1=title
-  h2 Signed in as: #{user.displayName} (#{user.userName})
-  img(src='#{user.avatar}')
-  p
-    a(href='/logout') Sign out
