@@ -1,3 +1,7 @@
+$('#js-add-image').on 'submit', (e) ->
+  e.preventDefault()
+  console.log 'form submitted'
+
 displayImages = (data) ->
   list = $('#js-image-list')
   html = ''

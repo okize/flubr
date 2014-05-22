@@ -1,5 +1,10 @@
 var displayImages;
 
+$('#js-add-image').on('submit', function(e) {
+  e.preventDefault();
+  return console.log('form submitted');
+});
+
 displayImages = function(data) {
   var html, list;
   list = $('#js-image-list');
