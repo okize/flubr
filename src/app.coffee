@@ -21,7 +21,7 @@ app = express()
 
 # configuration
 app.set 'env', process.env.NODE_ENV or 'development'
-app.set 'port', process.env.PORT or 2000
+app.set 'port', process.env.PORT or 3333
 app.set 'host name', process.env.HOST_NAME
 app.set 'app name', 'Blundercats'
 app.set 'views', path.join(__dirname, '..', 'views')
