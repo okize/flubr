@@ -1,4 +1,4 @@
-var app, bodyParser, coffee, coffeescriptMiddleware, cookieParser, express, images, livereload, logger, methodOverride, mongoose, nib, path, stylus;
+var app, bodyParser, coffee, coffeescriptMiddleware, cookieParser, express, livereload, logger, mongoose, nib, path, routes, session, stylus;
 
 path = require('path');
 
@@ -6,11 +6,11 @@ express = require('express');
 
 logger = require('morgan');
 
+session = require('express-session');
+
 cookieParser = require('cookie-parser');
 
 bodyParser = require('body-parser');
-
-methodOverride = require('method-override');
 
 livereload = require('connect-livereload');
 
@@ -23,8 +23,6 @@ coffeescriptMiddleware = require('connect-coffee-script');
 stylus = require('stylus');
 
 nib = require('nib');
-
-images = require('./controller/images');
 
 app = express();
 
@@ -40,7 +38,21 @@ app.set('view engine', 'jade');
 
 app.set('db-url', process.env.MONGOHQ_URL || 'mongodb://localhost/images');
 
-if (app.get('env' === 'development')) {
+mongoose.connect(app.get('db-url'), {
+  db: {
+    safe: true
+  }
+}, function(err) {
+  if (err == null) {
+    return console.log('Mongoose - connection OK');
+  } else {
+    if (err != null) {
+      return console.log('Mongoose - connection error: ' + err);
+    }
+  }
+});
+
+if (app.get('env') === 'development') {
   app.use(livereload());
 }
 
@@ -60,31 +72,27 @@ app.use(coffeescriptMiddleware({
   compress: true
 }));
 
-app.use(express["static"](path.join(__dirname, '..', 'public')));
-
 app.use(logger('dev'));
 
-app.use(bodyParser.json());
+app.use(express["static"](path.join(__dirname, '..', 'public')));
 
-app.use(bodyParser.urlencoded());
+console.log('Setting session/cookie');
 
 app.use(cookieParser());
 
-app.use('/', require('./routes/index'));
+app.use(session({
+  secret: 'blundercats',
+  key: 'sid',
+  cookie: {
+    secure: true
+  }
+}));
 
-mongoose.connect(app.get('db-url'), {
-  db: {
-    safe: true
-  }
-}, function(err) {
-  if (err == null) {
-    return console.log('Mongoose - connection OK');
-  } else {
-    if (err != null) {
-      return console.log('Mongoose - connection error: ' + err);
-    }
-  }
-});
+app.use(bodyParser());
+
+routes = require('./routes');
+
+routes(app);
 
 app.listen(app.get('port'), function() {
   return console.log("" + (app.get('app name')) + " running on port " + (app.get('port')));
