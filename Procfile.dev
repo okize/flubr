@@ -1,2 +1,2 @@
 web: gulp
-mongodb: mongod
+mongodb: mongod --quiet
