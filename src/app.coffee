@@ -44,6 +44,12 @@ app.use stylus.middleware
   src: path.join(__dirname, '..', 'views')
   dest: path.join(__dirname, '..', 'public')
   debug: true
+  compile: (str, cssPath) ->
+    stylus(str)
+      .set('filename', cssPath)
+      .set('compress', true)
+      .use(nib())
+      .import('nib')
 app.use coffeescriptMiddleware
   src: path.join(__dirname, '..', 'views')
   dest: path.join(__dirname, '..', 'public')
