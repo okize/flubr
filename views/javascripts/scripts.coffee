@@ -1,11 +1,14 @@
 displayImages = (data) ->
-  list = $('#image-list')
+  list = $('#js-image-list')
   html = ''
   $.each data, (i) ->
     html += "<li><img src='#{data[i].image_url}' /></li>"
-  list.append(html)
+  list.append(html).show()
 
-$.ajax
-  url: 'api/images'
-  success: displayImages
-  dataType: 'json'
+$('#js-show-images').on 'click', ->
+  $(this).remove()
+  # show images
+  $.ajax
+    url: 'api/images'
+    success: displayImages
+    dataType: 'json'
