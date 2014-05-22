@@ -27,7 +27,7 @@ imageForm.on('submit', function(e) {
     type: 'post',
     url: 'api/images',
     success: showImageAdded,
-    dataType: 'json',
+    contentType: 'application/json',
     data: JSON.stringify(data)
   });
 });

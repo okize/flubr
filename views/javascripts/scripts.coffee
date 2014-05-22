@@ -19,7 +19,7 @@ imageForm.on 'submit', (e) ->
     type: 'post'
     url: 'api/images'
     success: showImageAdded
-    dataType: 'json'
+    contentType: 'application/json',
     data: JSON.stringify(data)
 
 $('#js-show-images').on 'click', ->
