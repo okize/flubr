@@ -7,7 +7,7 @@ block content
     li
       =user.displayName
     li
-      "#{user.userName}"
+      =user.userName
     li
       a(href='/logout') Sign out
 
@@ -20,7 +20,7 @@ block content
     form#js-add-image
       label
         | Url:
-        input(type='text')
+        input#imageUrl(type='text')
       br
       label
         | Pass:
