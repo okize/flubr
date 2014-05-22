@@ -5,7 +5,9 @@ block content
     li
       img.avatar(src='#{user.avatar}')
     li
-      #{user.displayName} (#{user.userName})
+      =user.displayName
+    li
+      "#{user.userName}"
     li
       a(href='/logout') Sign out
 
