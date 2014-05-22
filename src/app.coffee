@@ -6,7 +6,6 @@ session = require 'express-session'
 logger = require 'morgan'
 mongoose = require 'mongoose'
 passport = require 'passport'
-passportTwitterStrategy = require('passport-twitter').Strategy
 bodyParser = require 'body-parser'
 livereload = require 'connect-livereload'
 mongoose = require 'mongoose'
@@ -15,7 +14,7 @@ coffeescriptMiddleware = require 'connect-coffee-script'
 stylus = require 'stylus'
 nib = require 'nib'
 routes = require './routes'
-User = require './models/user'
+authentication = require './authentication'
 
 # create application instance
 app = express()
@@ -35,39 +34,6 @@ mongoose.connect app.get('db-url'), {db: {safe: true}}, (err) ->
     console.log 'Mongoose - connection OK'
   else
     console.log 'Mongoose - connection error: ' + err if err?
-
-console.log ""
-
-# passport session setup
-passport.serializeUser (user, done) ->
-  done null, user
-
-passport.deserializeUser (obj, done) ->
-  done null, obj
-
-# passport authentication configuration
-passport.use new passportTwitterStrategy(
-  consumerKey: process.env.TWITTER_CONSUMER_KEY
-  consumerSecret: process.env.TWITTER_CONSUMER_SECRET
-  callbackURL: '/auth/callback'
-, (token, tokenSecret, profile, done) ->
-  User.findOne
-    userid: profile.id
-  , (err, user) ->
-    if user
-      process.nextTick ->
-        done null, user
-    else
-      user = new User()
-      user.userid = profile.id
-      user.userName = profile.username
-      user.displayName = profile.displayName
-      user.avatar = profile._json.profile_image_url
-      user.save (err) ->
-        throw err if err
-        process.nextTick ->
-          done null, user
-)
 
 # dev middleware
 if app.get('env') == 'development'
@@ -103,6 +69,7 @@ app.use session(
   key: 'sid'
 )
 
+# passport config (see also authentication.coffee)
 app.use passport.initialize()
 app.use passport.session()
 
@@ -112,5 +79,6 @@ app.use bodyParser()
 # routes
 routes(app, passport)
 
+# await connections
 app.listen app.get('port'), ->
   console.log "#{app.get('app name')} running on port #{app.get('port')}"
