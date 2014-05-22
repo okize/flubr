@@ -36,9 +36,8 @@ module.exports =
   # creates new image record
   create: (req, res)  ->
     if helpers.checkForUser req, res
-      data = req.body
-      data.added_by = req.user.userid
-      img = new Image(data)
+      req.body.added_by = req.user.userid
+      img = new Image(req.body)
       img.save (err, results) ->
         res.send 500, error: err if err?
         res.send(results)
@@ -48,8 +47,7 @@ module.exports =
   # updates existing image record
   update: (req, res) ->
     if helpers.checkForUser req, res
-      data = req.body
-      data.updated_by = req.user.userid
+      req.body.updated_by = req.user.userid
       img = new Image(data)
       Image.findByIdAndUpdate req.params.id, { $set: data }, (err, results) ->
         res.send(500, { error: err}) if err?
