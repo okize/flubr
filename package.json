@@ -29,7 +29,7 @@
     "jade": "x",
     "lodash": "*",
     "method-override": "*",
-    "mongoose": "x",
+    "mongoose": "3.8.x",
     "morgan": "x",
     "nib": "x",
     "passport": "*",
