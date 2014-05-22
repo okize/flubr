@@ -2,12 +2,7 @@ home = require './controllers/index'
 admin = require './controllers/admin'
 images = require './controllers/images'
 users = require './controllers/users'
-
-# ensure user has been authenticated
-ensureAuthenticated = (req, res, next) ->
-  unless !req.isAuthenticated()
-    return next()
-  res.redirect '/'
+helpers = require 'helpers'
 
 module.exports = (app, passport) ->
 
@@ -19,7 +14,7 @@ module.exports = (app, passport) ->
       res.redirect '/admin'
 
   # admin
-  app.all '/admin', ensureAuthenticated, (req, res, next) ->
+  app.all '/admin', helpers.ensureAuthenticated, (req, res, next) ->
     admin.index req, res, next
 
   # login
@@ -53,31 +48,31 @@ module.exports = (app, passport) ->
     images.random req, res, next
 
   # add new image
-  app.post '/api/images', (req, res, next) ->
+  app.post '/api/images', helpers.ensureAuthenticated, (req, res, next) ->
     images.create req, res, next
 
   # update image
-  app.put '/api/images/:id', (req, res, next) ->
+  app.put '/api/images/:id', helpers.ensureAuthenticated, (req, res, next) ->
     images.update req, res, next
 
   # delete image
-  app.delete '/api/images/:id', (req, res, next) ->
+  app.delete '/api/images/:id', helpers.ensureAuthenticated, (req, res, next) ->
     images.delete req, res, next
 
   # list all users
-  app.get '/api/users', (req, res, next) ->
+  app.get '/api/users', helpers.ensureAuthenticated, (req, res, next) ->
     users.index req, res, next
 
   # add new user
-  app.post '/api/users', (req, res, next) ->
+  app.post '/api/users', helpers.ensureAuthenticated, (req, res, next) ->
     users.create req, res, next
 
   # update user
-  app.put '/api/users/:id', (req, res, next) ->
+  app.put '/api/users/:id', helpers.ensureAuthenticated, (req, res, next) ->
     users.update req, res, next
 
   # delete user
-  app.delete '/api/users/:id', (req, res, next) ->
+  app.delete '/api/users/:id', helpers.ensureAuthenticated, (req, res, next) ->
     users.delete req, res, next
 
   # page not found
