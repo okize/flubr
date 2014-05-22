@@ -2,7 +2,7 @@ home = require './controllers/index'
 admin = require './controllers/admin'
 images = require './controllers/images'
 users = require './controllers/users'
-helpers = require 'helpers'
+helpers = require './helpers'
 
 module.exports = (app, passport) ->
 
