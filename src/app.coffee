@@ -15,6 +15,7 @@ coffeescriptMiddleware = require 'connect-coffee-script'
 stylus = require 'stylus'
 nib = require 'nib'
 routes = require './routes'
+User = require './models/user'
 
 # create application instance
 app = express()
@@ -50,8 +51,22 @@ passport.use new passportTwitterStrategy(
   consumerSecret: process.env.TWITTER_CONSUMER_SECRET
   callbackURL: '/auth/callback'
 , (token, tokenSecret, profile, done) ->
-  process.nextTick ->
-    done null, profile
+  User.findOne
+    userid: profile.id
+  , (err, user) ->
+    if user
+      process.nextTick ->
+        done null, user
+    else
+      user = new User()
+      user.userid = profile.id
+      user.userName = profile.username
+      user.displayName = profile.displayName
+      user.avatar = profile._json.profile_image_url
+      user.save (err) ->
+        throw err if err
+        process.nextTick ->
+          done null, user
 )
 
 # dev middleware
