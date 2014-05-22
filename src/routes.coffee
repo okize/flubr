@@ -8,9 +8,17 @@ module.exports = (app) ->
   app.all '/admin', (req, res, next) ->
     routeMvc('admin', 'index', req, res, next)
 
+  # login
+  app.all '/login', (req, res, next) ->
+    res.redirect '/'
+
+  # logout
+  app.all '/logout', (req, res, next) ->
+    res.redirect '/'
+
   # api
   app.all '/api', (req, res, next) ->
-    res.redirect('/');
+    res.redirect '/'
 
   app.all '/api/:controller', (req, res, next) ->
     routeMvc(req.params.controller, 'index', req, res, next)
