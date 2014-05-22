@@ -31,6 +31,8 @@
     "mongoose": "x",
     "morgan": "x",
     "nib": "x",
+    "passport": "*",
+    "passport-twitter": "*",
     "stylus": "x"
   },
   "devDependencies": {
