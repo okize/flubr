@@ -2,6 +2,7 @@ extends layout
 
 block content
   ul.logged-in-bar
+    li.messaging#messaging
     li
       img.avatar(src='#{user.avatar}')
     li
@@ -27,7 +28,7 @@ block content
         input(type='radio' name='kind' value='pass')
       label
         | Fail:
-        input(type='radio' name='kind' value='fail' selected='selected')
+        input(type='radio' name='kind' value='fail' checked='checked')
       br
       button(type='submit') Add
 
