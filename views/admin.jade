@@ -1,4 +1,12 @@
 extends layout
 
 block content
+  ul.logged-in-bar
+    li
+      img.avatar(src='#{user.avatar}')
+    li
+      #{user.displayName} (#{user.userName})
+    li
+      a(href='/logout') Sign out
+
   h1=title
