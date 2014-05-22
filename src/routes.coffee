@@ -4,6 +4,10 @@ module.exports = (app) ->
   app.all '/', (req, res, next) ->
     routeMvc('index', 'index', req, res, next)
 
+  # admin
+  app.all '/admin', (req, res, next) ->
+    routeMvc('admin', 'index', req, res, next)
+
   # api
   app.all '/api', (req, res, next) ->
     res.redirect('/');
