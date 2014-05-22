@@ -1,3 +1,6 @@
+*
+  box-sizing: border-box
+
 body
   text-align: center
   font-family: Verdana, Arial, sans-serif
@@ -11,7 +14,13 @@ h1
   color: yellow
   text-shadow: red 5px 5px
 
-a
+a, &:visited
+  color: blue
+  &:hover
+    color: yellow
+    background-color: red
+
+.login-button
   color: red
   display: inline-block
   background-color: yellow
@@ -29,3 +38,26 @@ a
     color: yellow
     background-color: red
     box-shadow: yellow 5px 5px
+
+.admin-bar
+  color: blue
+  line-height: 2em
+  vertical-align: middle
+  position: fixed
+  width: 100%
+  top: 0
+  left: 0
+  text-align: right
+  background-color: yellow
+  padding: 5px
+  border-bottom: 5px solid red
+  li
+    list-style: none
+    display: inline-block
+    margin-right: 10px
+
+.avatar
+  vertical-align: bottom
+  border: 2px solid white
+  height: 30px
+  width: 30px
