@@ -10,3 +10,21 @@ block content
       a(href='/logout') Sign out
 
   h1=title
+
+  hr
+
+  h2 Add new image:
+
+    form#add-image
+      label
+        | Url:
+        input(type='text')
+      br
+      label
+        | Pass:
+        input(type='radio' name='kind' value='pass')
+      label
+        | Fail:
+        input(type='radio' name='kind' value='fail' selected='selected')
+      br
+      button(type='submit') Add
