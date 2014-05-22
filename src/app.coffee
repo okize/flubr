@@ -60,12 +60,12 @@ app.use express.static(path.join(__dirname, '..', 'public'))
 # sessions
 console.log 'Setting session/cookie'
 app.use cookieParser()
-app.use bodyParser()
 app.use session(
   secret: 'blundercats'
-  key: 'sid'
-  maxAge: 360*5
+  name: 'session_id'
 )
+
+app.use bodyParser()
 
 # passport config (see also authentication.coffee)
 app.use passport.initialize()
