@@ -14,7 +14,6 @@ mainScript = path.join(appRoot, 'src', 'app.coffee')
 buildDir = path.join(appRoot, 'build')
 sources =
   app: 'src/**/*.coffee'
-  jade: 'views/*.jade'
   css: 'views/stylesheets/*.styl'
   coffee: 'views/javascripts/*.coffee'
 liveReloadPort = 35729
@@ -71,6 +70,10 @@ gulp.task 'clean', ->
     .src(buildDir, read: false)
     .pipe(clean())
 
+# compiles css
+gulp.task 'css', ->
+  console.log 'compile css'
+
 # builds coffeescript source into deployable javascript
 gulp.task 'build', ->
   gulp
@@ -86,5 +89,6 @@ gulp.task 'build', ->
 # deploys application
 gulp.task 'deploy', [
   'clean',
+  'css',
   'build'
 ]
