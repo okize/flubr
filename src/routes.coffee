@@ -11,6 +11,10 @@ module.exports = (app, passport) ->
   app.all '/admin', ensureAuthenticated, (req, res, next) ->
     routeMvc('admin', 'index', req, res, next)
 
+  # account
+  app.all '/account', ensureAuthenticated, (req, res, next) ->
+    routeMvc('account', 'index', req, res, next)
+
   # login
   app.get '/login', passport.authenticate('twitter'), (req, res, next) ->
 
