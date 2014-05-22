@@ -39,7 +39,7 @@ mongoose.connect app.get('db-url'), {db: {safe: true}}, (err) ->
 if app.get('env') == 'development'
   app.use livereload()
 
-# middleware
+# assets middleware
 app.use stylus.middleware
   src: path.join(__dirname, '..', 'views')
   dest: path.join(__dirname, '..', 'public')
@@ -55,9 +55,6 @@ app.use coffeescriptMiddleware
   dest: path.join(__dirname, '..', 'public')
   bare: true
   compress: true
-app.use logger('dev')
-
-# assets
 app.use express.static(path.join(__dirname, '..', 'public'))
 
 # sessions
@@ -75,6 +72,9 @@ app.use passport.session()
 
 # parses json & xml
 app.use bodyParser()
+
+# logger
+app.use logger('dev')
 
 # routes
 routes(app, passport)
