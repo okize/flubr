@@ -2,8 +2,9 @@ mongoose = require 'mongoose'
 
 User = new mongoose.Schema(
   userid: String
-  name: String
-  image: String
+  userName: String
+  displayName: String
+  avatar: String
   created_at: { type: Date, default: Date.now }
 )
 
