@@ -1,5 +1,6 @@
 path = require 'path'
 _ = require 'lodash'
+helpers = require path.join('..', 'helpers')
 Image = require path.join('..', 'models', 'image')
 
 errors =
@@ -11,20 +12,20 @@ module.exports =
 
   # lists all images
   index: (req, res) ->
-    Image.find {}, (err, results) ->
-      res.send(500, {error: err}) if err?
+    Image.find {deleted: false}, (err, results) ->
+      res.send 500, error: err if err?
       res.send results
 
   # displays single image
   show: (req, res) ->
     Image.find {_id: req.params.id}, (err, results) ->
-      res.send(500, {error: err}) if err?
+      res.send 500, error: err if err?
       res.send results
 
   # returns random image url based on id of pass/fail
   random: (req, res) ->
     res.send 500, error: errors.noIdError if !req.params.id? or !req.params.id.match /(pass|fail)/g
-    Image.find {kind: req.params.id}, 'image_url', (err, results) ->
+    Image.find {kind: req.params.id, deleted: false}, 'image_url', (err, results) ->
       res.send(500, { error: err }) if err?
       randomImage = _.sample(results)
       unless !randomImage?
@@ -34,21 +35,38 @@ module.exports =
 
   # creates new image record
   create: (req, res)  ->
-    img = new Image(req.body)
-    img.save (err, results) ->
-      res.send(500, {error: err}) if err?
-      res.send(results)
+    if helpers.checkForUser req, res
+      data = req.body
+      data.added_by = req.user.userid
+      img = new Image(data)
+      img.save (err, results) ->
+        res.send 500, error: err if err?
+        res.send(results)
+    else
+      res.send 500, {error: "Action requires user to be logged in"}
 
   # updates existing image record
   update: (req, res) ->
-    Image.findByIdAndUpdate req.params.id, { $set: req.body }, (err, results) ->
-      res.send(500, { error: err}) if err?
-      res.send(results) if results?
-      res.send(404)
+    if helpers.checkForUser req, res
+      data = req.body
+      data.updated_by = req.user.userid
+      img = new Image(data)
+      Image.findByIdAndUpdate req.params.id, { $set: data }, (err, results) ->
+        res.send(500, { error: err}) if err?
+        res.send(results) if results?
+        res.send(404)
+    else
+      res.send 500, {error: "Action requires user to be logged in"}
 
-  # deletes image record
+  # deletes image record non-permanently
   delete: (req, res) ->
-    Image.findByIdAndRemove req.params.id, (err, results) ->
-      res.send(500, {error: err}) if err?
-      res.send(200, results) if results?
-      res.send(404)
+    if helpers.checkForUser req, res
+      data = {}
+      data.deleted = true
+      data.deleted_by = req.user.userid
+      Image.findByIdAndUpdate req.params.id, { $set: data }, (err, results) ->
+        res.send 500, error: err if err?
+        res.send(200, results) if results?
+        res.send(404)
+    else
+      res.send 500, {error: "Action requires user to be logged in"}
