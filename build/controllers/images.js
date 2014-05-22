@@ -30,7 +30,7 @@ module.exports = {
     }
     return Image.find({
       kind: req.params.id
-    }, 'image_url randomizer', function(err, results) {
+    }, 'image_url', function(err, results) {
       var randomImage;
       if (err != null) {
         res.send(500, {

@@ -11,6 +11,9 @@ module.exports = function(app, passport) {
   app.all('/admin', ensureAuthenticated, function(req, res, next) {
     return routeMvc('admin', 'index', req, res, next);
   });
+  app.all('/account', ensureAuthenticated, function(req, res, next) {
+    return routeMvc('account', 'index', req, res, next);
+  });
   app.get('/login', passport.authenticate('twitter'), function(req, res, next) {});
   app.get('/auth/callback', passport.authenticate('twitter', {
     failureRedirect: '/'

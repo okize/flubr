@@ -1,4 +1,4 @@
-var app, bodyParser, coffee, coffeescriptMiddleware, cookieParser, express, livereload, logger, mongoose, nib, passport, passportTwitterStrategy, path, routes, session, stylus;
+var app, authentication, bodyParser, coffee, coffeescriptMiddleware, cookieParser, express, livereload, logger, mongoose, nib, passport, path, routes, session, stylus;
 
 path = require('path');
 
@@ -13,8 +13,6 @@ logger = require('morgan');
 mongoose = require('mongoose');
 
 passport = require('passport');
-
-passportTwitterStrategy = require('passport-twitter').Strategy;
 
 bodyParser = require('body-parser');
 
@@ -31,6 +29,8 @@ stylus = require('stylus');
 nib = require('nib');
 
 routes = require('./routes');
+
+authentication = require('./authentication');
 
 app = express();
 
@@ -62,26 +62,6 @@ mongoose.connect(app.get('db-url'), {
   }
 });
 
-console.log("");
-
-passport.serializeUser(function(user, done) {
-  return done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-  return done(null, obj);
-});
-
-passport.use(new passportTwitterStrategy({
-  consumerKey: process.env.TWITTER_CONSUMER_KEY,
-  consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: '/auth/callback'
-}, function(token, tokenSecret, profile, done) {
-  return process.nextTick(function() {
-    return done(null, profile);
-  });
-}));
-
 if (app.get('env') === 'development') {
   app.use(livereload());
 }
@@ -102,8 +82,6 @@ app.use(coffeescriptMiddleware({
   compress: true
 }));
 
-app.use(logger('dev'));
-
 app.use(express["static"](path.join(__dirname, '..', 'public')));
 
 console.log('Setting session/cookie');
@@ -122,6 +100,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(bodyParser());
+
+app.use(logger('dev'));
 
 routes(app, passport);
 
