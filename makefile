@@ -4,7 +4,7 @@ default:
 
 build:
 
-	coffee --compile --bare --map --output dist src
+	coffee --compile --bare --map --output build src
 
 debug:
 
