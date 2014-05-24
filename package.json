@@ -34,6 +34,7 @@
   "devDependencies": {
     "connect-livereload": "*",
     "gulp": "*",
+    "gulp-clean": "*",
     "gulp-coffee": "*",
     "gulp-nodemon": "*",
     "gulp-util": "*",
