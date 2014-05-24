@@ -11,9 +11,10 @@ clean = require 'gulp-clean'
 
 # configuration
 appRoot = __dirname
-buildDir = path.join(appRoot, 'dist')
+mainScript = path.join(appRoot, 'src', 'app.coffee')
+buildDir = path.join(appRoot, 'build')
 sources =
-  app: 'src/*.coffee'
+  app: 'src/**/*.coffee'
   jade: 'views/*.jade'
   css: 'views/stylesheets/*.styl'
   coffee: 'views/javascripts/*.coffee'
@@ -44,7 +45,7 @@ gulp.task 'default', [
 # starts up LiveReload server and the app with nodemon
 gulp.task 'start', ->
   nodemon(
-    script: path.join(appRoot, 'src/app.coffee')
+    script: mainScript
     ext: 'coffee'
     env:
       'NODE_ENV': 'development'
@@ -79,7 +80,9 @@ gulp.task 'build', ->
       bare: true
       sourceMap: true
     ).on('error', gutil.log))
-    .pipe(gulp.dest(path.join(appRoot, 'dist')))
+    .pipe(
+      gulp.dest(buildDir)
+    )
 
 # deploys application
 gulp.task 'deploy', [
