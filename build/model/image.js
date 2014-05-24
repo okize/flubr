@@ -17,7 +17,3 @@ Image = new mongoose.Schema({
 });
 
 mongoose.model('Image', Image);
-
-/*
-//# sourceMappingURL=image.js.map
-*/

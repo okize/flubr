@@ -78,7 +78,7 @@ gulp.task 'build', ->
     .src(sources.app)
     .pipe(coffee(
       bare: true
-      sourceMap: true
+      sourceMap: false
     ).on('error', gutil.log))
     .pipe(
       gulp.dest(buildDir)

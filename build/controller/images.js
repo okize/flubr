@@ -48,7 +48,3 @@ exports.retrieve = function(req, res) {
     });
   }
 };
-
-/*
-//# sourceMappingURL=images.js.map
-*/

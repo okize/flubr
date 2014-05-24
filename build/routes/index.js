@@ -6,12 +6,8 @@ router = express.Router();
 
 router.get('/', function(req, res) {
   return res.render('index', {
-    title: '...'
+    title: 'Blundercats!'
   });
 });
 
 module.exports = router;
-
-/*
-//# sourceMappingURL=index.js.map
-*/
