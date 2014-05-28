@@ -7,12 +7,12 @@ allowedUsers = process.env.ALLOWED_USERS.split ','
 
 # passport session setup
 passport.serializeUser (user, done) ->
-  console.log "serializeUser: #{user.userName}"
-  done null, user._id
+  console.log "Serialized user: #{user.userName}"
+  done null, user.id
 
 passport.deserializeUser (id, done) ->
   User.findById id, (err, user) ->
-    console.log "deserializeUser: #{user.userName}"
+    console.log "Deserialized user: #{user.userName}"
     unless err
       done null, user
     else

@@ -3,6 +3,7 @@ path = require 'path'
 express = require 'express'
 cookieParser = require 'cookie-parser'
 session = require 'express-session'
+Store = require('connect-mongostore')(session)
 logger = require 'morgan'
 mongoose = require 'mongoose'
 passport = require 'passport'
@@ -26,10 +27,10 @@ app.set 'host name', process.env.HOST_NAME
 app.set 'app name', 'Blundercats'
 app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
-app.set 'db-url', process.env.MONGOHQ_URL or 'mongodb://localhost/images'
+app.set 'db url', process.env.MONGOHQ_URL or 'mongodb://localhost/images'
 
 # database connection
-mongoose.connect app.get('db-url'), {db: {safe: true}}, (err) ->
+mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
   unless err?
     console.log 'Mongoose - connection OK'
   else
@@ -58,11 +59,15 @@ app.use coffeescriptMiddleware
 app.use express.static(path.join(__dirname, '..', 'public'))
 
 # sessions
-console.log 'Setting session/cookie'
 app.use cookieParser()
 app.use session(
   secret: 'blundercats'
-  name: 'session_id'
+  store: new Store(
+    "db" : "images",
+    "collection" : "express_sessions",
+    "host" : "localhost",
+    "port" : 27017
+  )
 )
 
 app.use bodyParser()
