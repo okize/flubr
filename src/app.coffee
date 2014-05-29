@@ -6,6 +6,7 @@ session = require 'express-session'
 Store = require('connect-mongostore')(session)
 logger = require 'morgan'
 mongoose = require 'mongoose'
+mongodbUri = require 'mongodb-uri'
 passport = require 'passport'
 bodyParser = require 'body-parser'
 livereload = require 'connect-livereload'
@@ -58,15 +59,19 @@ app.use coffeescriptMiddleware
   compress: true
 app.use express.static(path.join(__dirname, '..', 'public'))
 
+mongodbObj = mongodbUri.parse(app.get 'db url')
+
 # sessions
 app.use cookieParser()
 app.use session(
   secret: 'blundercats'
   store: new Store(
-    "db" : "images",
-    "collection" : "express_sessions",
-    "host" : "localhost",
-    "port" : 27017
+    db: mongodbObj.database
+    collection: 'sessions'
+    host: mongodbObj.hosts[0].host
+    port: mongodbObj.hosts[0].port or 27017
+    username: mongodbObj.username or ''
+    password: mongodbObj.password or ''
   )
 )
 
