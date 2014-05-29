@@ -5,7 +5,7 @@ displayImages = function(data) {
   list = $('#js-image-list');
   html = '';
   $.each(data, function(i) {
-    return html += "<li><img src='" + data[i].image_url + "' /></li>";
+    return html += "<li><img src='" + data[i].image_url + "' class='pf-image' /></li>";
   });
   return list.append(html).show();
 };

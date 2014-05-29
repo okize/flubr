@@ -2,7 +2,7 @@ displayImages = (data) ->
   list = $('#js-image-list')
   html = ''
   $.each data, (i) ->
-    html += "<li><img src='#{data[i].image_url}' /></li>"
+    html += "<li><img src='#{data[i].image_url}' class='pf-image' /></li>"
   list.append(html).show()
 
 showImageAdded = ->
