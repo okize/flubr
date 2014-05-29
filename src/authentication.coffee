@@ -1,5 +1,4 @@
 _ = require 'lodash'
-mongoose = require 'mongoose'
 passport = require 'passport'
 passportTwitterStrategy = require('passport-twitter').Strategy
 User = require './models/user'
