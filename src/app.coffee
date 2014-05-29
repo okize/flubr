@@ -2,13 +2,12 @@
 path = require 'path'
 express = require 'express'
 cookieParser = require 'cookie-parser'
+bodyParser = require 'body-parser'
 session = require 'express-session'
 Store = require('connect-mongostore')(session)
 logger = require 'morgan'
 mongoose = require 'mongoose'
-mongodbUri = require 'mongodb-uri'
 passport = require 'passport'
-bodyParser = require 'body-parser'
 livereload = require 'connect-livereload'
 mongoose = require 'mongoose'
 coffee = require 'coffee-script'
@@ -59,10 +58,10 @@ app.use coffeescriptMiddleware
   compress: true
 app.use express.static(path.join(__dirname, '..', 'public'))
 
-mongodbObj = mongodbUri.parse(app.get 'db url')
+app.use cookieParser()
+app.use bodyParser()
 
 # sessions
-app.use cookieParser()
 app.use session(
   secret: 'blundercats'
   store: new Store(
@@ -70,8 +69,6 @@ app.use session(
     collection: 'sessions'
   )
 )
-
-app.use bodyParser()
 
 # passport config (see also authentication.coffee)
 app.use passport.initialize()
