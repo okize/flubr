@@ -2,11 +2,12 @@
 path = require 'path'
 express = require 'express'
 cookieParser = require 'cookie-parser'
+bodyParser = require 'body-parser'
 session = require 'express-session'
+Store = require('connect-mongostore')(session)
 logger = require 'morgan'
 mongoose = require 'mongoose'
 passport = require 'passport'
-bodyParser = require 'body-parser'
 livereload = require 'connect-livereload'
 mongoose = require 'mongoose'
 coffee = require 'coffee-script'
@@ -26,10 +27,10 @@ app.set 'host name', process.env.HOST_NAME
 app.set 'app name', 'Blundercats'
 app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
-app.set 'db-url', process.env.MONGOHQ_URL or 'mongodb://localhost/images'
+app.set 'db url', process.env.MONGODB_URL or 'mongodb://localhost/images'
 
 # database connection
-mongoose.connect app.get('db-url'), {db: {safe: true}}, (err) ->
+mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
   unless err?
     console.log 'Mongoose - connection OK'
   else
@@ -37,7 +38,7 @@ mongoose.connect app.get('db-url'), {db: {safe: true}}, (err) ->
 
 # dev middleware
 if app.get('env') == 'development'
-  app.use livereload()
+  app.use livereload( port: 35730 )
 
 # assets middleware
 app.use stylus.middleware
@@ -57,15 +58,17 @@ app.use coffeescriptMiddleware
   compress: true
 app.use express.static(path.join(__dirname, '..', 'public'))
 
-# sessions
-console.log 'Setting session/cookie'
 app.use cookieParser()
+app.use bodyParser()
+
+# sessions
 app.use session(
   secret: 'blundercats'
-  name: 'session_id'
+  store: new Store(
+    mongooseConnection: mongoose.connections[0]
+    collection: 'sessions'
+  )
 )
-
-app.use bodyParser()
 
 # passport config (see also authentication.coffee)
 app.use passport.initialize()

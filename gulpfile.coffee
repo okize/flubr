@@ -16,8 +16,7 @@ sources =
   app: 'src/**/*.coffee'
   css: 'views/stylesheets/*.styl'
   coffee: 'views/javascripts/*.coffee'
-liveReloadPort = 35729
-
+liveReloadPort = 35730
 
 # returns an array of the source folders in sources object
 getSources = ->
