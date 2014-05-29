@@ -28,7 +28,7 @@ app.set 'host name', process.env.HOST_NAME
 app.set 'app name', 'Blundercats'
 app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
-app.set 'db url', process.env.MONGOHQ_URL or 'mongodb://localhost/images'
+app.set 'db url', process.env.MONGODB_URL or 'mongodb://localhost/images'
 
 # database connection
 mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
