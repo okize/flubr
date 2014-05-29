@@ -39,7 +39,7 @@ mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
 
 # dev middleware
 if app.get('env') == 'development'
-  app.use livereload()
+  app.use livereload( port: 35730 )
 
 # assets middleware
 app.use stylus.middleware
