@@ -66,12 +66,8 @@ app.use cookieParser()
 app.use session(
   secret: 'blundercats'
   store: new Store(
-    db: mongodbObj.database
+    mongooseConnection: mongoose.connections[0]
     collection: 'sessions'
-    host: mongodbObj.hosts[0].host
-    port: mongodbObj.hosts[0].port or 27017
-    username: mongodbObj.username or ''
-    password: mongodbObj.password or ''
   )
 )
 
