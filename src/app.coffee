@@ -58,11 +58,12 @@ app.use coffeescriptMiddleware
   compress: true
 app.use express.static(path.join(__dirname, '..', 'public'))
 
-app.use cookieParser()
+app.use cookieParser('blundercats')
 app.use bodyParser()
 
 # sessions
 app.use session(
+  name: 'express_session'
   secret: 'blundercats'
   store: new Store(
     mongooseConnection: mongoose.connections[0]
