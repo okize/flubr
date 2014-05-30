@@ -18,9 +18,9 @@ module.exports =
 
   # displays single image
   show: (req, res) ->
-    Image.find {_id: req.params.id}, (err, results) ->
+    Image.findById req.params.id, (err, result) ->
       res.send 500, error: err if err?
-      res.send results
+      res.send result
 
   # returns random image url based on id of pass/fail
   random: (req, res) ->
@@ -44,15 +44,15 @@ module.exports =
     else
       res.send 500, {error: "Action requires user to be logged in"}
 
-  # updates existing image record
+  # updates existing image record type: pass or fail
   update: (req, res) ->
     if helpers.checkForUser req, res
-      req.body.updated_by = req.user.userid
-      img = new Image(data)
-      Image.findByIdAndUpdate req.params.id, { $set: data }, (err, results) ->
+      updateData =
+        kind: req.body.kind
+        updated_by: req.body.userid
+      Image.update {_id: req.params.id}, updateData, (err, count) ->
         res.send(500, { error: err}) if err?
-        res.send(results) if results?
-        res.send(404)
+        res.send 200, {success: "#{count} rows have been updated"}
     else
       res.send 500, {error: "Action requires user to be logged in"}
 
@@ -65,6 +65,5 @@ module.exports =
       Image.findByIdAndUpdate req.params.id, { $set: data }, (err, results) ->
         res.send 500, error: err if err?
         res.send(200, results) if results?
-        res.send(404)
     else
       res.send 500, {error: "Action requires user to be logged in"}
