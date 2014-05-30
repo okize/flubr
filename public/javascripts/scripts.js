@@ -1,4 +1,4 @@
-var displayImages, imageForm, showImageAdded, switchImageKind;
+var deleteImage, displayImages, imageForm, showImageAdded, switchImageKind;
 
 displayImages = function(data) {
   var html, list, setImage;
@@ -11,7 +11,7 @@ displayImages = function(data) {
     } else {
       setImage = "<li><a href='#' class='changeImageKind isFail'>pass</a></li><li>fail</li>";
     }
-    return html += ("<li class='image-item' id='" + data[i]._id + "'>") + ("<ul class='set-image-kind'>" + setImage + "</ul>") + ("<img src='" + data[i].image_url + "' class='pf-image' />") + "</li>";
+    return html += ("<li class='image-item' id='" + data[i]._id + "'>") + ("<ul class='set-image-kind'>" + setImage + "</ul>") + ("<img src='" + data[i].image_url + "' class='pf-image' />") + "<div class='delete-image'><a href='#'>delete</a></div>" + "</li>";
   });
   return list.append(html).show();
 };
@@ -29,9 +29,9 @@ $('body').on('click', '.changeImageKind', function(e) {
   var $this, data, id;
   e.preventDefault();
   $this = $(this);
-  id = $(this).parent('li').parent('ul').parent('li').attr('id');
+  id = $this.closest('.image-item').attr('id');
   data = {
-    kind: $(this).hasClass('isPass') ? 'fail' : 'pass'
+    kind: $this.hasClass('isPass') ? 'fail' : 'pass'
   };
   return $.ajax({
     type: 'PUT',
@@ -39,6 +39,24 @@ $('body').on('click', '.changeImageKind', function(e) {
     success: switchImageKind($this),
     contentType: 'application/json',
     data: JSON.stringify(data)
+  });
+});
+
+deleteImage = function(el) {
+  el.closest('.image-item').remove();
+  return $('#messaging').html('Image deleted!');
+};
+
+$('body').on('click', '.delete-image a', function(e) {
+  var $this, id;
+  e.preventDefault();
+  $this = $(this);
+  id = $this.closest('.image-item').attr('id');
+  return $.ajax({
+    type: 'DELETE',
+    url: 'api/images/' + id,
+    success: deleteImage($this),
+    contentType: 'application/json'
   });
 });
 

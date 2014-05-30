@@ -11,6 +11,7 @@ displayImages = (data) ->
       "<li class='image-item' id='#{data[i]._id}'>" +
       "<ul class='set-image-kind'>#{setImage}</ul>" +
       "<img src='#{data[i].image_url}' class='pf-image' />" +
+      "<div class='delete-image'><a href='#'>delete</a></div>" +
       "</li>"
   list.append(html).show()
 
@@ -24,15 +25,29 @@ switchImageKind = (el) ->
 $('body').on 'click', '.changeImageKind', (e) ->
   e.preventDefault()
   $this = $(this)
-  id = $(this).parent('li').parent('ul').parent('li').attr('id')
+  id = $this.closest('.image-item').attr('id')
   data =
-    kind: if $(this).hasClass 'isPass' then 'fail' else 'pass'
+    kind: if $this.hasClass 'isPass' then 'fail' else 'pass'
   $.ajax
     type: 'PUT'
     url: 'api/images/' + id
     success: switchImageKind $this
     contentType: 'application/json'
     data: JSON.stringify(data)
+
+deleteImage = (el) ->
+  el.closest('.image-item').remove()
+  $('#messaging').html('Image deleted!')
+
+$('body').on 'click', '.delete-image a', (e) ->
+  e.preventDefault()
+  $this = $(this)
+  id = $this.closest('.image-item').attr('id')
+  $.ajax
+    type: 'DELETE'
+    url: 'api/images/' + id
+    success: deleteImage $this
+    contentType: 'application/json'
 
 imageForm = $('#js-add-image')
 
