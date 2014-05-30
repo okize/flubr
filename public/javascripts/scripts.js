@@ -1,11 +1,17 @@
-var displayImages, imageForm, showImageAdded;
+var displayImages, imageForm, showImageAdded, switchImageKind;
 
 displayImages = function(data) {
-  var html, list;
+  var html, list, setImage;
   list = $('#js-image-list');
   html = '';
+  setImage = '';
   $.each(data, function(i) {
-    return html += "<li>" + data[i].kind + ":<br/><img src='" + data[i].image_url + "' class='pf-image' /></li>";
+    if (data[i].kind === 'pass') {
+      setImage = "<li>pass</li><li><a href='#' class='changeImageKind isPass'>fail</a></li>";
+    } else {
+      setImage = "<li><a href='#' class='changeImageKind isFail'>pass</a></li><li>fail</li>";
+    }
+    return html += ("<li id='" + data[i]._id + "'>") + ("<ul class='set-image-kind'>" + setImage + "</ul>") + ("<img src='" + data[i].image_url + "' class='pf-image' />") + "</li>";
   });
   return list.append(html).show();
 };
@@ -13,6 +19,28 @@ displayImages = function(data) {
 showImageAdded = function() {
   return $('#messaging').html('Image added!');
 };
+
+switchImageKind = function(el) {
+  console.log(el);
+  return $('#messaging').html('Image changed!');
+};
+
+$('body').on('click', '.changeImageKind', function(e) {
+  var $this, data;
+  e.preventDefault();
+  $this = $(this);
+  data = {
+    id: $(this).parent('li').parent('ul').parent('li').attr('id'),
+    kind: $(this).hasClass('isPass') ? 'fail' : 'pass'
+  };
+  return $.ajax({
+    type: 'PUT',
+    url: 'api/images',
+    success: switchImageKind($this),
+    contentType: 'application/json',
+    data: JSON.stringify(data)
+  });
+});
 
 imageForm = $('#js-add-image');
 
@@ -24,7 +52,7 @@ imageForm.on('submit', function(e) {
     kind: imageForm.find('input[name=kind]:checked').val()
   };
   return $.ajax({
-    type: 'post',
+    type: 'POST',
     url: 'api/images',
     success: showImageAdded,
     contentType: 'application/json',
@@ -35,6 +63,7 @@ imageForm.on('submit', function(e) {
 $('#js-show-images').on('click', function() {
   $(this).remove();
   return $.ajax({
+    type: 'GET',
     url: 'api/images',
     success: displayImages,
     dataType: 'json'
