@@ -1,8 +1,6 @@
-var User, allowedUsers, mongoose, passport, passportTwitterStrategy, _;
+var User, allowedUsers, passport, passportTwitterStrategy, _;
 
 _ = require('lodash');
-
-mongoose = require('mongoose');
 
 passport = require('passport');
 
@@ -13,13 +11,13 @@ User = require('./models/user');
 allowedUsers = process.env.ALLOWED_USERS.split(',');
 
 passport.serializeUser(function(user, done) {
-  console.log("serializeUser: " + user.userName);
-  return done(null, user._id);
+  console.log("Serialized user: " + user.userName);
+  return done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
   return User.findById(id, function(err, user) {
-    console.log("deserializeUser: " + user.userName);
+    console.log("Deserialized user: " + user.userName);
     if (!err) {
       return done(null, user);
     } else {

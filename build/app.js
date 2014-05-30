@@ -1,4 +1,4 @@
-var app, authentication, bodyParser, coffee, coffeescriptMiddleware, cookieParser, express, livereload, logger, mongoose, nib, passport, path, routes, session, stylus;
+var Store, app, authentication, bodyParser, coffee, coffeescriptMiddleware, cookieParser, express, livereload, logger, mongoose, nib, passport, path, routes, session, stylus;
 
 path = require('path');
 
@@ -6,15 +6,17 @@ express = require('express');
 
 cookieParser = require('cookie-parser');
 
+bodyParser = require('body-parser');
+
 session = require('express-session');
+
+Store = require('connect-mongostore')(session);
 
 logger = require('morgan');
 
 mongoose = require('mongoose');
 
 passport = require('passport');
-
-bodyParser = require('body-parser');
 
 livereload = require('connect-livereload');
 
@@ -46,9 +48,9 @@ app.set('views', path.join(__dirname, '..', 'views'));
 
 app.set('view engine', 'jade');
 
-app.set('db-url', process.env.MONGOHQ_URL || 'mongodb://localhost/images');
+app.set('db url', process.env.MONGODB_URL || 'mongodb://localhost/blundercats');
 
-mongoose.connect(app.get('db-url'), {
+mongoose.connect(app.get('db url'), {
   db: {
     safe: true
   }
@@ -63,7 +65,9 @@ mongoose.connect(app.get('db-url'), {
 });
 
 if (app.get('env') === 'development') {
-  app.use(livereload());
+  app.use(livereload({
+    port: 35730
+  }));
 }
 
 app.use(stylus.middleware({
@@ -84,15 +88,17 @@ app.use(coffeescriptMiddleware({
 
 app.use(express["static"](path.join(__dirname, '..', 'public')));
 
-console.log('Setting session/cookie');
-
-app.use(cookieParser());
+app.use(cookieParser('blundercats'));
 
 app.use(bodyParser());
 
 app.use(session({
+  name: 'express_session',
   secret: 'blundercats',
-  key: 'sid'
+  store: new Store({
+    mongooseConnection: mongoose.connections[0],
+    collection: 'sessions'
+  })
 }));
 
 app.use(passport.initialize());

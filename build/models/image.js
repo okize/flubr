@@ -9,7 +9,13 @@ Image = new mongoose.Schema({
     type: String,
     "default": 'neutral'
   },
+  deleted: {
+    type: Boolean,
+    "default": false
+  },
   added_by: String,
+  updated_by: String,
+  deleted_by: String,
   created_at: {
     type: Date,
     "default": Date.now

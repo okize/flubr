@@ -1,8 +1,10 @@
-var Image, errors, path, _;
+var Image, errors, helpers, path, _;
 
 path = require('path');
 
 _ = require('lodash');
+
+helpers = require(path.join('..', 'helpers'));
 
 Image = require(path.join('..', 'models', 'image'));
 
@@ -13,13 +15,25 @@ errors = {
 
 module.exports = {
   index: function(req, res) {
-    return Image.find({}, function(err, results) {
+    return Image.find({
+      deleted: false
+    }, function(err, results) {
       if (err != null) {
         res.send(500, {
           error: err
         });
       }
       return res.send(results);
+    });
+  },
+  show: function(req, res) {
+    return Image.findById(req.params.id, function(err, result) {
+      if (err != null) {
+        res.send(500, {
+          error: err
+        });
+      }
+      return res.send(result);
     });
   },
   random: function(req, res) {
@@ -29,7 +43,8 @@ module.exports = {
       });
     }
     return Image.find({
-      kind: req.params.id
+      kind: req.params.id,
+      deleted: false
     }, 'image_url', function(err, results) {
       var randomImage;
       if (err != null) {
@@ -49,42 +64,71 @@ module.exports = {
   },
   create: function(req, res) {
     var img;
-    img = new Image(req.body);
-    return img.save(function(err, results) {
-      if (err != null) {
-        res.send(500, {
-          error: err
-        });
-      }
-      return res.send(results);
-    });
+    if (helpers.checkForUser(req, res)) {
+      req.body.added_by = req.user.userid;
+      img = new Image(req.body);
+      return img.save(function(err, results) {
+        if (err != null) {
+          res.send(500, {
+            error: err
+          });
+        }
+        return res.send(results);
+      });
+    } else {
+      return res.send(500, {
+        error: "Action requires user to be logged in"
+      });
+    }
   },
   update: function(req, res) {
-    return Image.findByIdAndUpdate(req.params.id, {
-      $set: req.body
-    }, function(err, results) {
-      if (err != null) {
-        res.send(500, {
-          error: err
+    var updateData;
+    if (helpers.checkForUser(req, res)) {
+      updateData = {
+        kind: req.body.kind,
+        updated_by: req.user.userid
+      };
+      return Image.update({
+        _id: req.params.id
+      }, updateData, function(err, count) {
+        if (err != null) {
+          res.send(500, {
+            error: err
+          });
+        }
+        return res.send(200, {
+          success: "" + count + " rows have been updated"
         });
-      }
-      if (results != null) {
-        res.send(results);
-      }
-      return res.send(404);
-    });
+      });
+    } else {
+      return res.send(500, {
+        error: "Action requires user to be logged in"
+      });
+    }
   },
   "delete": function(req, res) {
-    return Image.findByIdAndRemove(req.params.id, function(err, results) {
-      if (err != null) {
-        res.send(500, {
-          error: err
+    var updateData;
+    if (helpers.checkForUser(req, res)) {
+      updateData = {
+        deleted: true,
+        deleted_by: req.user.userid
+      };
+      return Image.update({
+        _id: req.params.id
+      }, updateData, function(err, count) {
+        if (err != null) {
+          res.send(500, {
+            error: err
+          });
+        }
+        return res.send(200, {
+          success: "" + count + " rows have been deleted"
         });
-      }
-      if (results != null) {
-        res.send(200, results);
-      }
-      return res.send(404);
-    });
+      });
+    } else {
+      return res.send(500, {
+        error: "Action requires user to be logged in"
+      });
+    }
   }
 };
