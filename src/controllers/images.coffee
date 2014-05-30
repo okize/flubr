@@ -49,7 +49,7 @@ module.exports =
     if helpers.checkForUser req, res
       updateData =
         kind: req.body.kind
-        updated_by: req.body.userid
+        updated_by: req.user.userid
       Image.update {_id: req.params.id}, updateData, (err, count) ->
         res.send(500, { error: err}) if err?
         res.send 200, {success: "#{count} rows have been updated"}
@@ -59,11 +59,11 @@ module.exports =
   # deletes image record non-permanently
   delete: (req, res) ->
     if helpers.checkForUser req, res
-      data = {}
-      data.deleted = true
-      data.deleted_by = req.user.userid
-      Image.findByIdAndUpdate req.params.id, { $set: data }, (err, results) ->
-        res.send 500, error: err if err?
-        res.send(200, results) if results?
+      updateData =
+        deleted: true
+        deleted_by: req.user.userid
+      Image.update {_id: req.params.id}, updateData, (err, count) ->
+        res.send(500, { error: err}) if err?
+        res.send 200, {success: "#{count} rows have been deleted"}
     else
       res.send 500, {error: "Action requires user to be logged in"}
