@@ -11,7 +11,7 @@ displayImages = function(data) {
     } else {
       setImage = "<li><a href='#' class='changeImageKind isFail'>pass</a></li><li>fail</li>";
     }
-    return html += ("<li id='" + data[i]._id + "'>") + ("<ul class='set-image-kind'>" + setImage + "</ul>") + ("<img src='" + data[i].image_url + "' class='pf-image' />") + "</li>";
+    return html += ("<li class='image-item' id='" + data[i]._id + "'>") + ("<ul class='set-image-kind'>" + setImage + "</ul>") + ("<img src='" + data[i].image_url + "' class='pf-image' />") + "</li>";
   });
   return list.append(html).show();
 };
@@ -26,16 +26,16 @@ switchImageKind = function(el) {
 };
 
 $('body').on('click', '.changeImageKind', function(e) {
-  var $this, data;
+  var $this, data, id;
   e.preventDefault();
   $this = $(this);
+  id = $(this).parent('li').parent('ul').parent('li').attr('id');
   data = {
-    id: $(this).parent('li').parent('ul').parent('li').attr('id'),
     kind: $(this).hasClass('isPass') ? 'fail' : 'pass'
   };
   return $.ajax({
     type: 'PUT',
-    url: 'api/images',
+    url: 'api/images/' + id,
     success: switchImageKind($this),
     contentType: 'application/json',
     data: JSON.stringify(data)

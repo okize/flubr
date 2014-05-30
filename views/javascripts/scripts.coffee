@@ -8,7 +8,7 @@ displayImages = (data) ->
     else
       setImage = "<li><a href='#' class='changeImageKind isFail'>pass</a></li><li>fail</li>"
     html +=
-      "<li id='#{data[i]._id}'>" +
+      "<li class='image-item' id='#{data[i]._id}'>" +
       "<ul class='set-image-kind'>#{setImage}</ul>" +
       "<img src='#{data[i].image_url}' class='pf-image' />" +
       "</li>"
@@ -24,14 +24,14 @@ switchImageKind = (el) ->
 $('body').on 'click', '.changeImageKind', (e) ->
   e.preventDefault()
   $this = $(this)
+  id = $(this).parent('li').parent('ul').parent('li').attr('id')
   data =
-    id: $(this).parent('li').parent('ul').parent('li').attr('id')
     kind: if $(this).hasClass 'isPass' then 'fail' else 'pass'
   $.ajax
     type: 'PUT'
-    url: 'api/images'
+    url: 'api/images/' + id
     success: switchImageKind $this
-    contentType: 'application/json',
+    contentType: 'application/json'
     data: JSON.stringify(data)
 
 imageForm = $('#js-add-image')
@@ -45,7 +45,7 @@ imageForm.on 'submit', (e) ->
     type: 'POST'
     url: 'api/images'
     success: showImageAdded
-    contentType: 'application/json',
+    contentType: 'application/json'
     data: JSON.stringify(data)
 
 $('#js-show-images').on 'click', ->
