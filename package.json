@@ -29,8 +29,6 @@
     "gulp-stylus": "*",
     "jade": "x",
     "lodash": "*",
-    "method-override": "*",
-    "mongodb-uri": "*",
     "mongoose": "3.8.x",
     "morgan": "x",
     "nib": "x",
