@@ -1,4 +1,12 @@
-var deleteImage, displayImages, imageForm, showImageAdded, switchImageKind;
+var deleteImage, displayImages, getImageSetHtml, imageForm, showImageAdded, switchImageKind;
+
+getImageSetHtml = function(imageKind) {
+  if (imageKind === 'pass') {
+    return "<li>pass</li><li><a href='#' class='changeImageKind isPass'>fail</a></li>";
+  } else {
+    return "<li><a href='#' class='changeImageKind isFail'>pass</a></li><li>fail</li>";
+  }
+};
 
 displayImages = function(data) {
   var html, list, setImage;
@@ -6,12 +14,7 @@ displayImages = function(data) {
   html = '';
   setImage = '';
   $.each(data, function(i) {
-    if (data[i].kind === 'pass') {
-      setImage = "<li>pass</li><li><a href='#' class='changeImageKind isPass'>fail</a></li>";
-    } else {
-      setImage = "<li><a href='#' class='changeImageKind isFail'>pass</a></li><li>fail</li>";
-    }
-    return html += ("<li class='image-item' id='" + data[i]._id + "'>") + ("<ul class='set-image-kind'>" + setImage + "</ul>") + ("<img src='" + data[i].image_url + "' class='pf-image' />") + "<div class='delete-image'><a href='#'>delete</a></div>" + "</li>";
+    return setImage = html += ("<li class='image-item' id='" + data[i]._id + "'>") + ("<ul class='set-image-kind'>" + (getImageSetHtml(data[i].kind)) + "</ul>") + ("<img src='" + data[i].image_url + "' class='pf-image' />") + "<div class='delete-image'><a href='#'>delete</a></div>" + "</li>";
   });
   return list.append(html).show();
 };
@@ -20,9 +23,14 @@ showImageAdded = function() {
   return $('#messaging').html('Image added!');
 };
 
-switchImageKind = function(el) {
-  console.log(el);
-  return $('#messaging').html('Image changed!');
+switchImageKind = function(el, newKind) {
+  el.closest('.set-image-kind').html(getImageSetHtml(newKind));
+  return $('#messaging').html('Image kind changed!');
+};
+
+deleteImage = function(el) {
+  el.closest('.image-item').remove();
+  return $('#messaging').html('Image deleted!');
 };
 
 $('body').on('click', '.changeImageKind', function(e) {
@@ -36,16 +44,11 @@ $('body').on('click', '.changeImageKind', function(e) {
   return $.ajax({
     type: 'PUT',
     url: 'api/images/' + id,
-    success: switchImageKind($this),
+    success: switchImageKind($this, data.kind),
     contentType: 'application/json',
     data: JSON.stringify(data)
   });
 });
-
-deleteImage = function(el) {
-  el.closest('.image-item').remove();
-  return $('#messaging').html('Image deleted!');
-};
 
 $('body').on('click', '.delete-image a', function(e) {
   var $this, id;

@@ -1,15 +1,18 @@
+getImageSetHtml = (imageKind) ->
+  if imageKind == 'pass'
+    "<li>pass</li><li><a href='#' class='changeImageKind isPass'>fail</a></li>"
+  else
+    "<li><a href='#' class='changeImageKind isFail'>pass</a></li><li>fail</li>"
+
 displayImages = (data) ->
   list = $('#js-image-list')
   html = ''
   setImage = ''
   $.each data, (i) ->
-    if data[i].kind == 'pass'
-      setImage = "<li>pass</li><li><a href='#' class='changeImageKind isPass'>fail</a></li>"
-    else
-      setImage = "<li><a href='#' class='changeImageKind isFail'>pass</a></li><li>fail</li>"
+    setImage =
     html +=
       "<li class='image-item' id='#{data[i]._id}'>" +
-      "<ul class='set-image-kind'>#{setImage}</ul>" +
+      "<ul class='set-image-kind'>#{getImageSetHtml(data[i].kind)}</ul>" +
       "<img src='#{data[i].image_url}' class='pf-image' />" +
       "<div class='delete-image'><a href='#'>delete</a></div>" +
       "</li>"
@@ -18,9 +21,13 @@ displayImages = (data) ->
 showImageAdded = ->
   $('#messaging').html('Image added!')
 
-switchImageKind = (el) ->
-  console.log el
-  $('#messaging').html('Image changed!')
+switchImageKind = (el, newKind) ->
+  el.closest('.set-image-kind').html( getImageSetHtml newKind )
+  $('#messaging').html('Image kind changed!')
+
+deleteImage = (el) ->
+  el.closest('.image-item').remove()
+  $('#messaging').html('Image deleted!')
 
 $('body').on 'click', '.changeImageKind', (e) ->
   e.preventDefault()
@@ -31,13 +38,9 @@ $('body').on 'click', '.changeImageKind', (e) ->
   $.ajax
     type: 'PUT'
     url: 'api/images/' + id
-    success: switchImageKind $this
+    success: switchImageKind $this, data.kind
     contentType: 'application/json'
     data: JSON.stringify(data)
-
-deleteImage = (el) ->
-  el.closest('.image-item').remove()
-  $('#messaging').html('Image deleted!')
 
 $('body').on 'click', '.delete-image a', (e) ->
   e.preventDefault()
