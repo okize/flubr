@@ -1,4 +1,4 @@
-var deleteImage, displayImages, getImageSetHtml, imageForm, showImageAdded, switchImageKind;
+var deleteImageInUi, displayImages, getImageSetHtml, imageForm, showImageAdded, switchImageKind;
 
 getImageSetHtml = function(imageKind) {
   if (imageKind === 'pass') {
@@ -9,12 +9,11 @@ getImageSetHtml = function(imageKind) {
 };
 
 displayImages = function(data) {
-  var html, list, setImage;
+  var html, list;
   list = $('#js-image-list');
   html = '';
-  setImage = '';
   $.each(data, function(i) {
-    return setImage = html += ("<li class='image-item' id='" + data[i]._id + "'>") + ("<ul class='set-image-kind'>" + (getImageSetHtml(data[i].kind)) + "</ul>") + ("<img src='" + data[i].image_url + "' class='pf-image' />") + "<div class='delete-image'><a href='#'>delete</a></div>" + "</li>";
+    return html += ("<li class='image-item' id='" + data[i]._id + "'>") + ("<ul class='set-image-kind'>" + (getImageSetHtml(data[i].kind)) + "</ul>") + ("<img src='" + data[i].image_url + "' class='pf-image' />") + "<div class='delete-image'><a href='#'>delete</a></div>" + "</li>";
   });
   return list.append(html).show();
 };
@@ -28,7 +27,7 @@ switchImageKind = function(el, newKind) {
   return $('#messaging').html('Image kind changed!');
 };
 
-deleteImage = function(el) {
+deleteImageInUi = function(el) {
   el.closest('.image-item').remove();
   return $('#messaging').html('Image deleted!');
 };
@@ -60,7 +59,7 @@ $('body').on('click', '.delete-image a', function(e) {
     return $.ajax({
       type: 'DELETE',
       url: 'api/images/' + id,
-      success: deleteImage($this),
+      success: deleteImageInUi($this),
       contentType: 'application/json'
     });
   }

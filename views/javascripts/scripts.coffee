@@ -7,9 +7,7 @@ getImageSetHtml = (imageKind) ->
 displayImages = (data) ->
   list = $('#js-image-list')
   html = ''
-  setImage = ''
   $.each data, (i) ->
-    setImage =
     html +=
       "<li class='image-item' id='#{data[i]._id}'>" +
       "<ul class='set-image-kind'>#{getImageSetHtml(data[i].kind)}</ul>" +
@@ -25,7 +23,7 @@ switchImageKind = (el, newKind) ->
   el.closest('.set-image-kind').html( getImageSetHtml newKind )
   $('#messaging').html('Image kind changed!')
 
-deleteImage = (el) ->
+deleteImageInUi = (el) ->
   el.closest('.image-item').remove()
   $('#messaging').html('Image deleted!')
 
@@ -51,7 +49,7 @@ $('body').on 'click', '.delete-image a', (e) ->
     $.ajax
       type: 'DELETE'
       url: 'api/images/' + id
-      success: deleteImage $this
+      success: deleteImageInUi $this
       contentType: 'application/json'
 
 imageForm = $('#js-add-image')
