@@ -2,6 +2,7 @@ mongoose = require 'mongoose'
 
 Image = new mongoose.Schema(
   image_url: String
+  thumbnail_url: String
   original_url: String
   kind: { type: String, default: 'neutral' }
   deleted: { type: Boolean, default: false }
