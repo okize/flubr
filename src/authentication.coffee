@@ -11,7 +11,6 @@ passport.serializeUser (user, done) ->
 
 passport.deserializeUser (id, done) ->
   User.findById id, (err, user) ->
-    console.log "Deserialized user: #{user.userName}"
     unless err
       done null, user
     else
