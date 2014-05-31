@@ -1,4 +1,4 @@
-var deleteImageInUi, displayImages, getImageSetHtml, imageForm, showImageAdded, switchImageKind;
+var deleteImageInUi, displayImages, getImageSetHtml, getThumbnail, imageForm, showImageAdded, switchImageKind;
 
 getImageSetHtml = function(imageKind) {
   if (imageKind === 'pass') {
@@ -8,12 +8,17 @@ getImageSetHtml = function(imageKind) {
   }
 };
 
+getThumbnail = function(url) {
+  var thumbnail;
+  return thumbnail = (url.substring(0, url.length - 4)) + 's.jpg';
+};
+
 displayImages = function(data) {
   var html, list;
   list = $('#js-image-list');
   html = '';
   $.each(data, function(i) {
-    return html += ("<li class='image-item' id='" + data[i]._id + "'>") + ("<ul class='set-image-kind'>" + (getImageSetHtml(data[i].kind)) + "</ul>") + ("<img src='" + data[i].image_url + "' class='pf-image' />") + "<div class='delete-image'><a href='#'>delete</a></div>" + "</li>";
+    return html += ("<li class='image-item' id='" + data[i]._id + "'>") + ("<ul class='set-image-kind'>" + (getImageSetHtml(data[i].kind)) + "</ul>") + ("<img src='" + (getThumbnail(data[i].image_url)) + "' class='pf-image' />") + "<div class='delete-image'><a href='#'>delete</a></div>" + "</li>";
   });
   return list.append(html).show();
 };

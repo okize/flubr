@@ -4,6 +4,9 @@ getImageSetHtml = (imageKind) ->
   else
     "<li><a href='#' class='changeImageKind isFail'>pass</a></li><li>fail</li>"
 
+getThumbnail = (url) ->
+  thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
+
 displayImages = (data) ->
   list = $('#js-image-list')
   html = ''
@@ -11,7 +14,7 @@ displayImages = (data) ->
     html +=
       "<li class='image-item' id='#{data[i]._id}'>" +
       "<ul class='set-image-kind'>#{getImageSetHtml(data[i].kind)}</ul>" +
-      "<img src='#{data[i].image_url}' class='pf-image' />" +
+      "<img src='#{getThumbnail(data[i].image_url)}' class='pf-image' />" +
       "<div class='delete-image'><a href='#'>delete</a></div>" +
       "</li>"
   list.append(html).show()
