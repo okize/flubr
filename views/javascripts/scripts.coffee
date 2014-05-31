@@ -14,7 +14,7 @@ displayImages = (data) ->
     html +=
       "<li class='image-item' id='#{data[i]._id}'>" +
       "<ul class='set-image-kind'>#{getImageSetHtml(data[i].kind)}</ul>" +
-      "<img src='#{getThumbnail(data[i].image_url)}' class='pf-image' />" +
+      "<a href='#{data[i].image_url}'><img src='#{getThumbnail(data[i].image_url)}' class='pf-image' /></a>" +
       "<div class='delete-image'><a href='#'>delete</a></div>" +
       "</li>"
   list.append(html).show()
