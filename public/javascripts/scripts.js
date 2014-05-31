@@ -51,16 +51,19 @@ $('body').on('click', '.changeImageKind', function(e) {
 });
 
 $('body').on('click', '.delete-image a', function(e) {
-  var $this, id;
+  var $this, id, verify;
   e.preventDefault();
-  $this = $(this);
-  id = $this.closest('.image-item').attr('id');
-  return $.ajax({
-    type: 'DELETE',
-    url: 'api/images/' + id,
-    success: deleteImage($this),
-    contentType: 'application/json'
-  });
+  verify = confirm('Are you sure you want to delete this image?');
+  if (verify === true) {
+    $this = $(this);
+    id = $this.closest('.image-item').attr('id');
+    return $.ajax({
+      type: 'DELETE',
+      url: 'api/images/' + id,
+      success: deleteImage($this),
+      contentType: 'application/json'
+    });
+  }
 });
 
 imageForm = $('#js-add-image');

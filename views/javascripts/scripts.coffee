@@ -44,13 +44,15 @@ $('body').on 'click', '.changeImageKind', (e) ->
 
 $('body').on 'click', '.delete-image a', (e) ->
   e.preventDefault()
-  $this = $(this)
-  id = $this.closest('.image-item').attr('id')
-  $.ajax
-    type: 'DELETE'
-    url: 'api/images/' + id
-    success: deleteImage $this
-    contentType: 'application/json'
+  verify = confirm 'Are you sure you want to delete this image?'
+  if verify == true
+    $this = $(this)
+    id = $this.closest('.image-item').attr('id')
+    $.ajax
+      type: 'DELETE'
+      url: 'api/images/' + id
+      success: deleteImage $this
+      contentType: 'application/json'
 
 imageForm = $('#js-add-image')
 
