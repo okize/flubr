@@ -6,6 +6,7 @@ gutil = require 'gulp-util'
 liveReload = require('tiny-lr')()
 nodemon = require 'gulp-nodemon'
 coffee = require 'gulp-coffee'
+coffeelint = require 'gulp-coffeelint'
 clean = require 'gulp-clean'
 
 # configuration
@@ -72,6 +73,13 @@ gulp.task 'clean', ->
 # compiles css
 gulp.task 'css', ->
   console.log 'compile css'
+
+# lints coffeescript
+gulp.task 'lint', ->
+  gulp
+    .src(sources.app)
+    .pipe(coffeelint())
+    .pipe(coffeelint.reporter())
 
 # builds coffeescript source into deployable javascript
 gulp.task 'build', ->

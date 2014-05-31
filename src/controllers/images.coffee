@@ -6,6 +6,7 @@ Image = require path.join('..', 'models', 'image')
 errors =
   noIdError: "Please specify image type (pass/fail) in request url"
   noImageError: "No image found"
+  needToLogin: "Action requires user to be logged in"
 
 # image model's CRUD controller.
 module.exports =
@@ -24,9 +25,13 @@ module.exports =
 
   # returns random image url based on id of pass/fail
   random: (req, res) ->
-    res.send 500, error: errors.noIdError if !req.params.id? or !req.params.id.match /(pass|fail)/g
-    Image.find {kind: req.params.id, deleted: false}, 'image_url', (err, results) ->
-      res.send(500, { error: err }) if err?
+    if !req.params.id? or !req.params.id.match /(pass|fail)/g
+      res.send 500, error: errors.noIdError
+    Image.find
+      kind: req.params.id
+      deleted: false
+    , 'image_url', (err, results) ->
+      res.send 500, error: err if err?
       randomImage = _.sample(results)
       unless !randomImage?
         res.send(randomImage.image_url)
@@ -42,7 +47,7 @@ module.exports =
         res.send 500, error: err if err?
         res.send(results)
     else
-      res.send 500, {error: "Action requires user to be logged in"}
+      res.send 500, error: needToLogin
 
   # updates existing image record type: pass or fail
   update: (req, res) ->
@@ -51,10 +56,10 @@ module.exports =
         kind: req.body.kind
         updated_by: req.user.userid
       Image.update {_id: req.params.id}, updateData, (err, count) ->
-        res.send(500, { error: err}) if err?
-        res.send 200, {success: "#{count} rows have been updated"}
+        res.send 500, error: err if err?
+        res.send 200, success: "#{count} rows have been updated"
     else
-      res.send 500, {error: "Action requires user to be logged in"}
+      res.send 500, error: needToLogin
 
   # deletes image record non-permanently
   delete: (req, res) ->
@@ -63,7 +68,7 @@ module.exports =
         deleted: true
         deleted_by: req.user.userid
       Image.update {_id: req.params.id}, updateData, (err, count) ->
-        res.send(500, { error: err}) if err?
-        res.send 200, {success: "#{count} rows have been deleted"}
+        res.send 500, error: err if err?
+        res.send 200, success: "#{count} rows have been deleted"
     else
-      res.send 500, {error: "Action requires user to be logged in"}
+      res.send 500, error: needToLogin
