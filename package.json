@@ -41,6 +41,7 @@
     "gulp": "*",
     "gulp-clean": "*",
     "gulp-coffee": "*",
+    "gulp-coffeelint": "*",
     "gulp-nodemon": "*",
     "gulp-util": "*",
     "tiny-lr": "*"
