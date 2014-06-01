@@ -10,7 +10,8 @@ Image = require(path.join('..', 'models', 'image'));
 
 errors = {
   noIdError: "Please specify image type (pass/fail) in request url",
-  noImageError: "No image found"
+  noImageError: "No image found",
+  needToLogin: "Action requires user to be logged in"
 };
 
 module.exports = {
@@ -77,7 +78,7 @@ module.exports = {
       });
     } else {
       return res.send(500, {
-        error: "Action requires user to be logged in"
+        error: needToLogin
       });
     }
   },
@@ -102,7 +103,7 @@ module.exports = {
       });
     } else {
       return res.send(500, {
-        error: "Action requires user to be logged in"
+        error: needToLogin
       });
     }
   },
@@ -127,7 +128,7 @@ module.exports = {
       });
     } else {
       return res.send(500, {
-        error: "Action requires user to be logged in"
+        error: needToLogin
       });
     }
   }

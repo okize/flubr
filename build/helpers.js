@@ -10,7 +10,9 @@ module.exports = {
     if (!!req.isAuthenticated()) {
       return next();
     } else {
-      return res.redirect('/');
+      return res.status(401).render('/', {
+        title: 'Unauthorized'
+      });
     }
   }
 };

@@ -1,8 +1,6 @@
-var admin, helpers, home, images, users;
+var helpers, home, images, users;
 
 home = require('./controllers/index');
-
-admin = require('./controllers/admin');
 
 images = require('./controllers/images');
 
@@ -15,11 +13,8 @@ module.exports = function(app, passport) {
     if (!req.isAuthenticated()) {
       return home.index(req, res, next);
     } else {
-      return res.redirect('/admin');
+      return home.loggedin(req, res, next);
     }
-  });
-  app.all('/admin', helpers.ensureAuthenticated, function(req, res, next) {
-    return admin.index(req, res, next);
   });
   app.get('/login', passport.authenticate('twitter'), function(req, res, next) {});
   app.all('/logout', function(req, res, next) {
@@ -29,7 +24,7 @@ module.exports = function(app, passport) {
   app.get('/auth/callback', passport.authenticate('twitter', {
     failureRedirect: '/'
   }), function(req, res, next) {
-    return res.redirect('/admin');
+    return res.redirect('/');
   });
   app.all('/api', function(req, res, next) {
     return res.redirect('/');
