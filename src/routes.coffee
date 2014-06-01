@@ -11,11 +11,7 @@ module.exports = (app, passport) ->
     unless req.isAuthenticated()
       home.index req, res, next
     else
-      res.redirect '/admin'
-
-  # admin
-  app.all '/admin', helpers.ensureAuthenticated, (req, res, next) ->
-    admin.index req, res, next
+      home.admin req, res, next
 
   # login
   app.get '/login', passport.authenticate('twitter'), (req, res, next) ->
@@ -29,7 +25,7 @@ module.exports = (app, passport) ->
   app.get '/auth/callback', passport.authenticate('twitter',
     failureRedirect: '/'
   ), (req, res, next) ->
-    res.redirect '/admin'
+    res.redirect '/'
 
   # api
   app.all '/api', (req, res, next) ->
