@@ -1,17 +1,16 @@
 home = require './controllers/index'
-admin = require './controllers/admin'
 images = require './controllers/images'
 users = require './controllers/users'
 helpers = require './helpers'
 
 module.exports = (app, passport) ->
 
-  # index page (redirect to admin if signed in)
+  # home page; redirects to loggedin after auth
   app.get '/', (req, res, next) ->
     unless req.isAuthenticated()
       home.index req, res, next
     else
-      home.admin req, res, next
+      home.loggedin req, res, next
 
   # login
   app.get '/login', passport.authenticate('twitter'), (req, res, next) ->
