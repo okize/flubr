@@ -5,8 +5,8 @@ module.exports =
     res.render 'index',
     title: 'Blundercats!'
 
-  # admin screen
-  admin: (req, res) ->
-    res.render 'admin',
-    title: 'Admin'
+  # manage images screen
+  loggedin: (req, res) ->
+    res.render 'loggedin',
+    title: 'Manage'
     user: req.user
