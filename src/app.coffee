@@ -24,10 +24,9 @@ app = express()
 app.set 'env', process.env.NODE_ENV or 'development'
 app.set 'port', process.env.PORT or 3333
 app.set 'host name', process.env.HOST_NAME
-app.set 'app name', 'Blundercats'
 app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
-app.set 'db url', process.env.MONGODB_URL or 'mongodb://localhost/blundercats'
+app.set 'db url', process.env.MONGODB_URL or 'mongodb://localhost/passfail'
 
 # database connection
 mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
