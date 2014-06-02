@@ -23,6 +23,7 @@ app = express()
 # configuration
 app.set 'env', process.env.NODE_ENV or 'development'
 app.set 'port', process.env.PORT or 3333
+app.set 'app name', 'Passfail'
 app.set 'host name', process.env.HOST_NAME
 app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'

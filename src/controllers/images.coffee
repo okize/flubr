@@ -6,6 +6,7 @@ Image = require path.join('..', 'models', 'image')
 errors =
   noIdError: "Please specify image type (pass/fail) in request url"
   noImageError: "No image found"
+  noImageUrlSent: "No image url sent"
   needToLogin: "Action requires user to be logged in"
 
 # image model's CRUD controller.
@@ -41,11 +42,21 @@ module.exports =
   # creates new image record
   create: (req, res)  ->
     if helpers.checkForUser req, res
-      req.body.added_by = req.user.userid
-      img = new Image(req.body)
-      img.save (err, results) ->
-        res.send 500, error: err if err?
-        res.send(results)
+      # should validate url here
+      url = req.body.source_url
+      if url is undefined or url == ''
+        res.send 500, error: errors.noImageUrlSent
+      else
+        req.body.added_by = req.user.userid
+        if url.match /imgur.com/
+          req.body.image_url = url
+          img = new Image(req.body)
+          img.save (err, results) ->
+            res.send 500, error: err if err?
+            res.send(results)
+        else
+          console.log 'get imgur url'
+
     else
       res.send 500, error: needToLogin
 
