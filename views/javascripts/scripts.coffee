@@ -58,30 +58,15 @@ $('body').on 'click', '.delete-image a', (e) ->
 $('#js-add-image').on 'submit', (e) ->
   e.preventDefault()
   $this = $(this)
-  url = $this.find('#imageUrl').val()
-  if !url.match /imgur.com/
-    $.ajax
-      url: 'https://api.imgur.com/3/image'
-      method: 'POST'
-      headers:
-        Authorization: 'Client-ID '
-        Accept: 'application/json'
-      data:
-        image: url
-        type: 'url'
-      success: (result) ->
-        console.log result
-  else
-    data =
-      source_url: url
-      image_url: url
-      kind: $this.find('input[name=kind]:checked').val()
-    $.ajax
-      type: 'POST'
-      url: 'api/images'
-      success: showImageAdded
-      contentType: 'application/json'
-      data: JSON.stringify(data)
+  data =
+    source_url: $this.find('#imageUrl').val()
+    kind: $this.find('input[name=kind]:checked').val()
+  $.ajax
+    type: 'POST'
+    url: 'api/images'
+    success: showImageAdded
+    contentType: 'application/json'
+    data: JSON.stringify(data)
 
 $('#js-show-images').on 'click', ->
   $(this).remove()
