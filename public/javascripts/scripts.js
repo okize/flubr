@@ -80,7 +80,7 @@ $('#js-add-image').on('submit', function(e) {
   };
   return $.ajax({
     type: 'POST',
-    url: 'api/images',
+    url: '/api/images',
     success: showImageAdded,
     contentType: 'application/json',
     data: JSON.stringify(data)

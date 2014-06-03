@@ -63,7 +63,7 @@ $('#js-add-image').on 'submit', (e) ->
     kind: $this.find('input[name=kind]:checked').val()
   $.ajax
     type: 'POST'
-    url: 'api/images'
+    url: '/api/images'
     success: showImageAdded
     contentType: 'application/json'
     data: JSON.stringify(data)
