@@ -19,6 +19,7 @@
     "url": "https://github.com/okize/blundercats/issues"
   },
   "dependencies": {
+    "async": "*",
     "body-parser": "x",
     "coffee-script": "x",
     "connect-coffee-script": "*",
@@ -34,8 +35,6 @@
     "nib": "x",
     "passport": "*",
     "passport-twitter": "*",
-    "request": "*",
-    "request-promise": "*",
     "stylus": "x"
   },
   "devDependencies": {
