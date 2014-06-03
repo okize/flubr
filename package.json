@@ -19,22 +19,24 @@
     "url": "https://github.com/okize/blundercats/issues"
   },
   "dependencies": {
-    "body-parser": "x",
-    "coffee-script": "x",
+    "async": "*",
+    "body-parser": "*",
+    "coffee-script": "*",
     "connect-coffee-script": "*",
     "connect-mongostore": "*",
-    "cookie-parser": "x",
-    "express": "x",
+    "cookie-parser": "*",
+    "express": "*",
     "express-session": "*",
     "gulp-stylus": "*",
-    "jade": "x",
+    "jade": "*",
     "lodash": "*",
     "mongoose": "3.8.x",
-    "morgan": "x",
-    "nib": "x",
+    "morgan": "*",
+    "nib": "*",
     "passport": "*",
     "passport-twitter": "*",
-    "stylus": "x"
+    "request": "*",
+    "stylus": "*"
   },
   "devDependencies": {
     "connect-livereload": "*",

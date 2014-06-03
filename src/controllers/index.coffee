@@ -3,7 +3,7 @@ module.exports =
   # login screen
   index: (req, res) ->
     res.render 'index',
-    title: 'Blundercats!'
+    title: 'Pass-fail Images'
 
   # manage images screen
   loggedin: (req, res) ->

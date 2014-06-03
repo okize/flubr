@@ -1,4 +1,4 @@
-var deleteImageInUi, displayImages, getImageSetHtml, getThumbnail, imageForm, showImageAdded, switchImageKind;
+var deleteImageInUi, displayImages, getImageSetHtml, getThumbnail, showImageAdded, switchImageKind;
 
 getImageSetHtml = function(imageKind) {
   if (imageKind === 'pass') {
@@ -24,7 +24,8 @@ displayImages = function(data) {
 };
 
 showImageAdded = function() {
-  return $('#messaging').html('Image added!');
+  $('#messaging').html('Image added!');
+  return $('#js-add-image')[0].reset();
 };
 
 switchImageKind = function(el, newKind) {
@@ -70,18 +71,17 @@ $('body').on('click', '.delete-image a', function(e) {
   }
 });
 
-imageForm = $('#js-add-image');
-
-imageForm.on('submit', function(e) {
-  var data;
+$('#js-add-image').on('submit', function(e) {
+  var $this, data;
   e.preventDefault();
+  $this = $(this);
   data = {
-    image_url: imageForm.find('#imageUrl').val(),
-    kind: imageForm.find('input[name=kind]:checked').val()
+    source_url: $this.find('#imageUrl').val(),
+    kind: $this.find('input[name=kind]:checked').val()
   };
   return $.ajax({
     type: 'POST',
-    url: 'api/images',
+    url: '/api/images',
     success: showImageAdded,
     contentType: 'application/json',
     data: JSON.stringify(data)

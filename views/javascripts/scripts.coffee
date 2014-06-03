@@ -21,6 +21,7 @@ displayImages = (data) ->
 
 showImageAdded = ->
   $('#messaging').html('Image added!')
+  $('#js-add-image')[0].reset()
 
 switchImageKind = (el, newKind) ->
   el.closest('.set-image-kind').html( getImageSetHtml newKind )
@@ -55,16 +56,15 @@ $('body').on 'click', '.delete-image a', (e) ->
       success: deleteImageInUi $this
       contentType: 'application/json'
 
-imageForm = $('#js-add-image')
-
-imageForm.on 'submit', (e) ->
+$('#js-add-image').on 'submit', (e) ->
   e.preventDefault()
+  $this = $(this)
   data =
-    image_url: imageForm.find('#imageUrl').val()
-    kind: imageForm.find('input[name=kind]:checked').val()
+    source_url: $this.find('#imageUrl').val()
+    kind: $this.find('input[name=kind]:checked').val()
   $.ajax
     type: 'POST'
-    url: 'api/images'
+    url: '/api/images'
     success: showImageAdded
     contentType: 'application/json'
     data: JSON.stringify(data)
