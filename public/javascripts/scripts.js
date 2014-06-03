@@ -24,7 +24,8 @@ displayImages = function(data) {
 };
 
 showImageAdded = function() {
-  return $('#messaging').html('Image added!');
+  $('#messaging').html('Image added!');
+  return $('#js-add-image')[0].reset();
 };
 
 switchImageKind = function(el, newKind) {

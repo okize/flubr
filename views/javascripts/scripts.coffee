@@ -21,6 +21,7 @@ displayImages = (data) ->
 
 showImageAdded = ->
   $('#messaging').html('Image added!')
+  $('#js-add-image')[0].reset()
 
 switchImageKind = (el, newKind) ->
   el.closest('.set-image-kind').html( getImageSetHtml newKind )
