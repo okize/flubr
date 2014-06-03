@@ -2,6 +2,8 @@ path = require 'path'
 _ = require 'lodash'
 helpers = require path.join('..', 'helpers')
 Image = require path.join('..', 'models', 'image')
+request = require 'request'
+async = require 'async'
 
 errors =
   noIdError: "Please specify image type (pass/fail) in request url"
@@ -44,18 +46,40 @@ module.exports =
     if helpers.checkForUser req, res
       # should validate url here
       url = req.body.source_url
+
       if url is undefined or url == ''
         res.send 500, error: errors.noImageUrlSent
       else
-        req.body.added_by = req.user.userid
-        if url.match /imgur.com/
-          req.body.image_url = url
+
+        async.series [
+          (callback) ->
+
+            unless url.match /imgur.com/
+              data =
+                image: url
+                type: 'url'
+              options =
+                url: 'https://api.imgur.com/3/image'
+                headers:
+                  Authorization: "Client-ID #{process.env.IMGUR_CLIENTID}"
+                  "Content-Type": 'application/x-www-form-urlencoded'
+                  Accept: 'application/json'
+
+              request.post(options,
+                (error, response, body) ->
+                  callback null, (JSON.parse body).data.link
+              ).form(data)
+
+            else
+              callback null, url
+
+        ], (err, results) ->
+          req.body.added_by = req.user.userid
+          req.body.image_url = results[0]
           img = new Image(req.body)
           img.save (err, results) ->
             res.send 500, error: err if err?
             res.send(results)
-        else
-          console.log 'get imgur url'
 
     else
       res.send 500, error: needToLogin
