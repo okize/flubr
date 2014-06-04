@@ -15,8 +15,11 @@ mainScript = path.join(appRoot, 'src', 'app.coffee')
 buildDir = path.join(appRoot, 'build')
 sources =
   app: 'src/**/*.coffee'
-  css: 'views/stylesheets/*.styl'
+  stylus: 'views/stylesheets/*.styl'
   coffee: 'views/javascripts/*.coffee'
+compiled =
+  css: 'public/stylesheets/*.css'
+  js: 'public/javascripts/*.js'
 liveReloadPort = 35730
 
 # returns an array of the source folders in sources object
@@ -76,8 +79,9 @@ gulp.task 'css', ->
 
 # lints coffeescript
 gulp.task 'lint', ->
+  log 'linting coffeescript...'
   gulp
-    .src(sources.app)
+    .src([sources.app, sources.coffee])
     .pipe(coffeelint())
     .pipe(coffeelint.reporter())
 
