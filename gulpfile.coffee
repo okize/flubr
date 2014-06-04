@@ -7,6 +7,7 @@ liveReload = require('tiny-lr')()
 nodemon = require 'gulp-nodemon'
 coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
+csslint = require 'gulp-csslint'
 clean = require 'gulp-clean'
 
 # configuration
@@ -78,12 +79,17 @@ gulp.task 'css', ->
   console.log 'compile css'
 
 # lints coffeescript
-gulp.task 'lint', ->
-  log 'linting coffeescript...'
+gulp.task 'coffeelint', ->
   gulp
     .src([sources.app, sources.coffee])
     .pipe(coffeelint())
     .pipe(coffeelint.reporter())
+
+gulp.task 'csslint', ->
+  gulp
+    .src([compiled.css])
+    .pipe(csslint())
+    .pipe(csslint.reporter())
 
 # builds coffeescript source into deployable javascript
 gulp.task 'build', ->
