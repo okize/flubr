@@ -1,5 +1,5 @@
 {
-  "name": "blundercats",
+  "name": "flubr",
   "version": "0.0.1",
   "private": true,
   "description": "pass/fail images for campfire, etc. moderated by your team members",
@@ -10,13 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/okize/blundercats"
+    "url": "https://github.com/okize/flubr"
   },
   "author": "Morgan Wigmanich <okize123@gmail.com> (https://github.com/okize)",
-  "homepage": "https://github.com/okize/blundercats",
+  "homepage": "https://github.com/okize/flubr",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/okize/blundercats/issues"
+    "url": "https://github.com/okize/flubr/issues"
   },
   "dependencies": {
     "async": "*",
