@@ -41,6 +41,7 @@
   "devDependencies": {
     "connect-livereload": "*",
     "gulp": "*",
+    "gulp-csslint": "*",
     "gulp-clean": "*",
     "gulp-coffee": "*",
     "gulp-coffeelint": "*",
