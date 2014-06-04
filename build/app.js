@@ -40,15 +40,15 @@ app.set('env', process.env.NODE_ENV || 'development');
 
 app.set('port', process.env.PORT || 3333);
 
-app.set('host name', process.env.HOST_NAME);
+app.set('app name', 'Passfail');
 
-app.set('app name', 'Blundercats');
+app.set('host name', process.env.HOST_NAME);
 
 app.set('views', path.join(__dirname, '..', 'views'));
 
 app.set('view engine', 'jade');
 
-app.set('db url', process.env.MONGODB_URL || 'mongodb://localhost/blundercats');
+app.set('db url', process.env.MONGODB_URL || 'mongodb://localhost/passfail');
 
 mongoose.connect(app.get('db url'), {
   db: {
