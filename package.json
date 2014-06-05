@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "async": "*",
+    "axis-css": "*",
     "body-parser": "*",
     "coffee-script": "*",
     "connect-coffee-script": "*",
