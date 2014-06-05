@@ -33,6 +33,10 @@ deleteImageInUi = (el) ->
   el.closest('.image-item').remove()
   $('#messaging').html('Image deleted!')
 
+getRandomImage = (el, type) ->
+  $.get '/api/images/random/' + type, (data) ->
+    el.append "<img src='#{data}' />"
+
 $('body').on 'click', '.changeImageKind', (e) ->
   e.preventDefault()
   $this = $(this)
@@ -78,3 +82,10 @@ $('#js-show-images').on 'click', ->
     url: 'api/images'
     success: displayImages
     dataType: 'json'
+
+randomPassImage = $('#random-pass-image')
+randomFailImage = $('#random-fail-image')
+
+if randomPassImage.length and randomFailImage.length
+  getRandomImage randomPassImage, 'pass'
+  getRandomImage randomFailImage, 'fail'

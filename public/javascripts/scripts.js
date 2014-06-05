@@ -1,4 +1,4 @@
-var deleteImageInUi, displayImages, getImageSetHtml, getThumbnail, showImageAdded, switchImageKind;
+var deleteImageInUi, displayImages, getImageSetHtml, getRandomImage, getThumbnail, randomFailImage, randomPassImage, showImageAdded, switchImageKind;
 
 getImageSetHtml = function(imageKind) {
   if (imageKind === 'pass') {
@@ -36,6 +36,12 @@ switchImageKind = function(el, newKind) {
 deleteImageInUi = function(el) {
   el.closest('.image-item').remove();
   return $('#messaging').html('Image deleted!');
+};
+
+getRandomImage = function(el, type) {
+  return $.get('/api/images/random/' + type, function(data) {
+    return el.append("<img src='" + data + "' />");
+  });
 };
 
 $('body').on('click', '.changeImageKind', function(e) {
@@ -97,3 +103,12 @@ $('#js-show-images').on('click', function() {
     dataType: 'json'
   });
 });
+
+randomPassImage = $('#random-pass-image');
+
+randomFailImage = $('#random-fail-image');
+
+if (randomPassImage.length && randomFailImage.length) {
+  getRandomImage(randomPassImage, 'pass');
+  getRandomImage(randomFailImage, 'fail');
+}
