@@ -13,6 +13,7 @@ mongoose = require 'mongoose'
 coffee = require 'coffee-script'
 coffeescriptMiddleware = require 'connect-coffee-script'
 stylus = require 'stylus'
+axis = require 'axis-css'
 nib = require 'nib'
 routes = require './routes'
 authentication = require './authentication'
@@ -49,8 +50,7 @@ app.use stylus.middleware
     stylus(str)
       .set('filename', cssPath)
       .set('compress', true)
-      .use(nib())
-      .import('nib')
+      .use(axis(implicit: false))
 app.use coffeescriptMiddleware
   src: path.join(__dirname, '..', 'views')
   dest: path.join(__dirname, '..', 'public')
