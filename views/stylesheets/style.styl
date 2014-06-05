@@ -14,22 +14,72 @@ body
   padding: 0
   margin: 0
 
+.main
+  width: 800px
+  margin: 0 auto
+
 h1
   font-size: 4rem
   text-transform: uppercase
   color: yellow
-  text-shadow: red 5px 5px
+  text-shadow: orange 5px 5px
   margin: 10rem 0 -2.5rem
 
+.homepage-random-images
+  z-index: -1
+  overflow: hidden
+  position: relative
+  top: -10rem
+
+.image-type-pass, .image-type-fail
+  position: relative
+  h2
+    position: absolute
+    top: 2rem
+    left: 0
+    width: 200px
+    text-align: center
+    padding: 0 0 0 1rem
+    font-size: 2rem
+    text-transform: uppercase
+    letter-spacing: 1.5rem
+    text-shadow:
+      -1px -1px 0 #fff,
+      1px -1px 0 #fff,
+      -1px 1px 0 #fff,
+      1px 1px 0 #fff
+  img
+    width: 200px
+    height: 200px
+    margin: 0 !important
+
+.image-type-pass
+  float: left
+  img
+    border: .5rem solid green
+  h2
+    color: green
+
+.image-type-fail
+  float: right
+  img
+    border: .5rem solid red
+  h2
+    color: red
+
 label
+  display: block
   font-size: .75rem
   text-transform: uppercase
+
+input
+  margin-left: 1rem
 
 a, &:visited
   color: blue
   &:hover
     color: yellow
-    background-color: red
+    background-color: orange
 
 button
   display: inline-block
@@ -39,7 +89,7 @@ button
   margin: 10px 0
   padding: 0px
   border-width: 0
-  background-color: Red
+  background-color: orange
   color: White
   font-family: sans-serif
   font-weight: normal
@@ -53,7 +103,7 @@ button
     padding: 0
 
 .login-button, button
-  color: red
+  color: orange
   display: inline-block
   background-color: yellow
   color: #243743
@@ -63,12 +113,12 @@ button
   font-weight: bold
   text-transform: uppercase
   line-height: 3
-  box-shadow: red 5px 5px
+  box-shadow: orange 5px 5px
   &:visited
-    color: red
+    color: orange
   &:hover
     color: yellow
-    background-color: red
+    background-color: orange
     box-shadow: yellow 5px 5px
 
 .logged-in-bar
@@ -83,7 +133,7 @@ button
   text-align: right
   background-color: yellow
   padding: 5px
-  border-bottom: 5px solid red
+  border-bottom: 5px solid orange
   li
     list-style: none
     display: inline-block
@@ -98,9 +148,9 @@ button
   width: 30px
 
 .addNewImage
-  background-color: white
+  border: .5rem solid white
   padding: 1rem 0
-  color: red
+  color: white
 
 .messaging
   float: left
