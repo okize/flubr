@@ -1,5 +1,17 @@
 extends layout
 
 block content
+
   h1= title
-  a.login-button(href='/login') Sign in
+
+  a.login-button(href='/login') Sign in with twitter
+
+  .homepage-random-images
+
+    .image-type-pass
+      h2 Pass
+      #random-pass-image
+
+    .image-type-fail
+      h2 Fail
+      #random-fail-image
