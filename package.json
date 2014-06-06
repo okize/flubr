@@ -1,7 +1,10 @@
 {
   "name": "flubr",
-  "version": "0.0.1",
   "private": true,
+  "version": "0.0.1",
+  "engines": {
+    "node": "0.10.x"
+  },
   "description": "pass/fail images for campfire, etc. moderated by your team members",
   "main": "app.js",
   "scripts": {
