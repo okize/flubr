@@ -9,6 +9,7 @@ coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
 clean = require 'gulp-clean'
+bump = require 'gulp-bump'
 
 # configuration
 appRoot = __dirname
@@ -78,6 +79,10 @@ gulp.task 'clean', ->
 gulp.task 'css', ->
   console.log 'compile css'
 
+# compiles js
+gulp.task 'js', ->
+  console.log 'compile javascript'
+
 # lints coffeescript
 gulp.task 'coffeelint', ->
   gulp
@@ -85,11 +90,18 @@ gulp.task 'coffeelint', ->
     .pipe(coffeelint())
     .pipe(coffeelint.reporter())
 
+# lints css
 gulp.task 'csslint', ->
   gulp
     .src([compiled.css])
     .pipe(csslint())
     .pipe(csslint.reporter())
+
+gulp.task 'bump version', ->
+  gulp
+    .src('./package.json')
+    .pipe(bump(type: 'patch'))
+    .pipe gulp.dest('./')
 
 # builds coffeescript source into deployable javascript
 gulp.task 'build', ->
@@ -106,6 +118,6 @@ gulp.task 'build', ->
 # deploys application
 gulp.task 'deploy', [
   'clean',
-  'css',
-  'build'
+  'build',
+  'bump version'
 ]
