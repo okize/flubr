@@ -39,12 +39,6 @@ refresh = (event) ->
   liveReload.changed body:
     files: [fileName]
 
-# default task that's run with 'gulp'
-gulp.task 'default', [
-  'start',
-  'watch'
-]
-
 # starts up LiveReload server and the app with nodemon
 gulp.task 'start', ->
   nodemon(
@@ -103,8 +97,8 @@ gulp.task 'bump version', ->
     .pipe(bump(type: 'patch'))
     .pipe gulp.dest('./')
 
-# builds coffeescript source into deployable javascript
-gulp.task 'build', ->
+# builds application coffeescript into deployable javascript
+gulp.task 'build app', ->
   gulp
     .src(sources.app)
     .pipe(coffee(
@@ -118,6 +112,12 @@ gulp.task 'build', ->
 # deploys application
 gulp.task 'deploy', [
   'clean',
-  'build',
+  'build app',
   'bump version'
+]
+
+# default task that's run with 'gulp'
+gulp.task 'default', [
+  'start',
+  'watch'
 ]
