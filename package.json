@@ -28,6 +28,7 @@
     "cookie-parser": "*",
     "express": "*",
     "express-session": "*",
+    "gulp-bump": "*",
     "gulp-stylus": "*",
     "jade": "*",
     "lodash": "*",
