@@ -1,7 +1,7 @@
 module.exports = {
   index: function(req, res) {
     return res.render('index', {
-      title: 'Pass-fail Images'
+      title: 'Flubr'
     });
   },
   loggedin: function(req, res) {
