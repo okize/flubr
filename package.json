@@ -45,10 +45,11 @@
   "devDependencies": {
     "connect-livereload": "*",
     "gulp": "*",
-    "gulp-csslint": "*",
+    "gulp-browserify": "*",
     "gulp-clean": "*",
     "gulp-coffee": "*",
     "gulp-coffeelint": "*",
+    "gulp-csslint": "*",
     "gulp-nodemon": "*",
     "gulp-util": "*",
     "tiny-lr": "*"
