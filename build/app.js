@@ -1,4 +1,4 @@
-var Store, app, authentication, bodyParser, coffee, coffeescriptMiddleware, cookieParser, express, livereload, logger, mongoose, nib, passport, path, routes, session, stylus;
+var Store, app, authentication, axis, bodyParser, coffee, coffeescriptMiddleware, cookieParser, express, livereload, logger, mongoose, nib, passport, path, routes, session, stylus;
 
 path = require('path');
 
@@ -27,6 +27,8 @@ coffee = require('coffee-script');
 coffeescriptMiddleware = require('connect-coffee-script');
 
 stylus = require('stylus');
+
+axis = require('axis-css');
 
 nib = require('nib');
 
@@ -75,7 +77,9 @@ app.use(stylus.middleware({
   dest: path.join(__dirname, '..', 'public'),
   debug: true,
   compile: function(str, cssPath) {
-    return stylus(str).set('filename', cssPath).set('compress', true).use(nib())["import"]('nib');
+    return stylus(str).set('filename', cssPath).set('compress', true).use(axis({
+      implicit: false
+    }));
   }
 }));
 
