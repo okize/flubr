@@ -28,7 +28,7 @@ sources =
 compiled =
   css: 'public/stylesheets/styles.css'
   js: 'public/javascripts/scripts.js'
-liveReloadPort = 35730
+liveReloadPort = process.env.LIVE_RELOAD_PORT or 35729
 
 # returns an array of the source folders in sources object
 getSources = ->

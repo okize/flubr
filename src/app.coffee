@@ -25,7 +25,6 @@ app = express()
 app.set 'env', process.env.NODE_ENV or 'development'
 app.set 'port', process.env.PORT or 3333
 app.set 'app name', 'Flubr'
-app.set 'host name', process.env.HOST_NAME
 app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
 app.set 'db url', process.env.MONGODB_URL or 'mongodb://localhost/passfail'
@@ -39,7 +38,7 @@ mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
 
 # dev middleware
 if app.get('env') == 'development'
-  app.use livereload( port: 35730 )
+  app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35729)
 
 # assets middleware
 app.use stylus.middleware
