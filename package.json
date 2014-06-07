@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "browserify": "*",
+    "coffeeify": "*",
     "connect-livereload": "*",
     "gulp": "*",
     "gulp-browserify": "*",
