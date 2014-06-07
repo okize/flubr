@@ -19,6 +19,7 @@ sources =
   app: 'src/**/*.coffee'
   stylus: 'views/stylesheets/*.styl'
   coffee: 'views/javascripts/*.coffee'
+  jade: 'views/*.jade'
 compiled =
   css: 'public/stylesheets/*.css'
   js: 'public/javascripts/*.js'
@@ -52,7 +53,7 @@ gulp.task 'start', ->
     ext: 'coffee'
     env:
       'NODE_ENV': 'development'
-    ignore: ['node_modules/']
+    ignore: ['node_modules/', 'views/', 'build/', 'public', 'gulp*']
   ).on('restart', (files) ->
     log 'app restarted'
   ).on('start', ->
