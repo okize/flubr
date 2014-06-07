@@ -35,7 +35,6 @@
     "lodash": "*",
     "mongoose": "3.8.x",
     "morgan": "*",
-    "nib": "*",
     "passport": "*",
     "passport-twitter": "*",
     "request": "*",
