@@ -1,11 +1,11 @@
 
-/* line 194 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 190 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 
 /* line 1 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/stylus/lib/functions/index.styl */
 
 /* line 297 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/stylus/lib/functions/index.styl */
 
-/* line 190 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/index.styl */
+/* line 200 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/index.styl */
 
 /* line 30 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/index.styl */
 
@@ -407,15 +407,23 @@ body {
 }
 
 /* line 20 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
-h1 {
+h1,
+h2 {
   font-size: 4rem;
   text-transform: uppercase;
   color: #ffdc00;
   text-shadow: #ff851b 5px 5px;
-  margin: 10rem 0 -2.5rem;
+  margin: 5rem 0 1.5rem;
+  border-bottom: 5px solid #fff;
 }
 
-/* line 27 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 28 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+h1 {
+  border: none;
+  margin: 10rem 0 -2.75rem;
+}
+
+/* line 32 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .homepage-random-images {
   z-index: -1;
   overflow: hidden;
@@ -423,15 +431,15 @@ h1 {
   top: -10rem;
 }
 
-/* line 33 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 38 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-pass,
 .image-type-fail {
   position: relative;
 }
 
-/* line 35 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
-.image-type-pass h2,
-.image-type-fail h2 {
+/* line 40 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+.image-type-pass h3,
+.image-type-fail h3 {
   position: absolute;
   top: 2rem;
   left: 0;
@@ -444,7 +452,7 @@ h1 {
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 
-/* line 50 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 55 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-pass img,
 .image-type-fail img {
   width: 200px;
@@ -452,62 +460,62 @@ h1 {
   margin: 0 !important;
 }
 
-/* line 55 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 60 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-pass {
   float: left;
 }
 
-/* line 57 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 62 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-pass img {
   border: 0.5rem solid #2ecc40;
 }
 
-/* line 59 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
-.image-type-pass h2 {
+/* line 64 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+.image-type-pass h3 {
   color: #2ecc40;
 }
 
-/* line 62 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 67 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-fail {
   float: right;
 }
 
-/* line 64 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 69 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-fail img {
   border: 0.5rem solid #d13f19;
 }
 
-/* line 66 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
-.image-type-fail h2 {
+/* line 71 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+.image-type-fail h3 {
   color: #d13f19;
 }
 
-/* line 69 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 74 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 label {
   display: block;
   font-size: 0.75rem;
   text-transform: uppercase;
 }
 
-/* line 74 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 79 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 input {
-  margin-left: 1rem;
+  margin: 0 1rem;
 }
 
-/* line 77 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 82 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 a,
 :visited {
-  color: #0074d9;
+  color: #222;
 }
 
-/* line 79 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 84 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 a:hover,
 :visited:hover {
   color: #ffdc00;
   background-color: #ff851b;
 }
 
-/* line 83 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 88 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 button {
   display: inline-block;
   -webkit-appearance: none;
@@ -525,13 +533,13 @@ button {
   overflow: visible;
 }
 
-/* line 98 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 103 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 
-/* line 102 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 107 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .login-button,
 button {
   color: #ff851b;
@@ -546,13 +554,13 @@ button {
   box-shadow: #ff851b 5px 5px;
 }
 
-/* line 113 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 118 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .login-button:visited,
 button:visited {
   color: #ff851b;
 }
 
-/* line 115 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 120 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .login-button:hover,
 button:hover {
   color: #ffdc00;
@@ -560,9 +568,9 @@ button:hover {
   box-shadow: #ffdc00 5px 5px;
 }
 
-/* line 120 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 125 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .logged-in-bar {
-  color: #0074d9;
+  color: #222;
   line-height: 2rem;
   vertical-align: middle;
   position: fixed;
@@ -576,19 +584,19 @@ button:hover {
   border-bottom: 5px solid #ff851b;
 }
 
-/* line 133 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 138 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .logged-in-bar li {
   list-style: none;
   display: inline-block;
   margin-right: 10px;
 }
 
-/* line 137 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 142 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .logged-in-bar li:first-child {
   float: left;
 }
 
-/* line 140 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 145 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .avatar {
   vertical-align: bottom;
   border: 2px solid #fff;
@@ -596,32 +604,41 @@ button:hover {
   width: 30px;
 }
 
-/* line 146 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
-.addNewImage {
-  border: 0.5rem solid #fff;
-  padding: 1rem 0;
-  color: #fff;
-}
-
 /* line 151 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
-.messaging {
-  float: left;
+.addNewImage,
+.is-inline {
+  display: inline-block;
 }
 
-/* line 154 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 156 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+.inline-list {
+  list-style: none;
+}
+
+/* line 158 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+.inline-list li {
+  display: inline-block;
+}
+
+/* line 161 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+.messaging {
+  padding: 1rem;
+}
+
+/* line 164 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-list {
   padding: 0 1rem;
   display: none;
   list-style: none;
 }
 
-/* line 159 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 169 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-item {
   display: inline-block;
   margin: 1rem;
 }
 
-/* line 163 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 173 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .pf-image {
   float: left;
   border: 5px solid #fff;
@@ -630,7 +647,7 @@ button:hover {
   width: 90px;
 }
 
-/* line 170 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 180 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .set-image-kind {
   list-style: none;
   overflow: hidden;
@@ -639,20 +656,20 @@ button:hover {
   margin: 0 10px;
   text-align: left;
   padding: 5px;
-  color: #0074d9;
+  color: #222;
 }
 
-/* line 179 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 189 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .set-image-kind li:first-child {
   float: left;
 }
 
-/* line 181 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 191 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .set-image-kind li:last-child {
   float: right;
 }
 
-/* line 184 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
+/* line 194 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .delete-image {
   clear: both;
   background-color: #fff;

@@ -17,12 +17,17 @@ body
   width: 800px
   margin: 0 auto
 
-h1
+h1, h2
   font-size: 4rem
   text-transform: uppercase
   color: yellow
   text-shadow: orange 5px 5px
-  margin: 10rem 0 -2.5rem
+  margin: 5rem 0 1.5rem
+  border-bottom: 5px solid white
+
+h1
+  border: none
+  margin: 10rem 0 -2.75rem
 
 .homepage-random-images
   z-index: -1
@@ -32,7 +37,7 @@ h1
 
 .image-type-pass, .image-type-fail
   position: relative
-  h2
+  h3
     position: absolute
     top: 2rem
     left: 0
@@ -56,14 +61,14 @@ h1
   float: left
   img
     border: .5rem solid green
-  h2
+  h3
     color: green
 
 .image-type-fail
   float: right
   img
     border: .5rem solid red
-  h2
+  h3
     color: red
 
 label
@@ -72,10 +77,10 @@ label
   text-transform: uppercase
 
 input
-  margin-left: 1rem
+  margin: 0 1rem
 
 a, &:visited
-  color: blue
+  color: black
   &:hover
     color: yellow
     background-color: orange
@@ -118,7 +123,7 @@ button
     box-shadow: yellow 5px 5px
 
 .logged-in-bar
-  color: blue
+  color: black
   line-height: 2rem
   vertical-align: middle
   position: fixed
@@ -144,12 +149,17 @@ button
   width: 30px
 
 .addNewImage
-  border: .5rem solid white
-  padding: 1rem 0
-  color: white
+
+.is-inline
+  display: inline-block
+
+.inline-list
+  list-style: none
+  li
+    display: inline-block
 
 .messaging
-  float: left
+  padding: 1rem
 
 .image-list
   padding: 0 1rem
@@ -175,7 +185,7 @@ button
   margin: 0 10px
   text-align: left
   padding: 5px
-  color: blue
+  color: black
   li:first-child
     float: left
   li:last-child
