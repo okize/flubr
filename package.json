@@ -55,6 +55,7 @@
     "gulp-nodemon": "*",
     "gulp-open": "*",
     "gulp-rename": "*",
+    "gulp-uglify": "*",
     "gulp-util": "*",
     "tiny-lr": "*"
   }
