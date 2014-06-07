@@ -25,6 +25,7 @@
     "async": "*",
     "axis-css": "*",
     "body-parser": "*",
+    "browserify-middleware": "*",
     "coffee-script": "*",
     "connect-coffee-script": "*",
     "connect-mongostore": "*",
@@ -59,7 +60,6 @@
     "gulp-util": "*",
     "jquery": "*",
     "tiny-lr": "*",
-    "vinyl-source-stream": "*",
-    "watchify": "*"
+    "vinyl-source-stream": "*"
   }
 }
