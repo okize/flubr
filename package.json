@@ -51,7 +51,6 @@
     "gulp-coffeelint": "*",
     "gulp-csslint": "*",
     "gulp-nodemon": "*",
-    "gulp-notify": "*",
     "gulp-util": "*",
     "tiny-lr": "*"
   }

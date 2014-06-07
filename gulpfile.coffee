@@ -9,6 +9,7 @@ coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
 clean = require 'gulp-clean'
+notify = require 'gulp-notify'
 
 # configuration
 appRoot = __dirname
@@ -107,5 +108,6 @@ gulp.task 'build', ->
 gulp.task 'deploy', [
   'clean',
   'css',
-  'build'
+  'build',
+  'done'
 ]
