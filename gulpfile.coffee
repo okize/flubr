@@ -25,10 +25,10 @@ publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
 appBuild = path.join(appRoot, 'build')
 cssBuild = path.join(appRoot, 'public', 'stylesheets')
 jsBuild = path.join(appRoot, 'public', 'javascripts')
-csSource = 'views/javascripts/*.coffee'
 sources =
   app: 'src/**/*.coffee'
   stylus: 'views/stylesheets/*.styl'
+  coffee: 'views/javascripts/*.coffee'
   jade: 'views/*.jade'
 compiled =
   css: 'public/stylesheets/styles.css'
@@ -44,7 +44,7 @@ log = (msg) ->
   gutil.log '[gulpfile]', gutil.colors.blue(msg)
 
 # sends updated files to LiveReload server
-refresh = (event) ->
+refreshPage = (event) ->
   fileName = path.relative(appRoot, event.path)
   gutil.log.apply gutil, [gutil.colors.blue(fileName + ' changed')]
   liveReload.changed body:
@@ -75,11 +75,11 @@ gulp.task 'start', ->
     gutil.beep()
   )
 
-# watches source files and triggers refresh on change
+# watches source files and triggers a page refresh on change
 gulp.task 'watch', ->
   log 'watching files...'
   gulp
-    .watch(getSources(), refresh)
+    .watch(getSources(), refreshPage)
 
 # open app in default browser
 gulp.task 'open', ->
@@ -104,7 +104,7 @@ gulp.task 'jsmin', ->
 # lints coffeescript
 gulp.task 'coffeelint', ->
   gulp
-    .src([sources.app, csSource])
+    .src([sources.app, sources.coffee])
     .pipe(coffeelint().on('error', gutil.log))
     .pipe(coffeelint.reporter())
 
@@ -157,6 +157,7 @@ gulp.task 'build', ->
 # deploys application
 gulp.task 'deploy', [
   'clean'
+  'browserify'
   'build'
   'jsmin'
   'cssmin'
@@ -164,10 +165,9 @@ gulp.task 'deploy', [
 
 # browserify task
 gulp.task 'browserify', ->
-
-  browserify({
-    extensions: ['.coffee']
-    })
+  browserify(
+      extensions: ['.coffee']
+    )
     .add(publicScript)
     .transform(coffeeify)
     .bundle(debug: true)
