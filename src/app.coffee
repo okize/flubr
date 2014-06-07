@@ -11,10 +11,9 @@ passport = require 'passport'
 livereload = require 'connect-livereload'
 mongoose = require 'mongoose'
 coffee = require 'coffee-script'
-coffeescriptMiddleware = require 'connect-coffee-script'
+# coffeescriptMiddleware = require 'connect-coffee-script'
 stylus = require 'stylus'
 axis = require 'axis-css'
-nib = require 'nib'
 routes = require './routes'
 authentication = require './authentication'
 
@@ -51,11 +50,11 @@ app.use stylus.middleware
       .set('compress', false)
       .set('linenos', true)
       .use(axis(implicit: false))
-app.use coffeescriptMiddleware
-  src: path.join(__dirname, '..', 'views')
-  dest: path.join(__dirname, '..', 'public')
-  bare: true
-  compress: true
+# app.use coffeescriptMiddleware
+#   src: path.join(__dirname, '..', 'views')
+#   dest: path.join(__dirname, '..', 'public')
+#   bare: true
+#   compress: true
 app.use express.static(path.join(__dirname, '..', 'public'))
 
 app.use cookieParser('blundercats')
