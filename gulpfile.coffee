@@ -34,7 +34,7 @@ liveReloadPort = 35730
 getSources = ->
   _.values sources
 
-# small wrapper around gulp util logging
+# wrapper around gulp util logging
 log = (msg) ->
   gutil.log '[gulpfile]', gutil.colors.blue(msg)
 
@@ -130,6 +130,12 @@ gulp.task 'csslint', ->
       'font-sizes': false
     ).on('error', gutil.log))
     .pipe(csslint.reporter())
+
+# lints coffeescript & css
+gulp.task 'lint', [
+  'coffeelint'
+  'csslint'
+]
 
 # builds coffeescript source into deployable javascript
 gulp.task 'build', ->
