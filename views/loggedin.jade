@@ -6,7 +6,6 @@ block content
 
     ul.logged-in-bar
       li Flubr
-      li.messaging#messaging
       li
         img.avatar(src='#{user.avatar}')
       li
@@ -16,27 +15,29 @@ block content
       li
         a(href='/logout') Sign out
 
-    h1=title
+    #messaging.messaging
+
+    h2 Add new image
 
     .addNewImage
 
-      h2 Add new image:
-
       form#js-add-image
-        label
-          | Image Url:
-          input#imageUrl(type='text')
-        br
-        label
-          | Pass:
-          input(type='radio' name='kind' value='pass')
-        label
-          | Fail:
-          input(type='radio' name='kind' value='fail' checked='checked')
-        br
-        button(type='submit') Add
+        ul.inline-list
+          li
+            label
+              | Image Url:
+              input#imageUrl(type='text')
+          li
+            label.is-inline
+              | Pass:
+              input(type='radio' name='kind' value='pass')
+            label.is-inline
+              | Fail:
+              input(type='radio' name='kind' value='fail' checked='checked')
+          li
+            button(type='submit') Add
 
-    h2 Images:
+    h2 View images
 
     button#js-show-images Show images
 

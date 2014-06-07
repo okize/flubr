@@ -10,5 +10,5 @@ module.exports =
   loggedin: (req, res) ->
     res.render 'loggedin',
       env: process.env.NODE_ENV
-      title: 'Manage'
+      title: 'Flubr'
       user: req.user
