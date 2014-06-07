@@ -9,7 +9,7 @@ coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
 clean = require 'gulp-clean'
-notify = require 'gulp-notify'
+open = require 'gulp-open'
 
 # configuration
 appRoot = __dirname
@@ -63,6 +63,13 @@ gulp.task 'start', ->
     liveReload.close()
     gutil.beep()
   )
+
+# open app in default browser
+gulp.task 'open', ->
+  port = process.env.PORT or 3333
+  gulp
+    .src('./src/app.coffee')
+    .pipe open('', url: "http://127.0.0.1:#{port}")
 
 # watches source files and triggers refresh on change
 gulp.task 'watch', ->
