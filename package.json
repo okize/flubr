@@ -25,6 +25,7 @@
     "async": "*",
     "axis-css": "*",
     "body-parser": "*",
+    "browserify": "*",
     "coffee-script": "*",
     "connect-coffee-script": "*",
     "connect-mongostore": "*",
