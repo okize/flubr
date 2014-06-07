@@ -42,6 +42,7 @@
     "passport-twitter": "*",
     "request": "*",
     "stylus": "*",
+    "vinyl-source-stream": "*",
     "watchify": "*"
   },
   "devDependencies": {
