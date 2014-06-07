@@ -25,10 +25,10 @@ publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
 appBuild = path.join(appRoot, 'build')
 cssBuild = path.join(appRoot, 'public', 'stylesheets')
 jsBuild = path.join(appRoot, 'public', 'javascripts')
+csSource = 'views/javascripts/*.coffee'
 sources =
   app: 'src/**/*.coffee'
   stylus: 'views/stylesheets/*.styl'
-  # coffee: 'views/javascripts/*.coffee'
   jade: 'views/*.jade'
 compiled =
   css: 'public/stylesheets/styles.css'
@@ -104,7 +104,7 @@ gulp.task 'jsmin', ->
 # lints coffeescript
 gulp.task 'coffeelint', ->
   gulp
-    .src([sources.app, sources.coffee])
+    .src([sources.app, csSource])
     .pipe(coffeelint().on('error', gutil.log))
     .pipe(coffeelint.reporter())
 
