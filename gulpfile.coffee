@@ -13,17 +13,22 @@ open = require 'gulp-open'
 rename = require 'gulp-rename'
 minifyCss = require 'gulp-minify-css'
 uglify = require 'gulp-uglify'
+browserify = require 'browserify'
+coffeeify = require 'coffeeify'
+watchify = require 'watchify'
+source = require 'vinyl-source-stream'
 
 # configuration
 appRoot = __dirname
-mainScript = path.join(appRoot, 'src', 'app.coffee')
+appScript = path.join(appRoot, 'src', 'app.coffee')
+publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
 appBuild = path.join(appRoot, 'build')
 cssBuild = path.join(appRoot, 'public', 'stylesheets')
 jsBuild = path.join(appRoot, 'public', 'javascripts')
 sources =
   app: 'src/**/*.coffee'
   stylus: 'views/stylesheets/*.styl'
-  coffee: 'views/javascripts/*.coffee'
+  # coffee: 'views/javascripts/*.coffee'
   jade: 'views/*.jade'
 compiled =
   css: 'public/stylesheets/styles.css'
@@ -34,7 +39,7 @@ liveReloadPort = process.env.LIVE_RELOAD_PORT or 35729
 getSources = ->
   _.values sources
 
-# wrapper around gulp util logging
+# info logging
 log = (msg) ->
   gutil.log '[gulpfile]', gutil.colors.blue(msg)
 
@@ -54,7 +59,7 @@ gulp.task 'default', [
 # starts up LiveReload server and the app with nodemon
 gulp.task 'start', ->
   nodemon(
-    script: mainScript
+    script: appScript
     ext: 'coffee'
     env:
       'NODE_ENV': 'development'
@@ -90,7 +95,7 @@ gulp.task 'clean', ->
     .pipe(clean())
 
 # minifies js
-gulp.task 'coffeemin', ->
+gulp.task 'jsmin', ->
   gulp.src(compiled.js)
     .pipe(uglify())
     .pipe(rename('scripts.min.js'))
@@ -153,6 +158,19 @@ gulp.task 'build', ->
 gulp.task 'deploy', [
   'clean'
   'build'
-  'coffeemin'
+  'jsmin'
   'cssmin'
 ]
+
+# browserify task
+gulp.task 'browserify', ->
+
+  browserify({
+    extensions: ['.coffee']
+    })
+    .add(publicScript)
+    .transform(coffeeify)
+    .bundle(debug: true)
+    .on('error', gutil.log)
+    .pipe(source('scripts.js'))
+    .pipe(gulp.dest(jsBuild))
