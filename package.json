@@ -57,6 +57,7 @@
     "gulp-rename": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",
+    "jquery": "*",
     "tiny-lr": "*",
     "vinyl-source-stream": "*",
     "watchify": "*"
