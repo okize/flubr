@@ -50,6 +50,7 @@ app.use stylus.middleware
     stylus(str)
       .set('filename', cssPath)
       .set('compress', false)
+      .set('linenos', true)
       .use(axis(implicit: false))
 app.use coffeescriptMiddleware
   src: path.join(__dirname, '..', 'views')
