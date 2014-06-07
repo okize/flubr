@@ -10,19 +10,21 @@ coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
 clean = require 'gulp-clean'
 open = require 'gulp-open'
+rename = require 'gulp-rename'
+minifyCss = require 'gulp-minify-css'
 
 # configuration
 appRoot = __dirname
 mainScript = path.join(appRoot, 'src', 'app.coffee')
-buildDir = path.join(appRoot, 'build')
+appBuild = path.join(appRoot, 'build')
+cssBuild = path.join(appRoot, 'public', 'stylesheets')
 sources =
   app: 'src/**/*.coffee'
   stylus: 'views/stylesheets/*.styl'
   coffee: 'views/javascripts/*.coffee'
   jade: 'views/*.jade'
 compiled =
-  css: 'public/stylesheets/*.css'
-  js: 'public/javascripts/*.js'
+  css: 'public/stylesheets/styles.css'
 liveReloadPort = 35730
 
 # returns an array of the source folders in sources object
@@ -65,27 +67,24 @@ gulp.task 'start', ->
     gutil.beep()
   )
 
+# watches source files and triggers refresh on change
+gulp.task 'watch', ->
+  log 'watching files...'
+  gulp
+    .watch(getSources(), refresh)
+
 # open app in default browser
 gulp.task 'open', ->
   port = process.env.PORT or 3333
   gulp
     .src('./src/app.coffee')
-    .pipe open('', url: "http://127.0.0.1:#{port}")
-
-# watches source files and triggers refresh on change
-gulp.task 'watch', ->
-  log 'watching files...'
-  gulp.watch getSources(), refresh
+    .pipe(open('', url: "http://127.0.0.1:#{port}"))
 
 # removes distribution folder
 gulp.task 'clean', ->
   gulp
-    .src(buildDir, read: false)
+    .src(appBuild, read: false)
     .pipe(clean())
-
-# compiles css
-gulp.task 'css', ->
-  console.log 'compile css'
 
 # lints coffeescript
 gulp.task 'coffeelint', ->
@@ -94,6 +93,15 @@ gulp.task 'coffeelint', ->
     .pipe(coffeelint())
     .pipe(coffeelint.reporter())
 
+# minifies css
+gulp.task 'cssmin', ->
+  gulp
+    .src(compiled.css)
+    .pipe(minifyCss())
+    .pipe(rename('styles.min.css'))
+    .pipe(gulp.dest(cssBuild))
+
+# lints css
 gulp.task 'csslint', ->
   gulp
     .src([compiled.css])
@@ -109,13 +117,12 @@ gulp.task 'build', ->
       sourceMap: false
     ).on('error', gutil.log))
     .pipe(
-      gulp.dest(buildDir)
+      gulp.dest(appBuild)
     )
 
 # deploys application
 gulp.task 'deploy', [
   'clean',
-  'css',
   'build',
-  'done'
+  'cssmin'
 ]
