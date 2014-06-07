@@ -1,40 +1,43 @@
 extends layout
 
 block content
-  ul.logged-in-bar
-    li Flubr
-    li.messaging#messaging
-    li
-      img.avatar(src='#{user.avatar}')
-    li
-      =user.displayName
-    li
-      =user.userName
-    li
-      a(href='/logout') Sign out
 
-  h1=title
+  .main
 
-  .addNewImage
+    ul.logged-in-bar
+      li Flubr
+      li.messaging#messaging
+      li
+        img.avatar(src='#{user.avatar}')
+      li
+        =user.displayName
+      li
+        =user.userName
+      li
+        a(href='/logout') Sign out
 
-    h2 Add new image:
+    h1=title
 
-    form#js-add-image
-      label
-        | Image Url:
-        input#imageUrl(type='text')
-      br
-      label
-        | Pass:
-        input(type='radio' name='kind' value='pass')
-      label
-        | Fail:
-        input(type='radio' name='kind' value='fail' checked='checked')
-      br
-      button(type='submit') Add
+    .addNewImage
 
-  h2 Images:
+      h2 Add new image:
 
-  button#js-show-images Show images
+      form#js-add-image
+        label
+          | Image Url:
+          input#imageUrl(type='text')
+        br
+        label
+          | Pass:
+          input(type='radio' name='kind' value='pass')
+        label
+          | Fail:
+          input(type='radio' name='kind' value='fail' checked='checked')
+        br
+        button(type='submit') Add
 
-  ul.image-list#js-image-list
+    h2 Images:
+
+    button#js-show-images Show images
+
+    ul.image-list#js-image-list
