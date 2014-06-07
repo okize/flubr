@@ -49,7 +49,7 @@ app.use stylus.middleware
   compile: (str, cssPath) ->
     stylus(str)
       .set('filename', cssPath)
-      .set('compress', true)
+      .set('compress', false)
       .use(axis(implicit: false))
 app.use coffeescriptMiddleware
   src: path.join(__dirname, '..', 'views')
