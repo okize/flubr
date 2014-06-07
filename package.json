@@ -25,14 +25,12 @@
     "async": "*",
     "axis-css": "*",
     "body-parser": "*",
-    "browserify": "*",
     "coffee-script": "*",
     "connect-coffee-script": "*",
     "connect-mongostore": "*",
     "cookie-parser": "*",
     "express": "*",
     "express-session": "*",
-    "gulp-stylus": "*",
     "jade": "*",
     "lodash": "*",
     "mongoose": "3.8.x",
@@ -41,11 +39,10 @@
     "passport": "*",
     "passport-twitter": "*",
     "request": "*",
-    "stylus": "*",
-    "vinyl-source-stream": "*",
-    "watchify": "*"
+    "stylus": "*"
   },
   "devDependencies": {
+    "browserify": "*",
     "connect-livereload": "*",
     "gulp": "*",
     "gulp-browserify": "*",
@@ -59,6 +56,8 @@
     "gulp-rename": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",
-    "tiny-lr": "*"
+    "tiny-lr": "*",
+    "vinyl-source-stream": "*",
+    "watchify": "*"
   }
 }
