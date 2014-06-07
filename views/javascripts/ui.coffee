@@ -2,9 +2,11 @@ module.exports = ($) ->
 
   getImageSetHtml = (imageKind) ->
     if imageKind == 'pass'
-      "<li>pass</li><li><a href='#' class='changeImageKind isPass'>fail</a></li>"
+      '<li>pass</li>' +
+      '<li><a href="#" class="changeImageKind isPass">fail</a></li>'
     else
-      "<li><a href='#' class='changeImageKind isFail'>pass</a></li><li>fail</li>"
+      '<li><a href="#" class="changeImageKind isFail">pass</a></li>' +
+      '<li>fail</li>'
 
   getThumbnail = (url) ->
     thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
