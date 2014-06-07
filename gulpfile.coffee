@@ -12,12 +12,14 @@ clean = require 'gulp-clean'
 open = require 'gulp-open'
 rename = require 'gulp-rename'
 minifyCss = require 'gulp-minify-css'
+uglify = require 'gulp-uglify'
 
 # configuration
 appRoot = __dirname
 mainScript = path.join(appRoot, 'src', 'app.coffee')
 appBuild = path.join(appRoot, 'build')
 cssBuild = path.join(appRoot, 'public', 'stylesheets')
+jsBuild = path.join(appRoot, 'public', 'javascripts')
 sources =
   app: 'src/**/*.coffee'
   stylus: 'views/stylesheets/*.styl'
@@ -25,6 +27,7 @@ sources =
   jade: 'views/*.jade'
 compiled =
   css: 'public/stylesheets/styles.css'
+  js: 'public/javascripts/scripts.js'
 liveReloadPort = 35730
 
 # returns an array of the source folders in sources object
@@ -86,6 +89,13 @@ gulp.task 'clean', ->
     .src(appBuild, read: false)
     .pipe(clean())
 
+# minifies js
+gulp.task 'coffeemin', ->
+  gulp.src(compiled.js)
+    .pipe(uglify())
+    .pipe(rename('scripts.min.js'))
+    .pipe(gulp.dest(jsBuild))
+
 # lints coffeescript
 gulp.task 'coffeelint', ->
   gulp
@@ -122,7 +132,8 @@ gulp.task 'build', ->
 
 # deploys application
 gulp.task 'deploy', [
-  'clean',
-  'build',
+  'clean'
+  'build'
+  'coffeemin'
   'cssmin'
 ]
