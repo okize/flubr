@@ -81,7 +81,7 @@ gulp.task 'open', ->
   port = process.env.PORT or 3333
   gulp
     .src('./src/app.coffee')
-    .pipe(open('', url: "http://127.0.0.1:#{port}"))
+    .pipe(open('', url: 'http://127.0.0.1:' + port))
 
 # removes distribution folder
 gulp.task 'clean', ->
@@ -100,7 +100,7 @@ gulp.task 'coffeemin', ->
 gulp.task 'coffeelint', ->
   gulp
     .src([sources.app, sources.coffee])
-    .pipe(coffeelint())
+    .pipe(coffeelint().on('error', gutil.log))
     .pipe(coffeelint.reporter())
 
 # minifies css
@@ -114,8 +114,21 @@ gulp.task 'cssmin', ->
 # lints css
 gulp.task 'csslint', ->
   gulp
-    .src([compiled.css])
-    .pipe(csslint())
+    .src(compiled.css)
+    .pipe(csslint(
+      'box-sizing': false
+      'universal-selector': false
+      'box-model': false
+      'overqualified-elements': false
+      'compatible-vendor-prefixes': false
+      'unique-headings': false
+      'qualified-headings': false
+      'unqualified-attributes': false
+      'important': false
+      'outline-none': false
+      'shorthand': false
+      'font-sizes': false
+    ).on('error', gutil.log))
     .pipe(csslint.reporter())
 
 # builds coffeescript source into deployable javascript
