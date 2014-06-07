@@ -41,7 +41,8 @@
     "passport": "*",
     "passport-twitter": "*",
     "request": "*",
-    "stylus": "*"
+    "stylus": "*",
+    "watchify": "*"
   },
   "devDependencies": {
     "connect-livereload": "*",
