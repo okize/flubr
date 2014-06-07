@@ -27,7 +27,6 @@
     "body-parser": "*",
     "browserify-middleware": "*",
     "coffee-script": "*",
-    "connect-coffee-script": "*",
     "connect-mongostore": "*",
     "cookie-parser": "*",
     "express": "*",
