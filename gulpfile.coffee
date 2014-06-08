@@ -15,7 +15,6 @@ minifyCss = require 'gulp-minify-css'
 uglify = require 'gulp-uglify'
 browserify = require 'browserify'
 coffeeify = require 'coffeeify'
-watchify = require 'watchify'
 source = require 'vinyl-source-stream'
 
 # configuration
