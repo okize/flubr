@@ -91,7 +91,7 @@ gulp.task 'open', ->
 # removes distribution folder
 gulp.task 'clean', ->
   gulp
-    .src(appBuild, read: false)
+    .src([appBuild, cssBuild, jsBuild], read: false)
     .pipe(clean())
 
 # minifies js
