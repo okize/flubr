@@ -68,25 +68,22 @@ if (app.get('env') === 'development') {
   app.use(livereload({
     port: process.env.LIVE_RELOAD_PORT || 35729
   }));
+  app.use(stylus.middleware({
+    src: path.join(__dirname, '..', 'views'),
+    dest: path.join(__dirname, '..', 'public'),
+    debug: true,
+    compile: function(str, cssPath) {
+      return stylus(str).set('filename', cssPath).set('compress', false).set('linenos', true).use(axis({
+        implicit: false
+      }));
+    }
+  }));
+  browserify.settings('transform', [coffeeify]);
+  app.get('/javascripts/scripts.js', browserify('./views/javascripts/scripts.coffee', {
+    cache: false,
+    precompile: true
+  }));
 }
-
-browserify.settings('transform', [coffeeify]);
-
-app.use(stylus.middleware({
-  src: path.join(__dirname, '..', 'views'),
-  dest: path.join(__dirname, '..', 'public'),
-  debug: true,
-  compile: function(str, cssPath) {
-    return stylus(str).set('filename', cssPath).set('compress', false).set('linenos', true).use(axis({
-      implicit: false
-    }));
-  }
-}));
-
-app.get('/javascripts/scripts.js', browserify('./views/javascripts/scripts.coffee', {
-  cache: false,
-  precompile: true
-}));
 
 app.use(express["static"](path.join(__dirname, '..', 'public')));
 
@@ -114,5 +111,5 @@ app.use(logger('dev'));
 routes(app, passport);
 
 app.listen(app.get('port'), function() {
-  return console.log("" + (app.get('app name')) + " running on port " + (app.get('port')));
+  return console.log(("" + (app.get('app name')) + " running on port " + (app.get('port'))) + (" in [" + (app.get('env')) + "]"));
 });

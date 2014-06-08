@@ -5,6 +5,8 @@ gulp = require 'gulp'
 gutil = require 'gulp-util'
 liveReload = require('tiny-lr')()
 nodemon = require 'gulp-nodemon'
+stylus = require 'gulp-stylus'
+axis = require 'axis-css'
 coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
@@ -22,6 +24,7 @@ source = require 'vinyl-source-stream'
 appRoot = __dirname
 appScript = path.join(appRoot, 'src', 'app.coffee')
 publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
+publicCss = path.join(appRoot, 'views', 'stylesheets', 'styles.styl')
 appBuild = path.join(appRoot, 'build')
 cssBuild = path.join(appRoot, 'public', 'stylesheets')
 jsBuild = path.join(appRoot, 'public', 'javascripts')
@@ -89,17 +92,25 @@ gulp.task 'open', ->
     .pipe(open('', url: 'http://127.0.0.1:' + port))
 
 # removes distribution folder
-gulp.task 'clean', ->
+gulp.task 'clean-directories', ->
   gulp
     .src([appBuild, cssBuild, jsBuild], read: false)
     .pipe(clean())
 
 # minifies js
-gulp.task 'jsmin', ->
+gulp.task 'minify-js', ->
   gulp.src(compiled.js)
     .pipe(uglify())
     .pipe(rename('scripts.min.js'))
     .pipe(gulp.dest(jsBuild))
+
+# minifies css
+gulp.task 'minify-css', ->
+  gulp
+    .src(compiled.css)
+    .pipe(minifyCss())
+    .pipe(rename('styles.min.css'))
+    .pipe(gulp.dest(cssBuild))
 
 # lints coffeescript
 gulp.task 'coffeelint', ->
@@ -107,14 +118,6 @@ gulp.task 'coffeelint', ->
     .src([sources.app, sources.coffee])
     .pipe(coffeelint().on('error', gutil.log))
     .pipe(coffeelint.reporter())
-
-# minifies css
-gulp.task 'cssmin', ->
-  gulp
-    .src(compiled.css)
-    .pipe(minifyCss())
-    .pipe(rename('styles.min.css'))
-    .pipe(gulp.dest(cssBuild))
 
 # lints css
 gulp.task 'csslint', ->
@@ -138,19 +141,28 @@ gulp.task 'csslint', ->
 
 # lints coffeescript & css
 gulp.task 'lint', [
-  'coffeelint'
+  'coffeelint',
   'csslint'
 ]
 
 # bumps patch version for every release
-gulp.task 'bump', ->
+gulp.task 'bump-version', ->
   gulp
     .src('./package.json')
     .pipe(bump(type: 'patch'))
     .pipe gulp.dest('./')
 
-# browserify for the front-end scripts build
-gulp.task 'browserify', ->
+# builds the css
+gulp.task 'build-css', ->
+  gulp
+    .src(publicCss)
+    .pipe(stylus(use: [
+      axis(implicit: false)
+    ]))
+    .pipe(gulp.dest(cssBuild))
+
+# builds the front-end scripts
+gulp.task 'build-js', ->
   browserify(
       extensions: ['.coffee']
     )
@@ -162,7 +174,7 @@ gulp.task 'browserify', ->
     .pipe(gulp.dest(jsBuild))
 
 # builds coffeescript source into deployable javascript
-gulp.task 'build', ->
+gulp.task 'build-app', ->
   gulp
     .src(sources.app)
     .pipe(coffee(
@@ -174,16 +186,17 @@ gulp.task 'build', ->
     )
 
 # deploys app to heroku
-gulp.task 'deploy', ->
+gulp.task 'deploy-app', ->
   console.log 'deploy'
 
 # creates a release and deploys the application
 gulp.task 'release', [
-  'clean'
-  'browserify'
-  'build'
-  'jsmin'
-  'cssmin'
-  'bump'
-  'deploy'
+  'clean-directories',
+  'build-css',
+  'build-js',
+  'build-app',
+  'minify-js',
+  'minify-css',
+  'bump-version',
+  'deploy-app'
 ]
