@@ -1,8 +1,11 @@
 {
   "name": "flubr",
-  "version": "0.0.1",
   "private": true,
-  "description": "pass/fail images for campfire, etc. moderated by your team members",
+  "version": "0.0.1",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "description": "pass/fail images for chatrooms, moderated by your team members",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,33 +25,40 @@
     "async": "*",
     "axis-css": "*",
     "body-parser": "*",
+    "browserify-middleware": "*",
+    "coffeeify": "*",
     "coffee-script": "*",
-    "connect-coffee-script": "*",
     "connect-mongostore": "*",
     "cookie-parser": "*",
     "express": "*",
     "express-session": "*",
     "gulp-bump": "*",
-    "gulp-stylus": "*",
     "jade": "*",
     "lodash": "*",
     "mongoose": "3.8.x",
     "morgan": "*",
-    "nib": "*",
     "passport": "*",
     "passport-twitter": "*",
     "request": "*",
     "stylus": "*"
   },
   "devDependencies": {
+    "browserify": "*",
     "connect-livereload": "*",
     "gulp": "*",
-    "gulp-csslint": "*",
+    "gulp-browserify": "*",
     "gulp-clean": "*",
     "gulp-coffee": "*",
     "gulp-coffeelint": "*",
+    "gulp-csslint": "*",
+    "gulp-minify-css": "*",
     "gulp-nodemon": "*",
+    "gulp-open": "*",
+    "gulp-rename": "*",
+    "gulp-uglify": "*",
     "gulp-util": "*",
-    "tiny-lr": "*"
+    "jquery": "*",
+    "tiny-lr": "*",
+    "vinyl-source-stream": "*"
   }
 }
