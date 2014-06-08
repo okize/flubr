@@ -9,30 +9,41 @@ coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
 clean = require 'gulp-clean'
+open = require 'gulp-open'
+rename = require 'gulp-rename'
+minifyCss = require 'gulp-minify-css'
+uglify = require 'gulp-uglify'
+browserify = require 'browserify'
+coffeeify = require 'coffeeify'
+source = require 'vinyl-source-stream'
 
 # configuration
 appRoot = __dirname
-mainScript = path.join(appRoot, 'src', 'app.coffee')
-buildDir = path.join(appRoot, 'build')
+appScript = path.join(appRoot, 'src', 'app.coffee')
+publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
+appBuild = path.join(appRoot, 'build')
+cssBuild = path.join(appRoot, 'public', 'stylesheets')
+jsBuild = path.join(appRoot, 'public', 'javascripts')
 sources =
   app: 'src/**/*.coffee'
   stylus: 'views/stylesheets/*.styl'
   coffee: 'views/javascripts/*.coffee'
+  jade: 'views/*.jade'
 compiled =
-  css: 'public/stylesheets/*.css'
-  js: 'public/javascripts/*.js'
-liveReloadPort = 35730
+  css: 'public/stylesheets/styles.css'
+  js: 'public/javascripts/scripts.js'
+liveReloadPort = process.env.LIVE_RELOAD_PORT or 35729
 
 # returns an array of the source folders in sources object
 getSources = ->
   _.values sources
 
-# small wrapper around gulp util logging
+# info logging
 log = (msg) ->
   gutil.log '[gulpfile]', gutil.colors.blue(msg)
 
 # sends updated files to LiveReload server
-refresh = (event) ->
+refreshPage = (event) ->
   fileName = path.relative(appRoot, event.path)
   gutil.log.apply gutil, [gutil.colors.blue(fileName + ' changed')]
   liveReload.changed body:
@@ -47,11 +58,11 @@ gulp.task 'default', [
 # starts up LiveReload server and the app with nodemon
 gulp.task 'start', ->
   nodemon(
-    script: mainScript
+    script: appScript
     ext: 'coffee'
     env:
       'NODE_ENV': 'development'
-    ignore: ['node_modules/']
+    ignore: ['node_modules/', 'views/', 'build/', 'public', 'gulp*']
   ).on('restart', (files) ->
     log 'app restarted'
   ).on('start', ->
@@ -63,33 +74,72 @@ gulp.task 'start', ->
     gutil.beep()
   )
 
-# watches source files and triggers refresh on change
+# watches source files and triggers a page refresh on change
 gulp.task 'watch', ->
   log 'watching files...'
-  gulp.watch getSources(), refresh
+  gulp
+    .watch(getSources(), refreshPage)
+
+# open app in default browser
+gulp.task 'open', ->
+  port = process.env.PORT or 3333
+  gulp
+    .src('./src/app.coffee')
+    .pipe(open('', url: 'http://127.0.0.1:' + port))
 
 # removes distribution folder
 gulp.task 'clean', ->
   gulp
-    .src(buildDir, read: false)
+    .src(appBuild, read: false)
     .pipe(clean())
 
-# compiles css
-gulp.task 'css', ->
-  console.log 'compile css'
+# minifies js
+gulp.task 'jsmin', ->
+  gulp.src(compiled.js)
+    .pipe(uglify())
+    .pipe(rename('scripts.min.js'))
+    .pipe(gulp.dest(jsBuild))
 
 # lints coffeescript
 gulp.task 'coffeelint', ->
   gulp
     .src([sources.app, sources.coffee])
-    .pipe(coffeelint())
+    .pipe(coffeelint().on('error', gutil.log))
     .pipe(coffeelint.reporter())
 
+# minifies css
+gulp.task 'cssmin', ->
+  gulp
+    .src(compiled.css)
+    .pipe(minifyCss())
+    .pipe(rename('styles.min.css'))
+    .pipe(gulp.dest(cssBuild))
+
+# lints css
 gulp.task 'csslint', ->
   gulp
-    .src([compiled.css])
-    .pipe(csslint())
+    .src(compiled.css)
+    .pipe(csslint(
+      'box-sizing': false
+      'universal-selector': false
+      'box-model': false
+      'overqualified-elements': false
+      'compatible-vendor-prefixes': false
+      'unique-headings': false
+      'qualified-headings': false
+      'unqualified-attributes': false
+      'important': false
+      'outline-none': false
+      'shorthand': false
+      'font-sizes': false
+    ).on('error', gutil.log))
     .pipe(csslint.reporter())
+
+# lints coffeescript & css
+gulp.task 'lint', [
+  'coffeelint'
+  'csslint'
+]
 
 # builds coffeescript source into deployable javascript
 gulp.task 'build', ->
@@ -100,12 +150,26 @@ gulp.task 'build', ->
       sourceMap: false
     ).on('error', gutil.log))
     .pipe(
-      gulp.dest(buildDir)
+      gulp.dest(appBuild)
     )
 
 # deploys application
 gulp.task 'deploy', [
-  'clean',
-  'css',
+  'clean'
+  'browserify'
   'build'
+  'jsmin'
+  'cssmin'
 ]
+
+# browserify task
+gulp.task 'browserify', ->
+  browserify(
+      extensions: ['.coffee']
+    )
+    .add(publicScript)
+    .transform(coffeeify)
+    .bundle(debug: true)
+    .on('error', gutil.log)
+    .pipe(source('scripts.js'))
+    .pipe(gulp.dest(jsBuild))

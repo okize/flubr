@@ -11,10 +11,10 @@ passport = require 'passport'
 livereload = require 'connect-livereload'
 mongoose = require 'mongoose'
 coffee = require 'coffee-script'
-coffeescriptMiddleware = require 'connect-coffee-script'
+coffeeify = require "coffeeify"
+browserify = require 'browserify-middleware'
 stylus = require 'stylus'
 axis = require 'axis-css'
-nib = require 'nib'
 routes = require './routes'
 authentication = require './authentication'
 
@@ -24,11 +24,10 @@ app = express()
 # configuration
 app.set 'env', process.env.NODE_ENV or 'development'
 app.set 'port', process.env.PORT or 3333
-app.set 'app name', 'Passfail'
-app.set 'host name', process.env.HOST_NAME
+app.set 'app name', 'Flubr'
 app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
-app.set 'db url', process.env.MONGODB_URL or 'mongodb://localhost/passfail'
+app.set 'db url', process.env.MONGODB_URL or 'mongodb://localhost/flubr'
 
 # database connection
 mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
@@ -39,9 +38,10 @@ mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
 
 # dev middleware
 if app.get('env') == 'development'
-  app.use livereload( port: 35730 )
+  app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35729)
 
 # assets middleware
+browserify.settings 'transform', [coffeeify]
 app.use stylus.middleware
   src: path.join(__dirname, '..', 'views')
   dest: path.join(__dirname, '..', 'public')
@@ -49,13 +49,13 @@ app.use stylus.middleware
   compile: (str, cssPath) ->
     stylus(str)
       .set('filename', cssPath)
-      .set('compress', true)
+      .set('compress', false)
+      .set('linenos', true)
       .use(axis(implicit: false))
-app.use coffeescriptMiddleware
-  src: path.join(__dirname, '..', 'views')
-  dest: path.join(__dirname, '..', 'public')
-  bare: true
-  compress: true
+app.get '/javascripts/scripts.js', browserify('./views/javascripts/scripts.coffee',
+  cache: false
+  precompile: true
+)
 app.use express.static(path.join(__dirname, '..', 'public'))
 
 app.use cookieParser('blundercats')
