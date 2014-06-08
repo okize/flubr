@@ -5,7 +5,7 @@
   "engines": {
     "node": "0.10.x"
   },
-  "description": "pass/fail images for campfire, etc. moderated by your team members",
+  "description": "pass/fail images for chatrooms, moderated by your team members",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -32,6 +32,7 @@
     "cookie-parser": "*",
     "express": "*",
     "express-session": "*",
+    "gulp-bump": "*",
     "jade": "*",
     "lodash": "*",
     "mongoose": "3.8.x",
@@ -50,6 +51,7 @@
     "gulp-coffee": "*",
     "gulp-coffeelint": "*",
     "gulp-csslint": "*",
+    "gulp-git": "*",
     "gulp-minify-css": "*",
     "gulp-nodemon": "*",
     "gulp-open": "*",

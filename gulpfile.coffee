@@ -9,6 +9,7 @@ coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
 clean = require 'gulp-clean'
+bump = require 'gulp-bump'
 open = require 'gulp-open'
 rename = require 'gulp-rename'
 minifyCss = require 'gulp-minify-css'
@@ -141,6 +142,25 @@ gulp.task 'lint', [
   'csslint'
 ]
 
+# bumps patch version for every release
+gulp.task 'bump', ->
+  gulp
+    .src('./package.json')
+    .pipe(bump(type: 'patch'))
+    .pipe gulp.dest('./')
+
+# browserify for the front-end scripts build
+gulp.task 'browserify', ->
+  browserify(
+      extensions: ['.coffee']
+    )
+    .add(publicScript)
+    .transform(coffeeify)
+    .bundle(debug: true)
+    .on('error', gutil.log)
+    .pipe(source('scripts.js'))
+    .pipe(gulp.dest(jsBuild))
+
 # builds coffeescript source into deployable javascript
 gulp.task 'build', ->
   gulp
@@ -153,23 +173,17 @@ gulp.task 'build', ->
       gulp.dest(appBuild)
     )
 
-# deploys application
-gulp.task 'deploy', [
+# deploys app to heroku
+gulp.task 'deploy', ->
+  console.log 'deploy'
+
+# creates a release and deploys the application
+gulp.task 'release', [
   'clean'
   'browserify'
   'build'
   'jsmin'
   'cssmin'
+  'bump'
+  'deploy'
 ]
-
-# browserify task
-gulp.task 'browserify', ->
-  browserify(
-      extensions: ['.coffee']
-    )
-    .add(publicScript)
-    .transform(coffeeify)
-    .bundle(debug: true)
-    .on('error', gutil.log)
-    .pipe(source('scripts.js'))
-    .pipe(gulp.dest(jsBuild))
