@@ -1,4 +1,3 @@
 $ = require 'jquery'
-ui = require './ui'
-
+ui = require './ui.coffee'
 ui($)
