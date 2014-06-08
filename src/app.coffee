@@ -39,23 +39,24 @@ mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
 # dev middleware
 if app.get('env') == 'development'
   app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35729)
+  app.use stylus.middleware
+    src: path.join(__dirname, '..', 'views')
+    dest: path.join(__dirname, '..', 'public')
+    debug: true
+    compile: (str, cssPath) ->
+      stylus(str)
+        .set('filename', cssPath)
+        .set('compress', false)
+        .set('linenos', true)
+        .use(axis(implicit: false))
+  browserify.settings 'transform', [coffeeify]
+  app.get '/javascripts/scripts.js',
+    browserify('./views/javascripts/scripts.coffee',
+      cache: false
+      precompile: true
+    )
 
-# assets middleware
-browserify.settings 'transform', [coffeeify]
-app.use stylus.middleware
-  src: path.join(__dirname, '..', 'views')
-  dest: path.join(__dirname, '..', 'public')
-  debug: true
-  compile: (str, cssPath) ->
-    stylus(str)
-      .set('filename', cssPath)
-      .set('compress', false)
-      .set('linenos', true)
-      .use(axis(implicit: false))
-app.get '/javascripts/scripts.js', browserify('./views/javascripts/scripts.coffee',
-  cache: false
-  precompile: true
-)
+# static assets
 app.use express.static(path.join(__dirname, '..', 'public'))
 
 app.use cookieParser('blundercats')
@@ -86,4 +87,5 @@ routes(app, passport)
 
 # await connections
 app.listen app.get('port'), ->
-  console.log "#{app.get('app name')} running on port #{app.get('port')}"
+  console.log "#{app.get('app name')} running on port #{app.get('port')}" +
+              " in [#{app.get('env')}]"

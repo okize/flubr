@@ -1,65 +1,3 @@
-
-/* line 200 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
-
-/* line 1 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/stylus/lib/functions/index.styl */
-
-/* line 297 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/stylus/lib/functions/index.styl */
-
-/* line 30 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/index.styl */
-
-/* line 30 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/index.styl */
-
-/* line 6 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/settings.styl */
-
-/* line 62 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/settings.styl */
-
-/* line 57 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/reset.styl */
-
-/* line 216 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/reset.styl */
-
-/* line 9 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
-
-/* line 442 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
-
-/* line 15 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vendor.styl */
-
-/* line 76 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vendor.styl */
-
-/* line 9 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/utilities.styl */
-
-/* line 318 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/utilities.styl */
-
-/* line 12 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/gradients.styl */
-
-/* line 47 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/gradients.styl */
-
-/* line 11 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/interaction.styl */
-
-/* line 100 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/interaction.styl */
-
-/* line 9 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/typography.styl */
-
-/* line 403 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/typography.styl */
-
-/* line 10 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/code.styl */
-
-/* line 42 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/code.styl */
-
-/* line 11 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/ui.styl */
-
-/* line 259 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/ui.styl */
-
-/* line 12 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/buttons.styl */
-
-/* line 174 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/buttons.styl */
-
-/* line 13 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/forms.styl */
-
-/* line 216 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/forms.styl */
-
-/* line 9 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/tables.styl */
-
-/* line 200 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 article,
 aside,
 details,
@@ -74,26 +12,18 @@ section,
 summary {
   display: block;
 }
-
-/* line 214 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 audio,
 canvas,
 video {
   display: inline-block;
 }
-
-/* line 222 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 audio:not([controls]) {
   display: none;
   height: 0;
 }
-
-/* line 225 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 [hidden] {
   display: none;
 }
-
-/* line 228 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -101,135 +31,93 @@ html {
   font-size: 100%;
   line-height: 1.5em;
 }
-
-/* line 242 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 body {
   margin: 0;
 }
-
-/* line 245 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 a:focus {
   outline: thin dotted;
 }
-
-/* line 248 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 a:active,
 a:hover {
   outline: 0;
 }
-
-/* line 252 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 p,
 pre {
   margin: 1.5em 0;
 }
-
-/* line 256 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 blockquote {
   margin: 1.5em 40px;
 }
-
-/* line 259 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 h1 {
   font-size: 2em;
   line-height: 1.5em;
   margin-top: 0.75em;
   margin-bottom: 0.75em;
 }
-
-/* line 264 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 h2 {
   font-size: 1.5em;
   line-height: 2em;
   margin-top: 1em;
   margin-bottom: 1em;
 }
-
-/* line 269 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 h3 {
   font-size: 1.17em;
   line-height: 1.282051282051282em;
   margin-top: 1.282051282051282em;
   margin-bottom: 1.282051282051282em;
 }
-
-/* line 274 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 h4 {
   font-size: 1em;
   line-height: 1.5em;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-
-/* line 279 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 h5 {
   font-size: 0.83em;
   line-height: 1.807228915662651em;
   margin-top: 1.807228915662651em;
   margin-bottom: 1.807228915662651em;
 }
-
-/* line 284 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 h6 {
   font-size: 0.67em;
   line-height: 2.238805970149254em;
   margin-top: 2.238805970149254em;
   margin-bottom: 2.238805970149254em;
 }
-
-/* line 289 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 abbr[title] {
   border-bottom: 1px dotted;
 }
-
-/* line 292 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 b,
 strong {
   font-weight: bold;
 }
-
-/* line 296 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 dfn {
   font-style: italic;
 }
-
-/* line 299 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 hr {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
-
-/* line 304 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 mark {
   background: #ff0;
   color: #000;
 }
-
-/* line 308 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 code,
 kbd,
 pre,
 samp {
   font-family: 'Bitstream Vera Sans Mono', Consolas, Courier, monospace, serif;
 }
-
-/* line 317 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 pre {
   white-space: pre-wrap;
 }
-
-/* line 320 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 q {
   quotes: "\201C" "\201D" "\2018" "\2019";
 }
-
-/* line 323 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 small {
   font-size: 80%;
 }
-
-/* line 326 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 sub,
 sup {
   font-size: 75%;
@@ -237,18 +125,12 @@ sup {
   position: relative;
   vertical-align: baseline;
 }
-
-/* line 333 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 sup {
   top: -0.5em;
 }
-
-/* line 336 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 sub {
   bottom: -0.25em;
 }
-
-/* line 339 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 dl,
 menu,
 ol,
@@ -256,33 +138,21 @@ ul {
   margin: 1.5em 0;
   padding: 0 0 0 40px;
 }
-
-/* line 346 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 dl {
   padding: 0;
 }
-
-/* line 349 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 dd {
   margin: 0 0 0 40px;
 }
-
-/* line 359 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 img {
   border: 0;
 }
-
-/* line 364 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 svg:not(:root) {
   overflow: hidden;
 }
-
-/* line 367 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 figure {
   margin: 0;
 }
-
-/* line 374 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 fieldset {
   border-color: #c0c0c0;
   margin: 0 2px;
@@ -299,14 +169,10 @@ fieldset {
   border-right-width: 0.0625em;
   padding-right: 1.4375em;
 }
-
-/* line 382 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 legend {
   border: 0;
   padding: 0;
 }
-
-/* line 388 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 button,
 input,
 select,
@@ -315,20 +181,14 @@ textarea {
   font-size: 100%;
   margin: 0;
 }
-
-/* line 399 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 button,
 input {
   line-height: normal;
 }
-
-/* line 403 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 button,
 select {
   text-transform: none;
 }
-
-/* line 407 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 button,
 html input[type="button"],
 input[type="reset"],
@@ -336,60 +196,40 @@ input[type="submit"] {
   -webkit-appearance: button;
   cursor: pointer;
 }
-
-/* line 413 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 button[disabled],
 html input[disabled] {
   cursor: default;
 }
-
-/* line 416 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
   padding: 0;
 }
-
-/* line 423 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 input[type="search"] {
   -webkit-appearance: textfield;
   box-sizing: content-box;
 }
-
-/* line 427 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
-
-/* line 430 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 button
-
-/* line 430 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 :-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
-
-/* line 435 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 textarea {
   overflow: auto;
   vertical-align: top;
 }
-
-/* line 439 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/node_modules/axis-css/axis/vertical-rhythm.styl */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
-/* line 4 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 * {
   box-sizing: border-box;
 }
-
-/* line 7 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 body {
   font-size: 1rem;
   text-align: center;
@@ -399,14 +239,10 @@ body {
   padding: 0;
   margin: 0;
 }
-
-/* line 16 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .main {
   width: 800px;
   margin: 0 auto;
 }
-
-/* line 20 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 h1,
 h2 {
   font-size: 4rem;
@@ -416,28 +252,20 @@ h2 {
   margin: 5rem 0 1.5rem;
   border-bottom: 5px solid #fff;
 }
-
-/* line 28 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 h1 {
   border: none;
   margin: 10rem 0 -2.75rem;
 }
-
-/* line 32 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .homepage-random-images {
   z-index: -1;
   overflow: hidden;
   position: relative;
   top: -10rem;
 }
-
-/* line 38 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-pass,
 .image-type-fail {
   position: relative;
 }
-
-/* line 40 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-pass h3,
 .image-type-fail h3 {
   position: absolute;
@@ -451,71 +279,47 @@ h1 {
   letter-spacing: 1.5rem;
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
-
-/* line 55 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-pass img,
 .image-type-fail img {
   width: 200px;
   height: 200px;
   margin: 0 !important;
 }
-
-/* line 60 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-pass {
   float: left;
 }
-
-/* line 62 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-pass img {
   border: 0.5rem solid #2ecc40;
 }
-
-/* line 64 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-pass h3 {
   color: #2ecc40;
 }
-
-/* line 67 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-fail {
   float: right;
 }
-
-/* line 69 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-fail img {
   border: 0.5rem solid #d13f19;
 }
-
-/* line 71 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-type-fail h3 {
   color: #d13f19;
 }
-
-/* line 74 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 label {
   display: block;
   font-size: 0.75rem;
   text-transform: uppercase;
 }
-
-/* line 79 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 input {
   margin: 0 1rem;
 }
-
-/* line 82 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 a,
 :visited {
   color: #222;
 }
-
-/* line 84 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 a:hover,
 :visited:hover {
   color: #ffdc00;
   background-color: #ff851b;
 }
-
-/* line 88 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 button {
   display: inline-block;
   -webkit-appearance: none;
@@ -532,14 +336,10 @@ button {
   cursor: pointer;
   overflow: visible;
 }
-
-/* line 103 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
-
-/* line 107 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .login-button,
 button {
   color: #ff851b;
@@ -553,22 +353,16 @@ button {
   line-height: 3;
   box-shadow: #ff851b 5px 5px;
 }
-
-/* line 118 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .login-button:visited,
 button:visited {
   color: #ff851b;
 }
-
-/* line 120 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .login-button:hover,
 button:hover {
   color: #ffdc00;
   background-color: #ff851b;
   box-shadow: #ffdc00 5px 5px;
 }
-
-/* line 125 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .logged-in-bar {
   color: #222;
   line-height: 2rem;
@@ -583,62 +377,42 @@ button:hover {
   padding: 5px;
   border-bottom: 5px solid #ff851b;
 }
-
-/* line 138 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .logged-in-bar li {
   list-style: none;
   display: inline-block;
   margin-right: 10px;
 }
-
-/* line 142 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .logged-in-bar li:first-child {
   float: left;
 }
-
-/* line 145 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .avatar {
   vertical-align: bottom;
   border: 2px solid #fff;
   height: 30px;
   width: 30px;
 }
-
-/* line 151 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .addNewImage,
 .is-inline {
   display: inline-block;
 }
-
-/* line 156 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .inline-list {
   list-style: none;
 }
-
-/* line 158 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .inline-list li {
   display: inline-block;
 }
-
-/* line 161 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .messaging {
   padding: 1rem;
 }
-
-/* line 164 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-list {
   padding: 0 1rem;
   display: none;
   list-style: none;
 }
-
-/* line 169 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .image-item {
   display: inline-block;
   margin: 1rem;
 }
-
-/* line 173 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .pf-image {
   float: left;
   border: 5px solid #fff;
@@ -646,8 +420,6 @@ button:hover {
   height: 90px;
   width: 90px;
 }
-
-/* line 180 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .set-image-kind {
   list-style: none;
   overflow: hidden;
@@ -658,18 +430,12 @@ button:hover {
   padding: 5px;
   color: #222;
 }
-
-/* line 189 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .set-image-kind li:first-child {
   float: left;
 }
-
-/* line 191 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .set-image-kind li:last-child {
   float: right;
 }
-
-/* line 194 : /Users/morganwigmanich/src/localhost/heroku-apps/flubr/views/stylesheets/styles.styl */
 .delete-image {
   clear: both;
   background-color: #fff;
