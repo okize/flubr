@@ -11,7 +11,8 @@ passport = require 'passport'
 livereload = require 'connect-livereload'
 mongoose = require 'mongoose'
 coffee = require 'coffee-script'
-# coffeescriptMiddleware = require 'connect-coffee-script'
+coffeeify = require "coffeeify"
+browserify = require 'browserify-middleware'
 stylus = require 'stylus'
 axis = require 'axis-css'
 routes = require './routes'
@@ -40,6 +41,7 @@ if app.get('env') == 'development'
   app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35729)
 
 # assets middleware
+browserify.settings 'transform', [coffeeify]
 app.use stylus.middleware
   src: path.join(__dirname, '..', 'views')
   dest: path.join(__dirname, '..', 'public')
@@ -50,11 +52,10 @@ app.use stylus.middleware
       .set('compress', false)
       .set('linenos', true)
       .use(axis(implicit: false))
-# app.use coffeescriptMiddleware
-#   src: path.join(__dirname, '..', 'views')
-#   dest: path.join(__dirname, '..', 'public')
-#   bare: true
-#   compress: true
+app.get '/javascripts/scripts.js', browserify('./views/javascripts/scripts.coffee',
+  cache: false
+  precompile: true
+)
 app.use express.static(path.join(__dirname, '..', 'public'))
 
 app.use cookieParser('blundercats')
