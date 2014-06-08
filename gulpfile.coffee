@@ -173,12 +173,17 @@ gulp.task 'build', ->
       gulp.dest(appBuild)
     )
 
-# deploys application
-gulp.task 'deploy', [
+# deploys app to heroku
+gulp.task 'deploy', ->
+  console.log 'deploy'
+
+# creates a release and deploys the application
+gulp.task 'release', [
   'clean'
   'browserify'
   'build'
   'jsmin'
   'cssmin'
   'bump'
+  'deploy'
 ]
