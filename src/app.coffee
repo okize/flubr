@@ -1,5 +1,6 @@
 # modules
 path = require 'path'
+fs = require 'fs'
 express = require 'express'
 cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
@@ -39,16 +40,25 @@ mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
 # dev middleware
 if app.get('env') == 'development'
   app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35729)
-  app.use stylus.middleware
-    src: path.join(__dirname, '..', 'views')
-    dest: path.join(__dirname, '..', 'public')
-    debug: true
-    compile: (str, cssPath) ->
-      stylus(str)
-        .set('filename', cssPath)
-        .set('compress', false)
-        .set('linenos', true)
-        .use(axis(implicit: false))
+  # app.use stylus.middleware
+  #   src: path.join(__dirname, '..', 'views')
+  #   dest: path.join(__dirname, '..', 'public')
+  #   debug: true
+  #   compile: (str, cssPath) ->
+  #     stylus(str)
+  #       .set('filename', cssPath)
+  #       .set('compress', false)
+  #       .set('linenos', true)
+  #       .use(axis(implicit: false))
+  app.route('/stylesheets/styles.css')
+    .get (req, res, next) ->
+      css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8'))
+              .set('compress', false)
+              .set('linenos', true)
+              .use(axis(implicit: false))
+              .render()
+      res.set 'Content-Type', 'text/css'
+      res.send css
   browserify.settings 'transform', [coffeeify]
   app.get '/javascripts/scripts.js',
     browserify('./views/javascripts/scripts.coffee',
@@ -87,5 +97,5 @@ routes(app, passport)
 
 # await connections
 app.listen app.get('port'), ->
-  console.log "#{app.get('app name')} running on port #{app.get('port')}" +
-              " in [#{app.get('env')}]"
+  console.log "#{app.get('app name')} running on port #{app.get('port')} " +
+              "in [#{app.get('env')}]"
