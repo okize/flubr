@@ -55,14 +55,14 @@ refreshPage = (event) ->
 
 # default task that's run with 'gulp'
 gulp.task 'default', [
-  'start',
-  'watch'
+  'start-app',
+  'watch-for-changes'
 ]
 
 # lints coffeescript & css
 gulp.task 'lint', [
-  'coffeelint',
-  'csslint'
+  'lint-coffeescript',
+  'lint-css'
 ]
 
 # creates a release and deploys the application
@@ -85,7 +85,7 @@ gulp.task 'open', ->
     .pipe(open('', url: 'http://127.0.0.1:' + port))
 
 # starts up LiveReload server and the app with nodemon
-gulp.task 'start', ->
+gulp.task 'start-app', ->
   nodemon(
     script: appScript
     ext: 'coffee'
@@ -111,20 +111,20 @@ gulp.task 'start', ->
   )
 
 # watches source files and triggers a page refresh on change
-gulp.task 'watch', ->
+gulp.task 'watch-for-changes', ->
   log 'watching files...'
   gulp
     .watch(getSources(), refreshPage)
 
 # lints coffeescript
-gulp.task 'coffeelint', ->
+gulp.task 'lint-coffeescript', ->
   gulp
     .src([sources.app, sources.coffee])
     .pipe(coffeelint().on('error', gutil.log))
     .pipe(coffeelint.reporter())
 
 # lints css
-gulp.task 'csslint', ->
+gulp.task 'lint-css', ->
   gulp
     .src(compiled.css)
     .pipe(csslint(
