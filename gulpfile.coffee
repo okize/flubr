@@ -156,12 +156,15 @@ gulp.task 'bump-version', ->
 gulp.task 'build-css', ->
   gulp
     .src(publicCss)
-    .pipe(stylus(use: [
-      axis(implicit: false)
-    ]))
+    .pipe(stylus(
+      linenos: false
+      use: [
+        axis(implicit: false)
+      ]
+    ))
     .pipe(gulp.dest(cssBuild))
 
-# builds the front-end scripts
+# builds the front-end javascript
 gulp.task 'build-js', ->
   browserify(
       extensions: ['.coffee']
