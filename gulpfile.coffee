@@ -1,4 +1,5 @@
 # modules
+config = require './env.json'
 path = require 'path'
 _ = require 'lodash'
 gulp = require 'gulp'
@@ -36,7 +37,6 @@ sources =
 compiled =
   css: 'public/stylesheets/styles.css'
   js: 'public/javascripts/scripts.js'
-liveReloadPort = process.env.LIVE_RELOAD_PORT or 35729
 
 # returns an array of the source folders in sources object
 getSources = ->
@@ -55,23 +55,55 @@ refreshPage = (event) ->
 
 # default task that's run with 'gulp'
 gulp.task 'default', [
-  'start',
-  'watch'
+  'start-app',
+  'watch-for-changes'
 ]
 
+# lints coffeescript & css
+gulp.task 'lint', [
+  'lint-coffeescript',
+  'lint-css'
+]
+
+# creates a release and deploys the application
+gulp.task 'release', [
+  'clean-directories',
+  'build-css',
+  'build-js',
+  'build-app',
+  'minify-js',
+  'minify-css',
+  'bump-version',
+  'deploy-app'
+]
+
+# open app in default browser
+gulp.task 'open', ->
+  port = config.PORT or 3333
+  gulp
+    .src('./src/app.coffee')
+    .pipe(open('', url: 'http://127.0.0.1:' + port))
+
 # starts up LiveReload server and the app with nodemon
-gulp.task 'start', ->
+gulp.task 'start-app', ->
   nodemon(
     script: appScript
     ext: 'coffee'
-    env:
-      'NODE_ENV': 'development'
-    ignore: ['node_modules/', 'views/', 'build/', 'public', 'gulp*']
+    env: config
+    ignore: [
+      'node_modules/',
+      'views/',
+      'build/',
+      'public/',
+      'gulp*'
+    ]
   ).on('restart', (files) ->
     log 'app restarted'
   ).on('start', ->
     log 'app started'
+    liveReloadPort = config.LIVE_RELOAD_PORT or 35730
     liveReload.listen liveReloadPort
+    log 'livereload started on port ' + liveReloadPort
   ).on('quit', ->
     log 'app closed'
     liveReload.close()
@@ -79,48 +111,20 @@ gulp.task 'start', ->
   )
 
 # watches source files and triggers a page refresh on change
-gulp.task 'watch', ->
+gulp.task 'watch-for-changes', ->
   log 'watching files...'
   gulp
     .watch(getSources(), refreshPage)
 
-# open app in default browser
-gulp.task 'open', ->
-  port = process.env.PORT or 3333
-  gulp
-    .src('./src/app.coffee')
-    .pipe(open('', url: 'http://127.0.0.1:' + port))
-
-# removes distribution folder
-gulp.task 'clean-directories', ->
-  gulp
-    .src([appBuild, cssBuild, jsBuild], read: false)
-    .pipe(clean())
-
-# minifies js
-gulp.task 'minify-js', ->
-  gulp.src(compiled.js)
-    .pipe(uglify())
-    .pipe(rename('scripts.min.js'))
-    .pipe(gulp.dest(jsBuild))
-
-# minifies css
-gulp.task 'minify-css', ->
-  gulp
-    .src(compiled.css)
-    .pipe(minifyCss())
-    .pipe(rename('styles.min.css'))
-    .pipe(gulp.dest(cssBuild))
-
 # lints coffeescript
-gulp.task 'coffeelint', ->
+gulp.task 'lint-coffeescript', ->
   gulp
     .src([sources.app, sources.coffee])
     .pipe(coffeelint().on('error', gutil.log))
     .pipe(coffeelint.reporter())
 
 # lints css
-gulp.task 'csslint', ->
+gulp.task 'lint-css', ->
   gulp
     .src(compiled.css)
     .pipe(csslint(
@@ -139,18 +143,23 @@ gulp.task 'csslint', ->
     ).on('error', gutil.log))
     .pipe(csslint.reporter())
 
-# lints coffeescript & css
-gulp.task 'lint', [
-  'coffeelint',
-  'csslint'
-]
-
-# bumps patch version for every release
-gulp.task 'bump-version', ->
+# removes distribution folder
+gulp.task 'clean-directories', ->
   gulp
-    .src('./package.json')
-    .pipe(bump(type: 'patch'))
-    .pipe gulp.dest('./')
+    .src([appBuild, cssBuild, jsBuild], read: false)
+    .pipe(clean())
+
+# builds coffeescript source into deployable javascript
+gulp.task 'build-app', ->
+  gulp
+    .src(sources.app)
+    .pipe(coffee(
+      bare: true
+      sourceMap: false
+    ).on('error', gutil.log))
+    .pipe(
+      gulp.dest(appBuild)
+    )
 
 # builds the css
 gulp.task 'build-css', ->
@@ -176,30 +185,28 @@ gulp.task 'build-js', ->
     .pipe(source('scripts.js'))
     .pipe(gulp.dest(jsBuild))
 
-# builds coffeescript source into deployable javascript
-gulp.task 'build-app', ->
+# minifies css
+gulp.task 'minify-css', ->
   gulp
-    .src(sources.app)
-    .pipe(coffee(
-      bare: true
-      sourceMap: false
-    ).on('error', gutil.log))
-    .pipe(
-      gulp.dest(appBuild)
-    )
+    .src(compiled.css)
+    .pipe(minifyCss())
+    .pipe(rename('styles.min.css'))
+    .pipe(gulp.dest(cssBuild))
+
+# minifies js
+gulp.task 'minify-js', ->
+  gulp.src(compiled.js)
+    .pipe(uglify())
+    .pipe(rename('scripts.min.js'))
+    .pipe(gulp.dest(jsBuild))
+
+# bumps patch version for every release
+gulp.task 'bump-version', ->
+  gulp
+    .src('./package.json')
+    .pipe(bump(type: 'patch'))
+    .pipe gulp.dest('./')
 
 # deploys app to heroku
 gulp.task 'deploy-app', ->
   console.log 'deploy'
-
-# creates a release and deploys the application
-gulp.task 'release', [
-  'clean-directories',
-  'build-css',
-  'build-js',
-  'build-app',
-  'minify-js',
-  'minify-css',
-  'bump-version',
-  'deploy-app'
-]
