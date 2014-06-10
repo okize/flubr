@@ -58,7 +58,7 @@ if app.get('env') == 'development'
       precompile: true
     )
 
-app.use compression
+app.use compression(threshold: 1024)
 app.use express.static(path.join(__dirname, '..', 'public'))
 app.use cookieParser('blundercats')
 app.use bodyParser()
