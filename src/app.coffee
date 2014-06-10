@@ -2,6 +2,7 @@
 path = require 'path'
 fs = require 'fs'
 express = require 'express'
+compression = require 'compression'
 cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 session = require 'express-session'
@@ -57,9 +58,8 @@ if app.get('env') == 'development'
       precompile: true
     )
 
-# static assets
+app.use compression(threshold: 1024)
 app.use express.static(path.join(__dirname, '..', 'public'))
-
 app.use cookieParser('blundercats')
 app.use bodyParser()
 
