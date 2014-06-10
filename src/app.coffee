@@ -39,17 +39,7 @@ mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
 
 # dev middleware
 if app.get('env') == 'development'
-  app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35729)
-  # app.use stylus.middleware
-  #   src: path.join(__dirname, '..', 'views')
-  #   dest: path.join(__dirname, '..', 'public')
-  #   debug: true
-  #   compile: (str, cssPath) ->
-  #     stylus(str)
-  #       .set('filename', cssPath)
-  #       .set('compress', false)
-  #       .set('linenos', true)
-  #       .use(axis(implicit: false))
+  app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35730)
   app.route('/stylesheets/styles.css')
     .get (req, res, next) ->
       css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8'))
@@ -62,6 +52,7 @@ if app.get('env') == 'development'
   browserify.settings 'transform', [coffeeify]
   app.get '/javascripts/scripts.js',
     browserify('./views/javascripts/scripts.coffee',
+      extensions: ['.coffee']
       cache: false
       precompile: true
     )
