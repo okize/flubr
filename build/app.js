@@ -1,8 +1,12 @@
-var Store, app, authentication, axis, bodyParser, browserify, coffee, coffeeify, cookieParser, express, livereload, logger, mongoose, passport, path, routes, session, stylus;
+var Store, app, authentication, axis, bodyParser, browserify, coffee, coffeeify, compression, cookieParser, express, fs, livereload, logger, mongoose, passport, path, routes, session, stylus;
 
 path = require('path');
 
+fs = require('fs');
+
 express = require('express');
+
+compression = require('compression');
 
 cookieParser = require('cookie-parser');
 
@@ -66,34 +70,38 @@ mongoose.connect(app.get('db url'), {
 
 if (app.get('env') === 'development') {
   app.use(livereload({
-    port: process.env.LIVE_RELOAD_PORT || 35729
+    port: process.env.LIVE_RELOAD_PORT || 35730
   }));
-  app.use(stylus.middleware({
-    src: path.join(__dirname, '..', 'views'),
-    dest: path.join(__dirname, '..', 'public'),
-    debug: true,
-    compile: function(str, cssPath) {
-      return stylus(str).set('filename', cssPath).set('compress', false).set('linenos', true).use(axis({
-        implicit: false
-      }));
-    }
-  }));
+  app.route('/stylesheets/styles.css').get(function(req, res, next) {
+    var css;
+    css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8')).set('compress', false).set('linenos', true).set('sourcemaps', true).use(axis({
+      implicit: false
+    })).render();
+    res.set('Content-Type', 'text/css');
+    return res.send(css);
+  });
   browserify.settings('transform', [coffeeify]);
+  browserify.settings('debug', true);
   app.get('/javascripts/scripts.js', browserify('./views/javascripts/scripts.coffee', {
+    extensions: ['.coffee'],
     cache: false,
     precompile: true
   }));
 }
 
+app.use(compression({
+  threshold: 1024
+}));
+
 app.use(express["static"](path.join(__dirname, '..', 'public')));
 
-app.use(cookieParser('blundercats'));
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 app.use(bodyParser());
 
 app.use(session({
   name: 'express_session',
-  secret: 'blundercats',
+  secret: process.env.SESSION_SECRET,
   store: new Store({
     mongooseConnection: mongoose.connections[0],
     collection: 'sessions'
@@ -111,5 +119,5 @@ app.use(logger('dev'));
 routes(app, passport);
 
 app.listen(app.get('port'), function() {
-  return console.log(("" + (app.get('app name')) + " running on port " + (app.get('port'))) + (" in [" + (app.get('env')) + "]"));
+  return console.log(("" + (app.get('app name')) + " running on port " + (app.get('port')) + " ") + ("in [" + (app.get('env')) + "]"));
 });
