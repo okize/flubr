@@ -46,11 +46,13 @@ if app.get('env') == 'development'
       css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8'))
               .set('compress', false)
               .set('linenos', true)
+              .set('sourcemaps', true)
               .use(axis(implicit: false))
               .render()
       res.set 'Content-Type', 'text/css'
       res.send css
   browserify.settings 'transform', [coffeeify]
+  browserify.settings 'debug', true
   app.get '/javascripts/scripts.js',
     browserify('./views/javascripts/scripts.coffee',
       extensions: ['.coffee']
@@ -60,13 +62,13 @@ if app.get('env') == 'development'
 
 app.use compression(threshold: 1024)
 app.use express.static(path.join(__dirname, '..', 'public'))
-app.use cookieParser('blundercats')
+app.use cookieParser(process.env.SESSION_SECRET)
 app.use bodyParser()
 
 # sessions
 app.use session(
   name: 'express_session'
-  secret: 'blundercats'
+  secret: process.env.SESSION_SECRET
   store: new Store(
     mongooseConnection: mongoose.connections[0]
     collection: 'sessions'
