@@ -1,5 +1,6 @@
 # modules
-config = require './env.json'
+env = require './env.json'
+fs = require 'fs'
 path = require 'path'
 _ = require 'lodash'
 gulp = require 'gulp'
@@ -25,7 +26,7 @@ bg = require 'gulp-bg'
 
 # configuration
 appRoot = __dirname
-appPort = config.PORT or 3333
+appPort = env.PORT or 3333
 appScript = path.join(appRoot, 'src', 'app.coffee')
 publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
 publicCss = path.join(appRoot, 'views', 'stylesheets', 'styles.styl')
@@ -41,13 +42,17 @@ compiled =
   css: 'public/stylesheets/styles.css'
   js: 'public/javascripts/scripts.js'
 
-# returns an array of the source folders in sources object
-getSources = ->
-  _.values sources
-
 # info logging
 log = (msg) ->
   gutil.log '[gulpfile]', gutil.colors.blue(msg)
+
+# error logging
+logErr = (msg) ->
+  gutil.log '[gulpfile]', gutil.colors.red(msg)
+
+# returns an array of the source folders in sources object
+getSources = ->
+  _.values sources
 
 # sends updated files to LiveReload server
 refreshPage = (event) ->
@@ -97,7 +102,7 @@ gulp.task 'start-app', ->
   nodemon(
     script: appScript
     ext: 'coffee'
-    env: config
+    env: env
     ignore: [
       'node_modules/',
       'views/',
@@ -109,7 +114,7 @@ gulp.task 'start-app', ->
     log 'app restarted'
   ).on('start', ->
     log 'app started'
-    liveReloadPort = config.LIVE_RELOAD_PORT or 35730
+    liveReloadPort = env.LIVE_RELOAD_PORT or 35730
     liveReload.listen liveReloadPort
     log 'livereload started on port ' + liveReloadPort
   ).on('quit', ->
