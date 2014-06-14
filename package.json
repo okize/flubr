@@ -57,6 +57,7 @@
     "gulp-nodemon": "*",
     "gulp-open": "*",
     "gulp-rename": "*",
+    "gulp-shell": "*",
     "gulp-stylus": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",
