@@ -26,11 +26,6 @@ semver = require 'semver'
 git = require 'gulp-git'
 codename = require('codename')()
 
-
-bump = require 'gulp-bump'
-tagVersion = require 'gulp-tag-version'
-filter = require 'gulp-filter'
-
 # configuration
 appRoot = __dirname
 appScript = path.join(appRoot, 'src', 'app.coffee')
