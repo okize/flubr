@@ -21,6 +21,7 @@ browserify = require 'browserify'
 coffeeify = require 'coffeeify'
 source = require 'vinyl-source-stream'
 runSequence = require 'run-sequence'
+shell = require 'gulp-shell'
 
 # configuration
 appRoot = __dirname
@@ -58,6 +59,7 @@ refreshPage = (event) ->
 # default task that's run with 'gulp'
 gulp.task 'default', (callback) ->
   runSequence(
+    'start-mongo',
     'start-app',
     'watch-for-changes',
     callback
@@ -85,6 +87,10 @@ gulp.task 'open', ->
   gulp
     .src('./src/app.coffee')
     .pipe(open('', url: 'http://127.0.0.1:' + appPort))
+
+# makes sure mongo is running and starts if it's not
+gulp.task 'start-mongo',
+  shell.task('mongod')
 
 # starts up LiveReload server and the app with nodemon
 gulp.task 'start-app', ->
@@ -114,7 +120,6 @@ gulp.task 'start-app', ->
 
 # watches source files and triggers a page refresh on change
 gulp.task 'watch-for-changes', ->
-  log 'watching files...'
   gulp
     .watch(getSources(), refreshPage)
 
