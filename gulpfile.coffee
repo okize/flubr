@@ -22,6 +22,11 @@ coffeeify = require 'coffeeify'
 source = require 'vinyl-source-stream'
 runSequence = require 'run-sequence'
 bg = require 'gulp-bg'
+semver = require 'semver'
+git = require 'gulp-git'
+codename = require('codename')()
+
+
 bump = require 'gulp-bump'
 tagVersion = require 'gulp-tag-version'
 filter = require 'gulp-filter'
@@ -87,7 +92,7 @@ gulp.task 'release', (callback) ->
     'clean-directories',
     ['build-css', 'build-js', 'build-app'],
     ['minify-css', 'minify-js'],
-    ['bump-version'],
+    'create-tag',
     'deploy-app',
     callback
   )
@@ -136,7 +141,7 @@ gulp.task 'watch-for-changes', ->
 # lints coffeescript
 gulp.task 'lint-coffeescript', ->
   gulp
-    .src([sources.app, sources.coffee])
+    .src([sources.app, sources.coffee, './gulpfile.coffee'])
     .pipe(coffeelint().on('error', gutil.log))
     .pipe(coffeelint.reporter())
 
@@ -192,9 +197,7 @@ gulp.task 'build-css', ->
 
 # builds the front-end javascript
 gulp.task 'build-js', ->
-  browserify(
-      extensions: ['.coffee']
-    )
+  browserify(extensions: ['.coffee'])
     .add(publicScript)
     .transform(coffeeify)
     .bundle(debug: true)
@@ -217,15 +220,29 @@ gulp.task 'minify-js', ->
     .pipe(rename('scripts.min.js'))
     .pipe(gulp.dest(jsBuild))
 
-# bumps patch version and creates a new tag
-gulp.task 'bump-and-tag-version', ->
-  gulp
-    .src('./package.json')
-    .pipe(bump(type: 'patch'))
-    .pipe(gulp.dest('./'))
-    .pipe(filter('package.json'))
-    .pipe(tagVersion())
-  log 'created new release tag - v' + getPackage().version
+# bumps patch version and creates a new tag and pushes to Github
+gulp.task 'create-tag', ->
+
+  pak = getPackage()
+
+  # create a codename for app release
+  pak.releaseCodename = codename.generate(
+    ['alliterative', 'random'],
+    ['adjectives', 'animals']
+  ).join('')
+
+  # bump patch version of app
+  pak.version = semver.inc(pak.version, 'patch')
+  fs.writeFile './package.json', JSON.stringify(pak, null, '  ')
+
+  message = pak.version + ' [' + pak.releaseCodename + ']'
+
+  # creates new tag
+  git.tag(
+    'v' + pak.version,
+    'Release version: ' + message,
+    args: '-a'
+  )
 
 # deploys app to heroku
 gulp.task 'deploy-app', ->
