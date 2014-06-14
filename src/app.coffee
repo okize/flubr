@@ -44,6 +44,7 @@ if app.get('env') == 'development'
   app.route('/stylesheets/styles.css')
     .get (req, res, next) ->
       css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8'))
+              .set('filename', './views/stylesheets/')
               .set('compress', false)
               .set('linenos', true)
               .set('sourcemaps', true)
