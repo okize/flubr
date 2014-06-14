@@ -13,7 +13,6 @@ coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
 clean = require 'gulp-clean'
-bump = require 'gulp-bump'
 open = require 'gulp-open'
 rename = require 'gulp-rename'
 minifyCss = require 'gulp-minify-css'
@@ -23,6 +22,8 @@ coffeeify = require 'coffeeify'
 source = require 'vinyl-source-stream'
 runSequence = require 'run-sequence'
 bg = require 'gulp-bg'
+bump = require 'gulp-bump'
+tagVersion = require 'gulp-tag-version'
 
 # configuration
 appRoot = __dirname
@@ -61,6 +62,9 @@ refreshPage = (event) ->
   liveReload.changed body:
     files: [fileName]
 
+getPackage = ->
+  JSON.parse fs.readFileSync('./package.json', 'utf8')
+
 # default task that's run with 'gulp'
 gulp.task 'default', (callback) ->
   runSequence(
@@ -82,7 +86,7 @@ gulp.task 'release', (callback) ->
     'clean-directories',
     ['build-css', 'build-js', 'build-app'],
     ['minify-css', 'minify-js'],
-    # ['bump-version'],
+    ['bump-version'],
     'deploy-app',
     callback
   )
@@ -217,7 +221,14 @@ gulp.task 'bump-version', ->
   gulp
     .src('./package.json')
     .pipe(bump(type: 'patch'))
-    .pipe gulp.dest('./')
+    .pipe(gulp.dest('./'))
+
+# create a new release tag
+gulp.task 'create-tag', ->
+  gulp
+    .src('./package.json')
+    .pipe(tagVersion())
+  log 'created new tag - v' + getPackage().version
 
 # deploys app to heroku
 gulp.task 'deploy-app', ->
