@@ -53,6 +53,7 @@
     "gulp-coffee": "*",
     "gulp-coffeelint": "*",
     "gulp-csslint": "*",
+    "gulp-filter": "*",
     "gulp-git": "*",
     "gulp-minify-css": "*",
     "gulp-nodemon": "*",
