@@ -61,6 +61,7 @@
     "gulp-uglify": "*",
     "gulp-util": "*",
     "jquery": "*",
+    "run-sequence": "*",
     "tiny-lr": "*",
     "vinyl-source-stream": "*"
   }
