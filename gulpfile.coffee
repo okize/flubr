@@ -24,6 +24,7 @@ runSequence = require 'run-sequence'
 
 # configuration
 appRoot = __dirname
+appPort = config.PORT or 3333
 appScript = path.join(appRoot, 'src', 'app.coffee')
 publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
 publicCss = path.join(appRoot, 'views', 'stylesheets', 'styles.styl')
@@ -81,10 +82,9 @@ gulp.task 'release', (callback) ->
 
 # open app in default browser
 gulp.task 'open', ->
-  port = config.PORT or 3333
   gulp
     .src('./src/app.coffee')
-    .pipe(open('', url: 'http://127.0.0.1:' + port))
+    .pipe(open('', url: 'http://127.0.0.1:' + appPort))
 
 # starts up LiveReload server and the app with nodemon
 gulp.task 'start-app', ->
