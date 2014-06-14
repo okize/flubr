@@ -1,5 +1,6 @@
 {
   "name": "flubr",
+  "releaseCodename": "",
   "private": true,
   "version": "0.0.1",
   "engines": {
@@ -17,10 +18,8 @@
   },
   "author": "Morgan Wigmanich <okize123@gmail.com> (https://github.com/okize)",
   "homepage": "https://github.com/okize/flubr",
+  "bugs": "https://github.com/okize/flubr/issues",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/okize/flubr/issues"
-  },
   "dependencies": {
     "async": "*",
     "axis-css": "*",
