@@ -60,6 +60,7 @@
     "gulp-rename": "*",
     "gulp-shell": "*",
     "gulp-stylus": "*",
+    "gulp-tag-version": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",
     "jquery": "*",
