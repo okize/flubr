@@ -55,10 +55,12 @@ refreshPage = (event) ->
     files: [fileName]
 
 # default task that's run with 'gulp'
-gulp.task 'default', [
-  'start-app',
-  'watch-for-changes'
-]
+gulp.task 'default', (callback) ->
+  runSequence(
+    'start-app',
+    'watch-for-changes',
+    callback
+  )
 
 # lints coffeescript & css
 gulp.task 'lint', [
