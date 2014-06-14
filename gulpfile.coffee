@@ -24,10 +24,10 @@ runSequence = require 'run-sequence'
 bg = require 'gulp-bg'
 bump = require 'gulp-bump'
 tagVersion = require 'gulp-tag-version'
+filter = require 'gulp-filter'
 
 # configuration
 appRoot = __dirname
-appPort = env.PORT or 3333
 appScript = path.join(appRoot, 'src', 'app.coffee')
 publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
 publicCss = path.join(appRoot, 'views', 'stylesheets', 'styles.styl')
@@ -62,6 +62,7 @@ refreshPage = (event) ->
   liveReload.changed body:
     files: [fileName]
 
+# returns parsed package.json
 getPackage = ->
   JSON.parse fs.readFileSync('./package.json', 'utf8')
 
@@ -95,7 +96,7 @@ gulp.task 'release', (callback) ->
 gulp.task 'open', ->
   gulp
     .src('./src/app.coffee')
-    .pipe(open('', url: 'http://127.0.0.1:' + appPort))
+    .pipe(open('', url: 'http://127.0.0.1:' + (env.PORT or 3333)))
 
 # starts up mongo
 gulp.task 'start-mongo',
@@ -216,19 +217,15 @@ gulp.task 'minify-js', ->
     .pipe(rename('scripts.min.js'))
     .pipe(gulp.dest(jsBuild))
 
-# bumps patch version for every release
-gulp.task 'bump-version', ->
+# bumps patch version and creates a new tag
+gulp.task 'bump-and-tag-version', ->
   gulp
     .src('./package.json')
     .pipe(bump(type: 'patch'))
     .pipe(gulp.dest('./'))
-
-# create a new release tag
-gulp.task 'create-tag', ->
-  gulp
-    .src('./package.json')
+    .pipe(filter('package.json'))
     .pipe(tagVersion())
-  log 'created new tag - v' + getPackage().version
+  log 'created new release tag - v' + getPackage().version
 
 # deploys app to heroku
 gulp.task 'deploy-app', ->
