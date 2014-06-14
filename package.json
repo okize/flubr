@@ -47,6 +47,7 @@
     "browserify": "*",
     "connect-livereload": "*",
     "gulp": "*",
+    "gulp-bg": "*",
     "gulp-browserify": "*",
     "gulp-clean": "*",
     "gulp-coffee": "*",
