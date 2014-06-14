@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "browserify": "*",
+    "codename": "*",
     "connect-livereload": "*",
     "gulp": "*",
     "gulp-bg": "*",
