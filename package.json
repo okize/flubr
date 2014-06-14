@@ -9,7 +9,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "./node_modules/.bin/gulp default --require coffee-script/register"
   },
   "repository": {
     "type": "git",
@@ -47,6 +47,7 @@
     "browserify": "*",
     "connect-livereload": "*",
     "gulp": "*",
+    "gulp-bg": "*",
     "gulp-browserify": "*",
     "gulp-clean": "*",
     "gulp-coffee": "*",
@@ -57,10 +58,12 @@
     "gulp-nodemon": "*",
     "gulp-open": "*",
     "gulp-rename": "*",
+    "gulp-shell": "*",
     "gulp-stylus": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",
     "jquery": "*",
+    "run-sequence": "*",
     "tiny-lr": "*",
     "vinyl-source-stream": "*"
   }

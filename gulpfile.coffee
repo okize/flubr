@@ -20,9 +20,12 @@ uglify = require 'gulp-uglify'
 browserify = require 'browserify'
 coffeeify = require 'coffeeify'
 source = require 'vinyl-source-stream'
+runSequence = require 'run-sequence'
+bg = require 'gulp-bg'
 
 # configuration
 appRoot = __dirname
+appPort = config.PORT or 3333
 appScript = path.join(appRoot, 'src', 'app.coffee')
 publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
 publicCss = path.join(appRoot, 'views', 'stylesheets', 'styles.styl')
@@ -54,10 +57,13 @@ refreshPage = (event) ->
     files: [fileName]
 
 # default task that's run with 'gulp'
-gulp.task 'default', [
-  'start-app',
-  'watch-for-changes'
-]
+gulp.task 'default', (callback) ->
+  runSequence(
+    'start-mongo',
+    'start-app',
+    'watch-for-changes',
+    callback
+  )
 
 # lints coffeescript & css
 gulp.task 'lint', [
@@ -66,23 +72,25 @@ gulp.task 'lint', [
 ]
 
 # creates a release and deploys the application
-gulp.task 'release', [
-  'clean-directories',
-  'build-css',
-  'build-js',
-  'build-app',
-  'minify-js',
-  'minify-css',
-  'bump-version',
-  'deploy-app'
-]
+gulp.task 'release', (callback) ->
+  runSequence(
+    'clean-directories',
+    ['build-css', 'build-js', 'build-app'],
+    ['minify-css', 'minify-js'],
+    # ['bump-version'],
+    'deploy-app',
+    callback
+  )
 
 # open app in default browser
 gulp.task 'open', ->
-  port = config.PORT or 3333
   gulp
     .src('./src/app.coffee')
-    .pipe(open('', url: 'http://127.0.0.1:' + port))
+    .pipe(open('', url: 'http://127.0.0.1:' + appPort))
+
+# starts up mongo
+gulp.task 'start-mongo',
+  bg('mongod', '--quiet')
 
 # starts up LiveReload server and the app with nodemon
 gulp.task 'start-app', ->
@@ -112,7 +120,6 @@ gulp.task 'start-app', ->
 
 # watches source files and triggers a page refresh on change
 gulp.task 'watch-for-changes', ->
-  log 'watching files...'
   gulp
     .watch(getSources(), refreshPage)
 
