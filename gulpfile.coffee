@@ -20,6 +20,7 @@ uglify = require 'gulp-uglify'
 browserify = require 'browserify'
 coffeeify = require 'coffeeify'
 source = require 'vinyl-source-stream'
+runSequence = require 'run-sequence'
 
 # configuration
 appRoot = __dirname
@@ -66,16 +67,15 @@ gulp.task 'lint', [
 ]
 
 # creates a release and deploys the application
-gulp.task 'release', [
-  'clean-directories',
-  'build-css',
-  'build-js',
-  'build-app',
-  'minify-js',
-  'minify-css',
-  'bump-version',
-  'deploy-app'
-]
+gulp.task 'release', (callback) ->
+  runSequence(
+    'clean-directories',
+    ['build-css', 'build-js', 'build-app'],
+    ['minify-css', 'minify-js'],
+    # ['bump-version'],
+    'deploy-app',
+    callback
+  )
 
 # open app in default browser
 gulp.task 'open', ->
