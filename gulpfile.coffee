@@ -249,22 +249,21 @@ gulp.task 'tag-version', ->
   git.tag(
     'v' + pak.version,
     'Release codename: ' + pak.releaseCodename,
-    args: '-a'
+    args: ' --annotate'
   )
 
 # commit updated files
 gulp.task 'commit-updates', ->
 
   pak = getPackage()
-
-  # commit updated files
-  repo.commit 'Built new release (v' + pak.version + ') codenamed ' + pak.releaseCodename, all: true, (err) ->
+  msg = "Built new release (v#{pak.version}) codenamed #{pak.releaseCodename}"
+  repo.commit msg, all: true, (err) ->
     throw err if err
 
 # push commits to github
 gulp.task 'push-updates', ->
   git
-    .push('origin', 'master', args: '--tags')
+    .push('origin', 'master', args: ' --tags')
     .end()
 
 # deploys app to heroku
