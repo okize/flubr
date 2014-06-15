@@ -1,0 +1,72 @@
+{
+  "name": "flubr",
+  "releaseCodename": "Wide-eyedWolf",
+  "private": true,
+  "version": "0.0.2",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "description": "pass/fail images for chatrooms, moderated by your team members",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/gulp default --require coffee-script/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okize/flubr"
+  },
+  "author": "Morgan Wigmanich <okize123@gmail.com> (https://github.com/okize)",
+  "homepage": "https://github.com/okize/flubr",
+  "bugs": "https://github.com/okize/flubr/issues",
+  "license": "MIT",
+  "dependencies": {
+    "async": "*",
+    "axis-css": "*",
+    "body-parser": "*",
+    "browserify-middleware": "*",
+    "coffee-script": "*",
+    "coffeeify": "*",
+    "compression": "*",
+    "connect-mongostore": "*",
+    "cookie-parser": "*",
+    "express": "*",
+    "express-session": "*",
+    "jade": "*",
+    "lodash": "*",
+    "mongoose": "3.8.x",
+    "morgan": "*",
+    "passport": "*",
+    "passport-twitter": "*",
+    "request": "*",
+    "stylus": "*"
+  },
+  "devDependencies": {
+    "browserify": "*",
+    "codename": "*",
+    "connect-livereload": "*",
+    "gift": "*",
+    "gulp": "*",
+    "gulp-bg": "*",
+    "gulp-browserify": "*",
+    "gulp-clean": "*",
+    "gulp-coffee": "*",
+    "gulp-coffeelint": "*",
+    "gulp-csslint": "*",
+    "gulp-exec": "*",
+    "gulp-git": "*",
+    "gulp-minify-css": "*",
+    "gulp-nodemon": "*",
+    "gulp-open": "*",
+    "gulp-rename": "*",
+    "gulp-shell": "*",
+    "gulp-stylus": "*",
+    "gulp-uglify": "*",
+    "gulp-util": "*",
+    "jquery": "*",
+    "run-sequence": "*",
+    "semver": "*",
+    "tiny-lr": "*",
+    "vinyl-source-stream": "*"
+  }
+}
