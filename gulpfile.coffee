@@ -68,13 +68,6 @@ refreshPage = (event) ->
 getPackage = ->
   JSON.parse fs.readFileSync('./package.json', 'utf8')
 
-execPromise = ->
-  log 'foo'
-  new rsvp.Promise (resolve, reject)->
-    exec command, (error, stdout, stderr)->
-      reject error if error
-      resolve stdout: stdout, stderr: stderr
-
 # default task that's run with 'gulp'
 gulp.task 'default', (callback) ->
   runSequence(
@@ -96,7 +89,9 @@ gulp.task 'release', (callback) ->
     'clean-directories',
     ['build-css', 'build-js', 'build-app'],
     ['minify-css', 'minify-js'],
-    'tag-commit-push',
+    'tag-version',
+    'commit-updates',
+    'push-updates',
     'deploy-app',
     callback
   )
@@ -225,7 +220,7 @@ gulp.task 'minify-js', ->
     .pipe(gulp.dest(jsBuild))
 
 # bumps patch version and creates a new tag
-gulp.task 'tag-commit-push', ->
+gulp.task 'tag-version', ->
 
   pak = getPackage()
 
@@ -246,16 +241,24 @@ gulp.task 'tag-commit-push', ->
     args: '-a'
   )
 
+# commit updated files
+gulp.task 'commit-updates', ->
+
+  pak = getPackage()
+
   # commit updated files
   repo = gift './'
   repo.commit 'Built new release (v' + pak.version + ') codenamed ' + pak.releaseCodename, all: true, (err) ->
     throw err if err
 
-  # push files to github
-  log 'push now'
-  # git.push('origin', 'head').end()
-  # --tags
+# push commits to github
+gulp.task 'push-updates', ->
+  git
+    .push('origin', 'head')
+    .end()
 
 # deploys app to heroku
 gulp.task 'deploy-app', ->
-  log 'deploy app'
+  git
+    .push('heroku', 'master')
+    .end()
