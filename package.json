@@ -45,6 +45,7 @@
     "browserify": "*",
     "codename": "*",
     "connect-livereload": "*",
+    "gift": "*",
     "gulp": "*",
     "gulp-bg": "*",
     "gulp-browserify": "*",
