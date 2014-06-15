@@ -90,7 +90,6 @@ gulp.task 'release', (callback) ->
     'clean-directories',
     ['build-css', 'build-js', 'build-app'],
     ['minify-css', 'minify-js'],
-    'tag-version',
     'commit-updates',
     'push-updates',
     'deploy-app',
@@ -230,8 +229,8 @@ gulp.task 'minify-js', ->
     .pipe(rename('scripts.min.js'))
     .pipe(gulp.dest(jsBuild))
 
-# bumps patch version and creates a new tag
-gulp.task 'tag-version', ->
+# bumps patch version and commits updated files
+gulp.task 'commit-updates', ->
 
   pak = getPackage()
 
@@ -243,28 +242,21 @@ gulp.task 'tag-version', ->
 
   # bump patch version of app
   pak.version = semver.inc(pak.version, 'patch')
-  fs.writeFile './package.json', JSON.stringify(pak, null, '  ')
+  fs.writeFileSync './package.json', JSON.stringify(pak, null, '  ')
 
-  # creates new tag
-  git.tag(
-    'v' + pak.version,
-    'Release codename: ' + pak.releaseCodename,
-    args: ' --annotate'
-  )
-
-# commit updated files
-gulp.task 'commit-updates', ->
-
-  pak = getPackage()
   msg = "Built new release (v#{pak.version}) codenamed #{pak.releaseCodename}"
   repo.commit msg, all: true, (err) ->
     throw err if err
 
-# push commits to github
+# creates new tag and pushes commits to github
 gulp.task 'push-updates', ->
-  git
-    .push('origin', 'master', args: ' --tags')
-    .end()
+  pak = getPackage()
+  version = 'v' + pak.version
+  message = 'Release codename: ' + pak.releaseCodename
+  git.tag version, message, args: ' --annotate', ->
+    git
+      .push 'origin', 'master', args: ' --tags'
+      .end()
 
 # deploys app to heroku
 gulp.task 'deploy-app', ->
