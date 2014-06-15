@@ -1,0 +1,41 @@
+.homepage-random-images
+  z-index: -1
+  overflow: hidden
+  position: relative
+  top: -10rem
+
+.image-type-pass, .image-type-fail
+  position: relative
+  h3
+    position: absolute
+    top: 2rem
+    left: 0
+    width: 200px
+    text-align: center
+    padding: 0 0 0 1rem
+    font-size: 2rem
+    text-transform: uppercase
+    letter-spacing: 1.5rem
+    text-shadow:
+      -1px -1px 0 #fff,
+      1px -1px 0 #fff,
+      -1px 1px 0 #fff,
+      1px 1px 0 #fff
+  img
+    width: 200px
+    height: 200px
+    margin: 0 !important
+
+.image-type-pass
+  float: left
+  img
+    border: .5rem solid green
+  h3
+    color: green
+
+.image-type-fail
+  float: right
+  img
+    border: .5rem solid red
+  h3
+    color: red
