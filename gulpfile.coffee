@@ -1,5 +1,4 @@
 # modules
-env = require './env.json'
 fs = require 'fs'
 path = require 'path'
 gulp = require 'gulp'
@@ -46,13 +45,22 @@ compiled =
   css: 'public/stylesheets/styles.css'
   js: 'public/javascripts/scripts.js'
 
+# loads environment variables
+getEnvironmentVariables = ->
+  envJson = 'env.json'
+  if fs.existsSync envJson
+    JSON.parse(fs.readFileSync envJson, 'utf8')
+  else
+    logErr 'missing Environment Variables! please create an env.json'
+    throw new Error 'MISSING ENV VARS'
+
 # info logging
 log = (msg) ->
-  gutil.log '[gulpfile]', gutil.colors.blue(msg)
+  gutil.log gutil.colors.blue(msg)
 
 # error logging
 logErr = (msg) ->
-  gutil.log '[gulpfile]', gutil.colors.red(msg)
+  gutil.log gutil.colors.red(msg)
 
 # returns an array of the source folders in sources object
 getSources = ->
@@ -68,6 +76,9 @@ refreshPage = (event) ->
 # returns parsed package.json
 getPackage = ->
   JSON.parse fs.readFileSync('./package.json', 'utf8')
+
+# get environment variables
+env = getEnvironmentVariables()
 
 # default task that's run with 'gulp'
 gulp.task 'default', (callback) ->
@@ -117,8 +128,7 @@ gulp.task 'start-app', ->
       'node_modules/',
       'views/',
       'build/',
-      'public/',
-      'gulp*'
+      'public/'
     ]
   ).on('restart', (files) ->
     log 'app restarted'
