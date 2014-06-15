@@ -28,7 +28,7 @@ mongoose = require('mongoose');
 
 coffee = require('coffee-script');
 
-coffeeify = require("coffeeify");
+coffeeify = require('coffeeify');
 
 browserify = require('browserify-middleware');
 
@@ -74,7 +74,7 @@ if (app.get('env') === 'development') {
   }));
   app.route('/stylesheets/styles.css').get(function(req, res, next) {
     var css;
-    css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8')).set('compress', false).set('linenos', true).set('sourcemaps', true).use(axis({
+    css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8')).set('filename', './views/stylesheets/').set('compress', false).set('linenos', true).set('sourcemaps', true).use(axis({
       implicit: false
     })).render();
     res.set('Content-Type', 'text/css');
