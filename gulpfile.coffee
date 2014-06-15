@@ -169,16 +169,16 @@ gulp.task 'lint-css', ->
 gulp.task 'clean-directories', ->
   gulp
     .src([appBuild, cssBuild, jsBuild], read: false)
-    .pipe(
-      # prevent deploys from happening on non-master branch
-      repo.branch (err, head) ->
-        throw err if err
-        if head.name != 'master'
-          logErr 'Switch to master branch before releasing'
-          throw err 'wrong branch'
-        else
-          gulp.util.noop()
-      )
+    # .pipe(
+    #   # prevent deploys from happening on non-master branch
+    #   repo.branch (err, head) ->
+    #     throw err if err
+    #     if head.name != 'master'
+    #       logErr 'Switch to master branch before releasing'
+    #       throw err 'wrong branch'
+    #     else
+    #       gutil.noop()
+    #   )
     .pipe(clean())
 
 # builds coffeescript source into deployable javascript
