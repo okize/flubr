@@ -2,8 +2,8 @@
 env = require './env.json'
 fs = require 'fs'
 path = require 'path'
-_ = require 'lodash'
 gulp = require 'gulp'
+_ = require 'lodash'
 gutil = require 'gulp-util'
 liveReload = require('tiny-lr')()
 nodemon = require 'gulp-nodemon'
@@ -23,8 +23,10 @@ source = require 'vinyl-source-stream'
 runSequence = require 'run-sequence'
 bg = require 'gulp-bg'
 semver = require 'semver'
-git = require 'gulp-git'
 codename = require('codename')()
+exec = require 'gulp-exec'
+git = require 'gulp-git'
+gift  = require 'gift'
 
 # configuration
 appRoot = __dirname
@@ -66,6 +68,13 @@ refreshPage = (event) ->
 getPackage = ->
   JSON.parse fs.readFileSync('./package.json', 'utf8')
 
+execPromise = ->
+  log 'foo'
+  new rsvp.Promise (resolve, reject)->
+    exec command, (error, stdout, stderr)->
+      reject error if error
+      resolve stdout: stdout, stderr: stderr
+
 # default task that's run with 'gulp'
 gulp.task 'default', (callback) ->
   runSequence(
@@ -88,6 +97,9 @@ gulp.task 'release', (callback) ->
     ['build-css', 'build-js', 'build-app'],
     ['minify-css', 'minify-js'],
     'create-tag',
+    'add-files',
+    'commit-updates',
+    'push-updates',
     'deploy-app',
     callback
   )
@@ -215,7 +227,7 @@ gulp.task 'minify-js', ->
     .pipe(rename('scripts.min.js'))
     .pipe(gulp.dest(jsBuild))
 
-# bumps patch version and creates a new tag and pushes to Github
+# bumps patch version and creates a new tag
 gulp.task 'create-tag', ->
 
   pak = getPackage()
@@ -230,15 +242,52 @@ gulp.task 'create-tag', ->
   pak.version = semver.inc(pak.version, 'patch')
   fs.writeFile './package.json', JSON.stringify(pak, null, '  ')
 
-  message = pak.version + ' [' + pak.releaseCodename + ']'
-
   # creates new tag
   git.tag(
     'v' + pak.version,
-    'Release version: ' + message,
+    'Release version: ' + pak.version + ' [' + pak.releaseCodename + ']',
     args: '-a'
   )
 
+# adds files
+gulp.task 'add-files', ->
+  repo = gift './'
+  repo.commit 'wip gulpfile', all: true, (err) ->
+    throw err if err
+  # repo.status (err, status) ->
+  #   throw err if err
+  #   _.map status.files, (meta, file) ->
+  #     if meta.type is
+  #     log i
+  #     log JSON.stringify file
+  #     return
+
+  # gulp
+  #   .src('.', read: false)
+  #   .pipe(exec('git status'))
+  #   .pipe(exec.reporter())
+
+# commits updates
+gulp.task 'commit-updates', ->
+
+  # pak = getPackage()
+
+  # gulp
+  #   .src('./**/**', buffer: false)
+  #   .pipe(
+  #     git.commit('updates gulpfile with git push task')
+  #   )
+
+# pushes to Github
+# git tag
+# git add . -A
+# git commit -m
+# git push origin master --tags
+gulp.task 'push-updates', ->
+
+  git.push('origin', 'head').end()
+  # need to add --tags
+
 # deploys app to heroku
 gulp.task 'deploy-app', ->
-  console.log 'deploy'
+  log 'deploy app'
