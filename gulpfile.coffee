@@ -91,6 +91,7 @@ gulp.task 'release', (callback) ->
     ['build-css', 'build-js', 'build-app'],
     ['minify-css', 'minify-js'],
     'commit-updates',
+    'tag-version',
     'push-updates',
     'deploy-app',
     callback
@@ -229,7 +230,7 @@ gulp.task 'minify-js', ->
     .pipe(rename('scripts.min.js'))
     .pipe(gulp.dest(jsBuild))
 
-# bumps patch version and commits updated files
+# commit updated files
 gulp.task 'commit-updates', ->
 
   pak = getPackage()
@@ -248,15 +249,24 @@ gulp.task 'commit-updates', ->
   repo.commit msg, all: true, (err) ->
     throw err if err
 
-# creates new tag and pushes commits to github
-gulp.task 'push-updates', ->
+# bumps patch version and creates a new tag
+gulp.task 'tag-version', ->
+
   pak = getPackage()
-  version = 'v' + pak.version
-  message = 'Release codename: ' + pak.releaseCodename
-  git.tag version, message, args: ' --annotate', ->
-    git
-      .push 'origin', 'master', args: ' --tags'
-      .end()
+
+  # creates new tag
+  git
+    .tag(
+      'v' + pak.version,
+      'Release codename: ' + pak.releaseCodename,
+      args: ' --annotate'
+    )
+
+# push commits to github
+gulp.task 'push-updates', ->
+  git
+    .push('origin', 'master', args: ' --tags')
+    .end()
 
 # deploys app to heroku
 gulp.task 'deploy-app', ->
