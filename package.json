@@ -1,7 +1,8 @@
 {
   "name": "flubr",
+  "releaseCodename": "Wide-eyedWolf",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "node": "0.10.x"
   },
@@ -17,10 +18,8 @@
   },
   "author": "Morgan Wigmanich <okize123@gmail.com> (https://github.com/okize)",
   "homepage": "https://github.com/okize/flubr",
+  "bugs": "https://github.com/okize/flubr/issues",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/okize/flubr/issues"
-  },
   "dependencies": {
     "async": "*",
     "axis-css": "*",
@@ -33,7 +32,6 @@
     "cookie-parser": "*",
     "express": "*",
     "express-session": "*",
-    "gulp-bump": "*",
     "jade": "*",
     "lodash": "*",
     "mongoose": "3.8.x",
@@ -45,7 +43,9 @@
   },
   "devDependencies": {
     "browserify": "*",
+    "codename": "*",
     "connect-livereload": "*",
+    "gift": "*",
     "gulp": "*",
     "gulp-bg": "*",
     "gulp-browserify": "*",
@@ -53,6 +53,7 @@
     "gulp-coffee": "*",
     "gulp-coffeelint": "*",
     "gulp-csslint": "*",
+    "gulp-exec": "*",
     "gulp-git": "*",
     "gulp-minify-css": "*",
     "gulp-nodemon": "*",
@@ -64,6 +65,7 @@
     "gulp-util": "*",
     "jquery": "*",
     "run-sequence": "*",
+    "semver": "*",
     "tiny-lr": "*",
     "vinyl-source-stream": "*"
   }

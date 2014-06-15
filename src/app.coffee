@@ -13,7 +13,7 @@ passport = require 'passport'
 livereload = require 'connect-livereload'
 mongoose = require 'mongoose'
 coffee = require 'coffee-script'
-coffeeify = require "coffeeify"
+coffeeify = require 'coffeeify'
 browserify = require 'browserify-middleware'
 stylus = require 'stylus'
 axis = require 'axis-css'
@@ -40,7 +40,11 @@ mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
 
 # dev middleware
 if app.get('env') == 'development'
+
+  # insert livereload script into page
   app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35730)
+
+  # compiles stylus in memory
   app.route('/stylesheets/styles.css')
     .get (req, res, next) ->
       css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8'))
@@ -52,6 +56,8 @@ if app.get('env') == 'development'
               .render()
       res.set 'Content-Type', 'text/css'
       res.send css
+
+  # compiles coffeescript in memory with Browserify
   browserify.settings 'transform', [coffeeify]
   browserify.settings 'debug', true
   app.get '/javascripts/scripts.js',
@@ -61,12 +67,13 @@ if app.get('env') == 'development'
       precompile: true
     )
 
+# gzip assets
 app.use compression(threshold: 1024)
 app.use express.static(path.join(__dirname, '..', 'public'))
-app.use cookieParser(process.env.SESSION_SECRET)
-app.use bodyParser()
 
 # sessions
+app.use cookieParser(process.env.SESSION_SECRET)
+app.use bodyParser()
 app.use session(
   name: 'express_session'
   secret: process.env.SESSION_SECRET

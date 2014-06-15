@@ -1,8 +1,9 @@
 # modules
-config = require './env.json'
+env = require './env.json'
+fs = require 'fs'
 path = require 'path'
-_ = require 'lodash'
 gulp = require 'gulp'
+_ = require 'lodash'
 gutil = require 'gulp-util'
 liveReload = require('tiny-lr')()
 nodemon = require 'gulp-nodemon'
@@ -12,7 +13,6 @@ coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
 clean = require 'gulp-clean'
-bump = require 'gulp-bump'
 open = require 'gulp-open'
 rename = require 'gulp-rename'
 minifyCss = require 'gulp-minify-css'
@@ -22,10 +22,15 @@ coffeeify = require 'coffeeify'
 source = require 'vinyl-source-stream'
 runSequence = require 'run-sequence'
 bg = require 'gulp-bg'
+semver = require 'semver'
+codename = require('codename')()
+exec = require 'gulp-exec'
+git = require 'gulp-git'
+gift = require 'gift'
+repo = gift './'
 
 # configuration
 appRoot = __dirname
-appPort = config.PORT or 3333
 appScript = path.join(appRoot, 'src', 'app.coffee')
 publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
 publicCss = path.join(appRoot, 'views', 'stylesheets', 'styles.styl')
@@ -41,13 +46,17 @@ compiled =
   css: 'public/stylesheets/styles.css'
   js: 'public/javascripts/scripts.js'
 
-# returns an array of the source folders in sources object
-getSources = ->
-  _.values sources
-
 # info logging
 log = (msg) ->
   gutil.log '[gulpfile]', gutil.colors.blue(msg)
+
+# error logging
+logErr = (msg) ->
+  gutil.log '[gulpfile]', gutil.colors.red(msg)
+
+# returns an array of the source folders in sources object
+getSources = ->
+  _.values sources
 
 # sends updated files to LiveReload server
 refreshPage = (event) ->
@@ -55,6 +64,10 @@ refreshPage = (event) ->
   gutil.log.apply gutil, [gutil.colors.blue(fileName + ' changed')]
   liveReload.changed body:
     files: [fileName]
+
+# returns parsed package.json
+getPackage = ->
+  JSON.parse fs.readFileSync('./package.json', 'utf8')
 
 # default task that's run with 'gulp'
 gulp.task 'default', (callback) ->
@@ -77,7 +90,9 @@ gulp.task 'release', (callback) ->
     'clean-directories',
     ['build-css', 'build-js', 'build-app'],
     ['minify-css', 'minify-js'],
-    # ['bump-version'],
+    'tag-version',
+    'commit-updates',
+    'push-updates',
     'deploy-app',
     callback
   )
@@ -86,7 +101,7 @@ gulp.task 'release', (callback) ->
 gulp.task 'open', ->
   gulp
     .src('./src/app.coffee')
-    .pipe(open('', url: 'http://127.0.0.1:' + appPort))
+    .pipe(open('', url: 'http://127.0.0.1:' + (env.PORT or 3333)))
 
 # starts up mongo
 gulp.task 'start-mongo',
@@ -97,7 +112,7 @@ gulp.task 'start-app', ->
   nodemon(
     script: appScript
     ext: 'coffee'
-    env: config
+    env: env
     ignore: [
       'node_modules/',
       'views/',
@@ -109,7 +124,7 @@ gulp.task 'start-app', ->
     log 'app restarted'
   ).on('start', ->
     log 'app started'
-    liveReloadPort = config.LIVE_RELOAD_PORT or 35730
+    liveReloadPort = env.LIVE_RELOAD_PORT or 35730
     liveReload.listen liveReloadPort
     log 'livereload started on port ' + liveReloadPort
   ).on('quit', ->
@@ -126,7 +141,7 @@ gulp.task 'watch-for-changes', ->
 # lints coffeescript
 gulp.task 'lint-coffeescript', ->
   gulp
-    .src([sources.app, sources.coffee])
+    .src([sources.app, sources.coffee, './gulpfile.coffee'])
     .pipe(coffeelint().on('error', gutil.log))
     .pipe(coffeelint.reporter())
 
@@ -154,6 +169,16 @@ gulp.task 'lint-css', ->
 gulp.task 'clean-directories', ->
   gulp
     .src([appBuild, cssBuild, jsBuild], read: false)
+    .pipe(
+      # prevent deploys from happening on non-master branch
+      repo.branch (err, head) ->
+        throw err if err
+        if head.name != 'master'
+          logErr 'Switch to master branch before releasing'
+          throw err 'wrong branch'
+        else
+          gulp.util.noop()
+      )
     .pipe(clean())
 
 # builds coffeescript source into deployable javascript
@@ -182,9 +207,7 @@ gulp.task 'build-css', ->
 
 # builds the front-end javascript
 gulp.task 'build-js', ->
-  browserify(
-      extensions: ['.coffee']
-    )
+  browserify(extensions: ['.coffee'])
     .add(publicScript)
     .transform(coffeeify)
     .bundle(debug: true)
@@ -207,13 +230,45 @@ gulp.task 'minify-js', ->
     .pipe(rename('scripts.min.js'))
     .pipe(gulp.dest(jsBuild))
 
-# bumps patch version for every release
-gulp.task 'bump-version', ->
-  gulp
-    .src('./package.json')
-    .pipe(bump(type: 'patch'))
-    .pipe gulp.dest('./')
+# bumps patch version and creates a new tag
+gulp.task 'tag-version', ->
+
+  pak = getPackage()
+
+  # create a codename for app release
+  pak.releaseCodename = codename.generate(
+    ['alliterative', 'random'],
+    ['adjectives', 'animals']
+  ).join('')
+
+  # bump patch version of app
+  pak.version = semver.inc(pak.version, 'patch')
+  fs.writeFile './package.json', JSON.stringify(pak, null, '  ')
+
+  # creates new tag
+  git.tag(
+    'v' + pak.version,
+    'Release codename: ' + pak.releaseCodename,
+    args: '-a'
+  )
+
+# commit updated files
+gulp.task 'commit-updates', ->
+
+  pak = getPackage()
+
+  # commit updated files
+  repo.commit 'Built new release (v' + pak.version + ') codenamed ' + pak.releaseCodename, all: true, (err) ->
+    throw err if err
+
+# push commits to github
+gulp.task 'push-updates', ->
+  git
+    .push('origin', 'master', args: '--tags')
+    .end()
 
 # deploys app to heroku
 gulp.task 'deploy-app', ->
-  console.log 'deploy'
+  git
+    .push('heroku', 'master')
+    .end()
