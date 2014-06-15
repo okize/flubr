@@ -26,7 +26,8 @@ semver = require 'semver'
 codename = require('codename')()
 exec = require 'gulp-exec'
 git = require 'gulp-git'
-gift  = require 'gift'
+gift = require 'gift'
+repo = gift './'
 
 # configuration
 appRoot = __dirname
@@ -168,6 +169,16 @@ gulp.task 'lint-css', ->
 gulp.task 'clean-directories', ->
   gulp
     .src([appBuild, cssBuild, jsBuild], read: false)
+    .pipe(
+      # prevent deploys from happening on non-master branch
+      repo.branch (err, head) ->
+        throw err if err
+        if head.name != 'master'
+          logErr 'Switch to master branch before releasing'
+          throw err 'wrong branch'
+        else
+          gulp.util.noop()
+      )
     .pipe(clean())
 
 # builds coffeescript source into deployable javascript
@@ -247,14 +258,13 @@ gulp.task 'commit-updates', ->
   pak = getPackage()
 
   # commit updated files
-  repo = gift './'
   repo.commit 'Built new release (v' + pak.version + ') codenamed ' + pak.releaseCodename, all: true, (err) ->
     throw err if err
 
 # push commits to github
 gulp.task 'push-updates', ->
   git
-    .push('origin', 'head')
+    .push('origin', 'master', args: '--tags')
     .end()
 
 # deploys app to heroku
