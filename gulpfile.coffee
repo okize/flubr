@@ -96,10 +96,7 @@ gulp.task 'release', (callback) ->
     'clean-directories',
     ['build-css', 'build-js', 'build-app'],
     ['minify-css', 'minify-js'],
-    'create-tag',
-    'add-files',
-    'commit-updates',
-    'push-updates',
+    'tag-commit-push',
     'deploy-app',
     callback
   )
@@ -228,7 +225,7 @@ gulp.task 'minify-js', ->
     .pipe(gulp.dest(jsBuild))
 
 # bumps patch version and creates a new tag
-gulp.task 'create-tag', ->
+gulp.task 'tag-commit-push', ->
 
   pak = getPackage()
 
@@ -245,48 +242,19 @@ gulp.task 'create-tag', ->
   # creates new tag
   git.tag(
     'v' + pak.version,
-    'Release version: ' + pak.version + ' [' + pak.releaseCodename + ']',
+    'Release codename: ' + pak.releaseCodename,
     args: '-a'
   )
 
-# adds files
-gulp.task 'add-files', ->
+  # commit updated files
   repo = gift './'
-  repo.commit 'wip gulpfile', all: true, (err) ->
+  repo.commit 'Built new release (v' + pak.version + ') codenamed ' + pak.releaseCodename, all: true, (err) ->
     throw err if err
-  # repo.status (err, status) ->
-  #   throw err if err
-  #   _.map status.files, (meta, file) ->
-  #     if meta.type is
-  #     log i
-  #     log JSON.stringify file
-  #     return
 
-  # gulp
-  #   .src('.', read: false)
-  #   .pipe(exec('git status'))
-  #   .pipe(exec.reporter())
-
-# commits updates
-gulp.task 'commit-updates', ->
-
-  # pak = getPackage()
-
-  # gulp
-  #   .src('./**/**', buffer: false)
-  #   .pipe(
-  #     git.commit('updates gulpfile with git push task')
-  #   )
-
-# pushes to Github
-# git tag
-# git add . -A
-# git commit -m
-# git push origin master --tags
-gulp.task 'push-updates', ->
-
-  git.push('origin', 'head').end()
-  # need to add --tags
+  # push files to github
+  log 'push now'
+  # git.push('origin', 'head').end()
+  # --tags
 
 # deploys app to heroku
 gulp.task 'deploy-app', ->
