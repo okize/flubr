@@ -40,7 +40,7 @@ sources =
   app: 'src/**/*.coffee'
   stylus: 'views/stylesheets/*.styl'
   coffee: 'views/javascripts/*.coffee'
-  jade: 'views/*.jade'
+  jade: 'views/**/*.jade'
 compiled =
   css: 'public/stylesheets/styles.css'
   js: 'public/javascripts/scripts.js'
