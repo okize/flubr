@@ -2,16 +2,14 @@ extends layout
 
 block content
 
-  .main
+  main(role='main')
 
     ul.logged-in-bar
       li Flubr
       li
         img.avatar(src='#{user.avatar}')
-      li
-        =user.displayName
-      li
-        =user.userName
+      li #{user.displayName}
+        small &nbsp;(#{user.userName})
       li
         a(href='/logout') Sign out
 
