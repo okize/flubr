@@ -4,14 +4,7 @@ block content
 
   main(role='main')
 
-    ul.logged-in-bar
-      li Flubr
-      li
-        img.avatar(src='#{user.avatar}')
-      li #{user.displayName}
-        small &nbsp;(#{user.userName})
-      li
-        a(href='/logout') Sign out
+    include includes/loggedInBar
 
     #messaging.messaging
 
