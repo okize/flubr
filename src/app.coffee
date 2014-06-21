@@ -88,7 +88,8 @@ app.use passport.initialize()
 app.use passport.session()
 
 # parses json & xml
-app.use bodyParser()
+app.use(bodyParser.urlencoded(extended: true))
+app.use(bodyParser.json())
 
 # logger
 app.use logger('dev')
