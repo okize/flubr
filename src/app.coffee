@@ -42,7 +42,7 @@ mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
 if app.get('env') == 'development'
 
   # insert livereload script into page
-  app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35730)
+  app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35729)
 
   # compiles stylus in memory
   app.route('/stylesheets/styles.css')
