@@ -2,4 +2,13 @@ extends application
 
 block page
 
-  p users go here
+  table
+    each user in userList
+      tr
+        td
+          img.avatar(src='#{user.avatar}', alt='avatar image')
+        td= user.name
+        td= user.twitterHandle
+        td= user.dateAdded
+        td
+          button(id='#{user.userid}') Delete user
