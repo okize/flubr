@@ -8,9 +8,9 @@ module.exports = (app, passport) ->
   # home page; redirects to loggedin after auth
   app.get '/', (req, res, next) ->
     unless req.isAuthenticated()
-      home.index req, res, next
+      home.homepage req, res, next
     else
-      home.loggedin req, res, next
+      home.application req, res, next
 
   # login
   app.get '/login', passport.authenticate('twitter'), (req, res, next) ->

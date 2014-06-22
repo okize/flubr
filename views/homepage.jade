@@ -2,11 +2,13 @@ extends layout
 
 block content
 
-  .main
+  main.app-homepage(role='main')
 
-    h1.homepage= title
+    .homepage-logo-wrapper
 
-    a.login-button(href='/login') Sign in with twitter
+      .homepage-logo= title
+
+      a.login-button(href='/login') Sign in with twitter
 
     .homepage-random-images
 

@@ -1,14 +1,15 @@
-doctype html
+doctype
 html
   head
+    meta(charset='utf-8')
     title= title
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     if env == 'production'
       link(rel='stylesheet', href='/stylesheets/styles.min.css')
     else
       link(rel='stylesheet', href='/stylesheets/styles.css')
 
-  body
+  body.app-body
     block content
     if env == 'production'
       script(src='/javascripts/scripts.min.js')
