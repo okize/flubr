@@ -34,9 +34,10 @@ module.exports =
       console.log users
       users = _.map users, (user) ->
         newUser =
+          id: user.userid
           name: user.displayName
           twitterHandle: user.userName
-          avatarUrl: user.avatar
+          avatar: user.avatar
           dateAdded: moment(user.created_at).format('lll')
       res.render 'users',
         env: process.env.NODE_ENV
