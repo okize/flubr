@@ -5,6 +5,7 @@ module.exports =
     res.render 'homepage',
       env: process.env.NODE_ENV
       title: 'Log in'
+      pageName: 'home'
 
   # add new image page
   addImage: (req, res) ->
