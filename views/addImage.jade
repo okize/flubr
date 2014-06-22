@@ -1,0 +1,24 @@
+extends application
+
+block page
+
+  h2 Add new image
+
+  .addNewImage
+
+    form#js-add-image
+      ul.inline-list
+        li
+          label
+            | Image Url:
+            input#imageUrl(type='text')
+        li
+          label.is-inline
+            | Pass:
+            input(type='radio' name='kind' value='pass')
+          label.is-inline
+            | Fail:
+            input(type='radio' name='kind' value='fail' checked='checked')
+        li
+          button(type='submit') Add
+
