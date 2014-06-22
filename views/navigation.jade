@@ -5,8 +5,7 @@ nav.app-navigation(role='navigation')
 
   .logged-in-user
     img.avatar(src='#{user.avatar}')
-    | #{user.displayName}
-    small &nbsp;(#{user.userName})
+    span(title=user.displayName)=user.userName
 
   ul.navigation-links
     li
