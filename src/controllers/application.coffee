@@ -1,3 +1,7 @@
+path = require 'path'
+User = require path.join('..', 'models', 'user')
+_ = require 'lodash'
+moment = require 'moment'
 navigation =
   'Add image': 'addImage'
   'Image list': 'imageList'
@@ -26,9 +30,18 @@ module.exports =
 
   # user management page
   users: (req, res) ->
-    res.render 'users',
-      env: process.env.NODE_ENV
-      title: 'Manage users'
-      pageName: 'users'
-      navigation: navigation
-      user: req.user
+    User.find {}, (err, users) ->
+      console.log users
+      users = _.map users, (user) ->
+        newUser =
+          name: user.displayName
+          twitterHandle: user.userName
+          avatarUrl: user.avatar
+          dateAdded: moment(user.created_at).format('lll')
+      res.render 'users',
+        env: process.env.NODE_ENV
+        title: 'Manage users'
+        pageName: 'users'
+        navigation: navigation
+        user: req.user
+        userList: users
