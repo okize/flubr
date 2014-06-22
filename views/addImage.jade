@@ -11,12 +11,11 @@ block page
             | Image Url:
             input#imageUrl(type='text')
         li
-          label.is-inline
+          label
             | Pass:
             input(type='radio' name='kind' value='pass')
-          label.is-inline
+          label
             | Fail:
             input(type='radio' name='kind' value='fail' checked='checked')
         li
           button(type='submit') Add
-
