@@ -34,6 +34,7 @@
     "express-session": "*",
     "jade": "*",
     "lodash": "*",
+    "moment": "*",
     "mongoose": "3.8.x",
     "morgan": "*",
     "passport": "*",
