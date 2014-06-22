@@ -18,8 +18,8 @@ module.exports = (app, passport) ->
     application.addImage req, res, next
 
   # view all images
-  app.get '/viewImages', helpers.ensureAuthenticated, (req, res, next) ->
-    application.viewImages req, res, next
+  app.get '/imageList', helpers.ensureAuthenticated, (req, res, next) ->
+    application.imageList req, res, next
 
   # manage users
   app.get '/users', helpers.ensureAuthenticated, (req, res, next) ->

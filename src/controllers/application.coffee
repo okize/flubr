@@ -1,6 +1,6 @@
 navigation =
   'Add image': 'addImage'
-  'View images': 'viewImages'
+  'Image list': 'imageList'
   'Manage users': 'users'
   'Log out': 'logout'
 
@@ -16,11 +16,11 @@ module.exports =
       user: req.user
 
   # view all images page
-  viewImages: (req, res) ->
-    res.render 'viewImages',
+  imageList: (req, res) ->
+    res.render 'imageList',
       env: process.env.NODE_ENV
-      title: 'View all images'
-      pageName: 'viewImages'
+      title: 'Image list'
+      pageName: 'imageList'
       navigation: navigation
       user: req.user
 
