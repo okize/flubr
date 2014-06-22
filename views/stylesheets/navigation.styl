@@ -1,21 +1,28 @@
 .app-navigation
   background-color: $navigationBgColor
-  border-right: 5px solid $navigationBorderColor
-  margin-right: 1em
+
+.navigation-logo
+  background-color: $flubr
+  color: $flubrText
+  height: 10rem
+  text-align: center
+  text-transform: uppercase
+  padding-top: 4rem
+  font-size: 2.5rem
+
+.navigation-user
+  background-color: $navigationUserBgColor
+  padding: 1rem
 
 .navigation-links
   margin: 0
   padding: 0
   list-style: none
   a
+    background-color: $navigationLinkBgColor
+    padding: 1rem
     display: block
-
-// .navigation-logo
-
-// .navigation-user
-
-.avatar
-  vertical-align: bottom
-  border: 2px solid $imageBg
-  height: 30px
-  width: 30px
+    text-decoration: none
+    text-transform: uppercase
+    font-size: 1rem
+    border-bottom: .1rem solid $navigationLinkBorderColor
