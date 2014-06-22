@@ -1,3 +1,5 @@
+-var nav = { 'Add image': 'addImage', 'View images': 'viewImages', 'Manage users': 'users' };
+
 nav.app-navigation(role='navigation')
 
   .logo
@@ -8,5 +10,12 @@ nav.app-navigation(role='navigation')
     span(title=user.displayName)=user.userName
 
   ul.navigation-links
+    each linkHref, linkTitle in nav
+      if pageName === linkHref
+        li
+          a.active(href='/#{linkHref}', title=linkTitle)= linkTitle
+      else
+        li
+          a(href=linkHref, title=linkTitle)= linkTitle
     li
       a(href='/logout') Sign out
