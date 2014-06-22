@@ -9,7 +9,7 @@ html
     else
       link(rel='stylesheet', href='/stylesheets/styles.css')
 
-  body
+  body.app-body
     block content
     if env == 'production'
       script(src='/javascripts/scripts.min.js')
