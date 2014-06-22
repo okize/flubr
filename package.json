@@ -39,6 +39,7 @@
     "passport": "*",
     "passport-twitter": "*",
     "request": "*",
+    "rupture": "*",
     "stylus": "*"
   },
   "devDependencies": {
