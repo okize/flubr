@@ -73,7 +73,6 @@ app.use express.static(path.join(__dirname, '..', 'public'))
 
 # sessions
 app.use cookieParser(process.env.SESSION_SECRET)
-app.use bodyParser()
 app.use session(
   name: 'express_session'
   secret: process.env.SESSION_SECRET
@@ -87,8 +86,9 @@ app.use session(
 app.use passport.initialize()
 app.use passport.session()
 
-# parses json & xml
-app.use bodyParser()
+# parses json
+app.use bodyParser.json()
+app.use bodyParser.urlencoded(extended: true)
 
 # logger
 app.use logger('dev')
