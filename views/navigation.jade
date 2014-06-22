@@ -1,4 +1,4 @@
--var nav = { 'Add image': 'addImage', 'View images': 'viewImages', 'Manage users': 'users' };
+-var nav = { 'Add image': 'addImage', 'View images': 'viewImages', 'Manage users': 'users', 'Log out': 'logout' };
 
 nav.app-navigation(role='navigation')
 
@@ -12,10 +12,8 @@ nav.app-navigation(role='navigation')
   ul.navigation-links
     each linkHref, linkTitle in nav
       if pageName === linkHref
-        li
-          a.active(href='/#{linkHref}', title=linkTitle)= linkTitle
+        li(class='nav-#{linkHref} active')
+          a(href='/#{linkHref}', title=linkTitle)= linkTitle
       else
-        li
+        li(class='nav-#{linkHref}')
           a(href=linkHref, title=linkTitle)= linkTitle
-    li
-      a(href='/logout') Sign out
