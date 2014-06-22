@@ -2,34 +2,36 @@ extends layout
 
 block content
 
-  include includes/navigation
+  .app-wrapper
 
-  main(role='main')
+    include includes/navigation
 
-    #messaging.messaging
+    main.app-content(role='main')
 
-    h2 Add new image
+      #messaging.messaging
 
-    .addNewImage
+      h2 Add new image
 
-      form#js-add-image
-        ul.inline-list
-          li
-            label
-              | Image Url:
-              input#imageUrl(type='text')
-          li
-            label.is-inline
-              | Pass:
-              input(type='radio' name='kind' value='pass')
-            label.is-inline
-              | Fail:
-              input(type='radio' name='kind' value='fail' checked='checked')
-          li
-            button(type='submit') Add
+      .addNewImage
 
-    h2 View images
+        form#js-add-image
+          ul.inline-list
+            li
+              label
+                | Image Url:
+                input#imageUrl(type='text')
+            li
+              label.is-inline
+                | Pass:
+                input(type='radio' name='kind' value='pass')
+              label.is-inline
+                | Fail:
+                input(type='radio' name='kind' value='fail' checked='checked')
+            li
+              button(type='submit') Add
 
-    button#js-show-images Show images
+      h2 View images
 
-    ul.image-list#js-image-list
+      button#js-show-images Show images
+
+      ul.image-list#js-image-list
