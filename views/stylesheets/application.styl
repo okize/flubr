@@ -1,14 +1,9 @@
 h1, h2
-  font-size: 4rem
+  margin: 0
+  font-size: 3rem
   text-transform: uppercase
-  color: $yellow
-  text-shadow: $yellowDark 5px 5px
-  margin: 5rem 0 1.5rem
-  border-bottom: 5px solid $imageBg
-
-h1
-  border: none
-  margin: 10rem 0 -2.75rem
+  color: $yellowDark
+  text-shadow: $yellow .35rem .25rem
 
 label
   display: block
@@ -21,8 +16,8 @@ input
 a, &:visited
   color: $text
   &:hover
-    color: $yellow
-    background-color: $yellowDark
+    color: $yellowDark
+    background-color: $yellow
 
 button
   display: inline-block
@@ -32,7 +27,6 @@ button
   margin: 10px 0
   padding: 0
   border-width: 0
-  background-color: $yellowDark
   font-family: sans-serif
   font-weight: normal
   font-size: inherit
@@ -44,16 +38,16 @@ button
     padding: 0
 
 .login-button, button
-  color: $yellowDark
+  background-color: $yellowDark
+  color: $yellow !important
+  box-shadow: $yellow 5px 5px
   display: inline-block
-  background-color: $yellow
   padding: 0 1rem
   margin: 1rem
   text-decoration: none
   font-weight: bold
   text-transform: uppercase
   line-height: 3
-  box-shadow: $yellowDark 5px 5px
   &:visited
     color: $yellowDark
   &:hover
