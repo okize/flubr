@@ -1,9 +1,13 @@
 nav.app-navigation(role='navigation')
+
+  .logo
+    | Flubr
+
+  .logged-in-user
+    img.avatar(src='#{user.avatar}')
+    | #{user.displayName}
+    small &nbsp;(#{user.userName})
+
   ul.navigation-links
-    li Flubr
-    li
-      img.avatar(src='#{user.avatar}')
-    li #{user.displayName}
-      small &nbsp;(#{user.userName})
     li
       a(href='/logout') Sign out
