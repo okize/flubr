@@ -5,12 +5,28 @@ establish-baseline('normalize')
 *
   box-sizing: border-box
 
-body
-  font-family: Verdana, Arial, sans-serif
+.app-body
   color: $bodyColor
-  padding: 0
   background: $bgColorBottom linear-gradient(to bottom, $bgColorTop, $bgColorBottom) repeat-x
+  font-family: Verdana, Arial, sans-serif
+  min-height: 100vh
 
-main
+.app-body, .app-wrapper
+  display: flex
+  flex-direction: column
+
+.app-navigation
+  order: -1
+
+.app-homepage
   width: 800px
   margin: 0 auto
+
+@media (min-width: 768px)
+  .app-wrapper
+    flex-direction: row
+    flex: 1
+  .app-content
+    flex: 1
+  .app-navigation
+    flex: 0 0 15rem
