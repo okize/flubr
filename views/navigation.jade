@@ -1,5 +1,3 @@
--var nav = { 'Add image': 'addImage', 'View images': 'viewImages', 'Manage users': 'users', 'Log out': 'logout' };
-
 nav.app-navigation(role='navigation')
 
   .logo
@@ -10,7 +8,7 @@ nav.app-navigation(role='navigation')
     span(title=user.displayName)=user.userName
 
   ul.navigation-links
-    each linkHref, linkTitle in nav
+    each linkHref, linkTitle in navigation
       if pageName === linkHref
         li(class='nav-#{linkHref} active')
           a(href='/#{linkHref}', title=linkTitle)= linkTitle
