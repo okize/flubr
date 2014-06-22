@@ -42,16 +42,16 @@ mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
 if app.get('env') == 'development'
 
   # insert livereload script into page
-  app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35730)
+  app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35729)
 
   # compiles stylus in memory
   app.route('/stylesheets/styles.css')
     .get (req, res, next) ->
       css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8'))
               .set('filename', './views/stylesheets/')
+              .set('paths', ['./views/stylesheets/'])
               .set('compress', false)
               .set('linenos', true)
-              .set('sourcemaps', true)
               .use(axis(implicit: false))
               .render()
       res.set 'Content-Type', 'text/css'

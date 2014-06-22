@@ -1,0 +1,32 @@
+@import 'variables'
+@import 'axis'
+establish-baseline('normalize')
+
+*
+  box-sizing: border-box
+
+.app-body
+  color: $bodyColor
+  background: $bgColorBottom linear-gradient(to bottom, $bgColorTop, $bgColorBottom) repeat-x
+  font-family: Verdana, Arial, sans-serif
+  min-height: 100vh
+
+.app-body, .app-wrapper
+  display: flex
+  flex-direction: column
+
+.app-navigation
+  order: -1
+
+.app-homepage
+  width: 800px
+  margin: 0 auto
+
+@media (min-width: 768px)
+  .app-wrapper
+    flex-direction: row
+    flex: 1
+  .app-content
+    flex: 1
+  .app-navigation
+    flex: 0 0 15rem
