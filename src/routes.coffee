@@ -20,6 +20,10 @@ module.exports = (app, passport) ->
   app.get '/viewImages', helpers.ensureAuthenticated, (req, res, next) ->
     index.viewImages req, res, next
 
+  # manage users
+  app.get '/users', helpers.ensureAuthenticated, (req, res, next) ->
+    index.users req, res, next
+
   # login
   app.get '/login', passport.authenticate('twitter'), (req, res, next) ->
 
