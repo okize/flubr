@@ -133,7 +133,6 @@ gulp.task 'start-app', ->
   ).on('restart', (files) ->
     log 'app restarted'
   ).on('start', ->
-    log 'app started'
     liveReloadPort = env.LIVE_RELOAD_PORT or 35730
     liveReload.listen liveReloadPort
     log 'livereload started on port ' + liveReloadPort
