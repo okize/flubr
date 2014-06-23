@@ -1,29 +1,29 @@
 module.exports = ($) ->
 
-  getImageSetHtml = (imageKind) ->
-    if imageKind == 'pass'
-      '<li>pass</li>' +
-      '<li><a href="#" class="changeImageKind isPass">fail</a></li>'
-    else
-      '<li><a href="#" class="changeImageKind isFail">pass</a></li>' +
-      '<li>fail</li>'
+  # getImageSetHtml = (imageKind) ->
+  #   if imageKind == 'pass'
+  #     '<li>pass</li>' +
+  #     '<li><a href="#" class="changeImageKind isPass">fail</a></li>'
+  #   else
+  #     '<li><a href="#" class="changeImageKind isFail">pass</a></li>' +
+  #     '<li>fail</li>'
 
-  getThumbnail = (url) ->
-    thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
+  # getThumbnail = (url) ->
+  #   thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
 
-  displayImages = (data) ->
-    list = $('#js-image-list')
-    html = ''
-    $.each data, (i) ->
-      html +=
-        "<li class='image-item' id='#{data[i]._id}'>" +
-        "<ul class='set-image-kind'>#{getImageSetHtml(data[i].kind)}</ul>" +
-        "<a href='#{data[i].image_url}'>" +
-        "<img src='#{getThumbnail(data[i].image_url)}' class='pf-image' />" +
-        "</a>" +
-        "<div class='delete-image'><a href='#'>delete</a></div>" +
-        "</li>"
-    list.append(html).show()
+  # displayImages = (data) ->
+  #   list = $('#js-image-list')
+  #   html = ''
+  #   $.each data, (i) ->
+  #     html +=
+  #       "<li class='image-item' id='#{data[i]._id}'>" +
+  #       "<ul class='set-image-kind'>#{getImageSetHtml(data[i].kind)}</ul>" +
+  #       "<a href='#{data[i].image_url}'>" +
+  #       "<img src='#{getThumbnail(data[i].image_url)}' class='pf-image' />" +
+  #       "</a>" +
+  #       "<div class='delete-image'><a href='#'>delete</a></div>" +
+  #       "</li>"
+  #   list.append(html).show()
 
   showImageAdded = ->
     $('#messaging').html('Image added!')
@@ -79,13 +79,13 @@ module.exports = ($) ->
       contentType: 'application/json'
       data: JSON.stringify(data)
 
-  $('#js-show-images').on 'click', ->
-    $(this).remove()
-    $.ajax
-      type: 'GET'
-      url: 'api/images'
-      success: displayImages
-      dataType: 'json'
+  # $('#js-show-images').on 'click', ->
+  #   $(this).remove()
+  #   $.ajax
+  #     type: 'GET'
+  #     url: 'api/images'
+  #     success: displayImages
+  #     dataType: 'json'
 
   randomPassImage = $('#random-pass-image')
   randomFailImage = $('#random-fail-image')
