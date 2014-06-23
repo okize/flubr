@@ -55,6 +55,7 @@ module.exports = ($) ->
       type: 'PUT'
       url: 'api/images/' + id
       success: switchImageKind $this, data.kind
+      error: alert 'image kind could not be changed!'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -68,6 +69,7 @@ module.exports = ($) ->
         type: 'DELETE'
         url: 'api/images/' + id
         success: deleteImageInUi $this
+        error: alert 'image could not be deleted!'
         contentType: 'application/json'
 
   $('#js-add-image').on 'submit', (e) ->
