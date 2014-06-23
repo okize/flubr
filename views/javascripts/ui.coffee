@@ -29,6 +29,10 @@ module.exports = ($) ->
     $('#messaging').html('Image added!')
     $('#js-add-image')[0].reset()
 
+  showUserAdded = (username) ->
+    $('#messaging').html("#{username} added!")
+    $('#js-add-user')[0].reset()
+
   switchImageKind = (el, newKind) ->
     el.closest('.set-image-kind').html( getImageSetHtml newKind )
     $('#messaging').html('Image kind changed!')
@@ -76,16 +80,22 @@ module.exports = ($) ->
       type: 'POST'
       url: '/api/images'
       success: showImageAdded
+      error: alert 'image could not be added!'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
-  # $('#js-show-images').on 'click', ->
-  #   $(this).remove()
-  #   $.ajax
-  #     type: 'GET'
-  #     url: 'api/images'
-  #     success: displayImages
-  #     dataType: 'json'
+  $('#js-add-user').on 'submit', (e) ->
+    e.preventDefault()
+    $this = $(this)
+    data =
+      user: $this.find('#username').val()
+    $.ajax
+      type: 'POST'
+      url: '/api/users'
+      success: showUserAdded data.user
+      error: alert 'user could not be added!'
+      contentType: 'application/json'
+      data: JSON.stringify(data)
 
   randomPassImage = $('#random-pass-image')
   randomFailImage = $('#random-fail-image')
