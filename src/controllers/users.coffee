@@ -11,6 +11,7 @@ module.exports =
       res.send results
 
   # creates new user record
+  # expects Twitter username in request body
   create: (req, res)  ->
     img = new User(req.body)
     img.save (err, results) ->
@@ -22,11 +23,9 @@ module.exports =
     User.findByIdAndUpdate req.params.id, { $set: req.body }, (err, results) ->
       res.send(500, { error: err}) if err?
       res.send(results) if results?
-      res.send(404)
 
   # deletes user record
   delete: (req, res) ->
     User.findByIdAndRemove req.params.id, (err, results) ->
       res.send(500, {error: err}) if err?
       res.send(200, results) if results?
-      res.send(404)
