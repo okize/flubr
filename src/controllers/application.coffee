@@ -1,5 +1,6 @@
 path = require 'path'
 User = require path.join('..', 'models', 'user')
+Image = require path.join('..', 'models', 'image')
 _ = require 'lodash'
 moment = require 'moment'
 navigation =
@@ -7,6 +8,9 @@ navigation =
   'Image list': 'imageList'
   'Manage users': 'users'
   'Log out': 'logout'
+
+getThumbnail = (url) ->
+  thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
 
 module.exports =
 
@@ -21,17 +25,24 @@ module.exports =
 
   # view all images page
   imageList: (req, res) ->
-    res.render 'imageList',
-      env: process.env.NODE_ENV
-      title: 'Image list'
-      pageName: 'imageList'
-      navigation: navigation
-      user: req.user
+    Image.find {deleted: false}, (err, images) ->
+      images = _.map images, (image) ->
+        newImage =
+          id: image._id
+          imageUrl: image.image_url
+          thumbnailUrl: getThumbnail(image.image_url)
+          kind: image.kind
+      res.render 'imageList',
+        env: process.env.NODE_ENV
+        title: 'Image list'
+        pageName: 'imageList'
+        navigation: navigation
+        user: req.user
+        imageList: images
 
   # user management page
   users: (req, res) ->
     User.find {}, (err, users) ->
-      console.log users
       users = _.map users, (user) ->
         newUser =
           id: user.userid
