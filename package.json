@@ -41,7 +41,8 @@
     "passport-twitter": "*",
     "request": "*",
     "rupture": "*",
-    "stylus": "*"
+    "stylus": "*",
+    "twit": "*"
   },
   "devDependencies": {
     "browserify": "*",
