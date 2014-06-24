@@ -47,6 +47,6 @@ module.exports =
 
   # deletes user record
   delete: (req, res) ->
-    User.findByIdAndRemove req.params.id, (err, results) ->
+    User.findOneAndRemove {userid: req.params.id}, (err, results) ->
       res.send(500, {error: err}) if err?
       res.send(200, results) if results?
