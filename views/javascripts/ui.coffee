@@ -37,6 +37,10 @@ module.exports = ($) ->
     el.closest('.set-image-kind').html( getImageSetHtml newKind )
     $('#messaging').html('Image kind changed!')
 
+  deleteUserInUi = (el) ->
+    el.closest('tr').remove()
+    $('#messaging').html('User deleted!')
+
   deleteImageInUi = (el) ->
     el.closest('.image-item').remove()
     $('#messaging').html('Image deleted!')
@@ -55,7 +59,7 @@ module.exports = ($) ->
       type: 'PUT'
       url: 'api/images/' + id
       success: switchImageKind $this, data.kind
-      error: alert 'image kind could not be changed!'
+      # error: alert 'image kind could not be changed!'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -69,7 +73,7 @@ module.exports = ($) ->
         type: 'DELETE'
         url: 'api/images/' + id
         success: deleteImageInUi $this
-        error: alert 'image could not be deleted!'
+        # error: alert 'image could not be deleted!'
         contentType: 'application/json'
 
   $('#js-add-image').on 'submit', (e) ->
@@ -82,7 +86,7 @@ module.exports = ($) ->
       type: 'POST'
       url: '/api/images'
       success: showImageAdded
-      error: alert 'image could not be added!'
+      # error: alert 'image could not be added!'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -95,9 +99,22 @@ module.exports = ($) ->
       type: 'POST'
       url: '/api/users'
       success: showUserAdded data.user
-      error: alert 'user could not be added!'
+      # error: alert 'user could not be added!'
       contentType: 'application/json'
       data: JSON.stringify(data)
+
+  $('body').on 'click', '.delete-user', (e) ->
+    e.preventDefault()
+    verify = confirm 'Are you sure you want to delete this user?'
+    if verify == true
+      $this = $(this)
+      id = $this.attr('id')
+      $.ajax
+        type: 'DELETE'
+        url: 'api/users/' + id
+        success: deleteUserInUi $this
+        # error: alert 'image could not be deleted!'
+        contentType: 'application/json'
 
   randomPassImage = $('#random-pass-image')
   randomFailImage = $('#random-fail-image')
