@@ -8,30 +8,8 @@ block content
 
     main.app-content(role='main')
 
-      #messaging.messaging
+      #messaging
 
-      h2 Add new image
+      h1.page-title=title
 
-      .addNewImage
-
-        form#js-add-image
-          ul.inline-list
-            li
-              label
-                | Image Url:
-                input#imageUrl(type='text')
-            li
-              label.is-inline
-                | Pass:
-                input(type='radio' name='kind' value='pass')
-              label.is-inline
-                | Fail:
-                input(type='radio' name='kind' value='fail' checked='checked')
-            li
-              button(type='submit') Add
-
-      h2 View images
-
-      button#js-show-images Show images
-
-      ul.image-list#js-image-list
+      block page

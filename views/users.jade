@@ -1,0 +1,23 @@
+extends application
+
+block page
+
+  form#js-add-user
+    ul.inline-list
+      li
+        label
+          | Twitter Username:
+          input#username(type='text')
+      li
+        button(type='submit') Add User
+
+  table
+    each user in userList
+      tr
+        td
+          img.avatar(src='#{user.avatar}', alt='avatar image')
+        td= user.name
+        td= user.twitterHandle
+        td= user.dateAdded
+        td
+          button.delete-user(id='#{user.id}') Delete user

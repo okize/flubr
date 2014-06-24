@@ -34,12 +34,15 @@
     "express-session": "*",
     "jade": "*",
     "lodash": "*",
+    "moment": "*",
     "mongoose": "3.8.x",
     "morgan": "*",
     "passport": "*",
     "passport-twitter": "*",
     "request": "*",
-    "stylus": "*"
+    "rupture": "*",
+    "stylus": "*",
+    "twit": "*"
   },
   "devDependencies": {
     "browserify": "*",
