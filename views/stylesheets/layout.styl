@@ -6,9 +6,6 @@ establish-baseline('normalize')
   box-sizing: border-box
 
 .app-body
-  color: $bodyColor
-  background: $bgColorBottom linear-gradient(to bottom, $bgColorTop, $bgColorBottom) repeat-x
-  font-family: Verdana, Arial, sans-serif
   min-height: 100vh
 
 .app-body, .app-wrapper
@@ -22,7 +19,7 @@ establish-baseline('normalize')
   width: 800px
   margin: 0 auto
 
-@media (min-width: 768px)
++from(767px)
   .app-wrapper
     flex-direction: row
     flex: 1

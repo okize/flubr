@@ -1,9 +1,17 @@
 nav.app-navigation(role='navigation')
+
+  .navigation-logo
+    | Flubr
+
+  .navigation-user
+    img.avatar(src='#{user.avatar}', alt='avatar image')
+    span(title=user.displayName)=user.userName
+
   ul.navigation-links
-    li Flubr
-    li
-      img.avatar(src='#{user.avatar}')
-    li #{user.displayName}
-      small &nbsp;(#{user.userName})
-    li
-      a(href='/logout') Sign out
+    each linkHref, linkTitle in navigation
+      if pageName === linkHref
+        li(class='nav-#{linkHref} active')
+          a(href='/#{linkHref}', title=linkTitle)= linkTitle
+      else
+        li(class='nav-#{linkHref}')
+          a(href=linkHref, title=linkTitle)= linkTitle

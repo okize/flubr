@@ -1,17 +1,31 @@
 .app-navigation
-  background-color: $navigationBgColor
-  border-right: 5px solid $navigationBorderColor
-  margin-right: 1em
+  background: $navBgColorBottom linear-gradient(to bottom, $navBgColorTop, $navBgColorBottom) repeat-x
+
+.navigation-logo
+  background-color: $flubr
+  color: $flubrText
+  height: 10rem
+  text-align: center
+  text-transform: uppercase
+  padding-top: 4rem
+  font-size: 2.5rem
+
+.navigation-user
+  background-color: $navUserBgColor
+  padding: 1rem
 
 .navigation-links
   margin: 0
   padding: 0
   list-style: none
   a
+    padding: 1rem
     display: block
-
-.avatar
-  vertical-align: bottom
-  border: 2px solid $imageBg
-  height: 30px
-  width: 30px
+    text-decoration: none
+    text-transform: uppercase
+    font-size: 1rem
+    border-bottom: .1rem solid $navLinkBorderColor
+.active
+  a
+    background-color: $navLinkActiveBgColor
+    color: $navLinkActiveColor

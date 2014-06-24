@@ -8,6 +8,7 @@ liveReload = require('tiny-lr')()
 nodemon = require 'gulp-nodemon'
 stylus = require 'gulp-stylus'
 axis = require 'axis-css'
+rupture = require 'rupture'
 coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
@@ -133,7 +134,7 @@ gulp.task 'start-app', ->
   ).on('restart', (files) ->
     log 'app restarted'
   ).on('start', ->
-    liveReloadPort = env.LIVE_RELOAD_PORT or 35730
+    liveReloadPort = env.LIVE_RELOAD_PORT or 35729
     liveReload.listen liveReloadPort
     log 'livereload started on port ' + liveReloadPort
   ).on('quit', ->
@@ -209,6 +210,7 @@ gulp.task 'build-css', ->
     .pipe(stylus(
       linenos: false
       use: [
+        ruptue(),
         axis(implicit: false)
       ]
     ))

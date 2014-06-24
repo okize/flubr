@@ -1,0 +1,17 @@
+extends application
+
+block page
+
+  ul.image-list
+    each image in imageList
+      li.image-item(id='#{image.id}')
+        ul.set-image-kind
+          if image.kind == 'pass'
+            li: strong pass
+            li: a.changeImageKind(href='#', class='isPass') fail
+          else
+            li: a.changeImageKind(href='#', class='isFail') pass
+            li: strong fail
+        a(href='#{image.imageUrl}')
+          img.pf-image(src='#{image.thumbnailUrl}', alt='')
+        .delete-image: a(href='#') delete

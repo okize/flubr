@@ -1,9 +1,14 @@
-h1, h2
+.app-body
+  background-color: $bodyBgColor
+  color: $bodyColor
+  font-family: Verdana, Arial, sans-serif
+
+.app-content
+  padding: 2rem
+
+.page-title
   margin: 0
-  font-size: 3rem
   text-transform: uppercase
-  color: $yellowDark
-  text-shadow: $yellow .35rem .25rem
 
 label
   display: block
@@ -16,10 +21,10 @@ input
 a, &:visited
   color: $text
   &:hover
-    color: $yellowDark
-    background-color: $yellow
+    color: white
+    background-color: $yellowDark
 
-button
+.login-button
   display: inline-block
   -webkit-appearance: none
   -moz-appearance: none
@@ -33,11 +38,6 @@ button
   text-decoration: none
   cursor: pointer
   overflow: visible
-  &::-moz-focus-inner
-    border: 0
-    padding: 0
-
-.login-button, button
   background-color: $yellowDark
   color: $yellow !important
   box-shadow: $yellow 5px 5px
@@ -55,12 +55,9 @@ button
     background-color: $yellowDark
     box-shadow: $yellow 5px 5px
 
-.is-inline
-  display: inline-block
-
 .inline-list
   list-style: none
-  li
+  li, label
     display: inline-block
 
 .messaging
@@ -68,10 +65,10 @@ button
 
 .image-list
   padding: 0 1rem
-  display: none
   list-style: none
 
 .image-item
+  bordeR: 1px solid black
   display: inline-block
   margin: 1rem
 

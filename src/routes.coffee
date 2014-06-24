@@ -1,16 +1,29 @@
-home = require './controllers/index'
+homepage = require './controllers/homepage'
+application = require './controllers/application'
 images = require './controllers/images'
 users = require './controllers/users'
 helpers = require './helpers'
 
 module.exports = (app, passport) ->
 
-  # home page; redirects to loggedin after auth
+  # home page; redirects to addImage after auth
   app.get '/', (req, res, next) ->
     unless req.isAuthenticated()
-      home.homepage req, res, next
+      homepage.index req, res, next
     else
-      home.application req, res, next
+      res.redirect '/addImage'
+
+  # add new image
+  app.get '/addImage', helpers.ensureAuthenticated, (req, res, next) ->
+    application.addImage req, res, next
+
+  # view all images
+  app.get '/imageList', helpers.ensureAuthenticated, (req, res, next) ->
+    application.imageList req, res, next
+
+  # manage users
+  app.get '/users', helpers.ensureAuthenticated, (req, res, next) ->
+    application.users req, res, next
 
   # login
   app.get '/login', passport.authenticate('twitter'), (req, res, next) ->

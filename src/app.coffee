@@ -17,6 +17,7 @@ coffeeify = require 'coffeeify'
 browserify = require 'browserify-middleware'
 stylus = require 'stylus'
 axis = require 'axis-css'
+rupture = require 'rupture'
 routes = require './routes'
 authentication = require './authentication'
 
@@ -52,6 +53,7 @@ if app.get('env') == 'development'
               .set('paths', ['./views/stylesheets/'])
               .set('compress', false)
               .set('linenos', true)
+              .use(rupture())
               .use(axis(implicit: false))
               .render()
       res.set 'Content-Type', 'text/css'
