@@ -1,16 +1,14 @@
 @import 'axis'
+@import 'axis/buttons'
 
-.app-body
-  background-color: $bodyBgColor
-  color: $bodyColor
-  font-family: Verdana, Arial, sans-serif
-
-.app-content
-  padding: 2rem
-
-.page-title
-  margin: 0
+button
   text-transform: uppercase
+  glossy-button($buttonBgColor, small, $buttonTextColor)
+  &:disabled, &.button-disabled
+    button-disabled()
+
+a.button
+  @extend button
 
 label
   display: block
@@ -26,6 +24,20 @@ a, &:visited
     color: white
     background-color: $yellowDark
 
+// // // // // // // // // // // // // // // // // // // //
+
+.app-body
+  background-color: $bodyBgColor
+  color: $bodyColor
+  font-family: Verdana, Arial, sans-serif
+
+.app-content
+  padding: 2rem
+
+.page-title
+  margin: 0
+  text-transform: uppercase
+
 .inline-list
   list-style: none
   li, label
@@ -40,7 +52,9 @@ a, &:visited
   list-style: none
 
 .image-item
-  bordeR: 1px solid black
+  text-transform: uppercase
+  font-size: 12px
+  border: 1px solid black
   display: inline-block
   margin: 1rem
 
@@ -69,5 +83,12 @@ a, &:visited
   clear: both
   background-color: $imageBg
   padding: 5px
-  margin: 0 10px 20px
+  margin: 0 10px 10px
+  text-align: center
   width: 90px
+
+.avatar
+  vertical-align: bottom
+  border: 2px solid $imageBg
+  height: 30px
+  width: 30px
