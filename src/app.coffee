@@ -39,11 +39,8 @@ mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
   else
     console.log 'Mongoose - connection error: ' + err if err?
 
-# dev middleware
+# js and css for development
 if app.get('env') == 'development'
-
-  # insert livereload script into page
-  app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35729)
 
   # compiles stylus in memory
   app.route('/stylesheets/styles.css')
@@ -72,6 +69,10 @@ if app.get('env') == 'development'
 # gzip assets
 app.use compression(threshold: 1024)
 app.use express.static(path.join(__dirname, '..', 'public'))
+
+# insert livereload script into page in development
+if app.get('env') == 'development'
+  app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35729)
 
 # sessions
 app.use cookieParser(process.env.SESSION_SECRET)
