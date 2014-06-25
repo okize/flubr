@@ -38,11 +38,6 @@ a, &:visited
   margin: 0
   text-transform: uppercase
 
-.inline-list
-  list-style: none
-  li, label
-    display: inline-block
-
 .messaging
   padding: 1rem
 
@@ -92,3 +87,10 @@ a, &:visited
   border: 2px solid $imageBg
   height: 30px
   width: 30px
+
+.user-table
+  font-size: .9rem
+  $table(border = true, striped = true, condensed = false)
+
+  td
+    line-height: 2rem
