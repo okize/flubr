@@ -1,7 +1,12 @@
+.inset-shadow
+  box-shadow: inset -5px 0 15px rgba($navShadowColor, .15)
+
 .app-navigation
+  @extend .inset-shadow
   background: $navBgColorBottom linear-gradient(to bottom, $navBgColorTop, $navBgColorBottom) repeat-x
 
 .navigation-logo
+  @extend .inset-shadow
   background-color: $flubr
   color: $flubrText
   height: 10rem
@@ -11,6 +16,7 @@
   font-size: 2.5rem
 
 .navigation-user
+  @extend .inset-shadow
   background-color: $navUserBgColor
   color: $navUserColor
   padding: 1rem
@@ -33,3 +39,4 @@
   a
     background-color: $navLinkActiveBgColor
     color: $navLinkActiveColor
+    box-shadow: -15px 0 15px rgba($navShadowColor, .25)
