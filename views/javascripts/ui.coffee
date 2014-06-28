@@ -8,6 +8,24 @@ module.exports = ($) ->
       '<li><a href="#" class="changeImageKind isFail">pass</a></li>' +
       '<li>fail</li>'
 
+  getUserRowHtml = (user) ->
+    html = """
+       <tr>
+        <td>
+          <img class="avatar" src="#{user.avatar}" alt="avatar image") />
+        </td>
+        <td>#{user.displayName}</td>
+        <td>#{user.userName}</td>
+        <td>#{user.created_at}</td>
+        <td class="align-right">
+          <button class="delete-user" id="#{user.id}">
+            Delete user
+          </button>
+        </td>
+       </tr>
+       """
+    html
+
   # getThumbnail = (url) ->
   #   thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
 
@@ -29,9 +47,10 @@ module.exports = ($) ->
     $('#messaging').html('Image added!')
     $('#js-add-image')[0].reset()
 
-  showUserAdded = (username) ->
-    $('#messaging').html("#{username} added!")
+  showUserAdded = (user) ->
+    $('#messaging').html("#{user.userName} added!")
     $('#js-add-user')[0].reset()
+    $('.user-table tbody').append(getUserRowHtml user)
 
   switchImageKind = (el, newKind) ->
     oldKind = if (newKind == 'pass') then 'fail' else 'pass'
@@ -100,7 +119,8 @@ module.exports = ($) ->
     $.ajax
       type: 'POST'
       url: '/api/users'
-      success: showUserAdded data.user
+      success: (response) ->
+        showUserAdded response
       # error: alert 'user could not be added!'
       contentType: 'application/json'
       data: JSON.stringify(data)
