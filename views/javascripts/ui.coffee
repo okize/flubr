@@ -1,12 +1,12 @@
 module.exports = ($) ->
 
-  # getImageSetHtml = (imageKind) ->
-  #   if imageKind == 'pass'
-  #     '<li>pass</li>' +
-  #     '<li><a href="#" class="changeImageKind isPass">fail</a></li>'
-  #   else
-  #     '<li><a href="#" class="changeImageKind isFail">pass</a></li>' +
-  #     '<li>fail</li>'
+  getImageSetHtml = (imageKind) ->
+    if imageKind == 'pass'
+      '<li>pass</li>' +
+      '<li><a href="#" class="changeImageKind isPass">fail</a></li>'
+    else
+      '<li><a href="#" class="changeImageKind isFail">pass</a></li>' +
+      '<li>fail</li>'
 
   # getThumbnail = (url) ->
   #   thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
@@ -34,6 +34,8 @@ module.exports = ($) ->
     $('#js-add-user')[0].reset()
 
   switchImageKind = (el, newKind) ->
+    oldKind = if (newKind == 'pass') then 'fail' else 'pass'
+    el.closest('.image-item').removeClass('image-item-' + oldKind).addClass('image-item-' + newKind)
     el.closest('.set-image-kind').html( getImageSetHtml newKind )
     $('#messaging').html('Image kind changed!')
 
