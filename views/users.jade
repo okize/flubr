@@ -12,6 +12,12 @@ block page
         button(type='submit') Add User
 
   table.user-table
+    columns
+      col.col-avatar
+      col.col-name
+      col.col-username
+      col.col-dateAdded
+      col.col-deleteUser
     thead
       tr
         th &nbsp;
@@ -26,5 +32,5 @@ block page
         td= user.name
         td= user.twitterHandle
         td= user.dateAdded
-        td
+        td.align-right
           button.delete-user(id='#{user.id}') Delete user
