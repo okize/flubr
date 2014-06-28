@@ -4,7 +4,11 @@ block page
 
   ul.image-list
     each image in imageList
-      li.image-item(id='#{image.id}')
+      if image.kind == 'pass'
+        - imageItemClass = 'image-item-pass'
+      else
+        - imageItemClass = 'image-item-fail'
+      li(id='#{image.id}', class='image-item #{imageItemClass}')
         ul.set-image-kind
           if image.kind == 'pass'
             li: strong pass
