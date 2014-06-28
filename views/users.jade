@@ -2,14 +2,10 @@ extends application
 
 block page
 
-  form#js-add-user
-    ul.inline-list
-      li
-        label
-          | Twitter Username:
-          input#username(type='text')
-      li
-        button(type='submit') Add User
+  form.add-new-user#js-add-user
+    .inputAddOn
+      input.inputAddOn-field(id='username', type='text', placeholder='Twitter Username')
+      button.inputAddOn-item(type='submit') Add User
 
   table.user-table
     columns
