@@ -1,0 +1,29 @@
+@import 'variables'
+@import 'axis'
+
+button
+  text-transform: uppercase
+  glossy-button($buttonBgColor, small, $buttonTextColor)
+  &:disabled, &.button-disabled
+    button-disabled()
+
+a.button
+  @extend button
+
+label
+  display: block
+  font-size: .75rem
+  text-transform: uppercase
+
+input
+  margin: 0 1rem
+
+a, &:visited
+  color: $text
+  &:hover
+    color: white
+    background-color: $yellowDark
+
+td
+  font-size: .8rem
+  vertical-align: middle
