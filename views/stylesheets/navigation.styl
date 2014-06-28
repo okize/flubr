@@ -32,7 +32,7 @@
   margin: 0
   padding: 0
   list-style: none
-  a
+  a, &:visited
     color: $navLinkColor
     padding: 1rem
     display: block
@@ -40,10 +40,13 @@
     text-transform: uppercase
     font-size: 1rem
     border-bottom: .1rem solid $navLinkBorderColor
-.active
-  a
-    @extend .nav-drop-shadow
-  a, a:hover
-    background-color: $navLinkActiveBgColor
-    color: $navLinkActiveColor
-    cursor: default
+    &:hover
+      color: $navLinkHoverColor
+      background-color: $navLinkHoverBgColor
+  .active
+    a
+      @extend .nav-drop-shadow
+    a, a:hover
+      background-color: $navLinkActiveBgColor
+      color: $navLinkActiveColor
+      cursor: default
