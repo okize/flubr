@@ -4,7 +4,7 @@ block page
 
   form.add-new-user#js-add-user
     .inputAddOn
-      input.inputAddOn-field(id='username', type='text', placeholder='Twitter Username')
+      input.inputAddOn-field(id='username', type='text', placeholder='Enter Twitter username to add new user')
       button.inputAddOn-item(type='submit') Add User
 
   table.user-table
@@ -29,4 +29,4 @@ block page
         td= user.twitterHandle
         td= user.dateAdded
         td.align-right
-          button.delete-user(id='#{user.id}') Delete user
+          button.button-delete.js-delete-user(id='#{user.id}') Delete user
