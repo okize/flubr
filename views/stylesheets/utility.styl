@@ -21,3 +21,40 @@
 
 // .inputAddOn-item
 
+.switch-toggle
+  height: $toggleSwitchHeight
+  position: relative
+  background-color: $toggleSwitchBgColor
+  label
+    color: #fff
+    line-height: $toggleSwitchHeight
+    vertical-align: middle
+  a
+    display: block
+    transition: all $toggleSwitchSpeed ease-out
+    position: absolute
+    top: 0
+    left: 0
+    padding: 0
+    z-index: 1
+    width: 50%
+    height: 100%
+    background-color: $toggleSwitchActiveBgColor
+    box-shadow: inset rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.3) 0 -1px 0
+  input
+    position: absolute
+    opacity: 0
+    & + label
+      position: relative
+      z-index: 2
+      float: left
+      width: 50%
+      height: 100%
+      margin: 0
+      text-align: center
+    &:last-of-type
+      &:checked
+        & ~ a
+          left 50%
+    &:focus + label
+      outline: 1px dotted #888
