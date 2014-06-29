@@ -4,12 +4,13 @@ block page
 
   form.add-new-image#js-add-image
     .inputAddOn
-      .pass-fail-toggle.inputAddOn-item
-        label
-          | Pass:
-          input(type='radio' name='kind' value='pass' checked='checked')
-        label
-          | Fail:
-          input(type='radio' name='kind' value='fail')
+      .inputAddOn-item
+        fieldset.pass-fail-toggle.switch-toggle
+          legend Choose image kind:
+          input#image-kind-pass(type='radio' name='kind' value='pass' checked='checked')
+          label(for='image-kind-pass') Pass
+          input#image-kind-fail(type='radio' name='kind' value='fail')
+          label(for='image-kind-fail') Fail
+          a
       input.inputAddOn-field(id='imageUrl', type='text', placeholder='Enter URL of image')
       button.inputAddOn-item(type='submit') Add Image
