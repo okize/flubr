@@ -1,9 +1,4 @@
 @import 'variables'
-@import 'axis'
-establish-baseline('normalize')
-
-*
-  box-sizing: border-box
 
 .app-body
   min-height: 100vh
@@ -19,7 +14,7 @@ establish-baseline('normalize')
   width: 800px
   margin: 0 auto
 
-+from(767px)
++from($medium-up)
   .app-wrapper
     flex-direction: row
     flex: 1
