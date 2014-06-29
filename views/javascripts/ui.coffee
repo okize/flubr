@@ -18,7 +18,7 @@ module.exports = ($) ->
         <td>#{user.userName}</td>
         <td>#{user.created_at}</td>
         <td class="align-right">
-          <button class="delete-user" id="#{user.id}">
+          <button class="button-delete js-delete-user" id="#{user.id}">
             Delete user
           </button>
         </td>
@@ -125,7 +125,7 @@ module.exports = ($) ->
       contentType: 'application/json'
       data: JSON.stringify(data)
 
-  $('body').on 'click', '.delete-user', (e) ->
+  $('body').on 'click', '.js-delete-user', (e) ->
     e.preventDefault()
     verify = confirm 'Are you sure you want to delete this user?'
     if verify == true
