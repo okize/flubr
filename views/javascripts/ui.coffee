@@ -112,7 +112,6 @@ module.exports = ($) ->
       data: JSON.stringify(data)
 
   # $('body').on 'click', '.pass-fail-toggle label', (e) ->
-  #   console.log $(this).prev()
   #   $(this).prev().prop('checked', 'checked')
 
   $('#js-add-user').on 'submit', (e) ->

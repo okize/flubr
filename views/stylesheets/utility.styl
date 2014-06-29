@@ -12,12 +12,17 @@
 .align-left
   text-align: left !important
 
+
+
 .inputAddOn
-  display: flex
+  display: block
+  +from($medium-up)
+    display: flex
 
 .inputAddOn-field
-  margin: 0
-  flex: 1
+  +from($medium-up)
+    margin: 0
+    flex: 1
 
 // .inputAddOn-item
 

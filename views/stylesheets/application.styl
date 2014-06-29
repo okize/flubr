@@ -10,8 +10,9 @@
   padding: 2rem
 
 .page-title
+  line-height: 1
   font-size: 2.5rem
-  margin: 0 0 1rem
+  margin: 0 0 2rem
   text-transform: capitalize
 
 .messaging
@@ -37,7 +38,8 @@
 .pass-fail-toggle
   legend
     display: none
-  width: 10rem
+  +from($medium-up)
+    width: 10rem
 
 // USERS LIST
 .add-new-user
