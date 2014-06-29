@@ -25,8 +25,8 @@ module.exports =
 
   # view all images page
   imageList: (req, res) ->
-    Image.find {deleted: false}, (err, images) ->
-      images = _.map images, (image) ->
+    Image.find(deleted: false).sort(created_at: 'descending').exec (err, results) ->
+      images = _.map results, (image) ->
         newImage =
           id: image._id
           imageUrl: image.image_url
