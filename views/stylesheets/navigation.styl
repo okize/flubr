@@ -1,7 +1,7 @@
 @import 'variables'
 
 .nav-drop-shadow
-  box-shadow: -15px 0 15px rgba($navShadowColor, .25)
+  box-shadow: -10px 0 15px rgba($navShadowColor, .25)
 
 .nav-inset-shadow
   box-shadow: inset -5px 0 15px rgba($navShadowColor, .15)
@@ -29,6 +29,7 @@
     margin-right: 1rem
 
 .navigation-links
+  display: none
   margin: 0
   padding: 0
   list-style: none
@@ -50,3 +51,5 @@
       background-color: $navLinkActiveBgColor
       color: $navLinkActiveColor
       cursor: default
+  +from($medium-up)
+    display: block
