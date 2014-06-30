@@ -255,10 +255,12 @@ gulp.task 'commit-updates', ->
   # bump patch version of app
   pak.version = semver.inc(pak.version, 'patch')
   fs.writeFileSync './package.json', JSON.stringify(pak, null, '  ')
-
   msg = "Built new release (v#{pak.version}) codenamed #{pak.releaseCodename}"
-  repo.commit msg, all: true, (err) ->
+  repo.add './', (err) ->
     throw err if err
+    repo.commit msg, {all: true}, (err) ->
+      throw err if err
+      log 'Commited master branch'
 
 # bumps patch version and creates a new tag
 gulp.task 'tag-version', ->
