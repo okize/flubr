@@ -1,7 +1,7 @@
 module.exports = ($) ->
 
   showMessage = (msg) ->
-    $('#messaging').prepend(msg)
+    $('#messaging').prepend("<li>#{msg}</li>")
 
   getImageSetHtml = (imageKind) ->
     if imageKind == 'pass'
