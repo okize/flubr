@@ -1,0 +1,15 @@
+@import 'variables'
+@import 'mixins'
+
+.app-messaging
+  @extend .nav-inset-shadow-right
+  background-color: $appMessagingBgColor
+  padding: 1rem
+  ul
+    padding: 0
+    margin: 0
+    list-style: none
+
+.hide-messaging
+  .app-messaging
+    display: none

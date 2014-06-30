@@ -2,20 +2,15 @@ extends application
 
 block page
 
-  .addNewImage
-
-    form#js-add-image
-      ul.inline-list
-        li
-          label
-            | Image Url:
-            input#imageUrl(type='text')
-        li
-          label
-            | Pass:
-            input(type='radio' name='kind' value='pass')
-          label
-            | Fail:
-            input(type='radio' name='kind' value='fail' checked='checked')
-        li
-          button(type='submit') Add
+  form.add-new-image#js-add-image
+    .inputAddOn
+      .inputAddOn-item
+        fieldset.pass-fail-toggle.switch-toggle
+          legend Choose image kind:
+          input#image-kind-pass(type='radio' name='kind' value='pass' checked='checked' tabindex=1)
+          label(for='image-kind-pass') Pass
+          input#image-kind-fail(type='radio' name='kind' value='fail')
+          label(for='image-kind-fail') Fail
+          a
+      input.inputAddOn-field(id='imageUrl', type='text', placeholder='Enter URL of image')
+      button.inputAddOn-item(type='submit') Add Image
