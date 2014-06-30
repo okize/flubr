@@ -6,14 +6,16 @@
   background-color: $navBgColor
 
 .navigation-logo
-  @extend .nav-inset-shadow-left
+  line-height: 2
   background-color: $flubr
   color: $flubrText
-  height: 10rem
   text-align: center
   text-transform: uppercase
-  padding-top: 4rem
   font-size: 2.5rem
+  +from($medium-up)
+    @extend .nav-inset-shadow-left
+    line-height: 10rem
+    height: 10rem
 
 .navigation-user
   @extend .nav-inset-shadow-left
