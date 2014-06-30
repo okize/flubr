@@ -1,29 +1,33 @@
 @import 'variables'
-@import 'axis'
-establish-baseline('normalize')
 
-*
-  box-sizing: border-box
-
-.app-body
+.app-body, .app-homepage
   min-height: 100vh
+  width: 100%
 
 .app-body, .app-wrapper
   display: flex
   flex-direction: column
 
+.app-messaging
+  display: none
+
 .app-navigation
   order: -1
 
-.app-homepage
-  width: 800px
-  margin: 0 auto
++from($medium-up)
 
-+from(767px)
   .app-wrapper
     flex-direction: row
     flex: 1
+
   .app-content
     flex: 1
+
   .app-navigation
-    flex: 0 0 15rem
+    flex: 0 0 $navigationWidth
+
+  .app-messaging
+    flex: 0 0 $appMessagingWidth
+
+  .app-messaging
+    display: block

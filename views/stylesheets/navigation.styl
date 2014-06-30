@@ -1,31 +1,56 @@
+@import 'variables'
+@import 'mixins'
+
 .app-navigation
-  background: $navBgColorBottom linear-gradient(to bottom, $navBgColorTop, $navBgColorBottom) repeat-x
+  @extend .nav-inset-shadow-left
+  background-color: $navBgColor
 
 .navigation-logo
+  line-height: 2
   background-color: $flubr
   color: $flubrText
-  height: 10rem
   text-align: center
   text-transform: uppercase
-  padding-top: 4rem
   font-size: 2.5rem
+  +from($medium-up)
+    @extend .nav-inset-shadow-left
+    line-height: 10rem
+    height: 10rem
 
 .navigation-user
+  @extend .nav-inset-shadow-left
   background-color: $navUserBgColor
+  color: $navUserColor
   padding: 1rem
+  .avatar
+    margin-right: 1rem
 
 .navigation-links
+  // display: none
   margin: 0
   padding: 0
   list-style: none
-  a
+  a, &:visited
+    color: $navLinkColor
     padding: 1rem
     display: block
     text-decoration: none
     text-transform: uppercase
     font-size: 1rem
     border-bottom: .1rem solid $navLinkBorderColor
-.active
-  a
-    background-color: $navLinkActiveBgColor
-    color: $navLinkActiveColor
+    &:hover
+      color: $navLinkHoverColor
+      background-color: $navLinkHoverBgColor
+  .active
+    overflow: hidden
+    margin-bottom: -15px
+    padding: 0 0 15px 0
+    a
+      display: block
+      @extend .nav-drop-shadow
+    a, a:hover
+      background-color: $navLinkActiveBgColor
+      color: $navLinkActiveColor
+      cursor: default
+  // +from($medium-up)
+  //   display: block
