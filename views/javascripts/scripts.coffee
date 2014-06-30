@@ -1,3 +1,7 @@
 $ = require 'jquery'
-ui = require './ui'
-ui($)
+homepage = require './homepage'
+app = require './application'
+
+homepage $
+
+app $
