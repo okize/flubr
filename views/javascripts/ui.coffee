@@ -1,5 +1,20 @@
 module.exports = ($) ->
 
+  # homepage random images
+  getRandomImage = (el, type) ->
+    $.get '/api/images/random/' + type, (data) ->
+      el.append "<img src='#{data}' />"
+
+  randomPassImage = $('#random-pass-image')
+  randomFailImage = $('#random-fail-image')
+
+  if randomPassImage.length and randomFailImage.length
+    getRandomImage randomPassImage, 'pass'
+    getRandomImage randomFailImage, 'fail'
+
+  showMessage = (msg) ->
+    $('#messaging').append(msg)
+
   getImageSetHtml = (imageKind) ->
     if imageKind == 'pass'
       '<li>pass</li>' +
@@ -44,32 +59,28 @@ module.exports = ($) ->
   #   list.append(html).show()
 
   showImageAdded = ->
-    $('#messaging').html('Image added!')
+    showMessage('Image added!')
     $('#js-add-image')[0].reset()
 
   showUserAdded = (user) ->
-    $('#messaging').html("#{user.userName} added!")
+    showMessage("#{user.userName} added!")
     $('#js-add-user')[0].reset()
     $('.user-table tbody').append(getUserRowHtml user)
 
   switchImageKind = (el, newKind) ->
+    showMessage('Image kind changed!')
     oldKind = if (newKind == 'pass') then 'fail' else 'pass'
     el.closest('.image-item').removeClass('image-item-' + oldKind).addClass('image-item-' + newKind)
     el.closest('.set-image-kind').html( getImageSetHtml newKind )
-    $('#messaging').html('Image kind changed!')
 
   deleteUserInUi = (el) ->
     username = el.parent('td').prev().prev().text()
+    showMessage(username + ' deleted!')
     el.closest('tr').remove()
-    $('#messaging').html(username + ' deleted!')
 
   deleteImageInUi = (el) ->
+    showMessage('Image deleted!')
     el.closest('.image-item').remove()
-    $('#messaging').html('Image deleted!')
-
-  getRandomImage = (el, type) ->
-    $.get '/api/images/random/' + type, (data) ->
-      el.append "<img src='#{data}' />"
 
   $('body').on 'click', '.changeImageKind', (e) ->
     e.preventDefault()
@@ -141,10 +152,3 @@ module.exports = ($) ->
         success: deleteUserInUi $this
         # error: alert 'image could not be deleted!'
         contentType: 'application/json'
-
-  randomPassImage = $('#random-pass-image')
-  randomFailImage = $('#random-fail-image')
-
-  if randomPassImage.length and randomFailImage.length
-    getRandomImage randomPassImage, 'pass'
-    getRandomImage randomFailImage, 'fail'
