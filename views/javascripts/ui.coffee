@@ -59,8 +59,9 @@ module.exports = ($) ->
     $('#messaging').html('Image kind changed!')
 
   deleteUserInUi = (el) ->
+    username = el.parent('td').prev().prev().text()
     el.closest('tr').remove()
-    $('#messaging').html('User deleted!')
+    $('#messaging').html(username + ' deleted!')
 
   deleteImageInUi = (el) ->
     el.closest('.image-item').remove()
