@@ -210,7 +210,7 @@ gulp.task 'build-css', ->
     .pipe(stylus(
       linenos: false
       use: [
-        ruptue(),
+        rupture(),
         axis(implicit: false)
       ]
     ))
