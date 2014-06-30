@@ -1,6 +1,8 @@
-var helpers, home, images, users;
+var application, helpers, homepage, images, users;
 
-home = require('./controllers/index');
+homepage = require('./controllers/homepage');
+
+application = require('./controllers/application');
 
 images = require('./controllers/images');
 
@@ -11,10 +13,19 @@ helpers = require('./helpers');
 module.exports = function(app, passport) {
   app.get('/', function(req, res, next) {
     if (!req.isAuthenticated()) {
-      return home.index(req, res, next);
+      return homepage.index(req, res, next);
     } else {
-      return home.loggedin(req, res, next);
+      return res.redirect('/addImage');
     }
+  });
+  app.get('/addImage', helpers.ensureAuthenticated, function(req, res, next) {
+    return application.addImage(req, res, next);
+  });
+  app.get('/imageList', helpers.ensureAuthenticated, function(req, res, next) {
+    return application.imageList(req, res, next);
+  });
+  app.get('/users', helpers.ensureAuthenticated, function(req, res, next) {
+    return application.users(req, res, next);
   });
   app.get('/login', passport.authenticate('twitter'), function(req, res, next) {});
   app.all('/logout', function(req, res, next) {
