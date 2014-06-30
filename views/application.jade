@@ -4,12 +4,12 @@ block content
 
   .app-wrapper
 
-    include navigation
+    include partials/navigation
 
     main.app-content(role='main')
-
-      #messaging.messaging
 
       h1.page-title=title
 
       block page
+
+    include partials/messaging
