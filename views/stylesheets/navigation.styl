@@ -1,7 +1,7 @@
 @import 'variables'
 
 .nav-drop-shadow
-  box-shadow: -10px 0 15px rgba($navShadowColor, .25)
+  box-shadow: 5px 5px 15px rgba($navShadowColor, .15)
 
 .nav-inset-shadow
   box-shadow: inset -5px 0 15px rgba($navShadowColor, .15)
@@ -45,7 +45,11 @@
       color: $navLinkHoverColor
       background-color: $navLinkHoverBgColor
   .active
+    overflow: hidden
+    margin-bottom: -15px
+    padding: 0 0 15px 0
     a
+      display: block
       @extend .nav-drop-shadow
     a, a:hover
       background-color: $navLinkActiveBgColor

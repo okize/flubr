@@ -4,7 +4,7 @@ Image = require path.join('..', 'models', 'image')
 _ = require 'lodash'
 moment = require 'moment'
 navigation =
-  'Add image': 'addImage'
+  'Add new image': 'addImage'
   'Image list': 'imageList'
   'Manage users': 'users'
   'Log out': 'logout'
