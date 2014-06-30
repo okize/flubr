@@ -1,6 +1,15 @@
-var User, path;
+var Twit, User, path, twitter;
 
 path = require('path');
+
+Twit = require('twit');
+
+twitter = new Twit({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token: process.env.TWITTER_ACCESS_TOKEN,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+});
 
 User = require(path.join('..', 'models', 'user'));
 
@@ -16,15 +25,39 @@ module.exports = {
     });
   },
   create: function(req, res) {
-    var img;
-    img = new User(req.body);
-    return img.save(function(err, results) {
-      if (err != null) {
-        res.send(500, {
-          error: err
-        });
+    return twitter.get('users/show', {
+      screen_name: req.body.user
+    }, function(err, data, response) {
+      var user;
+      if (err) {
+        throw err;
       }
-      return res.send(results);
+      user = new User();
+      user.userid = data.id;
+      user.userName = data.screen_name;
+      user.displayName = data.name;
+      user.avatar = data.profile_image_url;
+      return User.find({
+        userid: user.userid
+      }, function(err, results) {
+        if (err) {
+          throw err;
+        }
+        if (!results.length) {
+          return user.save(function(err) {
+            if (err != null) {
+              res.send(500, {
+                error: err
+              });
+            }
+            return res.send(user);
+          });
+        } else {
+          return res.send(500, {
+            error: 'user already exists'
+          });
+        }
+      });
     });
   },
   update: function(req, res) {
@@ -37,22 +70,22 @@ module.exports = {
         });
       }
       if (results != null) {
-        res.send(results);
+        return res.send(results);
       }
-      return res.send(404);
     });
   },
   "delete": function(req, res) {
-    return User.findByIdAndRemove(req.params.id, function(err, results) {
+    return User.findOneAndRemove({
+      userid: req.params.id
+    }, function(err, results) {
       if (err != null) {
         res.send(500, {
           error: err
         });
       }
       if (results != null) {
-        res.send(200, results);
+        return res.send(200, results);
       }
-      return res.send(404);
     });
   }
 };
