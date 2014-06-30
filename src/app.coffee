@@ -79,6 +79,8 @@ app.use cookieParser(process.env.SESSION_SECRET)
 app.use session(
   name: 'express_session'
   secret: process.env.SESSION_SECRET
+  saveUninitialized: true
+  resave: true
   store: new Store(
     mongooseConnection: mongoose.connections[0]
     collection: 'sessions'
