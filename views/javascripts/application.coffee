@@ -1,9 +1,7 @@
 $ = require 'jquery'
+msg = require './messaging'
 
 module.exports = () ->
-
-  showMessage = (msg, type) ->
-    $('#messaging').prepend("<li class='flash-#{type}'>#{msg}</li>")
 
   getImageSetHtml = (imageKind) ->
     if imageKind == 'pass'
@@ -49,27 +47,27 @@ module.exports = () ->
   #   list.append(html).show()
 
   showImageAdded = (url) ->
-    showMessage "<a href='#{url}'>Image added!</a>", 'notice'
+    msg "<a href='#{url}'>Image added!</a>", 'notice'
     $('#js-add-image')[0].reset()
 
   showUserAdded = (user) ->
-    showMessage "#{user.userName} added!", 'notice'
+    msg "#{user.userName} added!", 'notice'
     $('#js-add-user')[0].reset()
     $('.user-table tbody').append(getUserRowHtml user)
 
   switchImageKind = (el, newKind, id) ->
-    showMessage "Changed image to #{newKind}", 'notice'
+    msg "Changed image to #{newKind}", 'notice'
     oldKind = if (newKind == 'pass') then 'fail' else 'pass'
     el.closest('.image-item').removeClass('image-item-' + oldKind).addClass('image-item-' + newKind)
     el.closest('.set-image-kind').html( getImageSetHtml newKind )
 
   deleteUserInUi = (el) ->
     username = el.parent('td').prev().prev().text()
-    showMessage username + ' deleted!', 'notice'
+    msg username + ' deleted!', 'notice'
     el.closest('tr').remove()
 
   deleteImageInUi = (el) ->
-    showMessage 'Image deleted!', 'notice'
+    msg 'Image deleted!', 'notice'
     el.closest('.image-item').remove()
 
   $('body').on 'click', '.changeImageKind', (e) ->
