@@ -1,15 +1,26 @@
 @import 'variables'
 @import 'mixins'
 
+.hide-messaging
+  .app-messaging
+    display: none
+
 .app-messaging
   @extend .nav-inset-shadow-right
   background-color: $appMessagingBgColor
   padding: 1rem
   ul
+    font-size: .8rem
     padding: 0
     margin: 0
     list-style: none
+  li
+    margin: 0 0 1rem
+//     animation: slideup 5s
 
-.hide-messaging
-  .app-messaging
-    display: none
+// $keyframe-name = slideup
+// @keyframes {$keyframe-name}
+//   from
+//     opacity: 1
+//   to
+//     opacity: 0
