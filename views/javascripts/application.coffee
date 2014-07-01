@@ -1,4 +1,6 @@
-module.exports = ($) ->
+$ = require 'jquery'
+
+module.exports = () ->
 
   showMessage = (msg, type) ->
     $('#messaging').prepend("<li class='flash-#{type}'>#{msg}</li>")
