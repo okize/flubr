@@ -1,4 +1,6 @@
-module.exports = ($) ->
+$ = require 'jquery'
+
+module.exports = () ->
 
   # homepage random images
   getRandomImage = (el, type) ->
