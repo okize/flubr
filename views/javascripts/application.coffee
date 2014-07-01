@@ -82,7 +82,7 @@ module.exports = () ->
       type: 'PUT'
       url: 'api/images/' + id
       success: switchImageKind $this, data.kind
-      # error: alert 'image kind could not be changed!'
+      # error: showMessage 'image kind could not be changed!', 'error'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -96,7 +96,7 @@ module.exports = () ->
         type: 'DELETE'
         url: 'api/images/' + id
         success: deleteImageInUi $this
-        # error: alert 'image could not be deleted!'
+        # error: showMessage 'image could not be deleted!', 'error'
         contentType: 'application/json'
 
   $('#js-add-image').on 'submit', (e) ->
@@ -109,7 +109,7 @@ module.exports = () ->
       type: 'POST'
       url: '/api/images'
       success: showImageAdded data.source_url
-      # error: alert 'image could not be added!'
+      # error: showMessage 'image could not be added!', 'error'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -126,7 +126,7 @@ module.exports = () ->
       url: '/api/users'
       success: (response) ->
         showUserAdded response
-      # error: alert 'user could not be added!'
+      # error: showMessage 'user could not be added!', 'error'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -140,5 +140,5 @@ module.exports = () ->
         type: 'DELETE'
         url: 'api/users/' + id
         success: deleteUserInUi $this
-        # error: alert 'image could not be deleted!'
+        # error: showMessage 'image could not be deleted!', 'error'
         contentType: 'application/json'
