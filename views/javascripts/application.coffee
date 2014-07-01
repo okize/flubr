@@ -81,8 +81,10 @@ module.exports = () ->
     $.ajax
       type: 'PUT'
       url: 'api/images/' + id
-      success: switchImageKind $this, data.kind
-      # error: showMessage 'image kind could not be changed!', 'error'
+      success: ->
+        switchImageKind $this, data.kind
+      error: ->
+        showMessage 'Image kind could not be changed', 'error'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -95,8 +97,10 @@ module.exports = () ->
       $.ajax
         type: 'DELETE'
         url: 'api/images/' + id
-        success: deleteImageInUi $this
-        # error: showMessage 'image could not be deleted!', 'error'
+        success: ->
+          deleteImageInUi $this
+        error: ->
+          showMessage 'image could not be deleted!', 'error'
         contentType: 'application/json'
 
   $('#js-add-image').on 'submit', (e) ->
@@ -108,8 +112,10 @@ module.exports = () ->
     $.ajax
       type: 'POST'
       url: '/api/images'
-      success: showImageAdded data.source_url
-      # error: showMessage 'image could not be added!', 'error'
+      success: ->
+        showImageAdded data.source_url
+      error: ->
+        showMessage 'image could not be added!', 'error'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -126,7 +132,8 @@ module.exports = () ->
       url: '/api/users'
       success: (response) ->
         showUserAdded response
-      # error: showMessage 'user could not be added!', 'error'
+      error: ->
+        showMessage 'user could not be added!', 'error'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -139,6 +146,8 @@ module.exports = () ->
       $.ajax
         type: 'DELETE'
         url: 'api/users/' + id
-        success: deleteUserInUi $this
-        # error: showMessage 'image could not be deleted!', 'error'
+        success: ->
+          deleteUserInUi $this
+        error: ->
+          showMessage 'image could not be deleted!', 'error'
         contentType: 'application/json'
