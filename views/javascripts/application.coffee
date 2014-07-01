@@ -55,8 +55,8 @@ module.exports = ($) ->
     $('#js-add-user')[0].reset()
     $('.user-table tbody').append(getUserRowHtml user)
 
-  switchImageKind = (el, newKind) ->
-    showMessage 'Image kind changed!'
+  switchImageKind = (el, newKind, id) ->
+    showMessage "Changed image to #{newKind}"
     oldKind = if (newKind == 'pass') then 'fail' else 'pass'
     el.closest('.image-item').removeClass('image-item-' + oldKind).addClass('image-item-' + newKind)
     el.closest('.set-image-kind').html( getImageSetHtml newKind )
