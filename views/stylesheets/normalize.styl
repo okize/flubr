@@ -1,3 +1,8 @@
+*,
+*:before,
+*:after
+  box-sizing: border-box
+
 html
   font-family sans-serif
   -ms-text-size-adjust 100%
@@ -113,6 +118,15 @@ textarea
 
 button
   overflow visible
+  text-transform: uppercase
+  glossy-button($buttonBgColor, medium, $buttonTextColor)
+  &:disabled, &.button-disabled
+    button-disabled()
+  +from($medium-up)
+    glossy-button($buttonBgColor, small, $buttonTextColor)
+
+a.button
+  @extend button
 
 button,
 select
@@ -136,6 +150,8 @@ input::-moz-focus-inner
 
 input
   line-height normal
+  width: 100%
+  padding: .25rem .5rem
 
 input[type="checkbox"],
 input[type="radio"]
@@ -157,13 +173,20 @@ input[type="search"]::-webkit-search-decoration
   -webkit-appearance none
 
 fieldset
-  border 1px solid #c0c0c0
-  margin 0 2px
-  padding 0.35em 0.625em 0.75em
+  margin: 0
+  padding: 0
+  border: 0
 
 legend
   border 0
   padding 0
+
+label
+  display: block
+  font-size: 1.25rem
+  text-transform: uppercase
+  +from($medium-up)
+    font-size: .75rem
 
 textarea
   overflow auto
