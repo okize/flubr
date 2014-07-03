@@ -20,7 +20,7 @@ module.exports =
   # creates new user record
   # expects Twitter username in request body
   create: (req, res)  ->
-    twitter.get('users/show', screen_name: req.body.user, (err, data, response) ->
+    twitter.get('users/show', screen_name: req.body.user, (err, data, res) ->
       throw err if err
       user = new User()
       user.userid = data.id

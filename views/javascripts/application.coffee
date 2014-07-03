@@ -44,7 +44,7 @@ module.exports = () ->
   #       "<li class='image-card' id='#{data[i]._id}'>" +
   #       "<ul class='set-image-kind'>#{getImageSetHtml(data[i].kind)}</ul>" +
   #       "<a href='#{data[i].image_url}'>" +
-  #       "<img src='#{getThumbnail(data[i].image_url)}' class='image-thumbnail' />" +
+  #       "<img src='#{getThumbnail(data[i].image_url)}' />" +
   #       "</a>" +
   #       "<div class='delete-image'><a href='#'>delete</a></div>" +
   #       "</li>"
@@ -62,8 +62,11 @@ module.exports = () ->
   switchImageKind = (el, newKind, id) ->
     showMessage "Changed image to #{newKind}", 'notice'
     oldKind = if (newKind == 'pass') then 'fail' else 'pass'
-    el.closest('.image-card').removeClass('image-card-' + oldKind).addClass('image-card-' + newKind)
-    el.closest('.image-settings').html( getImageSetHtml newKind )
+    el.closest('.image-card')
+      .removeClass('image-card-' + oldKind)
+      .addClass('image-card-' + newKind)
+    el.closest('.image-settings')
+      .html( getImageSetHtml newKind )
 
   deleteUserInUi = (el) ->
     username = el.parent('td').prev().prev().text()
