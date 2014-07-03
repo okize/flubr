@@ -27,7 +27,7 @@ module.exports = {
   create: function(req, res) {
     return twitter.get('users/show', {
       screen_name: req.body.user
-    }, function(err, data, response) {
+    }, function(err, data, res) {
       var user;
       if (err) {
         throw err;

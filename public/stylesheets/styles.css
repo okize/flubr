@@ -415,6 +415,12 @@ fieldset {
 .align-left {
   text-align: left !important;
 }
+.flash-notice a,
+.flash-error a,
+.flash-warning a,
+.flash-success a {
+  color: #fff;
+}
 .flash-notice {
   background: #70c7fa;
   background: #62c1fa linear-gradient(top, #70c7fa, #62c1fa) repeat-x;
@@ -651,7 +657,7 @@ fieldset {
 }
 .navigation-links .active a,
 .navigation-links .active a:hover {
-  background-color: #fff;
+  background-color: #fafafa;
   color: #333;
   cursor: default;
 }
@@ -672,7 +678,7 @@ fieldset {
   margin: 0 0 1rem;
 }
 .app-body {
-  background-color: #fff;
+  background-color: #fafafa;
   color: #333;
   font-family: Verdana, Arial, sans-serif;
 }
@@ -714,6 +720,7 @@ fieldset {
   }
 }
 .user-table {
+  background-color: #fff;
   max-width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
@@ -801,12 +808,13 @@ th + th, td + td, th + td, td + th { border-left: 1px solid #ddd; }
 .button-delete {
   background-color: #d13f19;
 }
-.image-list {
+.image-cards {
   padding: 0;
   margin: 0 -2rem 0 0;
   list-style: none;
 }
-.image-item {
+.image-card {
+  background-color: #fff;
   overflow: hidden;
   text-transform: uppercase;
   font-size: 12px;
@@ -815,14 +823,14 @@ th + th, td + td, th + td, td + th { border-left: 1px solid #ddd; }
   margin: 0 2rem 2rem 0;
   overflow: hidden;
 }
-.image-item a {
+.image-card a {
   display: inline-block;
   vertical-align: top;
 }
-.image-item-pass {
+.image-card-pass {
   border-bottom: 0.5rem solid #2ecc40;
 }
-.image-item-fail {
+.image-card-fail {
   border-bottom: 0.5rem solid #ff4136;
 }
 .image-thumbnail {
@@ -838,9 +846,7 @@ th + th, td + td, th + td, td + th { border-left: 1px solid #ddd; }
   display: inline-block;
   list-style: none;
   overflow: hidden;
-  background-color: #fff;
   text-align: left;
-  padding: 5px;
 }
 .image-settings li {
   text-align: right;
