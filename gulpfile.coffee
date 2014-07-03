@@ -129,6 +129,7 @@ gulp.task 'start-app', ->
     script: appScript
     ext: 'coffee'
     env: env
+    nodeArgs: ['--nodejs', '--debug=5858']
     ignore: [
       'node_modules/',
       'views/',
