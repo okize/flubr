@@ -38,6 +38,7 @@
       display: none
 
 .user-table
+  background-color: #fff
   $table(border = true, striped = true, condensed = false)
 
   td
@@ -68,11 +69,12 @@
   list-style: none
 
 .image-card
+  background-color: $imageCardBgColor
   overflow: hidden
   text-transform: uppercase
   font-size: 12px
   display: inline-block
-  outline: 1px solid $imageBorderColor
+  outline: 1px solid $imageCardBorderColor
   margin: 0 2rem 2rem 0
   overflow: hidden
   a
@@ -87,20 +89,18 @@
 
 .image-thumbnail
   float: left
-  border: .5rem solid $imageBg
+  border: .5rem solid $imageCardBgColor
   height: 100px
   width: 100px
 
 .image-settings
   width: 100px
-  border: .5rem solid $imageBg
+  border: .5rem solid $imageCardBgColor
   margin: 0
   display: inline-block
   list-style: none
   overflow: hidden
-  background-color: $imageBg
   text-align: left
-  padding: 5px
   li
     text-align: right
 
