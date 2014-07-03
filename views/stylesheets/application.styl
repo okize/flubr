@@ -1,6 +1,3 @@
-@import 'variables'
-@import 'axis'
-
 .app-body
   background-color: $appBodyBgColor
   color: $appBodyColor
@@ -67,47 +64,47 @@
 // IMAGES LIST
 .image-list
   padding: 0
-  margin: 0
+  margin: 0 -2rem 0 0
   list-style: none
 
 .image-item
+  overflow: hidden
   text-transform: uppercase
   font-size: 12px
   display: inline-block
   outline: 1px solid $imageBorderColor
   margin: 0 2rem 2rem 0
+  overflow: hidden
+  a
+    display: inline-block
+    vertical-align: top
 
 .image-item-pass
-  border-top: 5px solid $pass
+  border-bottom: .5rem solid $pass
 
 .image-item-fail
-  border-top: 5px solid $fail
+  border-bottom: .5rem solid $fail
 
-.pf-image
+.image-thumbnail
   float: left
-  border: 5px solid $imageBg
-  margin: 0 10px
-  height: 90px
-  width: 90px
+  border: .5rem solid $imageBg
+  height: 100px
+  width: 100px
 
-.set-image-kind
+.image-settings
+  width: 100px
+  border: .5rem solid $imageBg
+  margin: 0
+  display: inline-block
   list-style: none
   overflow: hidden
-  width: 90px
   background-color: $imageBg
-  margin: 0 10px
   text-align: left
   padding: 5px
-  color: #000
-  li:first-child
-    float: left
-  li:last-child
-    float: right
+  li
+    text-align: right
+
+.change-image-kind
 
 .delete-image
   clear: both
-  background-color: $imageBg
-  padding: 5px
-  margin: 0 10px 10px
-  text-align: center
-  width: 90px
