@@ -38,6 +38,7 @@
       display: none
 
 .user-table
+  background-color: #fff
   $table(border = true, striped = true, condensed = false)
 
   td
@@ -62,45 +63,44 @@
   background-color: red
 
 // IMAGES LIST
-.image-list
+.image-cards
   padding: 0
   margin: 0 -2rem 0 0
   list-style: none
 
-.image-item
+.image-card
+  background-color: $imageCardBgColor
   overflow: hidden
   text-transform: uppercase
   font-size: 12px
   display: inline-block
-  outline: 1px solid $imageBorderColor
+  outline: 1px solid $imageCardBorderColor
   margin: 0 2rem 2rem 0
   overflow: hidden
   a
     display: inline-block
     vertical-align: top
 
-.image-item-pass
+.image-card-pass
   border-bottom: .5rem solid $pass
 
-.image-item-fail
+.image-card-fail
   border-bottom: .5rem solid $fail
 
 .image-thumbnail
   float: left
-  border: .5rem solid $imageBg
+  border: .5rem solid $imageCardBgColor
   height: 100px
   width: 100px
 
 .image-settings
   width: 100px
-  border: .5rem solid $imageBg
+  border: .5rem solid $imageCardBgColor
   margin: 0
   display: inline-block
   list-style: none
   overflow: hidden
-  background-color: $imageBg
   text-align: left
-  padding: 5px
   li
     text-align: right
 
