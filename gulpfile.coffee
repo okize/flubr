@@ -96,12 +96,18 @@ gulp.task 'lint', [
   'lint-css'
 ]
 
-# creates a release and deploys the application
-gulp.task 'release', (callback) ->
+# creates a build
+gulp.task 'build', (callback) ->
   runSequence(
     'clean-directories',
     ['build-css', 'build-js', 'build-app'],
-    ['minify-css', 'minify-js'],
+    ['minify-css', 'minify-js']
+    callback
+  )
+
+# commits, tags & deploys application
+gulp.task 'release', (callback) ->
+  runSequence(
     'commit-updates',
     'tag-version',
     'push-updates',
