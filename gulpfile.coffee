@@ -109,6 +109,10 @@ gulp.task 'release', (callback) ->
     callback
   )
 
+# run a node debugger
+gulp.task 'debug', ->
+  bg('./node_modules/.bin/node-debug', appScript)
+
 # open app in default browser
 gulp.task 'open', ->
   gulp
