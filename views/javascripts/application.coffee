@@ -7,11 +7,13 @@ module.exports = () ->
 
   getImageSetHtml = (imageKind) ->
     if imageKind == 'pass'
-      '<li>pass</li>' +
-      '<li><a href="#" class="change-image-kind isPass">fail</a></li>'
+      '<li><strong>pass</strong></li>' +
+      '<li><a href="#" class="change-image-kind isPass">fail</a></li>' +
+      '<li><a href="#" class="delete-image">delete</a></li>'
     else
       '<li><a href="#" class="change-image-kind isFail">pass</a></li>' +
-      '<li>fail</li>'
+      '<li><strong>fail</strong></li>' +
+      '<li><a href="#" class="delete-image">delete</a></li>'
 
   getUserRowHtml = (user) ->
     html = """
@@ -88,7 +90,7 @@ module.exports = () ->
       contentType: 'application/json'
       data: JSON.stringify(data)
 
-  $('body').on 'click', '.delete-image a', (e) ->
+  $('body').on 'click', '.delete-image', (e) ->
     e.preventDefault()
     verify = confirm 'Are you sure you want to delete this image?'
     if verify == true
