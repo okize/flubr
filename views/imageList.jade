@@ -9,13 +9,13 @@ block page
       else
         - imageItemClass = 'image-item-fail'
       li(id='#{image.id}', class='image-item #{imageItemClass}')
-        ul.set-image-kind
+        a(href='#{image.imageUrl}')
+          img.image-thumbnail(src='#{image.thumbnailUrl}', alt='')
+        ul.image-settings
           if image.kind == 'pass'
             li: strong pass
-            li: a.changeImageKind(href='#', class='isPass') fail
+            li: a.change-image-kind(href='#', class='isPass') fail
           else
-            li: a.changeImageKind(href='#', class='isFail') pass
+            li: a.change-image-kind(href='#', class='isFail') pass
             li: strong fail
-        a(href='#{image.imageUrl}')
-          img.pf-image(src='#{image.thumbnailUrl}', alt='')
-        .delete-image: a(href='#') delete
+          li: a.delete-image(href='#') delete
