@@ -20,23 +20,28 @@ module.exports =
   # creates new user record
   # expects Twitter username in request body
   create: (req, res)  ->
-    twitter.get('users/show', screen_name: req.body.user, (err, data, res) ->
-      throw err if err
-      user = new User()
-      user.userid = data.id
-      user.userName = data.screen_name
-      user.displayName = data.name
-      user.avatar = data.profile_image_url
+    twitter.get('users/show', screen_name: req.body.user, (err, data) ->
+      # https://dev.twitter.com/docs/error-codes-responses
+      if err? && err.code == 34
+        res.send(500, {error: "#{req.body.user} is not a valid Twitter username"})
+      else if err?
+        throw err
+      else
+        user = new User()
+        user.userid = data.id
+        user.userName = data.screen_name
+        user.displayName = data.name
+        user.avatar = data.profile_image_url
 
-      # check if user already exists, save user if new
-      User.find {userid: user.userid}, (err, results) ->
-        throw err if err
-        unless results.length
-          user.save (err) ->
-            res.send(500, {error: err}) if err?
-            res.send(user)
-        else
-          res.send(500, {error: 'user already exists'})
+        # check if user already exists, save user if new
+        User.find {userid: user.userid}, (err, results) ->
+          throw err if err
+          unless results.length
+            user.save (err) ->
+              res.send(500, {error: err}) if err?
+              res.send(user)
+          else
+            res.send(500, {error: "#{req.body.user} is already a user"})
     )
 
   # updates existing user record
