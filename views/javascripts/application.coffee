@@ -137,8 +137,11 @@ module.exports = () ->
       url: '/api/users'
       success: (response) ->
         showUserAdded response
-      error: ->
-        showMessage 'user could not be added!', 'error'
+      error: (error) ->
+        if error.responseText
+          showMessage JSON.parse(error.responseText).error, 'error'
+        else
+          showMessage 'Unable to add user', 'error'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
