@@ -10,7 +10,8 @@ navigation =
   'Log out': 'logout'
 
 getThumbnail = (url) ->
-  thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
+  if url?
+    thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
 
 module.exports =
 
@@ -25,21 +26,23 @@ module.exports =
 
   # view all images page
   imageList: (req, res) ->
-    Image.find(deleted: false).sort(created_at: 'descending').exec (err, results) ->
-      throw err if err
-      images = _.map results, (image) ->
-        newImage =
-          id: image._id
-          imageUrl: image.image_url
-          thumbnailUrl: getThumbnail(image.image_url)
-          kind: image.kind
-      res.render 'imageList',
-        env: process.env.NODE_ENV
-        title: 'Image list'
-        pageName: 'imageList'
-        navigation: navigation
-        user: req.user
-        imageList: images
+    Image.find(deleted: false).sort(created_at: 'descending').exec(
+      (err, results) ->
+        throw err if err
+        images = _.map results, (image) ->
+          newImage =
+            id: image._id
+            imageUrl: image.image_url
+            thumbnailUrl: getThumbnail(image.image_url)
+            kind: image.kind
+        res.render 'imageList',
+          env: process.env.NODE_ENV
+          title: 'Image list'
+          pageName: 'imageList'
+          navigation: navigation
+          user: req.user
+          imageList: images
+    )
 
   # user management page
   users: (req, res) ->
