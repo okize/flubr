@@ -8,9 +8,9 @@ module.exports = () ->
   getImageSetHtml = (imageKind) ->
     if imageKind == 'pass'
       '<li>pass</li>' +
-      '<li><a href="#" class="changeImageKind isPass">fail</a></li>'
+      '<li><a href="#" class="change-image-kind isPass">fail</a></li>'
     else
-      '<li><a href="#" class="changeImageKind isFail">pass</a></li>' +
+      '<li><a href="#" class="change-image-kind isFail">pass</a></li>' +
       '<li>fail</li>'
 
   getUserRowHtml = (user) ->
@@ -42,7 +42,7 @@ module.exports = () ->
   #       "<li class='image-item' id='#{data[i]._id}'>" +
   #       "<ul class='set-image-kind'>#{getImageSetHtml(data[i].kind)}</ul>" +
   #       "<a href='#{data[i].image_url}'>" +
-  #       "<img src='#{getThumbnail(data[i].image_url)}' class='pf-image' />" +
+  #       "<img src='#{getThumbnail(data[i].image_url)}' class='image-thumbnail' />" +
   #       "</a>" +
   #       "<div class='delete-image'><a href='#'>delete</a></div>" +
   #       "</li>"
@@ -61,7 +61,7 @@ module.exports = () ->
     showMessage "Changed image to #{newKind}", 'notice'
     oldKind = if (newKind == 'pass') then 'fail' else 'pass'
     el.closest('.image-item').removeClass('image-item-' + oldKind).addClass('image-item-' + newKind)
-    el.closest('.set-image-kind').html( getImageSetHtml newKind )
+    el.closest('.image-settings').html( getImageSetHtml newKind )
 
   deleteUserInUi = (el) ->
     username = el.parent('td').prev().prev().text()
@@ -72,7 +72,7 @@ module.exports = () ->
     showMessage 'Image deleted!', 'notice'
     el.closest('.image-item').remove()
 
-  $('body').on 'click', '.changeImageKind', (e) ->
+  $('body').on 'click', '.change-image-kind', (e) ->
     e.preventDefault()
     $this = $(this)
     id = $this.closest('.image-item').attr('id')
