@@ -3,6 +3,8 @@ path = require 'path'
 fs = require 'fs'
 express = require 'express'
 compression = require 'compression'
+partials = require 'express-partials'
+pjax = require 'express-pjax'
 cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 session = require 'express-session'
@@ -90,6 +92,10 @@ app.use session(
 # passport config (see also authentication.coffee)
 app.use passport.initialize()
 app.use passport.session()
+
+# use pjax for routing
+app.use partials()
+app.use pjax()
 
 # parses json
 app.use bodyParser.json()
