@@ -65,6 +65,7 @@
     "gulp-shell": "*",
     "gulp-stylus": "*",
     "gulp-uglify": "*",
+    "gulp-uglifyjs": "*",
     "gulp-util": "*",
     "jquery": "*",
     "run-sequence": "*",
