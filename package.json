@@ -31,6 +31,7 @@
     "connect-mongostore": "*",
     "cookie-parser": "*",
     "express": "*",
+    "express-pjax": "*",
     "express-session": "*",
     "jade": "*",
     "lodash": "*",
