@@ -26,6 +26,7 @@ module.exports =
   # view all images page
   imageList: (req, res) ->
     Image.find(deleted: false).sort(created_at: 'descending').exec (err, results) ->
+      throw err if err
       images = _.map results, (image) ->
         newImage =
           id: image._id
@@ -43,6 +44,7 @@ module.exports =
   # user management page
   users: (req, res) ->
     User.find {}, (err, users) ->
+      throw err if err
       users = _.map users, (user) ->
         newUser =
           id: user.userid
