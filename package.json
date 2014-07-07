@@ -1,8 +1,8 @@
 {
   "name": "flubr",
-  "releaseCodename": "LonelyLemur",
+  "releaseCodename": "ExuberantElephant",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
     "node": "0.10.x"
   },
