@@ -2,20 +2,20 @@ extends application
 
 block page
 
-  ul.image-list
+  ul.image-cards
     each image in imageList
       if image.kind == 'pass'
-        - imageItemClass = 'image-item-pass'
+        - imageItemClass = 'image-card-pass'
       else
-        - imageItemClass = 'image-item-fail'
-      li(id='#{image.id}', class='image-item #{imageItemClass}')
-        ul.set-image-kind
+        - imageItemClass = 'image-card-fail'
+      li(id='#{image.id}', class='image-card #{imageItemClass}')
+        a(href='#{image.imageUrl}')
+          img.image-thumbnail(src='#{image.thumbnailUrl}', alt='')
+        ul.image-settings
           if image.kind == 'pass'
             li: strong pass
-            li: a.changeImageKind(href='#', class='isPass') fail
+            li: a.change-image-kind(href='#', class='isPass') fail
           else
-            li: a.changeImageKind(href='#', class='isFail') pass
+            li: a.change-image-kind(href='#', class='isFail') pass
             li: strong fail
-        a(href='#{image.imageUrl}')
-          img.pf-image(src='#{image.thumbnailUrl}', alt='')
-        .delete-image: a(href='#') delete
+          li: a.delete-image(href='#') delete

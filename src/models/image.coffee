@@ -4,7 +4,7 @@ Image = new mongoose.Schema(
   image_url: String
   thumbnail_url: String
   original_url: String
-  animated: { type: Boolean, default: false }
+  animated: { type: Boolean, default: true }
   kind: { type: String, default: 'neutral' }
   deleted: { type: Boolean, default: false }
   added_by: String

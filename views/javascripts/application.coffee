@@ -5,11 +5,13 @@ module.exports = () ->
 
   getImageSetHtml = (imageKind) ->
     if imageKind == 'pass'
-      '<li>pass</li>' +
-      '<li><a href="#" class="changeImageKind isPass">fail</a></li>'
+      '<li><strong>pass</strong></li>' +
+      '<li><a href="#" class="change-image-kind isPass">fail</a></li>' +
+      '<li><a href="#" class="delete-image">delete</a></li>'
     else
-      '<li><a href="#" class="changeImageKind isFail">pass</a></li>' +
-      '<li>fail</li>'
+      '<li><a href="#" class="change-image-kind isFail">pass</a></li>' +
+      '<li><strong>fail</strong></li>' +
+      '<li><a href="#" class="delete-image">delete</a></li>'
 
   getUserRowHtml = (user) ->
     html = """
@@ -33,14 +35,14 @@ module.exports = () ->
   #   thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
 
   # displayImages = (data) ->
-  #   list = $('#js-image-list')
+  #   list = $('#js-image-cards')
   #   html = ''
   #   $.each data, (i) ->
   #     html +=
-  #       "<li class='image-item' id='#{data[i]._id}'>" +
+  #       "<li class='image-card' id='#{data[i]._id}'>" +
   #       "<ul class='set-image-kind'>#{getImageSetHtml(data[i].kind)}</ul>" +
   #       "<a href='#{data[i].image_url}'>" +
-  #       "<img src='#{getThumbnail(data[i].image_url)}' class='pf-image' />" +
+  #       "<img src='#{getThumbnail(data[i].image_url)}' />" +
   #       "</a>" +
   #       "<div class='delete-image'><a href='#'>delete</a></div>" +
   #       "</li>"
@@ -58,8 +60,11 @@ module.exports = () ->
   switchImageKind = (el, newKind, id) ->
     msg "Changed image to #{newKind}", 'notice'
     oldKind = if (newKind == 'pass') then 'fail' else 'pass'
-    el.closest('.image-item').removeClass('image-item-' + oldKind).addClass('image-item-' + newKind)
-    el.closest('.set-image-kind').html( getImageSetHtml newKind )
+    el.closest('.image-card')
+      .removeClass('image-card-' + oldKind)
+      .addClass('image-card-' + newKind)
+    el.closest('.image-settings')
+      .html( getImageSetHtml newKind )
 
   deleteUserInUi = (el) ->
     username = el.parent('td').prev().prev().text()
@@ -67,34 +72,38 @@ module.exports = () ->
     el.closest('tr').remove()
 
   deleteImageInUi = (el) ->
-    msg 'Image deleted!', 'notice'
-    el.closest('.image-item').remove()
+    showMessage 'Image deleted!', 'notice'
+    el.closest('.image-card').remove()
 
-  $('body').on 'click', '.changeImageKind', (e) ->
+  $('body').on 'click', '.change-image-kind', (e) ->
     e.preventDefault()
     $this = $(this)
-    id = $this.closest('.image-item').attr('id')
+    id = $this.closest('.image-card').attr('id')
     data =
       kind: if $this.hasClass 'isPass' then 'fail' else 'pass'
     $.ajax
       type: 'PUT'
       url: 'api/images/' + id
-      success: switchImageKind $this, data.kind
-      # error: alert 'image kind could not be changed!'
+      success: ->
+        switchImageKind $this, data.kind
+      error: ->
+        showMessage 'Image kind could not be changed', 'error'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
-  $('body').on 'click', '.delete-image a', (e) ->
+  $('body').on 'click', '.delete-image', (e) ->
     e.preventDefault()
     verify = confirm 'Are you sure you want to delete this image?'
     if verify == true
       $this = $(this)
-      id = $this.closest('.image-item').attr('id')
+      id = $this.closest('.image-card').attr('id')
       $.ajax
         type: 'DELETE'
         url: 'api/images/' + id
-        success: deleteImageInUi $this
-        # error: alert 'image could not be deleted!'
+        success: ->
+          deleteImageInUi $this
+        error: ->
+          showMessage 'image could not be deleted!', 'error'
         contentType: 'application/json'
 
   $('#js-add-image').on 'submit', (e) ->
@@ -106,8 +115,10 @@ module.exports = () ->
     $.ajax
       type: 'POST'
       url: '/api/images'
-      success: showImageAdded data.source_url
-      # error: alert 'image could not be added!'
+      success: ->
+        showImageAdded data.source_url
+      error: ->
+        showMessage 'image could not be added!', 'error'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -124,7 +135,11 @@ module.exports = () ->
       url: '/api/users'
       success: (response) ->
         showUserAdded response
-      # error: alert 'user could not be added!'
+      error: (error) ->
+        if error.responseText
+          showMessage JSON.parse(error.responseText).error, 'error'
+        else
+          showMessage 'Unable to add user', 'error'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -137,6 +152,8 @@ module.exports = () ->
       $.ajax
         type: 'DELETE'
         url: 'api/users/' + id
-        success: deleteUserInUi $this
-        # error: alert 'image could not be deleted!'
+        success: ->
+          deleteUserInUi $this
+        error: ->
+          showMessage 'image could not be deleted!', 'error'
         contentType: 'application/json'

@@ -16,9 +16,11 @@ module.exports =
 
   # lists all images
   index: (req, res) ->
-    Image.find(deleted: true).sort(created_at: 'descending').exec (err, results) ->
-      res.send 500, error: err if err?
-      res.send results
+    Image.find(deleted: true).sort(created_at: 'descending').exec(
+      (err, results) ->
+        res.send 500, error: err if err?
+        res.send results
+    )
 
   # displays single image
   show: (req, res) ->
