@@ -21,6 +21,11 @@ module.exports = (app, passport) ->
   app.get '/images', helpers.ensureAuthenticated, (req, res, next) ->
     application.images req, res, next
 
+  # view all deleted images
+  # NOTE: this is not in the navigation
+  app.get '/imagesDeleted', helpers.ensureAuthenticated, (req, res, next) ->
+    application.imagesDeleted req, res, next
+
   # manage users
   app.get '/users', helpers.ensureAuthenticated, (req, res, next) ->
     application.users req, res, next
