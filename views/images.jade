@@ -11,11 +11,12 @@ block page
       li(id='#{image.id}', class='image-card #{imageItemClass}')
         a(href='#{image.imageUrl}')
           img.image-thumbnail(src='#{image.thumbnailUrl}', alt='')
-        ul.image-settings
-          if image.kind == 'pass'
-            li: strong pass
-            li: a.change-image-kind(href='#', class='isPass') fail
-          else
-            li: a.change-image-kind(href='#', class='isFail') pass
-            li: strong fail
-          li: a.delete-image(href='#') delete
+        if !deleted
+          ul.image-settings
+            if image.kind == 'pass'
+              li: strong pass
+              li: a.change-image-kind(href='#', class='isPass') fail
+            else
+              li: a.change-image-kind(href='#', class='isFail') pass
+              li: strong fail
+              li: a.delete-image(href='#') delete
