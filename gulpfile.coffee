@@ -261,7 +261,7 @@ gulp.task 'commit-updates', ->
     throw err if err
     repo.commit msg, {all: true}, (err) ->
       throw err if err
-      log 'Commited master branch'
+      log "#{msg} & commited to master"
 
 # bumps patch version and creates a new tag
 gulp.task 'tag-version', ->
