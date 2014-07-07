@@ -47,6 +47,10 @@ module.exports = (app, passport) ->
   app.get '/api/images', (req, res, next) ->
     images.index req, res, next
 
+  # list all deleted images
+  app.get '/api/images/deleted', (req, res, next) ->
+    images.indexDeleted req, res, next
+
   # list single image by id
   app.get '/api/images/:id', (req, res, next) ->
     images.show req, res, next
