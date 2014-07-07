@@ -7,6 +7,7 @@ cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 session = require 'express-session'
 Store = require('connect-mongostore')(session)
+flash = require 'connect-flash'
 logger = require 'morgan'
 mongoose = require 'mongoose'
 passport = require 'passport'
@@ -31,6 +32,9 @@ app.set 'app name', 'Flubr'
 app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
 app.set 'db url', process.env.MONGODB_URL or 'mongodb://localhost/flubr'
+
+# logger
+app.use logger('dev')
 
 # database connection
 mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
@@ -95,8 +99,8 @@ app.use passport.session()
 app.use bodyParser.json()
 app.use bodyParser.urlencoded(extended: true)
 
-# logger
-app.use logger('dev')
+# flash messages
+app.use flash()
 
 # routes
 routes(app, passport)
