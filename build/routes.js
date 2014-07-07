@@ -21,8 +21,11 @@ module.exports = function(app, passport) {
   app.get('/addImage', helpers.ensureAuthenticated, function(req, res, next) {
     return application.addImage(req, res, next);
   });
-  app.get('/imageList', helpers.ensureAuthenticated, function(req, res, next) {
-    return application.imageList(req, res, next);
+  app.get('/images', helpers.ensureAuthenticated, function(req, res, next) {
+    return application.images(req, res, next);
+  });
+  app.get('/imagesDeleted', helpers.ensureAuthenticated, function(req, res, next) {
+    return application.imagesDeleted(req, res, next);
   });
   app.get('/users', helpers.ensureAuthenticated, function(req, res, next) {
     return application.users(req, res, next);
@@ -42,6 +45,9 @@ module.exports = function(app, passport) {
   });
   app.get('/api/images', function(req, res, next) {
     return images.index(req, res, next);
+  });
+  app.get('/api/images/deleted', function(req, res, next) {
+    return images.indexDeleted(req, res, next);
   });
   app.get('/api/images/:id', function(req, res, next) {
     return images.show(req, res, next);

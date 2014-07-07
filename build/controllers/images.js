@@ -22,6 +22,20 @@ errors = {
 module.exports = {
   index: function(req, res) {
     return Image.find({
+      deleted: false
+    }).sort({
+      created_at: 'descending'
+    }).exec(function(err, results) {
+      if (err != null) {
+        res.send(500, {
+          error: err
+        });
+      }
+      return res.send(results);
+    });
+  },
+  indexDeleted: function(req, res) {
+    return Image.find({
       deleted: true
     }).sort({
       created_at: 'descending'

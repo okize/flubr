@@ -12,7 +12,7 @@ moment = require('moment');
 
 navigation = {
   'Add new image': 'addImage',
-  'Image list': 'imageList',
+  'Image list': 'images',
   'Manage users': 'users',
   'Log out': 'logout'
 };
@@ -34,7 +34,7 @@ module.exports = {
       user: req.user
     });
   },
-  imageList: function(req, res) {
+  images: function(req, res) {
     return Image.find({
       deleted: false
     }).sort({
@@ -53,13 +53,44 @@ module.exports = {
           kind: image.kind
         };
       });
-      return res.render('imageList', {
+      return res.render('images', {
         env: process.env.NODE_ENV,
         title: 'Image list',
-        pageName: 'imageList',
+        pageName: 'images',
         navigation: navigation,
         user: req.user,
-        imageList: images
+        imageList: images,
+        deleted: false
+      });
+    });
+  },
+  imagesDeleted: function(req, res) {
+    return Image.find({
+      deleted: true
+    }).sort({
+      created_at: 'descending'
+    }).exec(function(err, results) {
+      var images;
+      if (err) {
+        throw err;
+      }
+      images = _.map(results, function(image) {
+        var newImage;
+        return newImage = {
+          id: image._id,
+          imageUrl: image.image_url,
+          thumbnailUrl: getThumbnail(image.image_url),
+          kind: image.kind
+        };
+      });
+      return res.render('images', {
+        env: process.env.NODE_ENV,
+        title: 'Image list',
+        pageName: 'images',
+        navigation: navigation,
+        user: req.user,
+        imageList: images,
+        deleted: true
       });
     });
   },
