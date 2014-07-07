@@ -42,6 +42,28 @@ module.exports =
           navigation: navigation
           user: req.user
           imageList: images
+          deleted: false
+    )
+
+  # view all images page
+  imagesDeleted: (req, res) ->
+    Image.find(deleted: true).sort(created_at: 'descending').exec(
+      (err, results) ->
+        throw err if err
+        images = _.map results, (image) ->
+          newImage =
+            id: image._id
+            imageUrl: image.image_url
+            thumbnailUrl: getThumbnail(image.image_url)
+            kind: image.kind
+        res.render 'images',
+          env: process.env.NODE_ENV
+          title: 'Image list'
+          pageName: 'images'
+          navigation: navigation
+          user: req.user
+          imageList: images
+          deleted: true
     )
 
   # user management page
