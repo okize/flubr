@@ -31,7 +31,7 @@ module.exports = (app, passport) ->
     application.users req, res, next
 
   # login
-  app.get '/login', passport.authenticate('twitter'), (req, res, next) ->
+  app.get '/login', passport.authenticate('twitter')
 
   # logout
   app.all '/logout', (req, res, next) ->
@@ -39,10 +39,10 @@ module.exports = (app, passport) ->
     res.redirect '/'
 
   # auth callback for twitter
-  app.get '/auth/callback', passport.authenticate('twitter',
-    failureRedirect: '/'
-  ), (req, res, next) ->
-    res.redirect '/'
+  app.get '/auth', passport.authenticate('twitter',
+    successRedirect: '/addImage'
+    failureRedirect: '/failed'
+  )
 
   # api
   app.all '/api', (req, res, next) ->
