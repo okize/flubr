@@ -18,8 +18,13 @@ module.exports = (app, passport) ->
     application.addImage req, res, next
 
   # view all images
-  app.get '/imageList', helpers.ensureAuthenticated, (req, res, next) ->
-    application.imageList req, res, next
+  app.get '/images', helpers.ensureAuthenticated, (req, res, next) ->
+    application.images req, res, next
+
+  # view all deleted images
+  # NOTE: this is not in the navigation
+  app.get '/imagesDeleted', helpers.ensureAuthenticated, (req, res, next) ->
+    application.imagesDeleted req, res, next
 
   # manage users
   app.get '/users', helpers.ensureAuthenticated, (req, res, next) ->
@@ -46,6 +51,10 @@ module.exports = (app, passport) ->
   # list all images
   app.get '/api/images', (req, res, next) ->
     images.index req, res, next
+
+  # list all deleted images
+  app.get '/api/images/deleted', (req, res, next) ->
+    images.indexDeleted req, res, next
 
   # list single image by id
   app.get '/api/images/:id', (req, res, next) ->
