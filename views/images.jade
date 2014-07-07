@@ -18,4 +18,7 @@ block page
           else
             li: a.change-image-kind(href='#', class='isFail') pass
             li: strong fail
-          li: a.delete-image(href='#') delete
+          if !deleted
+            li: a.delete-image(href='#') delete
+          else
+            li: a.undelete-image(href='#') undelete
