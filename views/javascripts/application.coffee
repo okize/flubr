@@ -49,16 +49,16 @@ module.exports = () ->
   #   list.append(html).show()
 
   showImageAdded = (url) ->
-    msg "<a href='#{url}'>Image added!</a>", 'notice'
+    msg.notice "<a href='#{url}'>Image added!</a>"
     $('#js-add-image')[0].reset()
 
   showUserAdded = (user) ->
-    msg "#{user.userName} added!", 'notice'
+    msg.notice "#{user.userName} added!"
     $('#js-add-user')[0].reset()
     $('.user-table tbody').append(getUserRowHtml user)
 
   switchImageKind = (el, newKind, id) ->
-    msg "Changed image to #{newKind}", 'notice'
+    msg.notice "Changed image to #{newKind}"
     oldKind = if (newKind == 'pass') then 'fail' else 'pass'
     el.closest('.image-card')
       .removeClass('image-card-' + oldKind)
@@ -68,11 +68,11 @@ module.exports = () ->
 
   deleteUserInUi = (el) ->
     username = el.parent('td').prev().prev().text()
-    msg username + ' deleted!', 'notice'
+    msg.notice username + ' deleted!'
     el.closest('tr').remove()
 
   deleteImageInUi = (el) ->
-    showMessage 'Image deleted!', 'notice'
+    msg.notice 'Image deleted!'
     el.closest('.image-card').remove()
 
   $('body').on 'click', '.change-image-kind', (e) ->
@@ -87,7 +87,7 @@ module.exports = () ->
       success: ->
         switchImageKind $this, data.kind
       error: ->
-        showMessage 'Image kind could not be changed', 'error'
+        msg.error 'Image kind could not be changed'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -103,7 +103,7 @@ module.exports = () ->
         success: ->
           deleteImageInUi $this
         error: ->
-          showMessage 'image could not be deleted!', 'error'
+          msg.error 'image could not be deleted!'
         contentType: 'application/json'
 
   $('#js-add-image').on 'submit', (e) ->
@@ -118,7 +118,7 @@ module.exports = () ->
       success: ->
         showImageAdded data.source_url
       error: ->
-        showMessage 'image could not be added!', 'error'
+        msg.error 'image could not be added!'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -137,9 +137,9 @@ module.exports = () ->
         showUserAdded response
       error: (error) ->
         if error.responseText
-          showMessage JSON.parse(error.responseText).error, 'error'
+          msg.error JSON.parse(error.responseText).error
         else
-          showMessage 'Unable to add user', 'error'
+          msg.error 'Unable to add user'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -155,5 +155,5 @@ module.exports = () ->
         success: ->
           deleteUserInUi $this
         error: ->
-          showMessage 'image could not be deleted!', 'error'
+          msg.error 'image could not be deleted!'
         contentType: 'application/json'
