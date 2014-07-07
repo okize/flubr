@@ -29,5 +29,5 @@ module.exports = passport.use new passportTwitterStrategy(
     if user
       done null, user
     else
-      done 'Unauthorized User', null
+      done 'You are not authorized to use this application', null
 )
