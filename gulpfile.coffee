@@ -261,7 +261,7 @@ gulp.task 'commit-updates', ->
     throw err if err
     repo.commit msg, {all: true}, (err) ->
       throw err if err
-      log "#{msg} & commited to master"
+      log "#{msg} & committed to master"
 
 # bumps patch version and creates a new tag
 gulp.task 'tag-version', ->
@@ -275,7 +275,7 @@ gulp.task 'tag-version', ->
       'Release codename: ' + pak.releaseCodename,
       args: ' --annotate',
       ->
-        log "Taged version #{pak.version} codenamed #{pak.releaseCodename}"
+        log "Tagged version #{pak.version}"
     )
 
 # push commits to github
