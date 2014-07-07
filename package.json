@@ -68,6 +68,7 @@
     "gulp-uglifyjs": "*",
     "gulp-util": "*",
     "jquery": "*",
+    "node-debug": "*",
     "run-sequence": "*",
     "semver": "*",
     "tiny-lr": "*",

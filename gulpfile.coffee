@@ -115,6 +115,10 @@ gulp.task 'release', (callback) ->
     callback
   )
 
+# run a node debugger
+gulp.task 'debug', ->
+  bg('./node_modules/.bin/node-debug', appScript)
+
 # open app in default browser
 gulp.task 'open', ->
   gulp
@@ -131,6 +135,7 @@ gulp.task 'start-app', ->
     script: appScript
     ext: 'coffee'
     env: env
+    nodeArgs: ['--nodejs', '--debug=5858']
     ignore: [
       'node_modules/',
       'views/',
@@ -268,17 +273,38 @@ gulp.task 'tag-version', ->
     .tag(
       'v' + pak.version,
       'Release codename: ' + pak.releaseCodename,
-      args: ' --annotate'
+      args: ' --annotate',
+      ->
+        log "Taged version #{pak.version} codenamed #{pak.releaseCodename}"
     )
 
 # push commits to github
 gulp.task 'push-updates', ->
+
+  pak = getPackage()
+
   git
-    .push('origin', 'master', args: ' --tags')
+    .push(
+      'origin',
+      'master',
+      args: ' --tags',
+      ->
+        log "Pushed v#{pak.version} tag to Github"
+    )
     .end()
 
 # deploys app to heroku
 gulp.task 'deploy-app', ->
+
+  pak = getPackage()
+
   git
-    .push('heroku', 'master')
+    .push(
+      'heroku',
+      'master',
+      null,
+      ->
+        log "Pushed v#{pak.version} to Heroku"
+    )
     .end()
+
