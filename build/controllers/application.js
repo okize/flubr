@@ -19,7 +19,9 @@ navigation = {
 
 getThumbnail = function(url) {
   var thumbnail;
-  return thumbnail = (url.substring(0, url.length - 4)) + 's.jpg';
+  if (url != null) {
+    return thumbnail = (url.substring(0, url.length - 4)) + 's.jpg';
+  }
 };
 
 module.exports = {
@@ -39,6 +41,9 @@ module.exports = {
       created_at: 'descending'
     }).exec(function(err, results) {
       var images;
+      if (err) {
+        throw err;
+      }
       images = _.map(results, function(image) {
         var newImage;
         return newImage = {
@@ -60,6 +65,9 @@ module.exports = {
   },
   users: function(req, res) {
     return User.find({}, function(err, users) {
+      if (err) {
+        throw err;
+      }
       users = _.map(users, function(user) {
         var newUser;
         return newUser = {

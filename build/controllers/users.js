@@ -27,37 +27,42 @@ module.exports = {
   create: function(req, res) {
     return twitter.get('users/show', {
       screen_name: req.body.user
-    }, function(err, data, response) {
+    }, function(err, data) {
       var user;
-      if (err) {
+      if ((err != null) && err.code === 34) {
+        return res.send(500, {
+          error: "" + req.body.user + " is not a valid Twitter username"
+        });
+      } else if (err != null) {
         throw err;
+      } else {
+        user = new User();
+        user.userid = data.id;
+        user.userName = data.screen_name;
+        user.displayName = data.name;
+        user.avatar = data.profile_image_url;
+        return User.find({
+          userid: user.userid
+        }, function(err, results) {
+          if (err) {
+            throw err;
+          }
+          if (!results.length) {
+            return user.save(function(err) {
+              if (err != null) {
+                res.send(500, {
+                  error: err
+                });
+              }
+              return res.send(user);
+            });
+          } else {
+            return res.send(500, {
+              error: "" + req.body.user + " is already a user"
+            });
+          }
+        });
       }
-      user = new User();
-      user.userid = data.id;
-      user.userName = data.screen_name;
-      user.displayName = data.name;
-      user.avatar = data.profile_image_url;
-      return User.find({
-        userid: user.userid
-      }, function(err, results) {
-        if (err) {
-          throw err;
-        }
-        if (!results.length) {
-          return user.save(function(err) {
-            if (err != null) {
-              res.send(500, {
-                error: err
-              });
-            }
-            return res.send(user);
-          });
-        } else {
-          return res.send(500, {
-            error: 'user already exists'
-          });
-        }
-      });
     });
   },
   update: function(req, res) {

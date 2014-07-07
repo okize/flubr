@@ -16,7 +16,7 @@ clean = require 'gulp-clean'
 open = require 'gulp-open'
 rename = require 'gulp-rename'
 minifyCss = require 'gulp-minify-css'
-uglify = require 'gulp-uglify'
+uglify = require 'gulp-uglifyjs'
 browserify = require 'browserify'
 coffeeify = require 'coffeeify'
 source = require 'vinyl-source-stream'
@@ -96,12 +96,18 @@ gulp.task 'lint', [
   'lint-css'
 ]
 
-# creates a release and deploys the application
-gulp.task 'release', (callback) ->
+# creates a build
+gulp.task 'build', (callback) ->
   runSequence(
     'clean-directories',
     ['build-css', 'build-js', 'build-app'],
-    ['minify-css', 'minify-js'],
+    ['minify-css', 'minify-js']
+    callback
+  )
+
+# commits, tags & deploys application
+gulp.task 'release', (callback) ->
+  runSequence(
     'commit-updates',
     'tag-version',
     'push-updates',
@@ -179,16 +185,6 @@ gulp.task 'lint-css', ->
 gulp.task 'clean-directories', ->
   gulp
     .src([appBuild, cssBuild, jsBuild], read: false)
-    # .pipe(
-    #   # prevent deploys from happening on non-master branch
-    #   repo.branch (err, head) ->
-    #     throw err if err
-    #     if head.name != 'master'
-    #       logErr 'Switch to master branch before releasing'
-    #       throw err 'wrong branch'
-    #     else
-    #       gutil.noop()
-    #   )
     .pipe(clean())
 
 # builds coffeescript source into deployable javascript
