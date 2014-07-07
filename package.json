@@ -28,6 +28,7 @@
     "coffee-script": "*",
     "coffeeify": "*",
     "compression": "*",
+    "connect-flash": "*",
     "connect-mongostore": "*",
     "cookie-parser": "*",
     "express": "*",
