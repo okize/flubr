@@ -18,7 +18,7 @@ passport.deserializeUser (id, done) ->
 module.exports = passport.use new passportTwitterStrategy(
   consumerKey: process.env.TWITTER_CONSUMER_KEY
   consumerSecret: process.env.TWITTER_CONSUMER_SECRET
-  callbackURL: '/auth/callback'
+  callbackURL: '/auth'
 , (token, tokenSecret, profile, done) ->
 
   # make sure user is in list of allowed users
