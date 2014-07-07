@@ -12,6 +12,8 @@ html
       link(rel='stylesheet', href='/stylesheets/styles.css')
 
   body.app-body
+    if (message)
+      .flash-message= message
     block content
     if env == 'production'
       script(src='/javascripts/scripts.min.js')
