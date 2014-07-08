@@ -40,9 +40,9 @@ module.exports = (app, passport) ->
 
   # auth callback for twitter
   app.get '/auth', passport.authenticate('twitter',
-    successRedirect: '/addImage'
-    failureRedirect: '/failed'
-  )
+    failureRedirect: '/403'
+  ), (req, res) ->
+    res.redirect '/'
 
   # api
   app.all '/api', (req, res, next) ->
@@ -92,8 +92,18 @@ module.exports = (app, passport) ->
   app.delete '/api/users/:id', helpers.ensureAuthenticated, (req, res, next) ->
     users.delete req, res, next
 
+  # unauthorized
+  app.all '/401', (req, res) ->
+    res.statusCode = 401
+    res.render '401', 401
+
+  # forbidden
+  app.all '/403', (req, res) ->
+    res.statusCode = 403
+    res.render '403', 403
+
   # page not found
   app.all '/*', (req, res) ->
-    console.warn "error 404: ", req.url
+    console.warn "error 404: #{req.url}"
     res.statusCode = 404
     res.render '404', 404
