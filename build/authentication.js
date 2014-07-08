@@ -24,7 +24,7 @@ passport.deserializeUser(function(id, done) {
 module.exports = passport.use(new passportTwitterStrategy({
   consumerKey: process.env.TWITTER_CONSUMER_KEY,
   consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: '/auth/callback'
+  callbackURL: '/auth'
 }, function(token, tokenSecret, profile, done) {
   return User.findOne({
     userid: profile.id
@@ -35,7 +35,7 @@ module.exports = passport.use(new passportTwitterStrategy({
     if (user) {
       return done(null, user);
     } else {
-      return done('Unauthorized User', null);
+      return done('You are not authorized to use this application', null);
     }
   });
 }));

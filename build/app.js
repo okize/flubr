@@ -34,7 +34,7 @@ browserify = require('browserify-middleware');
 
 stylus = require('stylus');
 
-axis = require('axis-css');
+axis = require('axis');
 
 rupture = require('rupture');
 
