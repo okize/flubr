@@ -7,6 +7,7 @@ gutil = require 'gulp-util'
 liveReload = require('tiny-lr')()
 nodemon = require 'gulp-nodemon'
 stylus = require 'gulp-stylus'
+nib = require 'nib'
 rupture = require 'rupture'
 coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
@@ -210,7 +211,8 @@ gulp.task 'build-css', ->
     .pipe(stylus(
       linenos: false
       use: [
-        rupture()
+        rupture(),
+        nib()
       ]
     ))
     .pipe(gulp.dest(cssBuild))
