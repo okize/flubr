@@ -1,3 +1,6 @@
+$homepageImageWidth = 18rem
+$homepageImageHeight = 12rem
+
 .app-homepage
   text-align: center
   position: relative
@@ -12,6 +15,23 @@
   +from($medium-up)
     font-size: 12rem
 
+.homepage-login-button
+  a
+    background: #4099FF
+    text-transform: uppercase
+    color: white
+    text-decoration: none
+    padding: .5rem 1rem
+    border-radius: .25rem
+    font-size: 1rem
+    display: block
+    width: $homepageImageWidth * .85
+    margin: .25rem auto
+    +from($medium-up)
+      font-size: .8rem
+      display: inline-block
+      width: auto
+
 .homepage-random-images
   overflow: hidden
   +from($medium-up)
@@ -19,26 +39,34 @@
     margin: 1rem 0 0
 
 .image-type-pass, .image-type-fail
+  width: $homepageImageWidth * .75
+  height: $homepageImageHeight * .75
+  img
+    width: $homepageImageWidth * .75
+    height: $homepageImageHeight * .75
+  +from($medium-up)
+    width: $homepageImageWidth
+    height: $homepageImageHeight
+    img
+      width: $homepageImageWidth
+      height: $homepageImageHeight
+
+.image-type-pass, .image-type-fail
   border: 1px solid #999
-  margin: 1.5rem auto
-  width: 18rem
-  height: 12rem
+  margin: 1rem auto 0
   position: relative
   overflow: hidden
-  img
-    width: 18rem
-    height: 12rem
   h3
     margin: 0 0 0 .4rem
     opacity: .65
     position: absolute
     z-index: 1
-    top: 4rem
-    left: 0
+    top: $homepageImageHeight * .25
+    left: .25rem
     vertical-align: middle
     width:100%
     text-align: center
-    font-size: 3.5rem
+    font-size: 2.5rem
     text-transform: uppercase
     letter-spacing: 1.5rem
     text-shadow:
@@ -49,6 +77,9 @@
   +from($medium-up)
     display: inline-block
     margin: 1.5rem
+    h3
+      font-size: 3.5rem
+      top: $homepageImageHeight * .3
 
 .image-type-pass
   h3
@@ -58,12 +89,3 @@
   h3
     color: $fail
 
-.homepage-login-button
-  a
-    background-color: #4099FF
-    text-transform: uppercase
-    color: white
-    text-decoration: none
-    padding: .5rem 1rem
-    border-radius: .25rem
-    font-size: .8rem
