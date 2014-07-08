@@ -30,16 +30,15 @@ module.exports = function(app, passport) {
   app.get('/users', helpers.ensureAuthenticated, function(req, res, next) {
     return application.users(req, res, next);
   });
-  app.get('/login', passport.authenticate('twitter'), function(req, res, next) {});
+  app.get('/login', passport.authenticate('twitter'));
   app.all('/logout', function(req, res, next) {
     req.logout();
     return res.redirect('/');
   });
-  app.get('/auth/callback', passport.authenticate('twitter', {
-    failureRedirect: '/'
-  }), function(req, res, next) {
-    return res.redirect('/');
-  });
+  app.get('/auth', passport.authenticate('twitter', {
+    successRedirect: '/addImage',
+    failureRedirect: '/failed'
+  }));
   app.all('/api', function(req, res, next) {
     return res.redirect('/');
   });
