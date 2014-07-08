@@ -1,4 +1,4 @@
-var Store, app, authentication, axis, bodyParser, browserify, coffee, coffeeify, compression, cookieParser, express, fs, livereload, logger, mongoose, passport, path, routes, rupture, session, stylus;
+var Store, app, authentication, bodyParser, browserify, coffee, coffeeify, compression, cookieParser, express, fs, livereload, logger, mongoose, nib, passport, path, routes, rupture, session, stylus;
 
 path = require('path');
 
@@ -34,7 +34,7 @@ browserify = require('browserify-middleware');
 
 stylus = require('stylus');
 
-axis = require('axis');
+nib = require('nib');
 
 rupture = require('rupture');
 
@@ -73,9 +73,7 @@ mongoose.connect(app.get('db url'), {
 if (app.get('env') === 'development') {
   app.route('/stylesheets/styles.css').get(function(req, res, next) {
     var css;
-    css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8')).set('filename', './views/stylesheets/').set('paths', ['./views/stylesheets/']).set('compress', false).set('linenos', true).use(rupture()).use(axis({
-      implicit: false
-    })).render();
+    css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8')).set('filename', './views/stylesheets/').set('paths', ['./views/stylesheets/']).set('compress', false).set('linenos', true).use(rupture()).use(nib()).render();
     res.set('Content-Type', 'text/css');
     return res.send(css);
   });
