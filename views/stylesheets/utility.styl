@@ -37,22 +37,10 @@
 .flash-success
   flash(success)
 
-.inputAddOn
-  display: block
-  +from($medium-up)
-    display: flex
-
-.inputAddOn-field
-  +from($medium-up)
-    margin: 0
-    flex: 1
-
-// .inputAddOn-item
-
 .switch-toggle
   height: $toggleSwitchHeight
   position: relative
-  background-color: $toggleSwitchBgColor
+  background: $toggleSwitchBgColor
   label
     color: #fff
     line-height: $toggleSwitchHeight
@@ -67,7 +55,7 @@
     z-index: 1
     width: 50%
     height: 100%
-    background-color: $toggleSwitchActiveBgColor
+    background: $toggleSwitchActiveBgColor
     box-shadow: inset rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.3) 0 -1px 0
   input
     position: absolute

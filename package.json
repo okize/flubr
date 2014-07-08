@@ -22,7 +22,6 @@
   "license": "MIT",
   "dependencies": {
     "async": "*",
-    "axis-css": "jenius/axis",
     "body-parser": "*",
     "browserify-middleware": "*",
     "coffee-script": "*",
@@ -37,6 +36,7 @@
     "moment": "*",
     "mongoose": "3.8.x",
     "morgan": "*",
+    "nib": "*",
     "passport": "*",
     "passport-twitter": "*",
     "request": "*",

@@ -1,0 +1,49 @@
+.table
+  width: 100%
+
+  th, td
+    padding: .75rem .5rem
+    font-size: 14px
+    vertical-align: middle
+    border-bottom: 1px solid $tableRowBorderColor
+
+  th
+    font-weight: bold
+    text-align: left
+
+  thead
+    background: $tableHeadBgColor
+    color: $tableHeadColor
+    tr:last-child
+      th
+        vertical-align: bottom
+      th, td
+        border-bottom: 1px solid $tableHeadBorderColor
+
+  tbody
+    tr
+      &:last-child
+        td
+          border-bottom: 0
+
+  tfoot
+    th, td
+      border-top: 1px solid $tableHeadBorderColor
+
+  .table
+    background: #ccc
+
+  &.table-striped
+    tbody tr:nth-child(even)
+      background: $tableStripedEvenColor
+    tbody tr:nth-child(odd)
+      background: $tableStripedOddColor
+    td
+      border-bottom: 1px solid white
+
+  &.table-bordered
+    border: 1px $tableBorderedColor solid
+    border-left: 0
+    td, th
+      border-left: 1px $tableBorderedColor solid
+      border-bottom: 1px $tableBorderedColor solid
