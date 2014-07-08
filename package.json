@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "async": "*",
-    "axis-css": "*",
+    "axis-css": "jenius/axis",
     "body-parser": "*",
     "browserify-middleware": "*",
     "coffee-script": "*",
