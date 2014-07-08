@@ -14,6 +14,6 @@ html
   body.app-body
     block content
     if env == 'production'
-      script(src='/javascripts/scripts.min.js')
+      script(async, src='/javascripts/scripts.min.js')
     else
-      script(src='/javascripts/scripts.js')
+      script(async, src='/javascripts/scripts.js')
