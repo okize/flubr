@@ -35,7 +35,7 @@ module.exports = passport.use(new passportTwitterStrategy({
     if (user) {
       return done(null, user);
     } else {
-      return done('You are not authorized to use this application', null);
+      return done(null, null);
     }
   });
 }));

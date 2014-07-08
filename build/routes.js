@@ -36,9 +36,10 @@ module.exports = function(app, passport) {
     return res.redirect('/');
   });
   app.get('/auth', passport.authenticate('twitter', {
-    successRedirect: '/addImage',
-    failureRedirect: '/failed'
-  }));
+    failureRedirect: '/403'
+  }), function(req, res) {
+    return res.redirect('/');
+  });
   app.all('/api', function(req, res, next) {
     return res.redirect('/');
   });
@@ -75,8 +76,16 @@ module.exports = function(app, passport) {
   app["delete"]('/api/users/:id', helpers.ensureAuthenticated, function(req, res, next) {
     return users["delete"](req, res, next);
   });
+  app.all('/401', function(req, res) {
+    res.statusCode = 401;
+    return res.render('401', 401);
+  });
+  app.all('/403', function(req, res) {
+    res.statusCode = 403;
+    return res.render('403', 403);
+  });
   return app.all('/*', function(req, res) {
-    console.warn("error 404: ", req.url);
+    console.warn("error 404: " + req.url);
     res.statusCode = 404;
     return res.render('404', 404);
   });
