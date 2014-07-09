@@ -1,8 +1,16 @@
 $ = require 'jquery'
 msg = require './messaging'
-imageCards = require './imageCards'
+imageCard = require './imageCards'
 
 module.exports = () ->
+
+  $('body').on 'click', '.change-image-kind', (e) ->
+    e.preventDefault()
+    imageCard.switchImageKind $(this)
+
+  $('body').on 'click', '.delete-image', (e) ->
+    e.preventDefault()
+    imageCard.deleteImage $(this)
 
   getUserRowHtml = (user) ->
     html = """
@@ -20,33 +28,6 @@ module.exports = () ->
        """
     html
 
-  getImageSetHtml = (imageKind) ->
-    if imageKind == 'pass'
-      '<li><strong>pass</strong></li>' +
-      '<li><a href="#" class="change-image-kind isPass">fail</a></li>' +
-      '<li><a href="#" class="delete-image">delete</a></li>'
-    else
-      '<li><a href="#" class="change-image-kind isFail">pass</a></li>' +
-      '<li><strong>fail</strong></li>' +
-      '<li><a href="#" class="delete-image">delete</a></li>'
-
-  # getThumbnail = (url) ->
-  #   thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
-
-  # displayImages = (data) ->
-  #   list = $('#js-image-cards')
-  #   html = ''
-  #   $.each data, (i) ->
-  #     html +=
-  #       "<li class='image-card' id='#{data[i]._id}'>" +
-  #       "<ul class='set-image-kind'>#{getImageSetHtml(data[i].kind)}</ul>" +
-  #       "<a href='#{data[i].image_url}'>" +
-  #       "<img src='#{getThumbnail(data[i].image_url)}' />" +
-  #       "</a>" +
-  #       "<div class='delete-image'><a href='#'>delete</a></div>" +
-  #       "</li>"
-  #   list.append(html).show()
-
   showImageAdded = (url) ->
     msg.notice "<a href='#{url}'>Image added!</a>"
     $('#js-add-image')[0].reset()
@@ -56,54 +37,10 @@ module.exports = () ->
     $('#js-add-user')[0].reset()
     $('.user-table tbody').append(getUserRowHtml user)
 
-  switchImageKind = (el, newKind, id) ->
-    msg.notice "Changed image to #{newKind}"
-    oldKind = if (newKind == 'pass') then 'fail' else 'pass'
-    el.closest('.image-card')
-      .removeClass('image-card-' + oldKind)
-      .addClass('image-card-' + newKind)
-    el.closest('.image-settings')
-      .html( getImageSetHtml newKind )
-
   deleteUserInUi = (el) ->
     username = el.parent('td').prev().prev().text()
     msg.notice username + ' deleted!'
     el.closest('tr').remove()
-
-  deleteImageInUi = (el) ->
-    msg.notice 'Image deleted!'
-    el.closest('.image-card').remove()
-
-  $('body').on 'click', '.change-image-kind', (e) ->
-    e.preventDefault()
-    $this = $(this)
-    id = $this.closest('.image-card').attr('id')
-    data =
-      kind: if $this.hasClass 'isPass' then 'fail' else 'pass'
-    $.ajax
-      type: 'PUT'
-      url: 'api/images/' + id
-      success: ->
-        switchImageKind $this, data.kind
-      error: ->
-        msg.error 'Image kind could not be changed'
-      contentType: 'application/json'
-      data: JSON.stringify(data)
-
-  $('body').on 'click', '.delete-image', (e) ->
-    e.preventDefault()
-    verify = confirm 'Are you sure you want to delete this image?'
-    if verify == true
-      $this = $(this)
-      id = $this.closest('.image-card').attr('id')
-      $.ajax
-        type: 'DELETE'
-        url: 'api/images/' + id
-        success: ->
-          deleteImageInUi $this
-        error: ->
-          msg.error 'image could not be deleted!'
-        contentType: 'application/json'
 
   $('#js-add-image').on 'submit', (e) ->
     e.preventDefault()
@@ -156,3 +93,5 @@ module.exports = () ->
         error: ->
           msg.error 'image could not be deleted!'
         contentType: 'application/json'
+
+
