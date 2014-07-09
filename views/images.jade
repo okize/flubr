@@ -14,9 +14,9 @@ block page
         if !deleted
           ul.image-settings
             if image.kind == 'pass'
-              li: strong pass
-              li: a.change-image-kind(href='#', class='isPass') fail
+              li: .is-pass: span.icon.icon-thumbs-up
+              li: a.change-image-kind(href='#', class='is-fail'): span.icon.icon-thumbs-o-down
             else
-              li: a.change-image-kind(href='#', class='isFail') pass
-              li: strong fail
-            li: a.delete-image(href='#') delete
+              li: a.change-image-kind(href='#', class='is-pass'): span.icon.icon-thumbs-o-up
+              li: .is-fail: span.icon.icon-thumbs-down
+            li: a.delete-image(href='#'): span.icon.icon-trash-o
