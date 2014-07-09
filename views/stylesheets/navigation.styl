@@ -22,6 +22,12 @@
   li
     display: inline-block
     padding: .5rem
+    &:hover:not(.nav-active)
+      background: $navLinkHoverBgColor
+      .nav-text
+        color: $navLinkHoverColor
+      .nav-icon
+        color: $navLinkIconHoverColor
     +from($medium-up)
       padding: 0
       display: list-item
@@ -56,9 +62,6 @@
   text-transform: uppercase
   font-size: 1rem
   border-bottom: .1rem solid $navLinkBorderColor
-  &:hover
-    color: $navLinkHoverColor
-    background: $navLinkHoverBgColor
   +from($medium-up)
     display: block
 
