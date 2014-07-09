@@ -23,7 +23,7 @@ module.exports =
     twitter.get('users/show', screen_name: req.body.user, (err, data) ->
       # https://dev.twitter.com/docs/error-codes-responses
       if err? && err.code == 34
-        res.send(500, {error: "#{req.body.user} is not a valid Twitter username"})
+        res.send(500, {error: "#{req.body.user} is not a valid Twitter user"})
       else if err?
         throw err
       else
