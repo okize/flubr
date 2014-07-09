@@ -61,31 +61,26 @@
   background: $imageCardBgColor
   overflow: hidden
   text-transform: uppercase
-  font-size: 12px
   display: inline-block
   outline: 1px solid $imageCardBorderColor
   margin: 0 2rem 2rem 0
-  overflow: hidden
-  a
-    display: inline-block
-    vertical-align: top
 
 .image-card-pass
-  border-bottom: .5rem solid $pass
+  border-bottom: .25rem solid $pass
 
 .image-card-fail
-  border-bottom: .5rem solid $fail
+  border-bottom: .25rem solid $fail
 
 .image-thumbnail
   float: left
   border: .5rem solid $imageCardBgColor
-  height: 100px
-  width: 100px
+  height: 150px
+  width: 150px
 
 .image-settings
-  width: 100px
-  border: .5rem solid $imageCardBgColor
-  margin: 0
+  font-size: 1.5rem
+  margin: .75rem .75rem 0 .25rem
+  padding: 0
   display: inline-block
   list-style: none
   overflow: hidden
@@ -96,7 +91,19 @@
     &:last-child
       margin: 0
 
-.change-image-kind
+.is-pass
+  .icon
+    color: $pass
+
+.is-fail
+  .icon
+    color: $fail
+
+a.is-pass, a.is-fail
+  .icon
+    color: #999
 
 .delete-image
-  clear: both
+  .icon
+    color: #999
+
