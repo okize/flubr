@@ -18,21 +18,41 @@
   margin: 0
   padding: 0
   list-style: none
-  +from($medium-up)
-    display: block
-
-.nav-icon
-  float: left
-  font-size: 2rem
+  text-align: center
+  li
+    display: inline-block
+    padding: .5rem
+    +from($medium-up)
+      padding: 0
+      display: list-item
 
 .nav-link
   text-decoration: none
+
+.nav-icon
+  font-size: 3rem
+  +from($medium-up)
+    font-size: 2rem
+    float: left
+    display: block
+    margin: .6rem 0 0 1rem
+
+.nav-user
+  vertical-align: top
+
+.nav-avatar
+  display: block
+  height: 50px
+  width: 50px
+  +from($medium-up)
+    height: 32px
+    width: 32px
 
 .nav-text, .nav-text:visited
   text-align: right
   color: $navLinkColor
   padding: 1rem
-  display: block
+  display: none
   text-transform: uppercase
   font-size: 1rem
   border-bottom: .1rem solid $navLinkBorderColor
@@ -43,13 +63,13 @@
     display: block
 
 .nav-active
-  overflow: hidden
-  margin-bottom: -15px
-  padding: 0 0 15px 0
-  .nav-text
-    display: block
-    @extend .nav-active-drop-shadow
-  .nav-text, .nav-text:hover
-    background: $navLinkActiveBgColor
-    color: $navLinkActiveColor
-    cursor: default
+  +from($medium-up)
+    overflow: hidden
+    margin-bottom: -1rem
+    padding: 0 0 1rem 0 !important
+    .nav-text
+      @extend .nav-active-drop-shadow
+    .nav-text, .nav-text:hover
+      background: $navLinkActiveBgColor
+      color: $navLinkActiveColor
+      cursor: default
