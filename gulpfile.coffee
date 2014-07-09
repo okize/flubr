@@ -111,7 +111,7 @@ gulp.task 'release', (callback) ->
     'commit-updates',
     'tag-version',
     'push-updates',
-    'deploy-app',
+    # 'deploy-app',
     callback
   )
 
