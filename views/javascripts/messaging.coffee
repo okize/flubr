@@ -1,6 +1,6 @@
 $ = require 'jquery'
 
-messaging =
+module.exports =
 
   # add message to the dom
   _send: (type, msg) ->
@@ -18,5 +18,3 @@ messaging =
 
   success: (msg) ->
     @_send 'success', msg
-
-module.exports = messaging
