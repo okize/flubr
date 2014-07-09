@@ -188,7 +188,7 @@ label {
   font-size: 1.25rem;
   text-transform: uppercase;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   label {
     font-size: 0.75rem;
   }
@@ -1897,6 +1897,10 @@ th {
 .switch-toggle input:focus + label {
   outline: 1px dotted #888;
 }
+.error-page {
+  width: 20rem;
+  margin: 0 auto;
+}
 .app-body,
 .app-homepage {
   min-height: 100vh;
@@ -1928,7 +1932,7 @@ th {
   -webkit-order: -1;
   order: -1;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .app-wrapper {
     -webkit-box-orient: horizontal;
     -moz-box-orient: horizontal;
@@ -1977,18 +1981,16 @@ th {
 }
 .inputAddOn {
   display: block;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .inputAddOn {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
     display: -ms-flexbox;
     display: box;
     display: flex;
   }
-}
-@media only screen and (min-width: 767px) {
   .inputAddOn-field {
     margin: 0;
     -webkit-box-flex: 1;
@@ -2011,7 +2013,7 @@ th {
   text-transform: uppercase;
   font-size: 2.5rem;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .navigation-logo {
     line-height: 10rem;
     height: 10rem;
@@ -2027,7 +2029,16 @@ th {
   display: inline-block;
   padding: 0.5rem;
 }
-@media only screen and (min-width: 767px) {
+.navigation-links li:hover:not(.nav-active) {
+  background: #659e0a;
+}
+.navigation-links li:hover:not(.nav-active) .nav-text {
+  color: #fff;
+}
+.navigation-links li:hover:not(.nav-active) .nav-icon {
+  color: #fff;
+}
+@media only screen and (min-width: 769px) {
   .navigation-links li {
     padding: 0;
     display: list-item;
@@ -2039,7 +2050,7 @@ th {
 .nav-icon {
   font-size: 3rem;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .nav-icon {
     font-size: 2rem;
     float: left;
@@ -2055,7 +2066,7 @@ th {
   height: 45px;
   width: 45px;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .nav-avatar {
     height: 32px;
     width: 32px;
@@ -2071,18 +2082,13 @@ th {
   font-size: 1rem;
   border-bottom: 0.1rem solid #fafafa;
 }
-.nav-text:hover,
-.nav-text:visited:hover {
-  color: #fff;
-  background: #deca03;
-}
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .nav-text,
   .nav-text:visited {
     display: block;
   }
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .nav-active {
     overflow: hidden;
     margin-bottom: -1rem;
@@ -2134,7 +2140,7 @@ th {
 .pass-fail-toggle legend {
   display: none;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .pass-fail-toggle {
     width: 10rem;
   }
@@ -2142,10 +2148,8 @@ th {
 .add-new-user {
   margin: 0 0 2rem;
 }
-@media only screen and (min-width: 767px) {
-  .add-new-user button {
-    display: none;
-  }
+.add-new-user button {
+  display: none;
 }
 .user-table .avatar {
   border: 2px solid #ccc;
@@ -2169,7 +2173,9 @@ th {
   width: 25%;
 }
 .button-delete {
-  background: #f00;
+  color: #999;
+  font-size: 2rem;
+  cursor: pointer;
 }
 .image-cards {
   padding: 0;
@@ -2180,36 +2186,29 @@ th {
   background: #fff;
   overflow: hidden;
   text-transform: uppercase;
-  font-size: 12px;
   display: inline-block;
   outline: 1px solid #ccc;
   margin: 0 2rem 2rem 0;
-  overflow: hidden;
-}
-.image-card a {
-  display: inline-block;
-  vertical-align: top;
 }
 .image-card-pass {
-  border-bottom: 0.5rem solid #2ecc40;
+  border-bottom: 0.25rem solid #2ecc40;
 }
 .image-card-fail {
-  border-bottom: 0.5rem solid #ff4136;
+  border-bottom: 0.25rem solid #ff4136;
 }
 .image-thumbnail {
   float: left;
   border: 0.5rem solid #fff;
-  height: 100px;
-  width: 100px;
+  height: 10.5rem;
+  width: 10.5rem;
 }
 .image-settings {
-  width: 100px;
-  border: 0.5rem solid #fff;
-  margin: 0;
-  display: inline-block;
+  float: right;
+  width: 1.8rem;
+  font-size: 1.75rem;
+  margin: 0.75rem 0.75rem 0 0.25rem;
+  padding: 0;
   list-style: none;
-  overflow: hidden;
-  text-align: left;
 }
 .image-settings li {
   text-align: right;
@@ -2218,9 +2217,18 @@ th {
 .image-settings li:last-child {
   margin: 0;
 }
-.change-image-kind,
-.delete-image {
-  clear: both;
+.is-pass .icon {
+  color: #2ecc40;
+}
+.is-fail .icon {
+  color: #ff4136;
+}
+a.is-pass .icon,
+a.is-fail .icon {
+  color: #999;
+}
+.delete-image .icon {
+  color: #999;
 }
 .app-homepage {
   text-align: center;
@@ -2238,7 +2246,7 @@ th {
   margin: 0 1rem;
   text-transform: uppercase;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .homepage-logo {
     font-size: 12rem;
   }
@@ -2256,7 +2264,7 @@ th {
   width: 15.299999999999999rem;
   margin: 0.25rem auto;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .homepage-login-button a {
     font-size: 0.8rem;
     display: inline-block;
@@ -2266,7 +2274,7 @@ th {
 .homepage-random-images {
   overflow: hidden;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .homepage-random-images {
     text-align: center;
     margin: 1rem 0 0;
@@ -2282,7 +2290,7 @@ th {
   width: 13.5rem;
   height: 9rem;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .image-type-pass,
   .image-type-fail {
     width: 18rem;
@@ -2319,7 +2327,7 @@ th {
   letter-spacing: 1.5rem;
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 769px) {
   .image-type-pass,
   .image-type-fail {
     display: inline-block;
