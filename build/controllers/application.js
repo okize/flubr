@@ -10,12 +10,25 @@ _ = require('lodash');
 
 moment = require('moment');
 
-navigation = {
-  'Add new image': 'addImage',
-  'Image list': 'images',
-  'Manage users': 'users',
-  'Log out': 'logout'
-};
+navigation = [
+  {
+    title: "Add new image",
+    href: "addImage",
+    icon: "upload"
+  }, {
+    title: "Image list",
+    href: "images",
+    icon: "photo"
+  }, {
+    title: "Manage users",
+    href: "users",
+    icon: "user"
+  }, {
+    title: "Log out",
+    href: "logout",
+    icon: "power-off"
+  }
+];
 
 getThumbnail = function(url) {
   var thumbnail;
