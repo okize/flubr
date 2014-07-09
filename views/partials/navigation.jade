@@ -3,15 +3,14 @@ nav.app-navigation(role='navigation')
   .navigation-logo
     | Flubr
 
-  .navigation-user
-    img.avatar(src='#{user.avatar}', alt='avatar image')
-    span(title=user.displayName)=user.userName
-
   ul.navigation-links
-    each linkHref, linkTitle in navigation
-      if pageName === linkHref
-        li(class='nav-#{linkHref} active')
-          a(href='/#{linkHref}', title=linkTitle)= linkTitle
-      else
-        li(class='nav-#{linkHref}')
-          a(href=linkHref, title=linkTitle)= linkTitle
+    li.nav-user
+      .nav-link
+        img.nav-icon.nav-avatar(src='#{user.avatar}', alt='avatar image')
+        span.nav-text(title=user.displayName)=user.userName
+    each item in navigation
+      - var activeClass = pageName === item.href ? 'nav-active' : ''
+      li(class='nav-#{item.href} #{activeClass}')
+        a.nav-link(href='/#{item.href}', title='#{item.title}')
+          span.nav-icon.icon(class=' icon-#{item.icon}')
+          span.nav-text= item.title
