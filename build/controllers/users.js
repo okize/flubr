@@ -31,7 +31,7 @@ module.exports = {
       var user;
       if ((err != null) && err.code === 34) {
         return res.send(500, {
-          error: "" + req.body.user + " is not a valid Twitter username"
+          error: "" + req.body.user + " is not a valid Twitter user"
         });
       } else if (err != null) {
         throw err;

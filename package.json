@@ -1,8 +1,8 @@
 {
   "name": "flubr",
-  "releaseCodename": "RapidRam",
+  "releaseCodename": "GiganticGuinea Pig",
   "private": true,
-  "version": "0.0.9",
+  "version": "0.0.11",
   "engines": {
     "node": "0.10.x"
   },
