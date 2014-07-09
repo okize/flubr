@@ -1,13 +1,9 @@
 path = require 'path'
 User = require path.join('..', 'models', 'user')
 Image = require path.join('..', 'models', 'image')
+navigation = require path.join('..', 'navigation.json')
 _ = require 'lodash'
 moment = require 'moment'
-navigation =
-  'Add new image': 'addImage'
-  'Image list': 'images'
-  'Manage users': 'users'
-  'Log out': 'logout'
 
 getThumbnail = (url) ->
   if url?
