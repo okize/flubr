@@ -13,7 +13,39 @@ html
 
   body.app-body
     block content
-    if env == 'production'
-      script(async, src='/javascripts/scripts.min.js')
-    else
-      script(async, src='/javascripts/scripts.js')
+    //- if env == 'production'
+    //-   script(async, src='/javascripts/scripts.min.js')
+    //- else
+    //-   script(async, src='/javascripts/scripts.js')
+
+  script.
+    var getImage, image, images, _i, _len;
+
+    getImage = function(image) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', "/api/images/random/" + image.kind);
+      xhr.send(null);
+      return xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            image.el.innerHTML = "<img src='" + xhr.responseText + "' />";
+            return image.el.offsetParent.style.visibility = 'visible';
+          }
+        }
+      };
+    };
+
+    images = [
+      {
+        kind: 'pass',
+        el: document.getElementById('random-pass-image')
+      }, {
+        kind: 'fail',
+        el: document.getElementById('random-fail-image')
+      }
+    ];
+
+    for (_i = 0, _len = images.length; _i < _len; _i++) {
+      image = images[_i];
+      getImage(image);
+    }
