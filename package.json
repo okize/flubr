@@ -1,8 +1,8 @@
 {
   "name": "flubr",
-  "releaseCodename": "RapidRam",
+  "releaseCodename": "BetterBadger",
   "private": true,
-  "version": "0.0.9",
+  "version": "0.0.10",
   "engines": {
     "node": "0.10.x"
   },
