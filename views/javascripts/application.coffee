@@ -1,17 +1,8 @@
 $ = require 'jquery'
 msg = require './messaging'
+imageCards = require './imageCards'
 
 module.exports = () ->
-
-  getImageSetHtml = (imageKind) ->
-    if imageKind == 'pass'
-      '<li><strong>pass</strong></li>' +
-      '<li><a href="#" class="change-image-kind isPass">fail</a></li>' +
-      '<li><a href="#" class="delete-image">delete</a></li>'
-    else
-      '<li><a href="#" class="change-image-kind isFail">pass</a></li>' +
-      '<li><strong>fail</strong></li>' +
-      '<li><a href="#" class="delete-image">delete</a></li>'
 
   getUserRowHtml = (user) ->
     html = """
@@ -23,13 +14,21 @@ module.exports = () ->
         <td>#{user.userName}</td>
         <td>#{user.created_at}</td>
         <td class="align-right">
-          <button class="button-delete js-delete-user" id="#{user.id}">
-            Delete user
-          </button>
+          <span class="icon icon-trash-o button-delete js-delete-user" id="#{user.id}" title="Delete user"></span>
         </td>
        </tr>
        """
     html
+
+  getImageSetHtml = (imageKind) ->
+    if imageKind == 'pass'
+      '<li><strong>pass</strong></li>' +
+      '<li><a href="#" class="change-image-kind isPass">fail</a></li>' +
+      '<li><a href="#" class="delete-image">delete</a></li>'
+    else
+      '<li><a href="#" class="change-image-kind isFail">pass</a></li>' +
+      '<li><strong>fail</strong></li>' +
+      '<li><a href="#" class="delete-image">delete</a></li>'
 
   # getThumbnail = (url) ->
   #   thumbnail = (url.substring(0, url.length - 4)) + 's.jpg'
