@@ -139,11 +139,6 @@ input::-moz-focus-inner
 button
   overflow: visible
   text-transform: uppercase
-  glossy-button($buttonBgColor, medium, $buttonTextColor)
-  &:disabled, &.button-disabled
-    button-disabled()
-  +from($medium-up)
-    glossy-button($buttonBgColor, small, $buttonTextColor)
 
 a.button
   @extend button
