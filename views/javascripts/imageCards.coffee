@@ -40,8 +40,11 @@ module.exports =
       url: 'api/images/' + id
       success: =>
         @_updateImageInUi card, newKind, oldKind
-      error: ->
-        msg.error 'Image kind could not be changed'
+      error: (error) ->
+        if error.responseText
+          msg.error JSON.parse(error.responseText).error
+        else
+          msg.error 'Sorry, image kind could not be changed!'
       contentType: 'application/json'
       data: JSON.stringify(data)
 
@@ -55,6 +58,9 @@ module.exports =
         url: 'api/images/' + id
         success: =>
           @_deleteImageInUi card
-        error: ->
-          msg.error 'image could not be deleted!'
+        error: (error) ->
+          if error.responseText
+            msg.error JSON.parse(error.responseText).error
+          else
+            msg.error 'Sorry, image could not be deleted!'
         contentType: 'application/json'

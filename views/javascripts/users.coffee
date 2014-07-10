@@ -41,8 +41,11 @@ module.exports =
         url: 'api/users/' + id
         success: =>
           @_deleteUserInUi $el
-        error: ->
-          msg.error 'image could not be deleted!'
+        error: (error) ->
+          if error.responseText
+            msg.error JSON.parse(error.responseText).error
+          else
+            msg.error 'Sorry, user could not be deleted'
         contentType: 'application/json'
 
   addUser: ($el) ->
@@ -57,6 +60,6 @@ module.exports =
         if error.responseText
           msg.error JSON.parse(error.responseText).error
         else
-          msg.error 'Unable to add user'
+          msg.error 'Sorry, user could not be deleted'
       contentType: 'application/json'
       data: JSON.stringify(data)
