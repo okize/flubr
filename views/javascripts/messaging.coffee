@@ -4,7 +4,12 @@ module.exports =
 
   # add message to the dom
   _send: (type, msg) ->
-    html = "<li class='flash-#{type}'>#{msg}</li>"
+    switch type
+      when 'notice' then icon = 'info-circle'
+      when 'error' then icon = 'times-circle'
+      when 'warning' then icon = 'exclamation-circle'
+      when 'success' then icon = 'check-circle'
+    html = "<li class='flash-#{type}'><span class='icon icon-#{icon}'></span>#{msg}</li>"
     $('#messaging').prepend(html)
 
   notice: (msg) ->
