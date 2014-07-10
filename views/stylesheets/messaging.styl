@@ -1,3 +1,12 @@
+$flashBgColorNotice = #0074d9
+$flashBgColorDarkNotice = #0057a2
+$flashBgColorError = #ff4136
+$flashBgColorDarkError = #bf3028
+$flashBgColorWarning = #f39c12
+$flashBgColorDarkWarning = #b6750d
+$flashBgColorSuccess = #2ecc40
+$flashBgColorDarkSuccess = #229930
+
 .hide-messaging
   .app-messaging
     display: none
@@ -13,11 +22,27 @@
     list-style: none
   li
     margin: 0 0 1rem
-//     animation: slideup 5s
 
-// $keyframe-name = slideup
-// @keyframes {$keyframe-name}
-//   from
-//     opacity: 1
-//   to
-//     opacity: 0
+// flash messages
+.flash-notice, .flash-error, .flash-warning, .flash-success
+  border-bottom: .2rem solid
+  padding: .5rem 1rem
+  color: white
+  a
+    color: white
+
+.flash-notice
+  background-color: $flashBgColorNotice
+  border-color: $flashBgColorDarkNotice
+
+.flash-error
+  background-color: $flashBgColorError
+  border-color: $flashBgColorDarkError
+
+.flash-warning
+  background-color: $flashBgColorWarning
+  border-color: $flashBgColorDarkWarning
+
+.flash-success
+  background-color: $flashBgColorSuccess
+  border-color: $flashBgColorDarkSuccess
