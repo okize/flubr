@@ -16,4 +16,4 @@ module.exports =
     unless !req.isAuthenticated()
       next()
     else
-      res.status(401).render('/', title: 'Unauthorized')
+      res.status(401).render('401', title: 'Unauthorized')
