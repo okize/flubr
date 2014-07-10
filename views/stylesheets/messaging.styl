@@ -1,12 +1,3 @@
-$flashBgColorNotice = #0074d9
-$flashBgColorDarkNotice = #0057a2
-$flashBgColorError = #ff4136
-$flashBgColorDarkError = #bf3028
-$flashBgColorWarning = #f39c12
-$flashBgColorDarkWarning = #b6750d
-$flashBgColorSuccess = #2ecc40
-$flashBgColorDarkSuccess = #229930
-
 .hide-messaging
   .app-messaging
     display: none
@@ -33,16 +24,16 @@ $flashBgColorDarkSuccess = #229930
 
 .flash-notice
   background-color: $flashBgColorNotice
-  border-color: $flashBgColorDarkNotice
+  border-color: darken($flashBgColorNotice, 25%)
 
 .flash-error
   background-color: $flashBgColorError
-  border-color: $flashBgColorDarkError
+  border-color: darken($flashBgColorError, 25%)
 
 .flash-warning
   background-color: $flashBgColorWarning
-  border-color: $flashBgColorDarkWarning
+  border-color: darken($flashBgColorWarning, 25%)
 
 .flash-success
   background-color: $flashBgColorSuccess
-  border-color: $flashBgColorDarkSuccess
+  border-color: darken($flashBgColorSuccess, 25%)
