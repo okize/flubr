@@ -1,10 +1,12 @@
 $ = require 'jquery'
+helpers = require './helpers'
 msg = require './messaging'
 
 module.exports =
 
   # this is dumb
   _getUserRowHtml: (user) ->
+    createDate = helpers.formatTime(user.created_at)
     html = """
        <tr>
         <td>
@@ -12,7 +14,7 @@ module.exports =
         </td>
         <td>#{user.displayName}</td>
         <td>#{user.userName}</td>
-        <td>#{user.created_at}</td>
+        <td>#{createDate}</td>
         <td class="align-right">
           <span class="icon icon-trash-o button-delete js-delete-user" id="#{user.id}" title="Delete user"></span>
         </td>
