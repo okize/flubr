@@ -12,9 +12,11 @@ module.exports =
       when 'error' then icon = 'times-circle'
       when 'warning' then icon = 'exclamation-circle'
       when 'success' then icon = 'check-circle'
-    $html = $('<li />')
-              .addClass("flash-#{type}")
-              .html("<span class='icon icon-#{icon}'></span>#{msg}")
+    $html =
+      $('<li />')
+        .addClass("flash-#{type} flag")
+        .append("<span class='icon icon-#{icon} flag-image'></span>")
+        .append("<span class='flag-body'>#{msg}</span>")
     $('#messaging').prepend($html)
     $html
       .velocity('callout.pulse', 350)
