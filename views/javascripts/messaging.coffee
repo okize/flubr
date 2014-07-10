@@ -1,7 +1,5 @@
-# jquery has to be assigned to window for velocity to work (as of 0.5.1)
-$ = window.jQuery = window.$ = require 'jquery'
-velocity = require 'velocity-animate'
-velocityui = require 'velocity-animate/velocity.ui'
+$ = require 'jquery'
+help = require './helpers'
 
 module.exports =
 
@@ -18,8 +16,7 @@ module.exports =
         .append("<span class='icon icon-#{icon} flag-image'></span>")
         .append("<span class='flag-body'>#{msg}</span>")
     $('#messaging').prepend($html)
-    $html
-      .velocity('callout.pulse', 350)
+    help.animate $html, 'pop'
 
   notice: (msg) ->
     @_send 'notice', msg
