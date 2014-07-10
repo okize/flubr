@@ -29,11 +29,11 @@ module.exports = () ->
     html
 
   showImageAdded = (url) ->
-    msg.notice "<a href='#{url}'>Image added!</a>"
+    msg.success "<a href='#{url}'>Image added!</a>"
     $('#js-add-image')[0].reset()
 
   showUserAdded = (user) ->
-    msg.notice "#{user.userName} added!"
+    msg.success "#{user.userName} added!"
     $('#js-add-user')[0].reset()
     $('.user-table tbody').append(getUserRowHtml user)
 
