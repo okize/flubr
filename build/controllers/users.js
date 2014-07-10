@@ -1,4 +1,4 @@
-var Twit, User, path, twitter;
+var Twit, User, help, path, twitter;
 
 path = require('path');
 
@@ -13,6 +13,8 @@ twitter = new Twit({
 
 User = require(path.join('..', 'models', 'user'));
 
+help = require(path.join('..', 'helpers'));
+
 module.exports = {
   index: function(req, res) {
     return User.find({}, function(err, results) {
@@ -21,7 +23,7 @@ module.exports = {
           error: err
         });
       }
-      return res.send(results);
+      return res.send(200, results);
     });
   },
   create: function(req, res) {
@@ -54,7 +56,7 @@ module.exports = {
                   error: err
                 });
               }
-              return res.send(user);
+              return res.send(201, user);
             });
           } else {
             return res.send(500, {
@@ -89,7 +91,12 @@ module.exports = {
         });
       }
       if (results != null) {
-        return res.send(200, results);
+        if (req.user.userid === req.params.id) {
+          req.session.destroy();
+          return res.send(200, results);
+        } else {
+          return res.send(200, results);
+        }
       }
     });
   }

@@ -1,10 +1,10 @@
-var Image, async, errors, helpers, path, request, _;
+var Image, async, checkUrlIsImage, errors, help, path, request, _;
 
 path = require('path');
 
 _ = require('lodash');
 
-helpers = require(path.join('..', 'helpers'));
+help = require(path.join('..', 'helpers'));
 
 Image = require(path.join('..', 'models', 'image'));
 
@@ -12,11 +12,16 @@ request = require('request');
 
 async = require('async');
 
+checkUrlIsImage = function(url) {
+  return url.match(/\.(jpeg|jpg|gif|png)$/) !== null;
+};
+
 errors = {
-  noIdError: "Please specify image type (pass/fail) in request url",
-  noImageError: "No image found",
-  noImageUrlSent: "No image url sent",
-  needToLogin: "Action requires user to be logged in"
+  needToLogin: 'Action requires user to be authenticated',
+  noIdError: 'Please specify image type (pass/fail) in request url',
+  noImageError: 'No image found',
+  noImageUrlSent: 'No image url specified',
+  invalidImageUrl: 'That does not appear to be a valid image url'
 };
 
 module.exports = {
@@ -86,11 +91,15 @@ module.exports = {
   },
   create: function(req, res) {
     var url;
-    if (helpers.checkForUser(req, res)) {
+    if (help.checkForUser(req, res)) {
       url = req.body.source_url;
       if (url === void 0 || url === '') {
-        return res.send(500, {
+        return res.send(422, {
           error: errors.noImageUrlSent
+        });
+      } else if (!checkUrlIsImage(url)) {
+        return res.send(422, {
+          error: errors.invalidImageUrl
         });
       } else {
         return async.series([
@@ -105,12 +114,20 @@ module.exports = {
                 url: 'https://api.imgur.com/3/image',
                 headers: {
                   Authorization: "Client-ID " + process.env.IMGUR_CLIENTID,
-                  "Content-Type": 'application/x-www-form-urlencoded',
+                  'Content-Type': 'application/x-www-form-urlencoded',
                   Accept: 'application/json'
                 }
               };
-              return request.post(options, function(error, response, body) {
-                return callback(null, (JSON.parse(body)).data.link);
+              return request.post(options, function(err, response, body) {
+                if (err) {
+                  callback(err, null);
+                }
+                data = JSON.parse(body);
+                if (!data.success) {
+                  return callback(data.data.error, null);
+                } else {
+                  return callback(null, data.data.link);
+                }
               }).form(data);
             } else {
               return callback(null, url);
@@ -118,28 +135,34 @@ module.exports = {
           }
         ], function(err, results) {
           var img;
-          req.body.added_by = req.user.userid;
-          req.body.image_url = results[0];
-          img = new Image(req.body);
-          return img.save(function(err, results) {
-            if (err != null) {
-              res.send(500, {
-                error: err
-              });
-            }
-            return res.send(results);
-          });
+          if (err != null) {
+            return res.send(500, {
+              error: err
+            });
+          } else {
+            req.body.added_by = req.user.userid;
+            req.body.image_url = results[0];
+            img = new Image(req.body);
+            return img.save(function(err, results) {
+              if (err != null) {
+                res.send(500, {
+                  error: err
+                });
+              }
+              return res.send(201, results);
+            });
+          }
         });
       }
     } else {
-      return res.send(500, {
+      return res.send(401, {
         error: needToLogin
       });
     }
   },
   update: function(req, res) {
     var updateData;
-    if (helpers.checkForUser(req, res)) {
+    if (help.checkForUser(req, res)) {
       updateData = {
         kind: req.body.kind,
         updated_by: req.user.userid
@@ -157,14 +180,14 @@ module.exports = {
         });
       });
     } else {
-      return res.send(500, {
+      return res.send(401, {
         error: needToLogin
       });
     }
   },
   "delete": function(req, res) {
     var updateData;
-    if (helpers.checkForUser(req, res)) {
+    if (help.checkForUser(req, res)) {
       updateData = {
         deleted: true,
         deleted_by: req.user.userid
@@ -182,7 +205,7 @@ module.exports = {
         });
       });
     } else {
-      return res.send(500, {
+      return res.send(401, {
         error: needToLogin
       });
     }

@@ -1826,6 +1826,37 @@ th {
   -webkit-box-shadow: 5px 5px 15px rgba(51,51,51,0.15);
   box-shadow: 5px 5px 15px rgba(51,51,51,0.15);
 }
+.flag {
+  display: table;
+  width: 100%;
+}
+.flag-image,
+.flag-body {
+  display: table-cell;
+  vertical-align: middle;
+}
+.flag-top .flag-image,
+.flag-top .flag-body {
+  vertical-align: top;
+}
+.flag-bottom .flag-image,
+.flag-bottom .flag-body {
+  vertical-align: bottom;
+}
+.flag-image {
+  padding-right: 10px;
+}
+.flag-image > img {
+  display: block;
+  max-width: none;
+}
+.flag-rev .flag-image {
+  padding-right: 0;
+  padding-left: 10px;
+}
+.flag-body {
+  width: 100%;
+}
 .hidden {
   display: none;
 }
@@ -1841,12 +1872,6 @@ th {
 }
 .align-left {
   text-align: left !important;
-}
-.flash-notice a,
-.flash-error a,
-.flash-warning a,
-.flash-success a {
-  color: #fff;
 }
 .switch-toggle {
   height: 2rem;
@@ -2117,10 +2142,51 @@ th {
 .app-messaging li {
   margin: 0 0 1rem;
 }
+.flash-notice,
+.flash-error,
+.flash-warning,
+.flash-success {
+  border-bottom: 0.2rem solid;
+  padding: 0.5rem 1rem;
+  color: #fff;
+}
+.flash-notice .icon,
+.flash-error .icon,
+.flash-warning .icon,
+.flash-success .icon {
+  font-size: 1.25rem;
+  padding: 0.1rem 0.75rem 0 0;
+}
+.flash-notice .icon,
+.flash-error .icon,
+.flash-warning .icon,
+.flash-success .icon,
+.flash-notice a,
+.flash-error a,
+.flash-warning a,
+.flash-success a {
+  color: #fff;
+}
+.flash-notice {
+  background-color: #0074d9;
+  border-color: #0057a3;
+}
+.flash-error {
+  background-color: #ff4136;
+  border-color: #e80d00;
+}
+.flash-warning {
+  background-color: #f39c12;
+  border-color: #ba7609;
+}
+.flash-success {
+  background-color: #2ecc40;
+  border-color: #229930;
+}
 .app-body {
   background: #f8f8f8;
   color: #333;
-  font-family: Verdana, Arial, sans-serif;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
 .app-content {
   padding: 2rem;
@@ -2217,18 +2283,15 @@ th {
 .image-settings li:last-child {
   margin: 0;
 }
-.is-pass .icon {
-  color: #2ecc40;
-}
-.is-fail .icon {
-  color: #ff4136;
-}
-a.is-pass .icon,
-a.is-fail .icon {
+.image-settings .icon,
+.image-settings a.icon {
   color: #999;
 }
-.delete-image .icon {
-  color: #999;
+.is-pass:not(a) .icon {
+  color: #2ecc40 !important;
+}
+.is-fail:not(a) .icon {
+  color: #ff4136 !important;
 }
 .app-homepage {
   text-align: center;
