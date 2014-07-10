@@ -131,11 +131,12 @@ gulp.task 'start-mongo',
 
 # starts up LiveReload server and the app with nodemon
 gulp.task 'start-app', ->
+  debugArgs = if env.NODE_ENV == 'development' then ['--nodejs', '--debug=5858'] else []
   nodemon(
     script: appScript
     ext: 'coffee'
     env: env
-    nodeArgs: ['--nodejs', '--debug=5858']
+    nodeArgs: debugArgs
     ignore: [
       'node_modules/',
       'views/',
