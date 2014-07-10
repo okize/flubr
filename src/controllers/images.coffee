@@ -5,11 +5,15 @@ Image = require path.join('..', 'models', 'image')
 request = require 'request'
 async = require 'async'
 
+checkUrlIsImage = (url) ->
+  url.match(/\.(jpeg|jpg|gif|png)$/) != null
+
 errors =
-  noIdError: "Please specify image type (pass/fail) in request url"
-  noImageError: "No image found"
-  noImageUrlSent: "No image url sent"
-  needToLogin: "Action requires user to be logged in"
+  needToLogin: 'Action requires user to be authenticated'
+  noIdError: 'Please specify image type (pass/fail) in request url'
+  noImageError: 'No image found'
+  noImageUrlSent: 'No image url specified'
+  invalidImageUrl: 'That does not appear to be a valid image url'
 
 # image model's CRUD controller.
 module.exports =
@@ -54,13 +58,14 @@ module.exports =
   # creates new image record
   create: (req, res)  ->
     if helpers.checkForUser req, res
-      # should validate url here
+
       url = req.body.source_url
 
       if url is undefined or url == ''
-        res.send 500, error: errors.noImageUrlSent
+        res.send 422, error: errors.noImageUrlSent
+      else if !checkUrlIsImage url
+        res.send 422, error: errors.invalidImageUrl
       else
-
         async.series [
           (callback) ->
 
