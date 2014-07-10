@@ -14,8 +14,8 @@ module.exports =
   # lists all users
   index: (req, res) ->
     User.find {}, (err, results) ->
-      res.send(500, {error: err}) if err?
-      res.send results
+      res.send 500, error: err if err?
+      res.send 200, results
 
   # creates new user record
   # expects Twitter username in request body
@@ -38,20 +38,20 @@ module.exports =
           throw err if err
           unless results.length
             user.save (err) ->
-              res.send(500, {error: err}) if err?
-              res.send(user)
+              res.send 500, error: err if err?
+              res.send 201, user
           else
-            res.send(500, {error: "#{req.body.user} is already a user"})
+            res.send 500, {error: "#{req.body.user} is already a user"}
     )
 
   # updates existing user record
   update: (req, res) ->
     User.findByIdAndUpdate req.params.id, { $set: req.body }, (err, results) ->
-      res.send(500, { error: err}) if err?
-      res.send(results) if results?
+      res.send 500, error: err if err?
+      res.send results if results?
 
   # deletes user record
   delete: (req, res) ->
     User.findOneAndRemove {userid: req.params.id}, (err, results) ->
-      res.send(500, {error: err}) if err?
-      res.send(200, results) if results?
+      res.send 500, error: err if err?
+      res.send 200, results if results?
