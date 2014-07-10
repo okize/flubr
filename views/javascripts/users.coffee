@@ -1,12 +1,12 @@
 $ = require 'jquery'
-helpers = require './helpers'
 msg = require './messaging'
+help = require './helpers'
 
 module.exports =
 
   # this is dumb
   _getUserRowHtml: (user) ->
-    createDate = helpers.formatTime(user.created_at)
+    createDate = help.formatTime(user.created_at)
     html = """
        <tr>
         <td>
@@ -16,7 +16,7 @@ module.exports =
         <td>#{user.userName}</td>
         <td>#{createDate}</td>
         <td class="align-right">
-          <span class="icon icon-trash-o button-delete js-delete-user" id="#{user.id}" title="Delete user"></span>
+          <span class="icon icon-trash-o button-delete js-delete-user" id="#{user.userid}" title="Delete user"></span>
         </td>
        </tr>
        """
@@ -25,12 +25,15 @@ module.exports =
   _showUserAdded: (user) ->
     msg.success "#{user.userName} added!"
     $('#js-add-user')[0].reset()
-    $('.user-table tbody').append(@_getUserRowHtml user)
+    $row = $(@_getUserRowHtml user)
+    $('.user-table tbody').append($row)
+    help.animate $row, 'addRow'
 
-  _deleteUserInUi: ($el) ->
-    username = $el.parent('td').prev().prev().text()
+  _deleteUserInUi: ($el, username) ->
     msg.notice username + ' deleted!'
-    $el.closest('tr').remove()
+    $row = $el.closest('tr')
+    help.animate $row, 'deleteRow', ->
+      $row.remove()
 
   deleteUser: ($el) ->
     verify = confirm 'Are you sure you want to delete this user?'
@@ -39,8 +42,8 @@ module.exports =
       $.ajax
         type: 'DELETE'
         url: 'api/users/' + id
-        success: =>
-          @_deleteUserInUi $el
+        success: (response) =>
+          @_deleteUserInUi $el, response.userName
         error: (error) ->
           if error.responseText
             msg.error JSON.parse(error.responseText).error
