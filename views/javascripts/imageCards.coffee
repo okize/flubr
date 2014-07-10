@@ -1,8 +1,6 @@
+$ = require 'jquery'
 msg = require './messaging'
-# jquery has to be assigned to window for velocity to work (as of 0.5.1)
-$ = window.jQuery = window.$ = require 'jquery'
-velocity = require 'velocity-animate'
-velocityui = require 'velocity-animate/velocity.ui'
+help = require './helpers'
 
 module.exports =
 
@@ -29,8 +27,7 @@ module.exports =
 
   _deleteImageInUi: ($el) ->
     msg.notice 'Image deleted!'
-    $el
-      .velocity('transition.flipBounceYOut', 500)
+    help.animate $el, 'delete'
 
   switchImageKind: ($el) ->
     card = $el.closest('.image-card')
