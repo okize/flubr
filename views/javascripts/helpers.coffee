@@ -8,10 +8,10 @@ module.exports =
 
   animate: ($el, type, cb) ->
     switch type
-      when 'pop' then $el.velocity('callout.pulse', 350)
-      when 'delete' then $el.velocity('transition.flipBounceYOut', 500)
-      when 'addRow' then $el.velocity('transition.slideDownIn', 500)
-      when 'deleteRow' then $el.velocity('transition.slideDownOut', 500)
+      when 'pop' then $el.velocity 'callout.pulse', 350, cb
+      when 'delete' then $el.velocity 'transition.flipBounceYOut', 500, cb
+      when 'addRow' then $el.velocity 'transition.slideDownIn', 500, cb
+      when 'deleteRow' then $el.velocity 'transition.slideDownOut', 500, cb
 
   formatTime: (date) ->
     moment(date).format('lll')
