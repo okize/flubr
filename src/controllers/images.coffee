@@ -77,24 +77,33 @@ module.exports =
                 url: 'https://api.imgur.com/3/image'
                 headers:
                   Authorization: "Client-ID #{process.env.IMGUR_CLIENTID}"
-                  "Content-Type": 'application/x-www-form-urlencoded'
+                  'Content-Type': 'application/x-www-form-urlencoded'
                   Accept: 'application/json'
 
               request.post(options,
-                (error, response, body) ->
-                  callback null, (JSON.parse body).data.link
+                (err, response, body) ->
+                  callback err, null if err
+                  data = JSON.parse(body)
+                  if !data.success
+                    callback data.data.error, null
+                    # res.send 500, error: err if err?
+                  else
+                    callback null, data.data.link
               ).form(data)
 
             else
               callback null, url
 
         ], (err, results) ->
-          req.body.added_by = req.user.userid
-          req.body.image_url = results[0]
-          img = new Image(req.body)
-          img.save (err, results) ->
-            res.send 500, error: err if err?
-            res.send(results)
+          if err?
+            res.send 500, error: err
+          else
+            req.body.added_by = req.user.userid
+            req.body.image_url = results[0]
+            img = new Image(req.body)
+            img.save (err, results) ->
+              res.send 500, error: err if err?
+              res.send(results)
 
     else
       res.send 500, error: needToLogin
