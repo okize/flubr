@@ -1,4 +1,4 @@
-var application, helpers, homepage, images, users;
+var application, help, homepage, images, users;
 
 homepage = require('./controllers/homepage');
 
@@ -8,7 +8,7 @@ images = require('./controllers/images');
 
 users = require('./controllers/users');
 
-helpers = require('./helpers');
+help = require('./helpers');
 
 module.exports = function(app, passport) {
   app.get('/', function(req, res, next) {
@@ -18,16 +18,16 @@ module.exports = function(app, passport) {
       return res.redirect('/addImage');
     }
   });
-  app.get('/addImage', helpers.ensureAuthenticated, function(req, res, next) {
+  app.get('/addImage', help.ensureAuthenticated, function(req, res, next) {
     return application.addImage(req, res, next);
   });
-  app.get('/images', helpers.ensureAuthenticated, function(req, res, next) {
+  app.get('/images', help.ensureAuthenticated, function(req, res, next) {
     return application.images(req, res, next);
   });
-  app.get('/imagesDeleted', helpers.ensureAuthenticated, function(req, res, next) {
+  app.get('/imagesDeleted', help.ensureAuthenticated, function(req, res, next) {
     return application.imagesDeleted(req, res, next);
   });
-  app.get('/users', helpers.ensureAuthenticated, function(req, res, next) {
+  app.get('/users', help.ensureAuthenticated, function(req, res, next) {
     return application.users(req, res, next);
   });
   app.get('/login', passport.authenticate('twitter'));
@@ -55,25 +55,25 @@ module.exports = function(app, passport) {
   app.get('/api/images/random/:id', function(req, res, next) {
     return images.random(req, res, next);
   });
-  app.post('/api/images', helpers.ensureAuthenticated, function(req, res, next) {
+  app.post('/api/images', help.ensureAuthenticated, function(req, res, next) {
     return images.create(req, res, next);
   });
-  app.put('/api/images/:id', helpers.ensureAuthenticated, function(req, res, next) {
+  app.put('/api/images/:id', help.ensureAuthenticated, function(req, res, next) {
     return images.update(req, res, next);
   });
-  app["delete"]('/api/images/:id', helpers.ensureAuthenticated, function(req, res, next) {
+  app["delete"]('/api/images/:id', help.ensureAuthenticated, function(req, res, next) {
     return images["delete"](req, res, next);
   });
-  app.get('/api/users', helpers.ensureAuthenticated, function(req, res, next) {
+  app.get('/api/users', help.ensureAuthenticated, function(req, res, next) {
     return users.index(req, res, next);
   });
-  app.post('/api/users', helpers.ensureAuthenticated, function(req, res, next) {
+  app.post('/api/users', help.ensureAuthenticated, function(req, res, next) {
     return users.create(req, res, next);
   });
-  app.put('/api/users/:id', helpers.ensureAuthenticated, function(req, res, next) {
+  app.put('/api/users/:id', help.ensureAuthenticated, function(req, res, next) {
     return users.update(req, res, next);
   });
-  app["delete"]('/api/users/:id', helpers.ensureAuthenticated, function(req, res, next) {
+  app["delete"]('/api/users/:id', help.ensureAuthenticated, function(req, res, next) {
     return users["delete"](req, res, next);
   });
   app.all('/401', function(req, res) {
