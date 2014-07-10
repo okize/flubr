@@ -2,7 +2,7 @@ homepage = require './controllers/homepage'
 application = require './controllers/application'
 images = require './controllers/images'
 users = require './controllers/users'
-helpers = require './helpers'
+help = require './helpers'
 
 module.exports = (app, passport) ->
 
@@ -14,20 +14,20 @@ module.exports = (app, passport) ->
       res.redirect '/addImage'
 
   # add new image
-  app.get '/addImage', helpers.ensureAuthenticated, (req, res, next) ->
+  app.get '/addImage', help.ensureAuthenticated, (req, res, next) ->
     application.addImage req, res, next
 
   # view all images
-  app.get '/images', helpers.ensureAuthenticated, (req, res, next) ->
+  app.get '/images', help.ensureAuthenticated, (req, res, next) ->
     application.images req, res, next
 
   # view all deleted images
   # NOTE: this is not in the navigation
-  app.get '/imagesDeleted', helpers.ensureAuthenticated, (req, res, next) ->
+  app.get '/imagesDeleted', help.ensureAuthenticated, (req, res, next) ->
     application.imagesDeleted req, res, next
 
   # manage users
-  app.get '/users', helpers.ensureAuthenticated, (req, res, next) ->
+  app.get '/users', help.ensureAuthenticated, (req, res, next) ->
     application.users req, res, next
 
   # login
@@ -65,31 +65,31 @@ module.exports = (app, passport) ->
     images.random req, res, next
 
   # add new image
-  app.post '/api/images', helpers.ensureAuthenticated, (req, res, next) ->
+  app.post '/api/images', help.ensureAuthenticated, (req, res, next) ->
     images.create req, res, next
 
   # update image
-  app.put '/api/images/:id', helpers.ensureAuthenticated, (req, res, next) ->
+  app.put '/api/images/:id', help.ensureAuthenticated, (req, res, next) ->
     images.update req, res, next
 
   # delete image
-  app.delete '/api/images/:id', helpers.ensureAuthenticated, (req, res, next) ->
+  app.delete '/api/images/:id', help.ensureAuthenticated, (req, res, next) ->
     images.delete req, res, next
 
   # list all users
-  app.get '/api/users', helpers.ensureAuthenticated, (req, res, next) ->
+  app.get '/api/users', help.ensureAuthenticated, (req, res, next) ->
     users.index req, res, next
 
   # add new user
-  app.post '/api/users', helpers.ensureAuthenticated, (req, res, next) ->
+  app.post '/api/users', help.ensureAuthenticated, (req, res, next) ->
     users.create req, res, next
 
   # update user
-  app.put '/api/users/:id', helpers.ensureAuthenticated, (req, res, next) ->
+  app.put '/api/users/:id', help.ensureAuthenticated, (req, res, next) ->
     users.update req, res, next
 
   # delete user
-  app.delete '/api/users/:id', helpers.ensureAuthenticated, (req, res, next) ->
+  app.delete '/api/users/:id', help.ensureAuthenticated, (req, res, next) ->
     users.delete req, res, next
 
   # unauthorized

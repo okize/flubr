@@ -1,6 +1,6 @@
 path = require 'path'
 _ = require 'lodash'
-helpers = require path.join('..', 'helpers')
+help = require path.join('..', 'helpers')
 Image = require path.join('..', 'models', 'image')
 request = require 'request'
 async = require 'async'
@@ -57,7 +57,7 @@ module.exports =
 
   # creates new image record
   create: (req, res)  ->
-    if helpers.checkForUser req, res
+    if help.checkForUser req, res
 
       url = req.body.source_url
 
@@ -110,7 +110,7 @@ module.exports =
 
   # updates existing image record type: pass or fail
   update: (req, res) ->
-    if helpers.checkForUser req, res
+    if help.checkForUser req, res
       updateData =
         kind: req.body.kind
         updated_by: req.user.userid
@@ -122,7 +122,7 @@ module.exports =
 
   # deletes image record non-permanently
   delete: (req, res) ->
-    if helpers.checkForUser req, res
+    if help.checkForUser req, res
       updateData =
         deleted: true
         deleted_by: req.user.userid
