@@ -1,8 +1,8 @@
 path = require 'path'
+helpers = require path.join('..', 'helpers')
 User = require path.join('..', 'models', 'user')
 Image = require path.join('..', 'models', 'image')
 _ = require 'lodash'
-moment = require 'moment'
 
 navigation = [
   {
@@ -94,7 +94,7 @@ module.exports =
           name: user.displayName
           twitterHandle: user.userName
           avatar: user.avatar
-          dateAdded: moment(user.created_at).format('lll')
+          dateAdded: helpers.formatTime(user.created_at)
       res.render 'users',
         env: process.env.NODE_ENV
         title: 'Manage users'
