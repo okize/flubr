@@ -42,7 +42,8 @@
     "request": "*",
     "rupture": "*",
     "stylus": "*",
-    "twit": "*"
+    "twit": "*",
+    "velocity-animate": "*"
   },
   "devDependencies": {
     "browserify": "*",
