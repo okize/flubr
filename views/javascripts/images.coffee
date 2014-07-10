@@ -16,7 +16,10 @@ module.exports =
       url: '/api/images'
       success: =>
         @_showImageAdded data.source_url
-      error: ->
-        msg.error 'image could not be added!'
+      error: (error) ->
+        if error.responseText
+          msg.error JSON.parse(error.responseText).error
+        else
+          msg.error 'Sorry, image could not be added!'
       contentType: 'application/json'
       data: JSON.stringify(data)
