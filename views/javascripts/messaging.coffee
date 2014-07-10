@@ -9,8 +9,10 @@ module.exports =
       when 'error' then icon = 'times-circle'
       when 'warning' then icon = 'exclamation-circle'
       when 'success' then icon = 'check-circle'
-    html = "<li class='flash-#{type}'><span class='icon icon-#{icon}'></span>#{msg}</li>"
-    $('#messaging').prepend(html)
+    $html = $("<li class='flash-#{type}'><span class='icon icon-#{icon}'></span>#{msg}</li>")
+    $('#messaging').prepend($html)
+    $html
+      .animate(opacity: 1)
 
   notice: (msg) ->
     @_send 'notice', msg
