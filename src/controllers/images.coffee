@@ -103,7 +103,7 @@ module.exports =
             img = new Image(req.body)
             img.save (err, results) ->
               res.send 500, error: err if err?
-              res.send(results)
+              res.send 201, results
 
     else
       res.send 500, error: needToLogin
