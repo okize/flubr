@@ -1,4 +1,9 @@
+moment = require 'moment'
+
 module.exports =
+
+  formatTime: (date) ->
+    moment(date).format('lll')
 
   checkForUser: (req, res) ->
     if req.user?
