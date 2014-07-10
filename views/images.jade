@@ -15,8 +15,8 @@ block page
           ul.image-settings
             if image.kind == 'pass'
               li: .is-pass: span.icon.icon-thumbs-up
-              li: a.change-image-kind(href='#', class='is-fail'): span.icon.icon-thumbs-o-down
+              li: a.js-change-image-kind(href='#', class='is-fail'): span.icon.icon-thumbs-o-down
             else
-              li: a.change-image-kind(href='#', class='is-pass'): span.icon.icon-thumbs-o-up
+              li: a.js-change-image-kind(href='#', class='is-pass'): span.icon.icon-thumbs-o-up
               li: .is-fail: span.icon.icon-thumbs-down
-            li: a.delete-image(href='#'): span.icon.icon-trash-o
+            li: a.js-delete-image(href='#'): span.icon.icon-trash-o

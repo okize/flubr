@@ -8,11 +8,11 @@ module.exports = () ->
 
   $body = $('body')
 
-  $body.on 'click', '.change-image-kind', (e) ->
+  $body.on 'click', '.js-change-image-kind', (e) ->
     e.preventDefault()
     imageCard.switchImageKind $(this)
 
-  $body.on 'click', '.delete-image', (e) ->
+  $body.on 'click', '.js-delete-image', (e) ->
     e.preventDefault()
     imageCard.deleteImage $(this)
 
