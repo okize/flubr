@@ -90,20 +90,13 @@
     margin: 0 0 1rem
     &:last-child
       margin: 0
-
-.is-pass
-  .icon
-    color: $pass
-
-.is-fail
-  .icon
-    color: $fail
-
-a.is-pass, a.is-fail
-  .icon
+  .icon, a.icon
     color: #999
 
-.delete-image
+.is-pass:not(a)
   .icon
-    color: #999
+    color: $pass !important
 
+.is-fail:not(a)
+  .icon
+    color: $fail !important
