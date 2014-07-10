@@ -7,6 +7,7 @@ twitter = new Twit(
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 )
 User = require path.join('..', 'models', 'user')
+help = require path.join('..', 'helpers')
 
 # user model's CRUD controller.
 module.exports =
@@ -54,4 +55,10 @@ module.exports =
   delete: (req, res) ->
     User.findOneAndRemove {userid: req.params.id}, (err, results) ->
       res.send 500, error: err if err?
-      res.send 200, results if results?
+      if results?
+        # user deletes themselves so delete session
+        if req.user.userid == req.params.id
+          req.session.destroy()
+          res.send 200, results
+        else
+          res.send 200, results
