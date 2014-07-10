@@ -7,12 +7,12 @@ module.exports =
   _getImageSetHtml: (newKind) ->
     if newKind == 'pass'
       '<li><div class="is-pass"><span class="icon icon-thumbs-up"</span></div></li>' +
-      '<li><a href="#" class="change-image-kind is-fail"><span class="icon icon-thumbs-o-down"</span></a></li>' +
-      '<li><a href="#" class="delete-image"><span class="icon icon-trash-o"></span></a></li>'
+      '<li><a href="#" class="js-change-image-kind is-fail"><span class="icon icon-thumbs-o-down"</span></a></li>' +
+      '<li><a href="#" class="js-delete-image"><span class="icon icon-trash-o"></span></a></li>'
     else
-      '<li><a href="#" class="change-image-kind is-pass"><span class="icon icon-thumbs-o-up"</span></a></li>' +
+      '<li><a href="#" class="js-change-image-kind is-pass"><span class="icon icon-thumbs-o-up"</span></a></li>' +
       '<li><div class="is-fail"><span class="icon icon-thumbs-down"</span></div></li>' +
-      '<li><a href="#" class="delete-image"><span class="icon icon-trash-o"></span></a></li>'
+      '<li><a href="#" class="js-delete-image"><span class="icon icon-trash-o"></span></a></li>'
 
   _updateImageInUi: (card, newKind, oldKind) ->
     msg.notice "Changed image to #{newKind}"
