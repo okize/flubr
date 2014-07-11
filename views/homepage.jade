@@ -1,8 +1,7 @@
 extends layout
 
 block head
-  style.
-    body { background-color: red; }
+  style.=css
 
 block content
 
@@ -28,3 +27,6 @@ block content
         .image-type-fail
           h3 Fail
           #random-fail-image
+
+block footer
+  script.=js
