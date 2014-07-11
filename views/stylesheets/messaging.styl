@@ -5,7 +5,9 @@
 .app-messaging
   @extend .nav-inset-shadow-right
   background: $appMessagingBgColor
-  padding: 1rem
+  padding: 0 1rem
+  +from($medium-up)
+    padding: 1rem
   ul
     font-size: .8rem
     padding: 0
