@@ -20,22 +20,15 @@ body
   font-family: $appFontFamily
 
 .app-homepage
+  min-height: 100vh
   text-align: center
   position: relative
   background: linear-gradient(top, $homepageBgColorTop, $homepageBgColorBottom)
 
-.homepage-logo
-  color: $flubr
-  text-shadow: $flubrDark .25rem .25rem
-  font-size: 4.5rem
-  margin: 0 1rem
-  text-transform: uppercase
-  +from($medium-up)
-    font-size: 12rem
-
 .homepage-login-button
   a
-    background: #4099FF
+    background: $homepageLoginButtonBgColor
+    border-bottom: .2rem solid darken($homepageLoginButtonBgColor, 25%)
     text-transform: uppercase
     color: white
     text-decoration: none
@@ -44,19 +37,38 @@ body
     font-size: 1rem
     display: block
     width: $homepageImageWidth * .85
-    margin: .25rem auto
+    margin: 1rem auto -.25rem
     +from($medium-up)
       font-size: .8rem
       display: inline-block
       width: auto
 
+.homepage-mascot
+  display: none
+  top: 4rem
+  position: absolute
+  left: 50%
+  margin-left: -9rem
+  z-index: 1
+  +from($medium-up)
+    display: block
+
+.homepage-logo
+  //
+
 .homepage-random-images
+  position: relative
   overflow: hidden
   +from($medium-up)
+    top: 10rem
     text-align: center
     margin: 1rem 0 0
 
 .image-type-pass, .image-type-fail
+  margin: 1rem auto 0
+  border: 1px solid #999
+  position: relative
+  overflow: hidden
   width: $homepageImageWidth * .75
   height: $homepageImageHeight * .75
   img
@@ -68,12 +80,6 @@ body
     img
       width: $homepageImageWidth
       height: $homepageImageHeight
-
-.image-type-pass, .image-type-fail
-  border: 1px solid #999
-  margin: 1rem auto 0
-  position: relative
-  overflow: hidden
   h3
     margin: 0 0 0 .4rem
     opacity: .65
@@ -94,7 +100,6 @@ body
       1px 1px 0 #fff
   +from($medium-up)
     display: inline-block
-    margin: 1.5rem
     h3
       font-size: 3.5rem
       top: $homepageImageHeight * .3
@@ -102,8 +107,11 @@ body
 .image-type-pass
   h3
     color: $pass
+  +from($medium-up)
+    margin: 0 4rem 0 0
 
 .image-type-fail
   h3
     color: $fail
-
+  +from($medium-up)
+    margin: 0 0 0 4rem

@@ -4,7 +4,11 @@ block content
 
   main.app-homepage(role='main')
 
-    h1.homepage-logo Flubr
+    .homepage-mascot
+      include images/flubr-mascot.svg
+
+    //- .homepage-logo
+    //-   include images/logo.svg
 
     .homepage-login-button
       a(href='/login') Sign in with twitter
