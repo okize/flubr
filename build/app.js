@@ -1,4 +1,4 @@
-var Store, app, authentication, bodyParser, browserify, coffee, coffeeify, compression, cookieParser, express, fs, livereload, logger, mongoose, nib, passport, path, routes, rupture, session, stylus;
+var Store, app, authentication, bodyParser, browserify, coffee, coffeeify, compression, cookieParser, express, favicon, fs, livereload, logger, mongoose, nib, passport, path, routes, rupture, session, stylus;
 
 path = require('path');
 
@@ -41,6 +41,8 @@ rupture = require('rupture');
 routes = require('./routes');
 
 authentication = require('./authentication');
+
+favicon = require('serve-favicon');
 
 app = express();
 
@@ -91,6 +93,8 @@ app.use(compression({
 }));
 
 app.use(express["static"](path.join(__dirname, '..', 'public')));
+
+app.use(favicon(path.join(__dirname, '..', 'public', 'images', 'favicon.ico')));
 
 if (app.get('env') === 'development') {
   app.use(livereload({

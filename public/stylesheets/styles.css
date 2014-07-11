@@ -1812,7 +1812,7 @@ th {
 }
 .nav-inset-shadow-left,
 .app-navigation,
-.navigation-logo {
+.navigation-top {
   -webkit-box-shadow: inset -5px -5px 15px rgba(51,51,51,0.15);
   box-shadow: inset -5px -5px 15px rgba(51,51,51,0.15);
 }
@@ -1926,8 +1926,7 @@ th {
   width: 20rem;
   margin: 0 auto;
 }
-.app-body,
-.app-homepage {
+.app-body {
   min-height: 100vh;
   width: 100%;
 }
@@ -1946,10 +1945,15 @@ th {
   -ms-flex-direction: column;
   flex-direction: column;
 }
-.app-messaging {
-  display: none;
-}
 .app-navigation {
+  -webkit-box-ordinal-group: -2;
+  -moz-box-ordinal-group: -2;
+  -o-box-ordinal-group: -2;
+  -ms-flex-order: -2;
+  -webkit-order: -2;
+  order: -2;
+}
+.app-messaging {
   -webkit-box-ordinal-group: -1;
   -moz-box-ordinal-group: -1;
   -o-box-ordinal-group: -1;
@@ -1957,7 +1961,32 @@ th {
   -webkit-order: -1;
   order: -1;
 }
+.app-content {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
 @media only screen and (min-width: 769px) {
+  .app-navigation {
+    -webkit-box-ordinal-group: -1;
+    -moz-box-ordinal-group: -1;
+    -o-box-ordinal-group: -1;
+    -ms-flex-order: -1;
+    -webkit-order: -1;
+    order: -1;
+  }
+  .app-messaging {
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    -o-box-ordinal-group: 1;
+    -ms-flex-order: 1;
+    -webkit-order: 1;
+    order: 1;
+  }
   .app-wrapper {
     -webkit-box-orient: horizontal;
     -moz-box-orient: horizontal;
@@ -1965,15 +1994,6 @@ th {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    -o-box-flex: 1;
-    box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-  }
-  .app-content {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
     -o-box-flex: 1;
@@ -2030,19 +2050,28 @@ th {
 .app-navigation {
   background: #d3d3d3;
 }
-.navigation-logo {
-  line-height: 2;
+.navigation-top {
+  position: relative;
   background: #85d10d;
-  color: #fff;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 2.5rem;
+  overflow: hidden;
 }
 @media only screen and (min-width: 769px) {
-  .navigation-logo {
+  .navigation-top {
     line-height: 10rem;
-    height: 10rem;
+    height: 15rem;
   }
+}
+.navigation-logo {
+  display: none;
+}
+.navigation-logo svg {
+  position: absolute;
+  z-index: 1;
+}
+.navigation-mascot svg {
+  position: absolute;
+  top: 3rem;
+  left: -2rem;
 }
 .navigation-links {
   margin: 0;
@@ -2131,7 +2160,12 @@ th {
 }
 .app-messaging {
   background: #d3d3d3;
-  padding: 1rem;
+  padding: 0 1rem;
+}
+@media only screen and (min-width: 769px) {
+  .app-messaging {
+    padding: 1rem;
+  }
 }
 .app-messaging ul {
   font-size: 0.8rem;
@@ -2293,29 +2327,79 @@ th {
 .is-fail:not(a) .icon {
   color: #ff4136 !important;
 }
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+}
+.app-body {
+  min-height: 100vh;
+  width: 100%;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
 .app-homepage {
+  min-height: 100vh;
   text-align: center;
   position: relative;
-  background: #aaa -webkit-linear-gradient(to(scale-point) bottom, #fafafa, #aaa) repeat-x;
-  background: #aaa -moz-linear-gradient(to(scale-point) bottom, #fafafa, #aaa) repeat-x;
-  background: #aaa -o-linear-gradient(to(scale-point) bottom, #fafafa, #aaa) repeat-x;
-  background: #aaa -ms-linear-gradient(to(scale-point) bottom, #fafafa, #aaa) repeat-x;
-  background: #aaa linear-gradient(to(scale-point) bottom, #fafafa, #aaa) repeat-x;
+  background: -webkit-linear-gradient(top, #fafafa, #aaa);
+  background: -moz-linear-gradient(top, #fafafa, #aaa);
+  background: -o-linear-gradient(top, #fafafa, #aaa);
+  background: -ms-linear-gradient(top, #fafafa, #aaa);
+  background: linear-gradient(to bottom, #fafafa, #aaa);
 }
-.homepage-logo {
-  color: #85d10d;
-  text-shadow: #659e0a 0.25rem 0.25rem;
-  font-size: 4.5rem;
-  margin: 0 1rem;
-  text-transform: uppercase;
+.homepage-logo,
+.homepage-mascot {
+  display: none;
 }
 @media only screen and (min-width: 769px) {
-  .homepage-logo {
-    font-size: 12rem;
+  .homepage-logo,
+  .homepage-mascot {
+    display: block;
+  }
+}
+.homepage-logo {
+  top: 1rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -14.5rem;
+}
+.homepage-mascot {
+  top: 12rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -9rem;
+  z-index: 1;
+}
+@media only screen and (min-width: 769px) {
+  .homepage-wrapper {
+    position: relative;
+    top: 10rem;
+  }
+}
+.homepage-login-button {
+  display: inline-block;
+  margin: 1rem auto 0;
+}
+@media only screen and (min-width: 769px) {
+  .homepage-login-button {
+    position: relative;
+    top: 25rem;
+    z-index: 2;
   }
 }
 .homepage-login-button a {
   background: #4099ff;
+  border-bottom: 0.2rem solid #006fef;
   text-transform: uppercase;
   color: #fff;
   text-decoration: none;
@@ -2325,26 +2409,21 @@ th {
   font-size: 1rem;
   display: block;
   width: 15.299999999999999rem;
-  margin: 0.25rem auto;
-}
-@media only screen and (min-width: 769px) {
-  .homepage-login-button a {
-    font-size: 0.8rem;
-    display: inline-block;
-    width: auto;
-  }
-}
-.homepage-random-images {
-  overflow: hidden;
 }
 @media only screen and (min-width: 769px) {
   .homepage-random-images {
+    position: relative;
+    top: 8rem;
     text-align: center;
     margin: 1rem 0 0;
   }
 }
 .image-type-pass,
 .image-type-fail {
+  margin: 1rem auto 0;
+  border: 1px solid #999;
+  position: relative;
+  overflow: hidden;
   width: 13.5rem;
   height: 9rem;
 }
@@ -2364,13 +2443,6 @@ th {
     width: 18rem;
     height: 12rem;
   }
-}
-.image-type-pass,
-.image-type-fail {
-  border: 1px solid #999;
-  margin: 1rem auto 0;
-  position: relative;
-  overflow: hidden;
 }
 .image-type-pass h3,
 .image-type-fail h3 {
@@ -2394,7 +2466,6 @@ th {
   .image-type-pass,
   .image-type-fail {
     display: inline-block;
-    margin: 1.5rem;
   }
   .image-type-pass h3,
   .image-type-fail h3 {
@@ -2405,6 +2476,16 @@ th {
 .image-type-pass h3 {
   color: #2ecc40;
 }
+@media only screen and (min-width: 769px) {
+  .image-type-pass {
+    margin: 0 4rem 0 0;
+  }
+}
 .image-type-fail h3 {
   color: #ff4136;
+}
+@media only screen and (min-width: 769px) {
+  .image-type-fail {
+    margin: 0 0 0 4rem;
+  }
 }
