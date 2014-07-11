@@ -38,7 +38,7 @@ module.exports =
       kind: newKind
     $.ajax
       type: 'PUT'
-      url: 'api/images/' + id
+      url: '/api/images/' + id
       success: =>
         @_updateImageInUi card, newKind, oldKind
       error: (error) ->
@@ -56,7 +56,7 @@ module.exports =
       id = card.attr('id')
       $.ajax
         type: 'DELETE'
-        url: 'api/images/' + id
+        url: '/api/images/' + id
         success: =>
           @_deleteImageInUi card
         error: (error) ->
