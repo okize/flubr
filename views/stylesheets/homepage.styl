@@ -1,10 +1,28 @@
-$homepageImageWidth = 18rem
-$homepageImageHeight = 12rem
+@import 'nib'
+@import 'variables'
+
+*,
+*:before,
+*:after
+  box-sizing: border-box
+
+html
+  font-family: sans-serif
+  -ms-text-size-adjust: 100%
+  -webkit-text-size-adjust: 100%
+
+body
+  margin: 0
+
+.app-body
+  min-height: 100vh
+  width: 100%
+  font-family: $appFontFamily
 
 .app-homepage
   text-align: center
   position: relative
-  background: $homepageBgColorBottom linear-gradient(to bottom, $homepageBgColorTop, $homepageBgColorBottom) repeat-x
+  background: linear-gradient(top, $homepageBgColorTop, $homepageBgColorBottom)
 
 .homepage-logo
   color: $flubr
