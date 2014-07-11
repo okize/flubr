@@ -1,16 +1,15 @@
-getImage = (image) ->
-  xhr = new XMLHttpRequest()
-  xhr.open 'GET', "/api/images/random/#{image.kind}"
-  xhr.send null
-  xhr.onreadystatechange = ->
-    if xhr.readyState == 4
-      if xhr.status == 200
-        image.el.innerHTML = "<img src='#{xhr.responseText}' />"
-        image.el.offsetParent.style.visibility = 'visible'
+$ = require 'jquery'
 
-images = [
-  { kind: 'pass', el: document.getElementById 'random-pass-image' }
-  { kind: 'fail', el: document.getElementById 'random-fail-image' }
-]
+module.exports = () ->
 
-getImage image for image in images
+  # homepage random images
+  getRandomImage = (el, type) ->
+    $.get '/api/images/random/' + type, (data) ->
+      el.append "<img src='#{data}' />"
+
+  randomPassImage = $('#random-pass-image')
+  randomFailImage = $('#random-fail-image')
+
+  if randomPassImage.length and randomFailImage.length
+    getRandomImage randomPassImage, 'pass'
+    getRandomImage randomFailImage, 'fail'
