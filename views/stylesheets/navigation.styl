@@ -2,16 +2,26 @@
   @extend .nav-inset-shadow-left
   background: $navBgColor
 
-.navigation-logo
+.navigation-top
+  position: relative
   background: $flubr
   overflow: hidden
   +from($medium-up)
     @extend .nav-inset-shadow-left
     line-height: 10rem
-    height: 10rem
+    height: 15rem
+
+.navigation-logo
+  display: none
   svg
-    position: relative
-    top: 4rem
+    position: absolute
+    z-index: 1
+
+.navigation-mascot
+  svg
+    position: absolute
+    top: 3rem
+    left: -2rem
 
 .navigation-links
   margin: 0
