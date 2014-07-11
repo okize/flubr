@@ -25,7 +25,36 @@ body
   position: relative
   background: linear-gradient(top, $homepageBgColorTop, $homepageBgColorBottom)
 
+.homepage-logo, .homepage-mascot
+  display: none
+  +from($medium-up)
+    display: block
+
+.homepage-logo
+  top: 1rem
+  position: absolute
+  left: 50%
+  margin-left: -14.5rem
+
+.homepage-mascot
+  top: 12rem
+  position: absolute
+  left: 50%
+  margin-left: -9rem
+  z-index: 1
+
+.homepage-wrapper
+  +from($medium-up)
+    position: relative
+    top: 10rem
+
 .homepage-login-button
+  display: inline-block
+  margin: 1rem auto 0
+  +from($medium-up)
+    position: relative
+    top: 25rem
+    z-index: 2
   a
     background: $homepageLoginButtonBgColor
     border-bottom: .2rem solid darken($homepageLoginButtonBgColor, 25%)
@@ -37,30 +66,11 @@ body
     font-size: 1rem
     display: block
     width: $homepageImageWidth * .85
-    margin: 1rem auto -.25rem
-    +from($medium-up)
-      font-size: .8rem
-      display: inline-block
-      width: auto
-
-.homepage-mascot
-  display: none
-  top: 4rem
-  position: absolute
-  left: 50%
-  margin-left: -9rem
-  z-index: 1
-  +from($medium-up)
-    display: block
-
-.homepage-logo
-  //
 
 .homepage-random-images
-  position: relative
-  overflow: hidden
   +from($medium-up)
-    top: 10rem
+    position: relative
+    top: 8rem
     text-align: center
     margin: 1rem 0 0
 
