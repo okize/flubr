@@ -20,6 +20,7 @@ nib = require 'nib'
 rupture = require 'rupture'
 routes = require './routes'
 authentication = require './authentication'
+favicon = require 'serve-favicon'
 
 # create application instance
 app = express()
@@ -68,7 +69,10 @@ if app.get('env') == 'development'
 
 # gzip assets
 app.use compression(threshold: 1024)
+
+# static assets
 app.use express.static(path.join(__dirname, '..', 'public'))
+app.use favicon(path.join __dirname, '..', 'public', 'images', 'favicon.ico')
 
 # insert livereload script into page in development
 if app.get('env') == 'development'
