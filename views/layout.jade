@@ -6,14 +6,8 @@ html
       | Flubr -
       = ' ' + title
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    if env == 'production'
-      link(rel='stylesheet', href='/stylesheets/styles.min.css')
-    else
-      link(rel='stylesheet', href='/stylesheets/styles.css')
+    block head
 
   body.app-body
     block content
-    if env == 'production'
-      script(async, src='/javascripts/scripts.min.js')
-    else
-      script(async, src='/javascripts/scripts.js')
+    block footer
