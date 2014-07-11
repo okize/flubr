@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="288.889px" height="318.869px" viewBox="0 0 288.889 318.869" enable-background="new 0 0 288.889 318.869"
 	 xml:space="preserve">
-<g id="Layer_1">
+<g id="Layer_1" display="none">
+	
+		<image display="inline" overflow="visible" width="282" height="282" xlink:href="flubber_ico.jpg"  transform="matrix(0.936 0 0 0.9912 10.4453 24.3667)">
+	</image>
+</g>
+<g id="Layer_2">
 	<g>
 		<path fill="#659E0A" d="M176.386,313.869c-5.125,0-9.957-1.339-13.975-3.872c-9.203-5.801-9.436-16.59-9.605-24.468l-0.003-0.111
 			c-0.089-4.084-0.339-8.268-0.58-12.314c-0.163-2.745-0.333-5.583-0.453-8.401c-0.009-0.19-0.025-0.335-0.043-0.438
@@ -77,7 +83,7 @@
 	</g>
 </g>
 <g id="Layer_4">
-
+	
 		<ellipse transform="matrix(0.7071 0.7071 -0.7071 0.7071 75.286 -110.1987)" fill="#CDFC80" cx="170.663" cy="35.778" rx="16.691" ry="9.119"/>
 </g>
 <g id="Layer_5">
