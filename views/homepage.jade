@@ -7,18 +7,20 @@ block content
     .homepage-mascot
       include images/flubr-mascot.svg
 
-    //- .homepage-logo
-    //-   include images/logo.svg
+    .homepage-logo
+      include images/flubr-logo.svg
 
-    .homepage-login-button
-      a(href='/login') Sign in with twitter
+    .homepage-wrapper
 
-    .homepage-random-images
+      .homepage-login-button
+        a(href='/login') Sign in with twitter
 
-      .image-type-pass
-        h3 Pass
-        #random-pass-image
+      .homepage-random-images
 
-      .image-type-fail
-        h3 Fail
-        #random-fail-image
+        .image-type-pass
+          h3 Pass
+          #random-pass-image
+
+        .image-type-fail
+          h3 Fail
+          #random-fail-image
