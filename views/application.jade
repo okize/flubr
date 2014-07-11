@@ -1,5 +1,12 @@
 extends layout
 
+block head
+
+  if env == 'production'
+    link(rel='stylesheet', href='/stylesheets/styles.min.css')
+  else
+    link(rel='stylesheet', href='/stylesheets/styles.css')
+
 block content
 
   .app-wrapper
@@ -13,3 +20,10 @@ block content
     include partials/navigation
 
     include partials/messaging
+
+block footer
+
+  if env == 'production'
+      script(async, src='/javascripts/scripts.min.js')
+    else
+      script(async, src='/javascripts/scripts.js')
