@@ -41,6 +41,7 @@
     "passport-twitter": "*",
     "request": "*",
     "rupture": "*",
+    "serve-favicon": "*",
     "stylus": "*",
     "twit": "*",
     "velocity-animate": "*"
