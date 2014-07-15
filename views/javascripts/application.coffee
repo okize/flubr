@@ -1,4 +1,5 @@
 $ = require 'jquery'
+Pjax = require 'pjax'
 msg = require './messaging'
 imageCard = require './imageCards'
 user = require './users'
@@ -27,3 +28,17 @@ module.exports = () ->
   $('#js-add-image').on 'submit', (e) ->
     e.preventDefault()
     image.addImage $(this)
+
+  new Pjax(
+    selectors: [
+      'title'
+    ]
+    elements: '.js-pjax'
+    debug: window.location.hostname == 'localhost'
+  )
+
+  document.addEventListener 'pjax:send', ->
+    console.log 'pjax:send'
+
+  document.addEventListener 'pjax:success', ->
+    console.log 'pjax:success'
