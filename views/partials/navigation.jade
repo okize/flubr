@@ -14,6 +14,6 @@ nav.app-navigation(role='navigation')
     each item in navigation
       - var activeClass = pageName === item.href ? 'nav-active' : ''
       li(class='nav-#{item.href} #{activeClass}')
-        a.nav-link(href='/#{item.href}', title='#{item.title}')
+        a.nav-link.js-pjax(href='/#{item.href}', title='#{item.title}')
           span.nav-icon.icon(class=' icon-#{item.icon}')
           span.nav-text= item.title
