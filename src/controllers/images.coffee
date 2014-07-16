@@ -106,7 +106,7 @@ module.exports =
               res.send 201, results
 
     else
-      res.send 401, error: needToLogin
+      res.send 401, error: errors.needToLogin
 
   # updates existing image record type: pass or fail
   update: (req, res) ->
@@ -118,7 +118,7 @@ module.exports =
         res.send 500, error: err if err?
         res.send 200, success: "#{count} rows have been updated"
     else
-      res.send 401, error: needToLogin
+      res.send 401, error: errors.needToLogin
 
   # deletes image record non-permanently
   delete: (req, res) ->
@@ -130,4 +130,4 @@ module.exports =
         res.send 500, error: err if err?
         res.send 200, success: "#{count} rows have been deleted"
     else
-      res.send 401, error: needToLogin
+      res.send 401, error: errors.needToLogin
