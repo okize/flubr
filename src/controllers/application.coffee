@@ -47,12 +47,19 @@ module.exports =
     Image.find(deleted: false).sort(created_at: 'descending').exec(
       (err, results) ->
         throw err if err
+        passImageCount = 0
+        failImageCount = 0
         images = _.map results, (image) ->
+          passImageCount++ if image.kind == 'pass'
+          failImageCount++ if image.kind == 'fail'
           newImage =
             id: image._id
             imageUrl: image.image_url
             thumbnailUrl: getThumbnail(image.image_url)
             kind: image.kind
+        totalImageCount = passImageCount + failImageCount
+        passImagePercentage = (passImageCount / totalImageCount) * 100
+        failImagePercentage = (failImageCount / totalImageCount) * 100
         res.render 'images',
           env: process.env.NODE_ENV
           title: 'Image list'
@@ -60,6 +67,10 @@ module.exports =
           navigation: navigation
           user: req.user
           imageList: images
+          passImageCount: passImageCount
+          failImageCount: failImageCount
+          passImagePercentage: passImagePercentage
+          failImagePercentage: failImagePercentage
           deleted: false
     )
 
