@@ -4,6 +4,19 @@ block page
 
   if imageList.length > 0
 
+
+    - passImageCount = 80
+    - failImageCount = 156
+    - totalImageCount = passImageCount + failImageCount
+    - passImagePercentage = (passImageCount / totalImageCount) * 100
+    - failImagePercentage = (failImageCount / totalImageCount) * 100
+
+    .image-stats-graph
+      span.image-stats-bar.image-stats-pass(style='width: #{passImagePercentage}%')= passImageCount
+      span.image-stats-bar.image-stats-fail(style='width: #{failImagePercentage}%')= failImageCount
+
+
+
     ul.image-cards
       each image in imageList
         if image.kind == 'pass'
