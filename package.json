@@ -77,6 +77,7 @@
     "node-debug": "*",
     "run-sequence": "*",
     "semver": "*",
+    "superagent": "*",
     "tiny-lr": "*",
     "vinyl-source-stream": "*"
   }
