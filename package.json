@@ -50,6 +50,7 @@
     "browserify": "*",
     "codename": "*",
     "connect-livereload": "*",
+    "expect": "*",
     "gift": "*",
     "gulp": "*",
     "gulp-bg": "*",
