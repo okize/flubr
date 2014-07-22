@@ -1,6 +1,6 @@
 superagent = require 'superagent'
 expect = require 'expect'
-describe 'express rest api server', ->
+describe 'rest api server', ->
 
   it 'retrieves a pass image url', (done) ->
     superagent.get('http://localhost:3333/api/images/random/pass').end (err, res) ->
