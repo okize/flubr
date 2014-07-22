@@ -61,6 +61,7 @@
     "gulp-exec": "*",
     "gulp-git": "*",
     "gulp-minify-css": "*",
+    "gulp-mocha": "*",
     "gulp-nodemon": "*",
     "gulp-open": "*",
     "gulp-rename": "*",
