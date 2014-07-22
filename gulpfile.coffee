@@ -236,6 +236,9 @@ gulp.task 'lint-css', ->
   gulp
     .src(compiled.css)
     .pipe(csslint(
+      'bulletproof-font-face': false
+      'adjoining-classes': false
+      'gradients': false
       'box-sizing': false
       'universal-selector': false
       'box-model': false
@@ -248,6 +251,7 @@ gulp.task 'lint-css', ->
       'outline-none': false
       'shorthand': false
       'font-sizes': false
+      'known-properties': false
     ).on('error', gutil.log))
     .pipe(csslint.reporter())
 
