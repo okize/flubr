@@ -137,13 +137,12 @@ gulp.task 'build', (callback) ->
     callback
   )
 
-# commits, tags & deploys application
+# commits, tags & pushes master
 gulp.task 'release', (callback) ->
   runSequence(
     'commit-updates',
     'tag-version',
     'push-updates',
-    # 'deploy-app',
     callback
   )
 
