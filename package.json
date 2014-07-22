@@ -50,6 +50,7 @@
     "browserify": "*",
     "codename": "*",
     "connect-livereload": "*",
+    "expect": "*",
     "gift": "*",
     "gulp": "*",
     "gulp-bg": "*",
@@ -60,6 +61,7 @@
     "gulp-exec": "*",
     "gulp-git": "*",
     "gulp-minify-css": "*",
+    "gulp-mocha": "*",
     "gulp-nodemon": "*",
     "gulp-open": "*",
     "gulp-rename": "*",
@@ -72,9 +74,11 @@
     "gulp-util": "*",
     "jquery": "*",
     "mkdirp": "*",
+    "mocha": "*",
     "node-debug": "*",
     "run-sequence": "*",
     "semver": "*",
+    "superagent": "*",
     "tiny-lr": "*",
     "vinyl-source-stream": "*"
   }

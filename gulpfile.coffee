@@ -10,6 +10,7 @@ stylus = require 'gulp-stylus'
 nib = require 'nib'
 rupture = require 'rupture'
 coffee = require 'gulp-coffee'
+mocha = require 'gulp-mocha'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
 clean = require 'gulp-rimraf'
@@ -45,6 +46,7 @@ sources =
   stylus: 'views/stylesheets/*.styl'
   coffee: 'views/javascripts/*.coffee'
   jade: 'views/**/*.jade'
+  tests: 'test/**/*.coffee'
 compiled =
   css: 'public/stylesheets/styles.css'
   js: 'public/javascripts/scripts.js'
@@ -122,6 +124,12 @@ gulp.task 'default', (callback) ->
     callback
   )
 
+# runs tests
+gulp.task 'test', ->
+  gulp.src(sources.tests,
+    read: false
+  ).pipe mocha(reporter: 'spec')
+
 # lints coffeescript & css
 gulp.task 'lint', [
   'lint-coffeescript',
@@ -137,13 +145,12 @@ gulp.task 'build', (callback) ->
     callback
   )
 
-# commits, tags & deploys application
+# commits, tags & pushes master
 gulp.task 'release', (callback) ->
   runSequence(
     'commit-updates',
     'tag-version',
     'push-updates',
-    # 'deploy-app',
     callback
   )
 
