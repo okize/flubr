@@ -166,9 +166,15 @@ gulp.task 'refresh-db', ->
   dumpDir = appRoot + '/dump/' + dateStamp
   mkdirp(dumpDir, (err) ->
     throw err if err
-    run("mongodump --host #{prodDb.host}:#{prodDb.port} --db #{prodDb.database} -u #{prodDb.username} -p#{prodDb.password} -o #{dumpDir}")
+    run("
+      mongodump --host #{prodDb.host}:#{prodDb.port}
+      --db #{prodDb.database} -u #{prodDb.username}
+      -p#{prodDb.password} -o #{dumpDir}
+    ")
     .exec( ->
-      run("mongorestore --drop -d #{devDb.database} #{dumpDir}/#{devDb.database}").exec( ->
+      run("
+        mongorestore --drop -d #{devDb.database} #{dumpDir}/#{devDb.database}
+      ").exec( ->
         log 'database downloaded from production and imported to development'
       )
     )
@@ -186,7 +192,10 @@ gulp.task 'start-mongo',
 
 # starts up LiveReload server and the app with nodemon
 gulp.task 'start-app', ->
-  debugArgs = if env.NODE_ENV == 'development' then ['--nodejs', '--debug=5858'] else []
+  if env.NODE_ENV is 'development'
+    debugArgs = ['--nodejs', '--debug=5858']
+  else
+    debugArgs = []
   nodemon(
     script: appScript
     ext: 'coffee'

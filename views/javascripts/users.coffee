@@ -16,7 +16,8 @@ module.exports =
         <td>#{user.userName}</td>
         <td>#{createDate}</td>
         <td class="align-right">
-          <span class="icon icon-trash-o button-delete js-delete-user" id="#{user.userid}" title="Delete user"></span>
+          <span class="icon icon-trash-o button-delete js-delete-user"
+          id="#{user.userid}" title="Delete user"></span>
         </td>
        </tr>
        """
