@@ -238,6 +238,7 @@ gulp.task 'lint-css', ->
     .pipe(csslint(
       'bulletproof-font-face': false
       'adjoining-classes': false
+      'font-faces': false
       'gradients': false
       'box-sizing': false
       'universal-selector': false
