@@ -25,7 +25,8 @@ block page
       tr
         td
           img.avatar(src='#{user.avatar}', alt='avatar image')
-        td= user.name
+        td
+          strong= user.name
         td= user.twitterHandle
         td= user.dateAdded
         td.align-right
