@@ -64,6 +64,7 @@
     "gulp-open": "*",
     "gulp-rename": "*",
     "gulp-rimraf": "*",
+    "gulp-run": "*",
     "gulp-shell": "*",
     "gulp-stylus": "*",
     "gulp-uglify": "*",
