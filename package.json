@@ -71,6 +71,7 @@
     "gulp-uglifyjs": "*",
     "gulp-util": "*",
     "jquery": "*",
+    "mkdirp": "*",
     "node-debug": "*",
     "run-sequence": "*",
     "semver": "*",
