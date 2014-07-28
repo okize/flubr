@@ -49,15 +49,15 @@ module.exports = (app, passport) ->
     res.redirect '/'
 
   # list all images
-  app.get '/api/images', (req, res, next) ->
+  app.get '/api/images', help.ensureAuthenticated, (req, res, next) ->
     images.index req, res, next
 
   # list all deleted images
-  app.get '/api/images/deleted', (req, res, next) ->
+  app.get '/api/images/deleted', help.ensureAuthenticated, (req, res, next) ->
     images.indexDeleted req, res, next
 
   # list single image by id
-  app.get '/api/images/:id', (req, res, next) ->
+  app.get '/api/images/:id', help.ensureAuthenticated, (req, res, next) ->
     images.show req, res, next
 
   # display random pass/fail image
