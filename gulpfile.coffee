@@ -151,6 +151,16 @@ gulp.task 'release', (callback) ->
 gulp.task 'debug', ->
   bg('./node_modules/.bin/node-debug', appScript)
 
+# dump production db
+gulp.task 'dump-prod-db', ->
+  db = parseMongoUrl env.MONGODB_PROD_URL
+  dateStamp = moment().format('YYYYMMDD-hhmmss')
+  dumpDir = appRoot + '/dump/' + dateStamp
+  mkdirp(dumpDir, (err) ->
+    throw err if err
+    run("mongodump --host #{db.host}:#{db.port} --db #{db.database} -u #{db.username} -p#{db.password} -o #{dumpDir}").exec()
+  )
+
 # open app in default browser
 gulp.task 'open', ->
   gulp
