@@ -2,21 +2,27 @@ extends application
 
 block page
 
-  ul.image-cards
-    each image in imageList
-      if image.kind == 'pass'
-        - imageItemClass = 'image-card-pass'
-      else
-        - imageItemClass = 'image-card-fail'
-      li(id='#{image.id}', class='image-card #{imageItemClass}')
-        a(href='#{image.imageUrl}')
-          img.image-thumbnail(src='#{image.thumbnailUrl}', alt='')
-        if !deleted
-          ul.image-settings
-            if image.kind == 'pass'
-              li: .is-pass: span.icon.icon-thumbs-up
-              li: a.js-change-image-kind(href='#', class='is-fail'): span.icon.icon-thumbs-o-down
-            else
-              li: a.js-change-image-kind(href='#', class='is-pass'): span.icon.icon-thumbs-o-up
-              li: .is-fail: span.icon.icon-thumbs-down
-            li: a.js-delete-image(href='#'): span.icon.icon-trash-o
+  if imageList.length > 0
+
+    ul.image-cards
+      each image in imageList
+        if image.kind == 'pass'
+          - imageItemClass = 'image-card-pass'
+        else
+          - imageItemClass = 'image-card-fail'
+        li(id='#{image.id}', class='image-card #{imageItemClass}')
+          a(href='#{image.imageUrl}')
+            img.image-thumbnail(src='#{image.thumbnailUrl}', alt='')
+          if !deleted
+            ul.image-settings
+              if image.kind == 'pass'
+                li: .is-pass: span.icon.icon-thumbs-up
+                li: a.js-change-image-kind(href='#', class='is-fail'): span.icon.icon-thumbs-o-down
+              else
+                li: a.js-change-image-kind(href='#', class='is-pass'): span.icon.icon-thumbs-o-up
+                li: .is-fail: span.icon.icon-thumbs-down
+              li: a.js-delete-image(href='#'): span.icon.icon-trash-o
+
+  else
+
+    h2 No images found!
