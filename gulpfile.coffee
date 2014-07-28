@@ -151,14 +151,20 @@ gulp.task 'release', (callback) ->
 gulp.task 'debug', ->
   bg('./node_modules/.bin/node-debug', appScript)
 
-# dump production db
-gulp.task 'dump-prod-db', ->
-  db = parseMongoUrl env.MONGODB_PROD_URL
+# download production db and import to localdb (logout first)
+gulp.task 'refresh-db', ->
+  devDb = parseMongoUrl env.MONGODB_DEV_URL
+  prodDb = parseMongoUrl env.MONGODB_PROD_URL
   dateStamp = moment().format('YYYYMMDD-hhmmss')
   dumpDir = appRoot + '/dump/' + dateStamp
   mkdirp(dumpDir, (err) ->
     throw err if err
-    run("mongodump --host #{db.host}:#{db.port} --db #{db.database} -u #{db.username} -p#{db.password} -o #{dumpDir}").exec()
+    run("mongodump --host #{prodDb.host}:#{prodDb.port} --db #{prodDb.database} -u #{prodDb.username} -p#{prodDb.password} -o #{dumpDir}")
+    .exec( ->
+      run("mongorestore --drop -d #{devDb.database} #{dumpDir}/#{devDb.database}").exec( ->
+        log 'database downloaded from production and imported to development'
+      )
+    )
   )
 
 # open app in default browser
