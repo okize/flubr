@@ -43,13 +43,13 @@ module.exports = function(app, passport) {
   app.all('/api', function(req, res, next) {
     return res.redirect('/');
   });
-  app.get('/api/images', function(req, res, next) {
+  app.get('/api/images', help.ensureAuthenticated, function(req, res, next) {
     return images.index(req, res, next);
   });
-  app.get('/api/images/deleted', function(req, res, next) {
+  app.get('/api/images/deleted', help.ensureAuthenticated, function(req, res, next) {
     return images.indexDeleted(req, res, next);
   });
-  app.get('/api/images/:id', function(req, res, next) {
+  app.get('/api/images/:id', help.ensureAuthenticated, function(req, res, next) {
     return images.show(req, res, next);
   });
   app.get('/api/images/random/:id', function(req, res, next) {

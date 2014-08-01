@@ -1,8 +1,8 @@
 {
   "name": "flubr",
-  "releaseCodename": "MiniatureMule",
+  "releaseCodename": "MotionlessMarten",
   "private": true,
-  "version": "0.0.15",
+  "version": "0.0.16",
   "engines": {
     "node": "0.10.x"
   },

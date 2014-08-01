@@ -8,7 +8,7 @@ Image = new mongoose.Schema({
   original_url: String,
   animated: {
     type: Boolean,
-    "default": true
+    "default": false
   },
   kind: {
     type: String,

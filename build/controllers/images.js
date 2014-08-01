@@ -156,7 +156,7 @@ module.exports = {
       }
     } else {
       return res.send(401, {
-        error: needToLogin
+        error: errors.needToLogin
       });
     }
   },
@@ -181,7 +181,7 @@ module.exports = {
       });
     } else {
       return res.send(401, {
-        error: needToLogin
+        error: errors.needToLogin
       });
     }
   },
@@ -206,7 +206,7 @@ module.exports = {
       });
     } else {
       return res.send(401, {
-        error: needToLogin
+        error: errors.needToLogin
       });
     }
   }
