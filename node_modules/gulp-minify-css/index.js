@@ -68,21 +68,19 @@ function minifyCSSGulp(opt){
       return;
     }
 
-    var newFile = file.clone();
-
     // Image URLs are rebased with the assumption that they are relative to the
     // CSS file they appear in (unless "relativeTo" option is explicitly set by
     // caller)
     var relativeToTmp = opt.relativeTo;
     opt.relativeTo = relativeToTmp || path.resolve(path.dirname(file.path));
 
-    var newContents = minify(opt, file, newFile.contents);
+    var newContents = minify(opt, file, file.contents);
 
     // Restore original "relativeTo" value
     opt.relativeTo = relativeToTmp;
-    newFile.contents = new Buffer(newContents);
+    file.contents = new Buffer(newContents);
 
-    done(null, newFile);
+    done(null, file);
   }
 
   return through2.obj(modifyContents);
