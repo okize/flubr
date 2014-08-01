@@ -56,7 +56,11 @@ app.set('views', path.join(__dirname, '..', 'views'));
 
 app.set('view engine', 'jade');
 
-app.set('db url', process.env.MONGODB_URL || 'mongodb://localhost/flubr');
+if (app.get('env') === 'development') {
+  app.set('db url', process.env.MONGODB_DEV_URL);
+} else {
+  app.set('db url', process.env.MONGODB_PROD_URL);
+}
 
 mongoose.connect(app.get('db url'), {
   db: {
