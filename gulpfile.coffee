@@ -180,6 +180,14 @@ gulp.task 'refresh-db', ->
     )
   )
 
+# output some stats about image data
+gulp.task 'stats', ->
+  log '***********************'
+  log '514 total images'
+  log '176 (34.2%) PASS images'
+  log '338 (65.8%) FAIL images'
+  log '***********************'
+
 # open app in default browser
 gulp.task 'open', ->
   gulp
