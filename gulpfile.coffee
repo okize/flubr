@@ -9,8 +9,8 @@ nodemon = require 'gulp-nodemon'
 stylus = require 'gulp-stylus'
 nib = require 'nib'
 rupture = require 'rupture'
-coffee = require 'gulp-coffee'
 mocha = require 'gulp-mocha'
+coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
 clean = require 'gulp-rimraf'
@@ -32,9 +32,11 @@ exec = require 'gulp-exec'
 git = require 'gulp-git'
 gift = require 'gift'
 repo = gift './'
+mongoose = require 'mongoose'
 
 # configuration
 appRoot = __dirname
+Image = require path.join(appRoot, 'src', 'models', 'image')
 appScript = path.join(appRoot, 'src', 'app.coffee')
 publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
 publicCss = path.join(appRoot, 'views', 'stylesheets', 'styles.styl')
@@ -182,11 +184,26 @@ gulp.task 'refresh-db', ->
 
 # output some stats about image data
 gulp.task 'stats', ->
-  log '***********************'
-  log '514 total images'
-  log '176 (34.2%) PASS images'
-  log '338 (65.8%) FAIL images'
-  log '***********************'
+  mongoose.connect env.MONGODB_PROD_URL, (err) ->
+    throw err if err
+    Image.find(deleted: false).exec(
+      (err, results) ->
+        throw err if err
+        passImageCount = 0
+        failImageCount = 0
+        images = _.map results, (image) ->
+          passImageCount++ if image.kind == 'pass'
+          failImageCount++ if image.kind == 'fail'
+        totalImageCount = passImageCount + failImageCount
+        passImagePercentage = ((passImageCount / totalImageCount) * 100).toFixed(1)
+        failImagePercentage = ((failImageCount / totalImageCount) * 100).toFixed(1)
+        log "***********************"
+        log "#{totalImageCount} total images"
+        log "#{passImageCount} (#{passImagePercentage}%) PASS images"
+        log "#{failImageCount} (#{failImagePercentage}%) FAIL images"
+        log "***********************"
+        mongoose.disconnect()
+    )
 
 # open app in default browser
 gulp.task 'open', ->
