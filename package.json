@@ -39,6 +39,7 @@
     "nib": "1.0.*",
     "passport": "0.2.*",
     "passport-twitter": "1.0.*",
+    "rupture": "0.1.*",
     "request": "2.37.*",
     "serve-favicon": "2.0.x",
     "stylus": "0.47.*",
