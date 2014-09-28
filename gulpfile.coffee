@@ -247,7 +247,7 @@ gulp.task 'start-app', ->
       liveReload.close()
       gutil.beep()
     )
-  else if env.NODE_ENV is 'production'
+  if env.NODE_ENV is 'production'
     logErr 'Cannot start application.'
   else
     logErr 'Cannot start application.\nMake sure NODE_ENV is defined as either "development" or "production".'
