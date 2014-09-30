@@ -17,7 +17,6 @@ coffeeify = require 'coffeeify'
 browserify = require 'browserify-middleware'
 stylus = require 'stylus'
 nib = require 'nib'
-rupture = require 'rupture'
 routes = require './routes'
 authentication = require './authentication'
 favicon = require 'serve-favicon'
@@ -56,7 +55,6 @@ if app.get('env') == 'development'
               .set('paths', ['./views/stylesheets/'])
               .set('compress', false)
               .set('linenos', true)
-              .use(rupture())
               .use(nib())
               .render()
       res.set 'Content-Type', 'text/css'
