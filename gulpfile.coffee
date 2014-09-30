@@ -8,7 +8,6 @@ liveReload = require('tiny-lr')()
 nodemon = require 'gulp-nodemon'
 stylus = require 'gulp-stylus'
 nib = require 'nib'
-rupture = require 'rupture'
 mocha = require 'gulp-mocha'
 coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
@@ -306,7 +305,6 @@ gulp.task 'build-css', ->
     .pipe(stylus(
       linenos: false
       use: [
-        rupture(),
         nib()
       ]
     ))
