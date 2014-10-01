@@ -312,10 +312,13 @@ gulp.task 'build-css', ->
 
 # builds the front-end javascript
 gulp.task 'build-js', ->
-  browserify(extensions: ['.coffee'])
+  browserify(
+      extensions: ['.coffee']
+      debug: true
+    )
     .add(publicScript)
     .transform(coffeeify)
-    .bundle(debug: true)
+    .bundle()
     .on('error', gutil.log)
     .pipe(source('scripts.js'))
     .pipe(gulp.dest(jsBuild))
