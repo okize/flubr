@@ -64,6 +64,6 @@ module.exports =
         if error.responseText
           msg.error JSON.parse(error.responseText).error
         else
-          msg.error 'Sorry, user could not be deleted'
+          msg.error 'Sorry, user could not be added'
       contentType: 'application/json'
       data: JSON.stringify(data)
