@@ -115,7 +115,7 @@ module.exports =
         userList: users
 
   # check if there are *any* users OR if not a registered user
-  notUser: (req, res) ->
+  noUsers: (req, res) ->
     User.find {}, (err, users) ->
       throw err if err
       if users.length == 0
