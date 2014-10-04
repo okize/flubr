@@ -30,7 +30,7 @@ module.exports = (app, passport) ->
   app.get '/users', help.ensureAuthenticated, (req, res, next) ->
     application.users req, res, next
 
-  # manage users
+  # no authorized users for application
   app.get '/notUser', (req, res, next) ->
     application.notUser req, res, next
 
