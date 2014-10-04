@@ -6,3 +6,8 @@ block content
     h1 No users found!
     p Enter your Twitter handle below to add yourself as the first user.
     p After you log into the application you can authorize more users.
+
+    form(method='post', action='/addFirstUser')
+      input.inputAddOn-field(id='username', type='text', placeholder='Twitter handle')
+      p
+        button.inputAddOn-item(type='submit') Add User
