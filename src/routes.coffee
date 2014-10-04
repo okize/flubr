@@ -30,6 +30,10 @@ module.exports = (app, passport) ->
   app.get '/users', help.ensureAuthenticated, (req, res, next) ->
     application.users req, res, next
 
+  # manage users
+  app.get '/notUser', (req, res, next) ->
+    application.notUser req, res, next
+
   # login
   app.get '/login', passport.authenticate('twitter')
 
@@ -40,7 +44,7 @@ module.exports = (app, passport) ->
 
   # auth callback for twitter
   app.get '/auth', passport.authenticate('twitter',
-    failureRedirect: '/403'
+    failureRedirect: '/notUser'
   ), (req, res) ->
     res.redirect '/'
 
