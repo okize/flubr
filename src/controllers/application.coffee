@@ -113,3 +113,14 @@ module.exports =
         navigation: navigation
         user: req.user
         userList: users
+
+  # check if there are *any* users OR if not a registered user
+  notUser: (req, res) ->
+    User.find {}, (err, users) ->
+      throw err if err
+      if users.length == 0
+        res.render 'noUsers',
+          title: 'No users found!'
+          pageName: 'users'
+      else
+        res.redirect '/403'
