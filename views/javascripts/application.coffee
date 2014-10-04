@@ -24,6 +24,10 @@ module.exports = () ->
     e.preventDefault()
     user.addUser $(this)
 
+  $('#js-add-first-user').on 'submit', (e) ->
+    e.preventDefault()
+    user.addFirstUser $(this)
+
   $('#js-add-image').on 'submit', (e) ->
     e.preventDefault()
     image.addImage $(this)
