@@ -21,6 +21,7 @@ module.exports =
   # creates new user record
   # expects Twitter username in request body
   create: (req, res)  ->
+
     twitter.get('users/show', screen_name: req.body.user, (err, data) ->
       # https://dev.twitter.com/docs/error-codes-responses
       if err? && err.code == 34
@@ -40,7 +41,13 @@ module.exports =
           unless results.length
             user.save (err) ->
               res.send 500, error: err if err?
-              res.send 201, user
+
+              # if saved user was first user redirect to login
+              if req.body.firstUser?
+                res.redirect '/login'
+              else
+                res.send 201, user
+
           else
             res.send 500, {error: "#{req.body.user} is already a user"}
     )
