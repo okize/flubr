@@ -8,6 +8,7 @@ block content
     p After you log into the application you can authorize more users.
 
     form(method='post', action='/addFirstUser')
+      input(name='firstUser', value='true', type='hidden')
       input.inputAddOn-field(name='user', type='text', placeholder='Twitter handle')
       p
-        button.inputAddOn-item(type='submit') Add User
+        button(type='submit') Add user
