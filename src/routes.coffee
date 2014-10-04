@@ -34,6 +34,10 @@ module.exports = (app, passport) ->
   app.get '/noUsers', (req, res, next) ->
     application.noUsers req, res, next
 
+  # add first user
+  app.post '/addFirstUser', help.ensureNoUsers, (req, res, next) ->
+    users.create req, res, next
+
   # login
   app.get '/login', passport.authenticate('twitter')
 
