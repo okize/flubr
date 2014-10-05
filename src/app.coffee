@@ -82,10 +82,10 @@ if app.get('env') == 'development'
   app.use livereload(port: process.env.LIVE_RELOAD_PORT or 35729)
 
 # sessions
-app.use cookieParser(process.env.SESSION_SECRET)
+app.use cookieParser(process.env.SECRET_TOKEN)
 app.use session(
   name: 'express_session'
-  secret: process.env.SESSION_SECRET
+  secret: process.env.SECRET_TOKEN
   saveUninitialized: true
   resave: true
   store: new Store(
