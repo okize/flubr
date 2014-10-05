@@ -1,8 +1,30 @@
 {
   "name": "Flubr",
-  "description": "",
+  "description": "pass/fail images for chatrooms, moderated by your team members",
+  "website": "http://okize.github.io/flubr/",
+  "repository": "https://github.com/okize/flubr",
+  "logo": "https://raw.githubusercontent.com/okize/flubr/gh-pages/logo.png",
   "keywords": [
+    "pass",
+    "fail",
+    "images",
+    "chat",
+    "hubot",
+    "flubr"
   ],
-  "addons": [],
-  "env": {}
+  "success_url": "/",
+  "addons": [
+    "mongohq"
+  ],
+  "env": {
+    "SECRET_TOKEN": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "IMGUR_CLIENTID": "",
+    "TWITTER_CONSUMER_KEY": "",
+    "TWITTER_CONSUMER_SECRET": "",
+    "TWITTER_ACCESS_TOKEN": "",
+    "TWITTER_ACCESS_TOKEN_SECRET": ""
+  }
 }
