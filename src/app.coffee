@@ -35,7 +35,7 @@ app.set 'view engine', 'jade'
 if app.get('env') == 'development'
   app.set 'db url', process.env.MONGODB_DEV_URL
 else
-  app.set 'db url', process.env.MONGODB_PROD_URL
+  app.set 'db url', process.env.MONGOHQ_URL or process.env.MONGODB_PROD_URL
 
 # database connection
 mongoose.connect app.get('db url'), {db: {safe: true}}, (err) ->
