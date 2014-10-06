@@ -1,8 +1,8 @@
 {
   "name": "flubr",
-  "releaseCodename": "DeliciousDunlin",
+  "releaseCodename": "PerfectPorcupine",
   "private": true,
-  "version": "0.0.17",
+  "version": "0.0.18",
   "engines": {
     "node": "0.10.x"
   },

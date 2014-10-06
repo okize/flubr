@@ -57,7 +57,7 @@ app.set('view engine', 'jade');
 if (app.get('env') === 'development') {
   app.set('db url', process.env.MONGODB_DEV_URL);
 } else {
-  app.set('db url', process.env.MONGODB_PROD_URL);
+  app.set('db url', process.env.MONGOHQ_URL || process.env.MONGODB_PROD_URL);
 }
 
 mongoose.connect(app.get('db url'), {
@@ -104,11 +104,11 @@ if (app.get('env') === 'development') {
   }));
 }
 
-app.use(cookieParser(process.env.SESSION_SECRET));
+app.use(cookieParser(process.env.SECRET_TOKEN));
 
 app.use(session({
   name: 'express_session',
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SECRET_TOKEN,
   saveUninitialized: true,
   resave: true,
   store: new Store({
