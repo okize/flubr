@@ -234,9 +234,10 @@ gulp.task 'start-app', ->
   ).on('restart', (files) ->
     log 'app restarted'
   ).on('start', ->
-    liveReloadPort = env.LIVE_RELOAD_PORT or 35729
-    liveReload.listen liveReloadPort
-    log 'livereload started on port ' + liveReloadPort
+    if env.NODE_ENV is 'development'
+      liveReloadPort = env.LIVE_RELOAD_PORT or 35729
+      liveReload.listen liveReloadPort
+      log 'livereload started on port ' + liveReloadPort
   ).on('quit', ->
     log 'app closed'
     liveReload.close()
