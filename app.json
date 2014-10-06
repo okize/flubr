@@ -17,6 +17,7 @@
     "mongohq"
   ],
   "env": {
+    "NODE_ENV": "production",
     "SECRET_TOKEN": {
       "description": "A secret key for verifying the integrity of signed cookies.",
       "generator": "secret"
