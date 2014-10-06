@@ -56,7 +56,11 @@ module.exports = {
                   error: err
                 });
               }
-              return res.send(201, user);
+              if (req.body.firstUser != null) {
+                return res.redirect('/login');
+              } else {
+                return res.send(201, user);
+              }
             });
           } else {
             return res.send(500, {

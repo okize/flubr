@@ -146,5 +146,20 @@ module.exports = {
         userList: users
       });
     });
+  },
+  noUsers: function(req, res) {
+    return User.find({}, function(err, users) {
+      if (err) {
+        throw err;
+      }
+      if (users.length === 0) {
+        return res.render('noUsers', {
+          title: 'No users found!',
+          pageName: 'users'
+        });
+      } else {
+        return res.redirect('/403');
+      }
+    });
   }
 };
