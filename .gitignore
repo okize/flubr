@@ -4,3 +4,9 @@ npm-debug.log
 dump/
 *.map
 temp.coffee
+
+node_modules/connect-mongostore/node_modules/mongodb/node_modules/bson/build/
+node_modules/connect-mongostore/node_modules/mongodb/node_modules/kerberos/build/
+node_modules/mongoose/node_modules/mongodb/node_modules/bson/build/
+node_modules/mongoose/node_modules/mongodb/node_modules/kerberos/build/
+node_modules/node-debug/node_modules/node-inspector/node_modules/socket.io/node_modules/socket.io-client/node_modules/ws/build/
