@@ -8,9 +8,9 @@ pass/fail images for campfire, etc. moderated by your team members
 
 ### Updating app from source
 
-'''
+```
   git pull git@github.com:okize/flubr.git
-'''
+```
 
 ## Hubot
 
