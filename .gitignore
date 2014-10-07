@@ -1,7 +1,6 @@
 env.json
 .env
 dump/
-*.map
 temp.coffee
 
 npm-debug.log
