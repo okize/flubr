@@ -140,7 +140,7 @@ gulp.task 'lint', [
 # creates a build
 gulp.task 'build', (callback) ->
   runSequence(
-    'clean-directories',
+    ['clean-directories'],
     ['build-css', 'build-js', 'build-app'],
     ['minify-css', 'minify-js']
     callback
@@ -149,9 +149,9 @@ gulp.task 'build', (callback) ->
 # commits, tags & pushes master
 gulp.task 'release', (callback) ->
   runSequence(
-    'commit-updates',
-    'tag-version',
-    'push-updates',
+    ['commit-updates'],
+    ['tag-version'],
+    ['push-updates'],
     callback
   )
 
