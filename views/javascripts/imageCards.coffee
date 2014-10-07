@@ -53,6 +53,39 @@ module.exports =
       .html('updated!')
       .html( @_getImageSetHtml newKind )
 
+  _getImageCountsByType: () ->
+    passBar = $('#js-image-stats-pass')
+    failBar = $('#js-image-stats-fail')
+    {
+      pass: parseInt(passBar.text(), 10),
+      fail: parseInt(failBar.text(), 10)
+    }
+
+  _updateBars: (values) ->
+    passBar = $('#js-image-stats-pass')
+    failBar = $('#js-image-stats-fail')
+    passWidth = (values.pass / (values.pass + values.fail)) * 100 + '%'
+    failWidth = (values.fail / (values.pass + values.fail)) * 100 + '%'
+    passBar.text(values.pass).css('width', passWidth)
+    failBar.text(values.fail).css('width', failWidth)
+
+  _updateImageStats: (operation, type) ->
+    values = @_getImageCountsByType()
+    if type == 'pass'
+      if operation == 'switch'
+        values.pass++
+        values.fail--
+      else if operation == 'delete'
+        values.pass--
+      @_updateBars values
+    else if type == 'fail'
+      if operation == 'switch'
+        values.pass--
+        values.fail++
+      else if operation == 'delete'
+        values.fail--
+      @_updateBars values
+
   _deleteImageInUi: ($el) ->
     msg.notice 'Image deleted!'
     help.animate $el, 'delete'
@@ -69,6 +102,7 @@ module.exports =
       url: '/api/images/' + id
       success: =>
         @_updateImageInUi card, newKind, oldKind
+        @_updateImageStats 'switch', newKind
       error: (error) ->
         if error.responseText
           msg.error JSON.parse(error.responseText).error
@@ -82,11 +116,13 @@ module.exports =
     if verify == true
       card = $el.closest('.image-card')
       id = card.attr('id')
+      kind = if card.hasClass 'image-card-pass' then 'pass' else 'fail'
       $.ajax
         type: 'DELETE'
         url: '/api/images/' + id
         success: =>
           @_deleteImageInUi card
+          @_updateImageStats 'delete', kind
         error: (error) ->
           if error.responseText
             msg.error JSON.parse(error.responseText).error
