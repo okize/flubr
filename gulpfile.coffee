@@ -224,12 +224,11 @@ gulp.task 'start-mongo',
 # starts up LiveReload server and the app with nodemon
 gulp.task 'start-app', ->
   if env.NODE_ENV is 'development'
-    debugArgs = ['--nodejs', '--debug=5858']
     nodemon(
       script: appScript
       ext: 'coffee'
       env: env
-      nodeArgs: debugArgs
+      nodeArgs: ['--nodejs', '--debug=5858']
       ignore: [
         'node_modules/',
         'views/',
@@ -248,7 +247,23 @@ gulp.task 'start-app', ->
       gutil.beep()
     )
   else if env.NODE_ENV is 'production'
-    logErr 'Cannot start application.'
+    nodemon(
+      script: appScript
+      env: env
+      nodeArgs: ['--nodejs', '--debug=5858']
+      ignore: [
+        'node_modules/',
+        'views/',
+        'build/',
+        'public/'
+      ]
+    ).on('restart', (files) ->
+      log 'app restarted'
+    ).on('quit', ->
+      log 'app closed'
+      liveReload.close()
+      gutil.beep()
+    )
   else
     logErr 'Cannot start application.\nMake sure NODE_ENV is defined as either "development" or "production".'
     throw new Error('Can\'t start app')
