@@ -20,12 +20,12 @@ block page
           if !deleted
             ul.image-settings
               if image.kind == 'pass'
-                li: .is-pass: span.icon.icon-thumbs-up
-                li: a.js-change-image-kind(href='#', class='is-fail'): span.icon.icon-thumbs-o-down
+                li: button(disabled='true').button-icon.is-pass: span.icon.icon-thumbs-up
+                li: button.button-icon.is-fail.js-change-image-kind: span.icon.icon-thumbs-o-down
               else
-                li: a.js-change-image-kind(href='#', class='is-pass'): span.icon.icon-thumbs-o-up
-                li: .is-fail: span.icon.icon-thumbs-down
-              li: a.js-delete-image(href='#'): span.icon.icon-trash-o
+                li: button.button-icon.is-pass.js-change-image-kind: span.icon.icon-thumbs-o-up
+                li: button(disabled='true').button-icon.is-fail: span.icon.icon-thumbs-down
+              li: button.button-icon.js-delete-image: span.icon.icon-trash-o
 
   else
 
