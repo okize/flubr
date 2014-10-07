@@ -17,16 +17,10 @@
     "mongohq"
   ],
   "env": {
-    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-nodejs",
     "NODE_ENV": "production",
     "SECRET_TOKEN": {
       "description": "A secret key for verifying the integrity of signed cookies.",
       "generator": "secret"
-    },
-    "IMGUR_CLIENTID": "",
-    "TWITTER_CONSUMER_KEY": "",
-    "TWITTER_CONSUMER_SECRET": "",
-    "TWITTER_ACCESS_TOKEN": "",
-    "TWITTER_ACCESS_TOKEN_SECRET": ""
+    }
   }
 }
