@@ -1,8 +1,8 @@
 {
   "name": "flubr",
-  "releaseCodename": "PerfectPorcupine",
+  "releaseCodename": "CloudyCattle",
   "private": true,
-  "version": "0.0.18",
+  "version": "0.0.19",
   "engines": {
     "node": ">=0.10.x"
   },

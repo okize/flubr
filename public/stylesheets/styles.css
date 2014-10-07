@@ -84,7 +84,8 @@ a {
   background: transparent;
 }
 a:active,
-a:hover {
+a:hover,
+button:active {
   outline: 0;
 }
 abbr[title] {
@@ -155,6 +156,14 @@ a.button {
   color: inherit;
   font: inherit;
   margin: 0;
+}
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  -webkit-box-shadow: 0 0 0.1rem #51cbee;
+  box-shadow: 0 0 0.1rem #51cbee;
 }
 button,
 select,
@@ -2082,7 +2091,6 @@ th {
 }
 @media only screen and (min-width: 769px) {
   .navigation-top {
-    line-height: 10rem;
     height: 15rem;
   }
 }
@@ -2095,8 +2103,17 @@ th {
 }
 .navigation-mascot svg {
   position: absolute;
-  top: 3rem;
+  top: 2.5rem;
   left: -2rem;
+}
+.navigation-username {
+  color: #fff;
+  font-size: 1.75rem;
+  font-family: 'Lato-Hairline', 'Trebuchet MS', Arial, sans-serif;
+  z-index: 1;
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
 }
 .navigation-links {
   font-family: 'Lato-Heavy', 'Trebuchet MS', Arial, sans-serif;
@@ -2138,9 +2155,6 @@ th {
     display: block;
     margin: 0.6rem 0 0 1rem;
   }
-}
-.nav-user {
-  vertical-align: top;
 }
 .nav-avatar {
   display: block;
@@ -2312,6 +2326,11 @@ h6 {
   font-size: 2rem;
   cursor: pointer;
 }
+.button-icon {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
 .image-stats-graph {
   margin: 0 0 2rem;
 }
@@ -2348,9 +2367,19 @@ h6 {
 }
 .image-thumbnail {
   float: left;
-  border: 0.5rem solid #fff;
+  margin: 0.5rem;
   height: 10.5rem;
   width: 10.5rem;
+}
+a:focus .image-thumbnail {
+  -webkit-box-shadow: 0 0 0.1rem #51cbee;
+  box-shadow: 0 0 0.1rem #51cbee;
+}
+button[disabled=disabled].is-pass .icon {
+  color: #2ecc40 !important;
+}
+button[disabled=disabled].is-fail .icon {
+  color: #ff4136 !important;
 }
 .image-settings {
   float: right;
@@ -2367,15 +2396,8 @@ h6 {
 .image-settings li:last-child {
   margin: 0;
 }
-.image-settings .icon,
-.image-settings a.icon {
+.image-settings .icon {
   color: #999;
-}
-.is-pass:not(a) .icon {
-  color: #2ecc40 !important;
-}
-.is-fail:not(a) .icon {
-  color: #ff4136 !important;
 }
 .app-body {
   min-height: 100vh;
