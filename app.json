@@ -21,6 +21,23 @@
     "SECRET_TOKEN": {
       "description": "A secret key for verifying the integrity of signed cookies.",
       "generator": "secret"
+    },
+    "IMGUR_CLIENTID": {
+      "description": "This is provided when you resgister an application with Imgur.",
+      "required": true
+    },
+    "TWITTER_CONSUMER_KEY": {
+      "description": "These Twitter keys are provided when you create an application for Twitter.",
+      "required": true
+    },
+    "TWITTER_CONSUMER_SECRET": {
+      "required": true
+    },
+    "TWITTER_ACCESS_TOKEN": {
+      "required": true
+    },
+    "TWITTER_ACCESS_TOKEN_SECRET": {
+      "required": true
     }
   }
 }
