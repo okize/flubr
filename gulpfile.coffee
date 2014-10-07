@@ -218,31 +218,33 @@ gulp.task 'start-mongo',
 gulp.task 'start-app', ->
   if env.NODE_ENV is 'development'
     debugArgs = ['--nodejs', '--debug=5858']
-  else
-    debugArgs = []
-  nodemon(
-    script: appScript
-    ext: 'coffee'
-    env: env
-    nodeArgs: debugArgs
-    ignore: [
-      'node_modules/',
-      'views/',
-      'build/',
-      'public/'
-    ]
-  ).on('restart', (files) ->
-    log 'app restarted'
-  ).on('start', ->
-    if env.NODE_ENV is 'development'
+    nodemon(
+      script: appScript
+      ext: 'coffee'
+      env: env
+      nodeArgs: debugArgs
+      ignore: [
+        'node_modules/',
+        'views/',
+        'build/',
+        'public/'
+      ]
+    ).on('restart', (files) ->
+      log 'app restarted'
+    ).on('start', ->
       liveReloadPort = env.LIVE_RELOAD_PORT or 35729
       liveReload.listen liveReloadPort
       log 'livereload started on port ' + liveReloadPort
-  ).on('quit', ->
-    log 'app closed'
-    liveReload.close()
-    gutil.beep()
-  )
+    ).on('quit', ->
+      log 'app closed'
+      liveReload.close()
+      gutil.beep()
+    )
+  if env.NODE_ENV is 'production'
+    logErr 'Cannot start application.'
+  else
+    logErr 'Cannot start application.\nMake sure NODE_ENV is defined as either "development" or "production".'
+    throw new Error('Can\'t start app')
 
 # watches source files and triggers a page refresh on change
 gulp.task 'watch-for-changes', ->
