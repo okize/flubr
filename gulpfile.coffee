@@ -162,7 +162,7 @@ gulp.task 'debug', ->
 # download production db and import to localdb (logout first)
 gulp.task 'refresh-db', ->
   devDb = parseMongoUrl env.MONGODB_DEV_URL
-  prodDb = parseMongoUrl env.MONGODB_PROD_URL || env.MONGODBHQ_URL
+  prodDb = parseMongoUrl env.MONGODB_PROD_URL || env.MONGOHQ_URL
   dateStamp = moment().format('YYYYMMDD-hhmmss')
   dumpDir = appRoot + '/dump/' + dateStamp
   mkdirp(dumpDir, (err) ->
@@ -183,7 +183,7 @@ gulp.task 'refresh-db', ->
 
 # output some stats about image data
 gulp.task 'stats', ->
-  mongoose.connect env.MONGODB_PROD_URL, (err) ->
+  mongoose.connect env.MONGODB_PROD_URL || env.MONGOHQ_URL, (err) ->
     throw err if err
     Image.find(deleted: false).exec(
       (err, results) ->
