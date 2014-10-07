@@ -162,7 +162,7 @@ gulp.task 'debug', ->
 # download production db and import to localdb (logout first)
 gulp.task 'refresh-db', ->
   devDb = parseMongoUrl env.MONGODB_DEV_URL
-  prodDb = parseMongoUrl env.MONGODB_PROD_URL
+  prodDb = parseMongoUrl env.MONGODB_PROD_URL || env.MONGODBHQ_URL
   dateStamp = moment().format('YYYYMMDD-hhmmss')
   dumpDir = appRoot + '/dump/' + dateStamp
   mkdirp(dumpDir, (err) ->
