@@ -196,18 +196,11 @@ gulp.task 'stats', ->
         totalImageCount = passImageCount + failImageCount
         passPercent = ((passImageCount / totalImageCount) * 100).toFixed(1)
         failPercent = ((failImageCount / totalImageCount) * 100).toFixed(1)
-        log ""
-        log "   __  _         _"
-        log "  / _|| |       | |"
-        log " | |_ | | _   _ | |__   _ __"
-        log " |  _|| || | | || '_ \\ | '__|"
-        log " | |  | || |_| || |_) || |"
-        log " |_|  |_| \\__,_||_.__/ |_|"
-        log ""
+        log "***********************"
         log "#{totalImageCount} total images"
         log "#{passImageCount} (#{passPercent}%) PASS images"
         log "#{failImageCount} (#{failPercent}%) FAIL images"
-        log ""
+        log "***********************"
         mongoose.disconnect()
     )
 
