@@ -9,7 +9,7 @@ module.exports =
     if newKind == 'pass'
       '''
       <li>
-        <button class="button-icon is-pass" disabled="true">
+        <button class="button-icon is-pass" disabled="disabled">
           <span class="icon icon-thumbs-up"></span>
         </button>
       </li>
@@ -32,7 +32,7 @@ module.exports =
         </button>
       </li>
       <li>
-        <button class="button-icon is-fail" disabled="true">
+        <button class="button-icon is-fail" disabled="disabled">
           <span class="icon icon-thumbs-down"</span>
         </button>
       </li>
