@@ -17,6 +17,7 @@
     "mongohq"
   ],
   "env": {
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-nodejs",
     "NODE_ENV": "production",
     "SECRET_TOKEN": {
       "description": "A secret key for verifying the integrity of signed cookies.",
