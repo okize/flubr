@@ -6,6 +6,7 @@ _ = require 'lodash'
 gutil = require 'gulp-util'
 liveReload = require('tiny-lr')()
 nodemon = require 'gulp-nodemon'
+server = require 'gulp-express'
 stylus = require 'gulp-stylus'
 nib = require 'nib'
 mocha = require 'gulp-mocha'
@@ -248,7 +249,9 @@ gulp.task 'start-app', ->
       gutil.beep()
     )
   else if env.NODE_ENV is 'production'
-    logErr 'Cannot start application.'
+    server.run
+      env: env
+      file: './build/app.js'
   else
     logErr 'Cannot start application.\nMake sure NODE_ENV is defined as either "development" or "production".'
     throw new Error('Can\'t start app')
