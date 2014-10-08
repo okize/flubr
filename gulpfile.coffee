@@ -196,11 +196,18 @@ gulp.task 'stats', ->
         totalImageCount = passImageCount + failImageCount
         passPercent = ((passImageCount / totalImageCount) * 100).toFixed(1)
         failPercent = ((failImageCount / totalImageCount) * 100).toFixed(1)
-        log "***********************"
+        log ""
+        log "   __  _         _"
+        log "  / _|| |       | |"
+        log " | |_ | | _   _ | |__   _ __"
+        log " |  _|| || | | || '_ \\ | '__|"
+        log " | |  | || |_| || |_) || |"
+        log " |_|  |_| \\__,_||_.__/ |_|"
+        log ""
         log "#{totalImageCount} total images"
         log "#{passImageCount} (#{passPercent}%) PASS images"
         log "#{failImageCount} (#{failPercent}%) FAIL images"
-        log "***********************"
+        log ""
         mongoose.disconnect()
     )
 
@@ -240,7 +247,7 @@ gulp.task 'start-app', ->
       liveReload.close()
       gutil.beep()
     )
-  if env.NODE_ENV is 'production'
+  else if env.NODE_ENV is 'production'
     logErr 'Cannot start application.'
   else
     logErr 'Cannot start application.\nMake sure NODE_ENV is defined as either "development" or "production".'
@@ -406,4 +413,3 @@ gulp.task 'deploy-app', ->
         log "Pushed v#{pak.version} to Heroku"
     )
     .end()
-
