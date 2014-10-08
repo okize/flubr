@@ -58,6 +58,7 @@
     "gulp-coffeelint": "*",
     "gulp-csslint": "*",
     "gulp-exec": "*",
+    "gulp-express": "*",
     "gulp-git": "*",
     "gulp-minify-css": "*",
     "gulp-mocha": "*",
