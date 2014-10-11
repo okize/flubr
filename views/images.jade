@@ -5,8 +5,8 @@ block page
   if imageList.length > 0
 
     .image-stats-graph
-      span.image-stats-bar.image-stats-pass(style='width: #{passImagePercentage}%')= passImageCount
-      span.image-stats-bar.image-stats-fail(style='width: #{failImagePercentage}%')= failImageCount
+      span.image-stats-bar.image-stats-pass#js-image-stats-pass(style='width: #{passImagePercentage}%')= passImageCount
+      span.image-stats-bar.image-stats-fail#js-image-stats-fail(style='width: #{failImagePercentage}%')= failImageCount
 
     ul.image-cards
       each image in imageList
