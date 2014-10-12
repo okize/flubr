@@ -55,6 +55,11 @@ h1, h2, h3, h4, h5, h6
   font-size: 2rem
   cursor: pointer
 
+.button-icon
+  border: none
+  background: transparent
+  padding: 0
+
 .image-stats-graph
   margin: 0 0 2rem
 
@@ -91,10 +96,20 @@ h1, h2, h3, h4, h5, h6
   border-bottom: .25rem solid $fail
 
 .image-thumbnail
+  a:focus &
+    box-shadow: $focusStyle
   float: left
-  border: .5rem solid $imageCardBgColor
+  margin: .5rem
   height: 10.5rem
   width: 10.5rem
+
+button[disabled=disabled].is-pass
+  .icon
+    color: $pass !important
+
+button[disabled=disabled].is-fail
+  .icon
+    color: $fail !important
 
 .image-settings
   float: right
@@ -108,13 +123,5 @@ h1, h2, h3, h4, h5, h6
     margin: 0 0 1rem
     &:last-child
       margin: 0
-  .icon, a.icon
+  .icon
     color: #999
-
-.is-pass:not(a)
-  .icon
-    color: $pass !important
-
-.is-fail:not(a)
-  .icon
-    color: $fail !important
