@@ -9,37 +9,37 @@ module.exports =
     if newKind == 'pass'
       '''
       <li>
-        <div class="is-pass">
+        <button class="button-icon is-pass" disabled="true">
           <span class="icon icon-thumbs-up"></span>
-        </div>
+        </button>
       </li>
       <li>
-        <a href="#" class="js-change-image-kind is-fail">
+        <button class="button-icon js-change-image-kind is-fail">
           <span class="icon icon-thumbs-o-down"</span>
-        </a>
+        </button>
       </li>
       <li>
-        <a href="#" class="js-delete-image">
+        <button class="button-icon js-delete-image">
           <span class="icon icon-trash-o"></span>
-        </a>
+        </button>
       </li>
       '''
     else
       '''
       <li>
-        <a href="#" class="js-change-image-kind is-pass">
+        <button class="button-icon js-change-image-kind is-pass">
           <span class="icon icon-thumbs-o-up"</span>
-        </a>
+        </button>
       </li>
       <li>
-        <div class="is-fail">
+        <button class="button-icon is-fail" disabled="true">
           <span class="icon icon-thumbs-down"</span>
-        </div>
+        </button>
       </li>
       <li>
-        <a href="#" class="js-delete-image">
+        <button class="button-icon js-delete-image">
           <span class="icon icon-trash-o"></span>
-        </a>
+        </button>
       </li>
       '''
 
