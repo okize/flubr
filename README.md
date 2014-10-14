@@ -4,7 +4,7 @@ pass/fail images for campfire, etc. moderated by your team members
 
 ## Deploy to Heroku
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/okize/flubr)
 
 ### Updating app from source
 
