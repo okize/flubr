@@ -34,7 +34,7 @@ repo = gift './'
 mongoose = require 'mongoose'
 
 # configuration
-appRoot = __dirname
+appRoot = path.join(__dirname, '..')
 Image = require path.join(appRoot, 'src', 'models', 'image')
 appScript = path.join(appRoot, 'src', 'app.coffee')
 publicScript = path.join(appRoot, 'views', 'javascripts', 'scripts.coffee')
