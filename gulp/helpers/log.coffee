@@ -20,6 +20,15 @@ module.exports =
       err = gutil.colors.red err
     gutil.log err
 
+  # outputs ascii logo
+  logo: () ->
+    console.log "   __  _         _"
+    console.log "  / _|| |       | |"
+    console.log " | |_ | | _   _ | |__   _ __"
+    console.log " |  _|| || | | || '_ \\ | '__|"
+    console.log " | |  | || |_| || |_) || |"
+    console.log " |_|  |_| \\__,_||_.__/ |_|"
+
   # start logging with timer
   start: (msg) ->
     startTime = process.hrtime()

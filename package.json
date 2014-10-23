@@ -75,6 +75,7 @@
     "mkdirp": "*",
     "mocha": "*",
     "node-debug": "*",
+    "pretty-hrtime": "*",
     "run-sequence": "*",
     "semver": "*",
     "superagent": "*",
