@@ -2,6 +2,7 @@
 
 gulp = require 'gulp'
 open = require 'gulp-open'
+
 env = require('../helpers/getEnvironmentVariables')()
 
 gulp.task 'open', ->

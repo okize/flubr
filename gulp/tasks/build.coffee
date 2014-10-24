@@ -14,14 +14,6 @@ nib = require 'nib'
 
 config = require '../config'
 
-sources =
-  app: 'src/**/*.coffee'
-appBuild = path.join(config.root, 'build')
-cssBuild = path.join(config.root, 'public', 'stylesheets')
-jsBuild = path.join(config.root, 'public', 'javascripts')
-publicCss = path.join(config.root, 'views', 'stylesheets', 'styles.styl')
-publicScript = path.join(config.root, 'views', 'javascripts', 'scripts.coffee')
-
 gulp.task 'build', (callback) ->
   runSequence(
     ['clean'],
@@ -33,26 +25,26 @@ gulp.task 'build', (callback) ->
 # builds coffeescript source into deployable javascript
 gulp.task 'build-app', ->
   gulp
-    .src(sources.app)
+    .src(config.src.app)
     .pipe(coffee(
       bare: true
       sourceMap: false
     ).on('error', gutil.log))
     .pipe(
-      gulp.dest(appBuild)
+      gulp.dest(config.dist.appDir)
     )
 
 # builds the css
 gulp.task 'build-css', ->
   gulp
-    .src(publicCss)
+    .src("#{config.src.stylusDir}#{config.src.stylusEntry}")
     .pipe(stylus(
       linenos: false
       use: [
         nib()
       ]
     ))
-    .pipe(gulp.dest(cssBuild))
+    .pipe(gulp.dest(config.dist.cssDir))
 
 # builds the front-end javascript
 gulp.task 'build-js', ->
@@ -60,9 +52,9 @@ gulp.task 'build-js', ->
       extensions: ['.coffee']
       debug: true
     )
-    .add(publicScript)
+    .add("#{config.src.coffeeDir}#{config.src.coffeeEntry}")
     .transform(coffeeify)
     .bundle()
     .on('error', gutil.log)
     .pipe(source('scripts.js'))
-    .pipe(gulp.dest(jsBuild))
+    .pipe(gulp.dest(config.dist.jsDir))

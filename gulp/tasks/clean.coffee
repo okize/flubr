@@ -6,11 +6,8 @@ clean = require 'gulp-rimraf'
 
 config = require '../config'
 
-appBuild = path.join(config.root, 'build')
-cssBuild = path.join(config.root, 'public', 'stylesheets')
-jsBuild = path.join(config.root, 'public', 'javascripts')
-
 gulp.task 'clean', ->
+  dirsToDelete = [config.dist.appDir, config.dist.cssDir, config.dist.jsDir]
   gulp
-    .src([appBuild, cssBuild, jsBuild], read: false)
+    .src(dirsToDelete, read: false)
     .pipe(clean())

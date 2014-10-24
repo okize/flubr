@@ -8,13 +8,6 @@ uglify = require 'gulp-uglifyjs'
 
 config = require '../config'
 
-cssBuild = path.join(config.root, 'public', 'stylesheets')
-jsBuild = path.join(config.root, 'public', 'javascripts')
-
-compiled =
-  css: "#{cssBuild}/styles.css"
-  js: "#{jsBuild}/scripts.js"
-
 gulp.task 'minify', [
   'minify-css',
   'minify-js'
@@ -22,14 +15,14 @@ gulp.task 'minify', [
 
 gulp.task 'minify-css', ->
   gulp
-    .src(compiled.css)
+    .src("#{config.dist.cssDir}/#{config.dist.cssName}")
     .pipe(minifyCss())
     .pipe(rename('styles.min.css'))
-    .pipe(gulp.dest(cssBuild))
+    .pipe(gulp.dest(config.dist.cssDir))
 
 gulp.task 'minify-js', ->
   gulp
-    .src(compiled.js)
+    .src("#{config.dist.jsDir}/#{config.dist.jsName}")
     .pipe(uglify())
     .pipe(rename('scripts.min.js'))
-    .pipe(gulp.dest(jsBuild))
+    .pipe(gulp.dest(config.dist.jsDir))

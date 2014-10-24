@@ -3,13 +3,14 @@
 path = require 'path'
 root = path.resolve(__dirname, '..')
 assets = path.resolve(root, 'public')
+coffeeDir = "#{root}/views/javascripts/"
+stylusDir = "#{root}/views/stylesheets/"
 
 module.exports =
   root: root
   tests: "#{root}/tests/**/*.coffee"
-  taskDir: "#{root}/gulp/tasks"
+  taskDir: "#{root}/gulp/tasks/"
   main: "#{root}/src/app.coffee"
-  publicAssetsDir: assets
 
   # DO NOT restart node app when files change in these directories
   appIgnoreDirs: [
@@ -21,15 +22,20 @@ module.exports =
 
   # asset sources
   src:
+    app: "#{root}/src/**/*.coffee"
     favicons: "#{root}/assets/favicons/"
-    sassEntry: 'main.sass'
-    sassDir: "#{root}/assets/sass/"
-    coffeeEntry: 'app.coffee'
-    coffeeDir: "#{root}/assets/coffee/"
+    jade: "#{root}/views/**/*.jade"
+    stylus: "#{stylusDir}**/*.styl"
+    stylusEntry: 'styles.styl'
+    stylusDir: stylusDir
+    coffee: "#{coffeeDir}*.coffee"
+    coffeeEntry: 'scripts.coffee'
+    coffeeDir: coffeeDir
 
   # asset compilation targets
   dist:
+    appDir: "#{root}/build/"
     cssName: 'styles.css'
-    cssDir: "#{assets}/stylesheets"
+    cssDir: "#{assets}/stylesheets/"
     jsName: 'scripts.js'
-    jsDir: "#{assets}/javascripts"
+    jsDir: "#{assets}/javascripts/"

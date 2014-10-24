@@ -9,6 +9,7 @@ git = require 'gulp-git'
 gift = require 'gift'
 repo = gift './'
 
+getPak = require '../helpers/getPackageJson'
 config = require '../config'
 
 gulp.task 'release', (callback) ->
@@ -22,7 +23,7 @@ gulp.task 'release', (callback) ->
 # commit updated files
 gulp.task 'commit-updates', ->
 
-  pak = require('../helpers/getPackageJson')()
+  pak = getPak()
 
   # create a codename for app release
   pak.releaseCodename = codename.generate(
@@ -43,7 +44,7 @@ gulp.task 'commit-updates', ->
 # bumps patch version and creates a new tag
 gulp.task 'tag-version', ->
 
-  pak = require('../helpers/getPackageJson')()
+  pak = getPak()
 
   # creates new tag
   git
@@ -58,7 +59,7 @@ gulp.task 'tag-version', ->
 # push commits to github
 gulp.task 'push-updates', ->
 
-  pak = require('../helpers/getPackageJson')()
+  pak = getPak()
 
   git
     .push(

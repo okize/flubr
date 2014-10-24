@@ -19,12 +19,7 @@ gulp.task 'start-app', ->
       ext: 'coffee'
       env: env
       nodeArgs: ['--nodejs', '--debug=5858']
-      ignore: [
-        'node_modules/',
-        'views/',
-        'build/',
-        'public/'
-      ]
+      ignore: config.appIgnoreDirs
     ).on('restart', (files) ->
       log.info 'app restarted'
     ).on('start', ->
@@ -41,12 +36,7 @@ gulp.task 'start-app', ->
       script: config.main
       env: env
       nodeArgs: ['--nodejs', '--debug=5858']
-      ignore: [
-        'node_modules/',
-        'views/',
-        'build/',
-        'public/'
-      ]
+      ignore: config.appIgnoreDirs
     ).on('restart', (files) ->
       log.info 'app restarted'
     ).on('quit', ->

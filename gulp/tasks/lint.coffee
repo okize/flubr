@@ -1,21 +1,12 @@
 # lints coffeescript & css
 
 gulp = require 'gulp'
-gutil = require 'gulp-util'
 coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
+
 config = require '../config'
 env = require('../helpers/getEnvironmentVariables')()
 log = require '../helpers/log'
-
-sources =
-  app: 'src/**/*.coffee'
-  stylus: 'views/stylesheets/*.styl'
-  coffee: 'views/javascripts/*.coffee'
-
-compiled =
-  css: 'public/stylesheets/styles.css'
-  js: 'public/javascripts/scripts.js'
 
 gulp.task 'lint', [
   'lint-coffeescript',
@@ -24,13 +15,15 @@ gulp.task 'lint', [
 
 gulp.task 'lint-coffeescript', ->
   gulp
-    .src([sources.app, sources.coffee])
-    .pipe(coffeelint().on('error', gutil.log))
+    .src([config.src.app, config.src.coffee])
+    .pipe(
+      coffeelint().on('error', log.error)
+    )
     .pipe(coffeelint.reporter())
 
 gulp.task 'lint-css', ->
   gulp
-    .src(compiled.css)
+    .src("#{config.dist.cssDir}/#{config.dist.cssName}")
     .pipe(
       csslint(
         'bulletproof-font-face': false
@@ -50,6 +43,6 @@ gulp.task 'lint-css', ->
         'shorthand': false
         'font-sizes': false
         'known-properties': false
-      ).on('error', gutil.log)
+      ).on('error', log.error)
     )
     .pipe(csslint.reporter())

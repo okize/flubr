@@ -2,11 +2,13 @@
 
 gulp = require 'gulp'
 git = require 'gulp-git'
+
 log = require '../helpers/log'
+getPak = require '../helpers/getPackageJson'
 
 gulp.task 'deploy-app', ->
 
-  pak = require('../helpers/getPackageJson')()
+  pak = getPak()
 
   git
     .push(
