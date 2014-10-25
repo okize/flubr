@@ -1,6 +1,8 @@
 # returns parsed package.json
 
 fs = require 'fs'
+path = require 'path'
 
 module.exports = () ->
-  JSON.parse fs.readFileSync('../../package.json', 'utf8')
+  pak = path.join(__dirname, '..', '..', 'package.json')
+  JSON.parse fs.readFileSync(pak, 'utf8')

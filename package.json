@@ -1,10 +1,10 @@
 {
   "name": "flubr",
-  "releaseCodename": "OddOstrich",
+  "releaseCodename": "SoftShrew",
   "private": true,
   "version": "0.1.1",
   "engines": {
-    "node": ">=0.10.x"
+    "node": "~0.10.x"
   },
   "description": "pass/fail images for chatrooms, moderated by your team members",
   "main": "build/app.js",
@@ -57,7 +57,6 @@
     "gulp-coffee": "*",
     "gulp-coffeelint": "*",
     "gulp-csslint": "*",
-    "gulp-exec": "*",
     "gulp-git": "*",
     "gulp-minify-css": "*",
     "gulp-mocha": "*",

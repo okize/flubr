@@ -9,19 +9,20 @@ git = require 'gulp-git'
 gift = require 'gift'
 repo = gift './'
 
-getPak = require '../helpers/getPackageJson'
 config = require '../config'
+getPak = require '../helpers/getPackageJson'
+log = require '../helpers/log'
 
 gulp.task 'release', (callback) ->
   runSequence(
-    ['commit-updates'],
+    ['bump-version'],
     ['tag-version'],
     ['push-updates'],
     callback
   )
 
-# commit updated files
-gulp.task 'commit-updates', ->
+# bumps version & commits new package.json
+gulp.task 'bump-version', ->
 
   pak = getPak()
 
