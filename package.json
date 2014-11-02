@@ -49,6 +49,7 @@
   "devDependencies": {
     "codename": "*",
     "connect-livereload": "*",
+    "del": "*",
     "expect": "*",
     "gift": "*",
     "gulp": "*",

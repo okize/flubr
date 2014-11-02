@@ -2,12 +2,9 @@
 
 path = require 'path'
 gulp = require 'gulp'
-clean = require 'gulp-rimraf'
+clean = require 'del'
 
 config = require '../config'
 
 gulp.task 'clean', ->
-  dirsToDelete = [config.dist.appDir, config.dist.cssDir, config.dist.jsDir]
-  gulp
-    .src(dirsToDelete, read: false)
-    .pipe(clean())
+  clean [config.dist.appDir, config.dist.cssDir, config.dist.jsDir]
