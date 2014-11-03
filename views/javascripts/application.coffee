@@ -26,4 +26,5 @@ module.exports = () ->
 
   $('#js-add-image').on 'submit', (e) ->
     e.preventDefault()
+    $(this).addClass('disabled').find(':input').prop('disabled', true)
     image.addImage $(this)
