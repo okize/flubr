@@ -21,6 +21,11 @@ navigation = [
     icon: "user"
   },
   {
+    title: "Statistics",
+    href: "stats",
+    icon: "bar-chart-o"
+  },
+  {
     title: "Log out",
     href: "logout",
     icon: "power-off"
