@@ -89,6 +89,33 @@ module.exports =
           deleted: true
     )
 
+  # statistics page
+  stats: (req, res) ->
+    Image.find(deleted: false).sort(created_at: 'descending').exec(
+      (err, results) ->
+        throw err if err
+        passImageCount = 0
+        failImageCount = 0
+        images = _.map results, (image) ->
+          passImageCount++ if image.kind == 'pass'
+          failImageCount++ if image.kind == 'fail'
+        totalImageCount = passImageCount + failImageCount
+        passImagePercentage = (passImageCount / totalImageCount) * 100
+        failImagePercentage = (failImageCount / totalImageCount) * 100
+        res.render 'stats',
+          env: process.env.NODE_ENV
+          title: 'Statistics'
+          pageName: 'stats'
+          navigation: navigation
+          user: req.user
+          imageList: images
+          passImageCount: passImageCount
+          failImageCount: failImageCount
+          passImagePercentage: passImagePercentage
+          failImagePercentage: failImagePercentage
+          deleted: false
+    )
+
   # user management page
   users: (req, res) ->
     User.find {}, (err, users) ->
