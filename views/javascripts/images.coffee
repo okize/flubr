@@ -1,5 +1,6 @@
 $ = require 'jquery'
 msg = require './messaging'
+lazy = require('./lazy')('image-thumbnail')
 
 module.exports =
 
