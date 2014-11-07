@@ -10,7 +10,7 @@ module.exports =
 
   addImage: ($el) ->
     data =
-      source_url: $el.find('#imageUrl').val()
+      source_url: $el.find('#image-url').val()
       kind: $el.find('input[name=kind]:checked').val()
     $.ajax
       type: 'POST'
