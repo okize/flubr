@@ -27,6 +27,9 @@ module.exports = function(app, passport) {
   app.get('/imagesDeleted', help.ensureAuthenticated, function(req, res, next) {
     return application.imagesDeleted(req, res, next);
   });
+  app.get('/stats', help.ensureAuthenticated, function(req, res, next) {
+    return application.stats(req, res, next);
+  });
   app.get('/users', help.ensureAuthenticated, function(req, res, next) {
     return application.users(req, res, next);
   });

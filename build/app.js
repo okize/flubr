@@ -94,7 +94,9 @@ app.use(compression({
   threshold: 1024
 }));
 
-app.use(express["static"](path.join(__dirname, '..', 'public')));
+app.use(express["static"](path.join(__dirname, '..', 'public'), {
+  maxAge: 86400000
+}));
 
 app.use(favicon(path.join(__dirname, '..', 'public', 'images', 'favicon.ico')));
 

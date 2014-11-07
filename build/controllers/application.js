@@ -24,6 +24,10 @@ navigation = [
     href: "users",
     icon: "user"
   }, {
+    title: "Statistics",
+    href: "stats",
+    icon: "bar-chart-o"
+  }, {
     title: "Log out",
     href: "logout",
     icon: "power-off"
@@ -53,20 +57,12 @@ module.exports = {
     }).sort({
       created_at: 'descending'
     }).exec(function(err, results) {
-      var failImageCount, failImagePercentage, images, passImageCount, passImagePercentage, totalImageCount;
+      var images;
       if (err) {
         throw err;
       }
-      passImageCount = 0;
-      failImageCount = 0;
       images = _.map(results, function(image) {
         var newImage;
-        if (image.kind === 'pass') {
-          passImageCount++;
-        }
-        if (image.kind === 'fail') {
-          failImageCount++;
-        }
         return newImage = {
           id: image._id,
           imageUrl: image.image_url,
@@ -74,9 +70,6 @@ module.exports = {
           kind: image.kind
         };
       });
-      totalImageCount = passImageCount + failImageCount;
-      passImagePercentage = (passImageCount / totalImageCount) * 100;
-      failImagePercentage = (failImageCount / totalImageCount) * 100;
       return res.render('images', {
         env: process.env.NODE_ENV,
         title: 'Image list',
@@ -84,10 +77,6 @@ module.exports = {
         navigation: navigation,
         user: req.user,
         imageList: images,
-        passImageCount: passImageCount,
-        failImageCount: failImageCount,
-        passImagePercentage: passImagePercentage,
-        failImagePercentage: failImagePercentage,
         deleted: false
       });
     });
@@ -119,6 +108,44 @@ module.exports = {
         user: req.user,
         imageList: images,
         deleted: true
+      });
+    });
+  },
+  stats: function(req, res) {
+    return Image.find({
+      deleted: false
+    }).sort({
+      created_at: 'descending'
+    }).exec(function(err, results) {
+      var failImageCount, failImagePercentage, images, passImageCount, passImagePercentage, totalImageCount;
+      if (err) {
+        throw err;
+      }
+      passImageCount = 0;
+      failImageCount = 0;
+      images = _.map(results, function(image) {
+        if (image.kind === 'pass') {
+          passImageCount++;
+        }
+        if (image.kind === 'fail') {
+          return failImageCount++;
+        }
+      });
+      totalImageCount = passImageCount + failImageCount;
+      passImagePercentage = (passImageCount / totalImageCount) * 100;
+      failImagePercentage = (failImageCount / totalImageCount) * 100;
+      return res.render('stats', {
+        env: process.env.NODE_ENV,
+        title: 'Statistics',
+        pageName: 'stats',
+        navigation: navigation,
+        user: req.user,
+        imageList: images,
+        passImageCount: passImageCount,
+        failImageCount: failImageCount,
+        passImagePercentage: passImagePercentage,
+        failImagePercentage: failImagePercentage,
+        deleted: false
       });
     });
   },

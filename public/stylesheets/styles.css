@@ -2283,6 +2283,11 @@ h6 {
 .add-new-image button {
   display: none;
 }
+.add-new-image.disabled input,
+.add-new-image.disabled label {
+  background-color: #ddd;
+  color: #fff;
+}
 .pass-fail-toggle {
   overflow: hidden;
 }
