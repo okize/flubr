@@ -26,6 +26,10 @@ module.exports = (app, passport) ->
   app.get '/imagesDeleted', help.ensureAuthenticated, (req, res, next) ->
     application.imagesDeleted req, res, next
 
+  # view application stats
+  app.get '/stats', help.ensureAuthenticated, (req, res, next) ->
+    application.stats req, res, next
+
   # manage users
   app.get '/users', help.ensureAuthenticated, (req, res, next) ->
     application.users req, res, next
