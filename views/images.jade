@@ -2,27 +2,45 @@ extends application
 
 block page
 
-  if imageList.length > 0
+  #got-gridbox
+    figure
+      img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/daenerys-targaryen.png', alt='Black and white photograph of Emilia Clarke as Daenerys Targaryen')
+      figcaption Daenerys Targaryen
+    figure#tyrion
+      img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/tyrion-lannister.png', alt='Black and white photograph of Peter Dinklage as Tyrion Lannister')
+      figcaption Tyrion Lannister
+    figure
+      img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jamie-lannister.png', alt='Black and white photograph of Nikolaj Coster-Waldau as Jamie Lannister')
+      figcaption Jamie Lannister
+    figure
+      img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jon-snow.png', alt='Black and white photograph of Kit Harington as Jon Snow')
+      figcaption Jon Snow
+    figure
+      img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/robb-stark.png', alt='Black and white photograph of  Richard Madden as Robb Stark')
+      figcaption Robb Stark
+    figure
+      img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/cersei-lannister.png', alt='Black and white photograph of Lena Headey as Cersei Lannister')
+      figcaption Cersei Lannister
 
-    ul.image-cards
-      each image in imageList
-        if image.kind == 'pass'
-          - imageItemClass = 'image-card-pass'
-        else
-          - imageItemClass = 'image-card-fail'
-        li(id='#{image.id}', class='image-card #{imageItemClass}')
-          a(href='#{image.imageUrl}')
-            img.image-thumbnail(src='' data-src='#{image.thumbnailUrl}', alt='')
-          if !deleted
-            ul.image-settings
-              if image.kind == 'pass'
-                li: button(disabled='disabled').button-icon.is-pass: span.icon.icon-thumbs-up
-                li: button.button-icon.is-fail.js-change-image-kind: span.icon.icon-thumbs-o-down
-              else
-                li: button.button-icon.is-pass.js-change-image-kind: span.icon.icon-thumbs-o-up
-                li: button(disabled='disabled').button-icon.is-fail: span.icon.icon-thumbs-down
-              li: button.button-icon.js-delete-image: span.icon.icon-trash-o
+  //-   ul.image-cards
+  //-     each image in imageList
+  //-       if image.kind == 'pass'
+  //-         - imageItemClass = 'image-card-pass'
+  //-       else
+  //-         - imageItemClass = 'image-card-fail'
+  //-       li(id='#{image.id}', class='image-card #{imageItemClass}')
+  //-         a(href='#{image.imageUrl}')
+  //-           img.image-thumbnail(src='' data-src='#{image.thumbnailUrl}', alt='')
+  //-         if !deleted
+  //-           ul.image-settings
+  //-             if image.kind == 'pass'
+  //-               li: button(disabled='disabled').button-icon.is-pass: span.icon.icon-thumbs-up
+  //-               li: button.button-icon.is-fail.js-change-image-kind: span.icon.icon-thumbs-o-down
+  //-             else
+  //-               li: button.button-icon.is-pass.js-change-image-kind: span.icon.icon-thumbs-o-up
+  //-               li: button(disabled='disabled').button-icon.is-fail: span.icon.icon-thumbs-down
+  //-             li: button.button-icon.js-delete-image: span.icon.icon-trash-o
 
-  else
+  //- else
 
-    include partials/noImages
+  //-   include partials/noImages

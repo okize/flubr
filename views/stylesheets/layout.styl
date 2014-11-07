@@ -52,3 +52,65 @@
     flex: 1
 
 // .inputAddOn-item
+
+.temp
+  margin: 20px
+  background-color: red
+  border: 3px solid black
+
+#got-gridbox
+  display: flex
+  flex-flow: row wrap
+  justify-content: space-between
+
+#got-gridbox figure
+  border: 1px solid #333
+  position: relative
+  font-size: 0
+  margin: 2% 0
+  flex: 0 0 48%
+
+#got-gridbox figure img
+  width: 60%
+  height: auto
+  margin-top: -2rem
+
+#got-gridbox figure:nth-child(even) img
+  float: right
+
+#got-gridbox figure figcaption
+  position: absolute
+  right: 4%
+  top: 5%
+  font-family: Deseret, Trajan Pro, Trajan, Requiem, serif
+  text-transform: uppercase
+  font-size: 1.6rem
+  text-align: right
+
+#got-gridbox figure:nth-child(even) figcaption
+  left: 4%
+  right: auto
+  text-align: left
+
+#got-gridbox figure:nth-last-child(-n+2)
+  background-image: linear-gradient(transparent, transparent 80%, #111 81%)
+
+@media screen and (max-width: 900px)
+  #got-gridbox figure figcaption
+   font-size: 1.4rem
+
+@media screen and (max-width: 800px)
+  #got-gridbox figure figcaption
+   font-size: 1.25rem
+
+@media screen and (max-width: 750px)
+  #got-gridbox figure
+   flex: 0 0 100%
+   margin-bottom: 7%
+  #got-gridbox figure figcaption
+   font-size: 1.6rem;
+
+@media screen and (max-width: 450px)
+  #got-gridbox figure figcaption
+   font-size: 1.2rem
+   width: 50%
