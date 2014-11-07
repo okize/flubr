@@ -60,14 +60,16 @@ gulp.task 'tag-version', ->
 # push commits to github
 gulp.task 'push-updates', ->
 
-  pak = getPak()
+  console.log 'push updates is broken'
 
-  git
-    .push(
-      'origin',
-      'master',
-      args: ' --tags',
-      ->
-        log.info "Pushed v#{pak.version} tag to Github"
-    )
-    .end()
+  # pak = getPak()
+
+  # git
+  #   .push(
+  #     'origin',
+  #     'master',
+  #     args: ' --tags',
+  #     ->
+  #       log.info "Pushed v#{pak.version} tag to Github"
+  #   )
+  #   .end()
