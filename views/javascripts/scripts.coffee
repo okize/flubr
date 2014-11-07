@@ -2,6 +2,9 @@
 attachFastClick = require('fastclick')
 attachFastClick(document.body)
 
+# load keyboard bindings
+require('./keyboard')()
+
 # load homepage and main app scripts
-homepage = require('./homepage')()
-app = require('./application')()
+require('./homepage')()
+require('./application')()
