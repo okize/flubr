@@ -52,6 +52,7 @@
     "codename": "*",
     "connect-livereload": "*",
     "del": "*",
+    "dotenv": "*",
     "expect": "*",
     "gift": "*",
     "gulp": "*",
