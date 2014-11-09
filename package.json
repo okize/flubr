@@ -49,6 +49,7 @@
     "velocity-animate": "~0.8.0"
   },
   "devDependencies": {
+    "assert-dotenv": "*",
     "codename": "*",
     "connect-livereload": "*",
     "del": "*",
