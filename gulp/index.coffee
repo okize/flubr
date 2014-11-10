@@ -1,7 +1,10 @@
 # this file boostraps all the gulp tasks
 
 # load env vars here so they'll be available to all gulp tasks
-dotenv = require('dotenv').load()
+require('dotenv').load()
+
+# ensure that env variables required for the application to run have been set
+require('dotenv-assert')()
 
 config = require './config'
 tasks = require './helpers/getTaskList'
