@@ -4,13 +4,13 @@ path = require 'path'
 gulp = require 'gulp'
 _ = require 'lodash'
 config = require '../config'
-env = require('../helpers/getEnvironmentVariables')()
 log = require '../helpers/log'
 Image = require "#{config.root}/src/models/image"
 mongoose = require 'mongoose'
 
 gulp.task 'stats', ->
-  mongoose.connect env.MONGODB_PROD_URL || env.MONGOHQ_URL, (err) ->
+  db = process.env.MONGODB_PROD_URL || process.env.MONGOHQ_URL
+  mongoose.connect db, (err) ->
     throw err if err
     Image.find(deleted: false).exec(
       (err, results) ->

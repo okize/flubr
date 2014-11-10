@@ -5,7 +5,6 @@ coffeelint = require 'gulp-coffeelint'
 csslint = require 'gulp-csslint'
 
 config = require '../config'
-env = require('../helpers/getEnvironmentVariables')()
 log = require '../helpers/log'
 
 gulp.task 'lint', [
