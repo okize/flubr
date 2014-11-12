@@ -59,7 +59,7 @@ module.exports =
   create: (req, res)  ->
     if help.checkForUser req, res
 
-      url = req.body.source_url
+      url = (req.body.source_url).trim()
 
       if url is undefined or url == ''
         res.send 422, error: errors.noImageUrlSent
