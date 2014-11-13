@@ -1,6 +1,7 @@
 # modules
 path = require 'path'
 fs = require 'fs'
+pak = require '../package.json'
 express = require 'express'
 compression = require 'compression'
 cookieParser = require 'cookie-parser'
@@ -28,6 +29,7 @@ app = express()
 app.set 'env', process.env.NODE_ENV or 'development'
 app.set 'port', process.env.PORT or 3333
 app.set 'app name', 'Flubr'
+app.set 'app version', pak.version
 app.set 'views', path.join(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
 
@@ -110,5 +112,5 @@ routes(app, passport)
 
 # await connections
 app.listen app.get('port'), ->
-  console.log "#{app.get('app name')} running on port #{app.get('port')} " +
-              "in [#{app.get('env')}]"
+  console.log "#{app.get('app name')} (#{app.get('app version')}) " +
+              "running on port #{app.get('port')} in [#{app.get('env')}]"
