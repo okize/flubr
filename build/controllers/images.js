@@ -21,6 +21,7 @@ errors = {
   noIdError: 'Please specify image type (pass/fail) in request url',
   noImageError: 'No image found',
   noImageUrlSent: 'No image url specified',
+  noImageUrlReturned: 'Something went wrong and your image could not be saved. Please try again.',
   invalidImageUrl: 'That does not appear to be a valid image url'
 };
 
@@ -92,7 +93,7 @@ module.exports = {
   create: function(req, res) {
     var url;
     if (help.checkForUser(req, res)) {
-      url = req.body.source_url;
+      url = req.body.source_url.trim();
       if (url === void 0 || url === '') {
         return res.send(422, {
           error: errors.noImageUrlSent
@@ -119,12 +120,13 @@ module.exports = {
                 }
               };
               return request.post(options, function(err, response, body) {
-                if (err) {
-                  callback(err, null);
-                }
                 data = JSON.parse(body);
-                if (!data.success) {
+                if (err) {
+                  return callback(err, null);
+                } else if (!data.success) {
                   return callback(data.data.error, null);
+                } else if (data.data.link == null) {
+                  return callback(errors.noImageUrlReturned, null);
                 } else {
                   return callback(null, data.data.link);
                 }

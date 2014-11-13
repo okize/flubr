@@ -1,8 +1,10 @@
-var Store, app, authentication, bodyParser, browserify, coffee, coffeeify, compression, cookieParser, express, favicon, fs, livereload, logger, mongoose, nib, passport, path, routes, session, stylus;
+var Store, app, authentication, bodyParser, browserify, coffee, coffeeify, compression, cookieParser, express, favicon, fs, livereload, logger, mongoose, nib, pak, passport, path, routes, session, stylus;
 
 path = require('path');
 
 fs = require('fs');
+
+pak = require('../package.json');
 
 express = require('express');
 
@@ -49,6 +51,8 @@ app.set('env', process.env.NODE_ENV || 'development');
 app.set('port', process.env.PORT || 3333);
 
 app.set('app name', 'Flubr');
+
+app.set('app version', pak.version);
 
 app.set('views', path.join(__dirname, '..', 'views'));
 
@@ -134,5 +138,5 @@ app.use(logger('dev'));
 routes(app, passport);
 
 app.listen(app.get('port'), function() {
-  return console.log(("" + (app.get('app name')) + " running on port " + (app.get('port')) + " ") + ("in [" + (app.get('env')) + "]"));
+  return console.log(("" + (app.get('app name')) + " (" + (app.get('app version')) + ") ") + ("running on port " + (app.get('port')) + " in [" + (app.get('env')) + "]"));
 });
