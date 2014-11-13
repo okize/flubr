@@ -17,11 +17,12 @@ block page
             ul.image-settings
               if image.kind == 'pass'
                 li: button(disabled='disabled').button-icon.is-pass: span.icon.icon-thumbs-up
+                li: button.button-icon.js-delete-image: span.icon.icon-trash-o
                 li: button.button-icon.is-fail.js-change-image-kind: span.icon.icon-thumbs-o-down
-              else
+              if image.kind == 'fail'
                 li: button.button-icon.is-pass.js-change-image-kind: span.icon.icon-thumbs-o-up
+                li: button.button-icon.js-delete-image: span.icon.icon-trash-o
                 li: button(disabled='disabled').button-icon.is-fail: span.icon.icon-thumbs-down
-              li: button.button-icon.js-delete-image: span.icon.icon-trash-o
 
   else
 

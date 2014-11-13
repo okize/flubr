@@ -1,0 +1,52 @@
+// IMAGES LIST
+
+.image-cards
+  padding: 0
+  list-style: none
+  display: flex
+  flex-wrap: wrap
+  flex-direction: row
+  margin: -1.5%
+
+.image-card
+  background: $imageCardBgColor
+  flex: 1 1 auto
+  margin: 1.5%
+
+.image-card-pass
+  border-top: .25rem solid $pass
+
+.image-card-fail
+  border-top: .25rem solid $fail
+
+.image-thumbnail
+  a:focus &
+    box-shadow: $focusStyle
+  max-width: 100%
+  min-width: 10rem
+  max-height: 100%
+  width: 100%
+  height: 7rem
+
+.image-settings
+  display: flex
+  font-size: 1.5rem
+  margin: 0
+  padding: .5rem 1rem
+  list-style: none
+  li
+    flex: 1 0 auto
+    &:nth-child(2)
+      text-align: center
+    &:nth-child(3)
+      text-align: right
+  .icon
+    color: #999
+
+button[disabled=disabled].is-pass
+  .icon
+    color: $pass !important
+
+button[disabled=disabled].is-fail
+  .icon
+    color: $fail !important

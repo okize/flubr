@@ -15,8 +15,8 @@ module.exports =
     $.ajax
       type: 'POST'
       url: '/api/images'
-      success: =>
-        @_showImageAdded data.source_url
+      success: (data) =>
+        @_showImageAdded data.image_url
       error: (error) ->
         if error.responseText
           msg.error JSON.parse(error.responseText).error
