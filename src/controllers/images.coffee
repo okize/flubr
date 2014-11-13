@@ -13,6 +13,7 @@ errors =
   noIdError: 'Please specify image type (pass/fail) in request url'
   noImageError: 'No image found'
   noImageUrlSent: 'No image url specified'
+  noImageUrlReturned: 'Something went wrong and your image could not be saved. Please try again.'
   invalidImageUrl: 'That does not appear to be a valid image url'
 
 # image model's CRUD controller.
@@ -63,7 +64,7 @@ module.exports =
 
       if url is undefined or url == ''
         res.send 422, error: errors.noImageUrlSent
-      else if !checkUrlIsImage url
+      else if !checkUrlIsImage(url)
         res.send 422, error: errors.invalidImageUrl
       else
         async.series [
@@ -80,13 +81,17 @@ module.exports =
                   'Content-Type': 'application/x-www-form-urlencoded'
                   Accept: 'application/json'
 
-              request.post(options,
+              request.post(
+                options,
                 (err, response, body) ->
-                  callback err, null if err
                   data = JSON.parse(body)
-                  if !data.success
+                  console.log data
+                  if err
+                    callback err, null
+                  else if data.success == false
                     callback data.data.error, null
-                    # res.send 500, error: err if err?
+                  else if data.data.link?
+                    callback errors.noImageUrlReturned, null
                   else
                     callback null, data.data.link
               ).form(data)
