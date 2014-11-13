@@ -6,35 +6,12 @@
   display: flex
   flex-wrap: wrap
   flex-direction: row
+  margin: -1.5%
 
 .image-card
   background: $imageCardBgColor
   flex: 1 1 auto
-  margin: 0 3% 3% 0
-
-@media screen and (min-width: 769px) and (max-width: 895px)
-  .image-card
-    margin-right: 0
-
-@media screen and (min-width: 896px) and (max-width: 1086px)
-  .image-card:nth-child(2n)
-    margin-right: 0
-
-@media screen and (min-width: 1087px) and (max-width: 1279px)
-  .image-card:nth-child(3n)
-    margin-right: 0
-
-@media screen and (min-width: 1280px) and (max-width: 1484px)
-  .image-card:nth-child(4n)
-    margin-right: 0
-
-@media screen and (min-width: 1485px) and (max-width: 1705px)
-  .image-card:nth-child(5n)
-    margin-right: 0
-
-@media screen and (min-width: 1706px)
-  .image-card:nth-child(6n)
-    margin-right: 0
+  margin: 1.5%
 
 .image-card-pass
   border-top: .25rem solid $pass
