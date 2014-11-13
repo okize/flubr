@@ -1,0 +1,50 @@
+// IMAGES LIST
+.image-cards
+  padding: 0
+  margin: 0 -2rem 0 0
+  list-style: none
+
+.image-card
+  background: $imageCardBgColor
+  overflow: hidden
+  text-transform: uppercase
+  display: inline-block
+  outline: 1px solid $imageCardBorderColor
+  margin: 0 2rem 2rem 0
+
+.image-card-pass
+  border-bottom: .25rem solid $pass
+
+.image-card-fail
+  border-bottom: .25rem solid $fail
+
+.image-thumbnail
+  a:focus &
+    box-shadow: $focusStyle
+  float: left
+  margin: .5rem
+  height: 10.5rem
+  width: 10.5rem
+
+button[disabled=disabled].is-pass
+  .icon
+    color: $pass !important
+
+button[disabled=disabled].is-fail
+  .icon
+    color: $fail !important
+
+.image-settings
+  float: right
+  width: 1.8rem
+  font-size: 1.75rem
+  margin: .75rem .75rem 0 .25rem
+  padding: 0
+  list-style: none
+  li
+    text-align: right
+    margin: 0 0 1rem
+    &:last-child
+      margin: 0
+  .icon
+    color: #999
