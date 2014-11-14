@@ -1,8 +1,8 @@
 {
   "name": "flubr",
-  "releaseCodename": "DepressedDog",
+  "releaseCodename": "NarrowNewt",
   "private": true,
-  "version": "0.1.4",
+  "version": "0.1.5",
   "engines": {
     "node": "~0.10.x"
   },

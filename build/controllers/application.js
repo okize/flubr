@@ -17,7 +17,7 @@ navigation = [
     icon: "upload"
   }, {
     title: "Image list",
-    href: "images",
+    href: "imageList",
     icon: "photo"
   }, {
     title: "Manage users",
@@ -51,7 +51,7 @@ module.exports = {
       user: req.user
     });
   },
-  images: function(req, res) {
+  imageList: function(req, res) {
     return Image.find({
       deleted: false
     }).sort({
@@ -70,10 +70,10 @@ module.exports = {
           kind: image.kind
         };
       });
-      return res.render('images', {
+      return res.render('imageList', {
         env: process.env.NODE_ENV,
         title: 'Image list',
-        pageName: 'images',
+        pageName: 'imageList',
         navigation: navigation,
         user: req.user,
         imageList: images,

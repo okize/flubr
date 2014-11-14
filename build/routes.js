@@ -21,8 +21,8 @@ module.exports = function(app, passport) {
   app.get('/addImage', help.ensureAuthenticated, function(req, res, next) {
     return application.addImage(req, res, next);
   });
-  app.get('/images', help.ensureAuthenticated, function(req, res, next) {
-    return application.images(req, res, next);
+  app.get('/imageList', help.ensureAuthenticated, function(req, res, next) {
+    return application.imageList(req, res, next);
   });
   app.get('/imagesDeleted', help.ensureAuthenticated, function(req, res, next) {
     return application.imagesDeleted(req, res, next);
