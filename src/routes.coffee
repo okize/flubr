@@ -18,8 +18,8 @@ module.exports = (app, passport) ->
     application.addImage req, res, next
 
   # view all images
-  app.get '/images', help.ensureAuthenticated, (req, res, next) ->
-    application.images req, res, next
+  app.get '/imageList', help.ensureAuthenticated, (req, res, next) ->
+    application.imageList req, res, next
 
   # view all deleted images
   # NOTE: this is not in the navigation

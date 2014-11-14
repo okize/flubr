@@ -12,7 +12,7 @@ navigation = [
   },
   {
     title: "Image list",
-    href: "images",
+    href: "imageList",
     icon: "photo"
   },
   {
@@ -48,7 +48,7 @@ module.exports =
       user: req.user
 
   # view all images page
-  images: (req, res) ->
+  imageList: (req, res) ->
     Image.find(deleted: false).sort(created_at: 'descending').exec(
       (err, results) ->
         throw err if err
@@ -58,10 +58,10 @@ module.exports =
             imageUrl: image.image_url
             thumbnailUrl: getThumbnail(image.image_url)
             kind: image.kind
-        res.render 'images',
+        res.render 'imageList',
           env: process.env.NODE_ENV
           title: 'Image list'
-          pageName: 'images'
+          pageName: 'imageList'
           navigation: navigation
           user: req.user
           imageList: images
