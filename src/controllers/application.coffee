@@ -1,4 +1,5 @@
 path = require 'path'
+moment = require 'moment'
 help = require path.join('..', 'helpers')
 User = require path.join('..', 'models', 'user')
 Image = require path.join('..', 'models', 'image')
@@ -49,7 +50,33 @@ module.exports =
 
   # view all images page
   imageList: (req, res) ->
-    Image.find(deleted: false).sort(created_at: 'descending').exec(
+    User.find {}, (err, users) ->
+      throw err if err
+      Image.find(deleted: false).sort(created_at: 'descending').exec(
+        (err, results) ->
+          throw err if err
+          images = _.map results, (image) ->
+            user = _.find(users, { 'userid': image.added_by })
+            newImage =
+              id: image._id
+              imageUrl: image.image_url
+              thumbnailUrl: getThumbnail(image.image_url)
+              kind: image.kind
+              added: moment(image.created_at).format('MM-DD-YYYY')
+              addedBy: if typeof user != 'undefined' then user.displayName else 'Unknown'
+          res.render 'imageList',
+            env: process.env.NODE_ENV
+            title: 'Image list'
+            pageName: 'imageList'
+            navigation: navigation
+            user: req.user
+            imageList: images
+            deleted: false
+      )
+
+  # view all images page
+  imageListDeleted: (req, res) ->
+    Image.find(deleted: true).sort(created_at: 'descending').exec(
       (err, results) ->
         throw err if err
         images = _.map results, (image) ->
@@ -60,29 +87,8 @@ module.exports =
             kind: image.kind
         res.render 'imageList',
           env: process.env.NODE_ENV
-          title: 'Image list'
+          title: 'Deleted image list'
           pageName: 'imageList'
-          navigation: navigation
-          user: req.user
-          imageList: images
-          deleted: false
-    )
-
-  # view all images page
-  imagesDeleted: (req, res) ->
-    Image.find(deleted: true).sort(created_at: 'descending').exec(
-      (err, results) ->
-        throw err if err
-        images = _.map results, (image) ->
-          newImage =
-            id: image._id
-            imageUrl: image.image_url
-            thumbnailUrl: getThumbnail(image.image_url)
-            kind: image.kind
-        res.render 'images',
-          env: process.env.NODE_ENV
-          title: 'Image list'
-          pageName: 'images'
           navigation: navigation
           user: req.user
           imageList: images
