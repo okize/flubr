@@ -14,13 +14,13 @@ module.exports =
         </button>
       </li>
       <li>
-        <button class="button-icon js-change-image-kind is-fail">
-          <span class="icon icon-thumbs-o-down"</span>
+        <button class="button-icon js-delete-image">
+          <span class="icon icon-trash-o"></span>
         </button>
       </li>
       <li>
-        <button class="button-icon js-delete-image">
-          <span class="icon icon-trash-o"></span>
+        <button class="button-icon js-change-image-kind is-fail">
+          <span class="icon icon-thumbs-o-down"</span>
         </button>
       </li>
       '''
@@ -32,13 +32,13 @@ module.exports =
         </button>
       </li>
       <li>
-        <button class="button-icon is-fail" disabled="disabled">
-          <span class="icon icon-thumbs-down"</span>
+        <button class="button-icon js-delete-image">
+          <span class="icon icon-trash-o"></span>
         </button>
       </li>
       <li>
-        <button class="button-icon js-delete-image">
-          <span class="icon icon-trash-o"></span>
+        <button class="button-icon is-fail" disabled="disabled">
+          <span class="icon icon-thumbs-down"</span>
         </button>
       </li>
       '''
