@@ -24,7 +24,7 @@ module.exports =
   src:
     app: "#{root}/src/**/*.coffee"
     favicons: "#{root}/assets/favicons/"
-    jade: "#{root}/views/**/*.jade"
+    jade: "#{root}/views/**/**/*.jade"
     stylus: "#{stylusDir}**/*.styl"
     stylusEntry: 'styles.styl'
     stylusDir: stylusDir
