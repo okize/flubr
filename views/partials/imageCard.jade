@@ -2,9 +2,9 @@ if image.kind == 'pass'
     - imageItemClass = 'image-card-pass'
   else
     - imageItemClass = 'image-card-fail'
-  figure(id='#{image.id}', class='image-card #{imageItemClass} js-flip-card')
-    .image-card-front
-      .flip-card-indicator
+  figure(id='#{image.id}', class='image-card #{imageItemClass}')
+    .image-card-front.js-flip-card
+      .flip-card-overlay
         span.icon.icon-refresh
       img.image-thumbnail(src='' data-src='#{image.thumbnailUrl}', alt='')
       if !deleted
@@ -13,13 +13,13 @@ if image.kind == 'pass'
             .image-setting.set-pass
               button(disabled='disabled').button-icon.is-pass: span.icon.icon-thumbs-up
             .image-setting.set-fail
-              button.button-icon.is-fail.js-change-image-kind: span.icon.icon-thumbs-o-down
+              button.button-icon.is-fail.js-change-image-kind: span.icon.icon-thumbs-down
           if image.kind == 'fail'
             .image-setting.set-pass
-              button.button-icon.is-pass.js-change-image-kind: span.icon.icon-thumbs-o-up
+              button.button-icon.is-pass.js-change-image-kind: span.icon.icon-thumbs-up
             .image-setting.set-fail
               button(disabled='disabled').button-icon.is-fail: span.icon.icon-thumbs-down
-    figcaption.image-card-back
+    .image-card-back
       ul.image-metadata
         li
           a(href='#{image.imageUrl}') #{image.imageUrl}
@@ -27,3 +27,5 @@ if image.kind == 'pass'
         li #{image.added}
         li
           button.button-link.js-delete-image Delete this image
+        li
+          button.button-link.js-flip-card Flip card over
