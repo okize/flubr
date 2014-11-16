@@ -1,6 +1,8 @@
-var Image, User, getThumbnail, help, navigation, path, _;
+var Image, User, getThumbnail, help, moment, navigation, path, _;
 
 path = require('path');
+
+moment = require('moment');
 
 help = require(path.join('..', 'helpers'));
 
@@ -52,36 +54,46 @@ module.exports = {
     });
   },
   imageList: function(req, res) {
-    return Image.find({
-      deleted: false
-    }).sort({
-      created_at: 'descending'
-    }).exec(function(err, results) {
-      var images;
+    return User.find({}, function(err, users) {
       if (err) {
         throw err;
       }
-      images = _.map(results, function(image) {
-        var newImage;
-        return newImage = {
-          id: image._id,
-          imageUrl: image.image_url,
-          thumbnailUrl: getThumbnail(image.image_url),
-          kind: image.kind
-        };
-      });
-      return res.render('imageList', {
-        env: process.env.NODE_ENV,
-        title: 'Image list',
-        pageName: 'imageList',
-        navigation: navigation,
-        user: req.user,
-        imageList: images,
+      return Image.find({
         deleted: false
+      }).sort({
+        created_at: 'descending'
+      }).exec(function(err, results) {
+        var images;
+        if (err) {
+          throw err;
+        }
+        images = _.map(results, function(image) {
+          var newImage, user;
+          user = _.find(users, {
+            'userid': image.added_by
+          });
+          return newImage = {
+            id: image._id,
+            imageUrl: image.image_url,
+            thumbnailUrl: getThumbnail(image.image_url),
+            kind: image.kind,
+            added: moment(image.created_at).format('MM-DD-YYYY'),
+            addedBy: typeof user !== 'undefined' ? user.displayName : 'Unknown'
+          };
+        });
+        return res.render('imageList', {
+          env: process.env.NODE_ENV,
+          title: 'Image list',
+          pageName: 'imageList',
+          navigation: navigation,
+          user: req.user,
+          imageList: images,
+          deleted: false
+        });
       });
     });
   },
-  imagesDeleted: function(req, res) {
+  imageListDeleted: function(req, res) {
     return Image.find({
       deleted: true
     }).sort({
@@ -100,10 +112,10 @@ module.exports = {
           kind: image.kind
         };
       });
-      return res.render('images', {
+      return res.render('imageList', {
         env: process.env.NODE_ENV,
-        title: 'Image list',
-        pageName: 'images',
+        title: 'Deleted image list',
+        pageName: 'imageList',
         navigation: navigation,
         user: req.user,
         imageList: images,
