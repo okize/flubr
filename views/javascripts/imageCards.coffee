@@ -89,6 +89,15 @@ module.exports =
       card.find('.image-card-back').hide()
       card.find('.image-card-front').show()
 
+  flipAllCards: ->
+    firstCard = $('.js-flip-card').not('button').first().css('display')
+    if firstCard == 'none'
+      $('.image-card-front').show()
+      $('.image-card-back').hide()
+    else
+      $('.image-card-front').hide()
+      $('.image-card-back').show()
+
   switchImageKind: ($el) ->
     card = $el.closest('.image-card')
     id = card.attr('id')

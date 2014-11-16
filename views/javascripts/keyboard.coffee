@@ -1,13 +1,19 @@
 $ = require 'jquery'
 key = require 'keymaster'
+cards = require './imageCards'
 
 module.exports = () ->
 
   key 'p', ->
-    $('#image-kind-pass').click()
+    if $('#image-kind-pass').length
+      $('#image-kind-pass').click()
 
   key 'f', ->
-    $('#image-kind-fail').click()
+    if $('#image-kind-fail').length
+      $('#image-kind-fail').click()
+    if $('.image-cards').length
+      cards.flipAllCards()
 
   key 'space', ->
-    $('#image-url').focus()
+    if $('#image-url')
+      $('#image-url').focus()
