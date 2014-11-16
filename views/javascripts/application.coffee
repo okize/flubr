@@ -9,8 +9,13 @@ module.exports = () ->
   $body = $('body')
 
   $body.on 'click', '.js-change-image-kind', (e) ->
+    e.stopPropagation()
     e.preventDefault()
     imageCard.switchImageKind $(this)
+
+  $body.on 'click', '.js-flip-card', (e) ->
+    e.preventDefault()
+    imageCard.flipCard $(this)
 
   $body.on 'click', '.js-delete-image', (e) ->
     e.preventDefault()

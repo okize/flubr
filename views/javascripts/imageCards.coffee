@@ -13,16 +13,16 @@ module.exports =
           <span class="icon icon-thumbs-up"></span>
         </button>
       </div>
-      <div class="image-setting set-fail">
-        <button class="button-icon js-change-image-kind is-fail">
+      <div class="image-setting set-fail js-change-image-kind">
+        <button class="button-icon is-fail">
           <span class="icon icon-thumbs-o-down"</span>
         </button>
       </div>
       '''
     else
       '''
-      <div class="image-setting set-pass">
-        <button class="button-icon js-change-image-kind is-pass">
+      <div class="image-setting set-pass js-change-image-kind">
+        <button class="button-icon is-pass">
           <span class="icon icon-thumbs-o-up"</span>
         </button>
       </div>
@@ -79,6 +79,15 @@ module.exports =
   _deleteImageInUi: ($el) ->
     msg.notice 'Image deleted!'
     help.animate $el, 'delete'
+
+  flipCard: ($el) ->
+    if $el.hasClass('image-card-front')
+      $el.hide()
+      $el.closest('.image-card').find('.image-card-back').show()
+    else
+      card = $el.closest('.image-card')
+      card.find('.image-card-back').hide()
+      card.find('.image-card-front').show()
 
   switchImageKind: ($el) ->
     card = $el.closest('.image-card')
