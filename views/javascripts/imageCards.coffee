@@ -8,39 +8,29 @@ module.exports =
   _getImageSetHtml: (newKind) ->
     if newKind == 'pass'
       '''
-      <li>
+      <div class="image-setting set-pass">
         <button class="button-icon is-pass" disabled="disabled">
           <span class="icon icon-thumbs-up"></span>
         </button>
-      </li>
-      <li>
-        <button class="button-icon js-delete-image">
-          <span class="icon icon-trash-o"></span>
-        </button>
-      </li>
-      <li>
+      </div>
+      <div class="image-setting set-fail">
         <button class="button-icon js-change-image-kind is-fail">
           <span class="icon icon-thumbs-o-down"</span>
         </button>
-      </li>
+      </div>
       '''
     else
       '''
-      <li>
+      <div class="image-setting set-pass">
         <button class="button-icon js-change-image-kind is-pass">
           <span class="icon icon-thumbs-o-up"</span>
         </button>
-      </li>
-      <li>
-        <button class="button-icon js-delete-image">
-          <span class="icon icon-trash-o"></span>
-        </button>
-      </li>
-      <li>
+      </div>
+      <div class="image-setting set-fail">
         <button class="button-icon is-fail" disabled="disabled">
           <span class="icon icon-thumbs-down"</span>
         </button>
-      </li>
+      </div>
       '''
 
   _updateImageInUi: (card, newKind, oldKind) ->

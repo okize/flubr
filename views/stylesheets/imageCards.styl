@@ -9,19 +9,21 @@
   margin: -1rem
 
 .image-card
-  background: $imageCardBgColor
+  position: relative
   flex: 1 1 auto
   margin: 1rem
 
 .image-card-pass
-  border-top: .25rem solid $pass
+  // border-top: .25rem solid $pass
 
 .image-card-fail
-  border-top: .25rem solid $fail
+  // border-top: .25rem solid $fail
 
 .image-thumbnail
-  a:focus &
-    box-shadow: $focusStyle
+  // a:focus &
+  //   box-shadow: $focusStyle
+  box-shadow: 5px 5px 15px rgba($navShadowColor, .25)
+  border-radius: 5px
   max-width: 100%
   min-width: 10rem
   max-height: 100%
@@ -29,19 +31,28 @@
   height: 8rem
 
 .image-settings
-  display: flex
-  font-size: 1.5rem
+  width: 100%
+  top: 4rem
+  position: absolute
+  font-size: 2rem
   margin: 0
-  padding: .5rem 1rem
   list-style: none
-  li
-    flex: 1 0 auto
-    &:nth-child(2)
-      text-align: center
-    &:nth-child(3)
-      text-align: right
+
+.image-setting
+  margin-top: -1.5rem
+  background-color: $imageCardToggleBgColor
+  padding: .5rem
+  position: absolute
+  &:hover
+    background-color: $imageCardToggleBgColorHover
+  &.set-pass
+    border-radius: 0 1rem 1rem 0
+    left: 0
+  &.set-fail
+    border-radius: 1rem 0 0 1rem
+    right: 0
   .icon
-    color: #999
+    color: #333
 
 button[disabled=disabled].is-pass
   .icon

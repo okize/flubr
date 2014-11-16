@@ -3,20 +3,25 @@ if image.kind == 'pass'
   else
     - imageItemClass = 'image-card-fail'
   figure(id='#{image.id}', class='image-card #{imageItemClass}')
-    a(href='#{image.imageUrl}')
-      img.image-thumbnail(src='' data-src='#{image.thumbnailUrl}', alt='')
+    //- a(href='#{image.imageUrl}')
+    img.image-thumbnail(src='' data-src='#{image.thumbnailUrl}', alt='')
     dl.image-metadata
       dt added on:
       dd #{image.added}
       dt added by:
       dd #{image.addedBy}
+      dt delete image:
+      dd
+        button.button-icon.js-delete-image: span.icon.icon-trash-o
     if !deleted
-      ul.image-settings
+      .image-settings
         if image.kind == 'pass'
-          li: button(disabled='disabled').button-icon.is-pass: span.icon.icon-thumbs-up
-          li: button.button-icon.js-delete-image: span.icon.icon-trash-o
-          li: button.button-icon.is-fail.js-change-image-kind: span.icon.icon-thumbs-o-down
+          .image-setting.set-pass
+            button(disabled='disabled').button-icon.is-pass: span.icon.icon-thumbs-up
+          .image-setting.set-fail
+            button.button-icon.is-fail.js-change-image-kind: span.icon.icon-thumbs-o-down
         if image.kind == 'fail'
-          li: button.button-icon.is-pass.js-change-image-kind: span.icon.icon-thumbs-o-up
-          li: button.button-icon.js-delete-image: span.icon.icon-trash-o
-          li: button(disabled='disabled').button-icon.is-fail: span.icon.icon-thumbs-down
+          .image-setting.set-pass
+            button.button-icon.is-pass.js-change-image-kind: span.icon.icon-thumbs-o-up
+          .image-setting.set-fail
+            button(disabled='disabled').button-icon.is-fail: span.icon.icon-thumbs-down
