@@ -11,6 +11,8 @@ module.exports = () ->
   key 'f', ->
     if $('#image-kind-fail').length
       $('#image-kind-fail').click()
+
+  key 'shift+f', ->
     if $('.image-cards').length
       cards.flipAllCards()
 
