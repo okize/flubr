@@ -2,26 +2,28 @@ if image.kind == 'pass'
     - imageItemClass = 'image-card-pass'
   else
     - imageItemClass = 'image-card-fail'
-  figure(id='#{image.id}', class='image-card #{imageItemClass}')
-    //- a(href='#{image.imageUrl}')
-    img.image-thumbnail(src='' data-src='#{image.thumbnailUrl}', alt='')
-    dl.image-metadata
-      dt added on:
-      dd #{image.added}
-      dt added by:
-      dd #{image.addedBy}
-      dt delete image:
-      dd
-        button.button-icon.js-delete-image: span.icon.icon-trash-o
-    if !deleted
-      .image-settings
-        if image.kind == 'pass'
-          .image-setting.set-pass
-            button(disabled='disabled').button-icon.is-pass: span.icon.icon-thumbs-up
-          .image-setting.set-fail
-            button.button-icon.is-fail.js-change-image-kind: span.icon.icon-thumbs-o-down
-        if image.kind == 'fail'
-          .image-setting.set-pass
-            button.button-icon.is-pass.js-change-image-kind: span.icon.icon-thumbs-o-up
-          .image-setting.set-fail
-            button(disabled='disabled').button-icon.is-fail: span.icon.icon-thumbs-down
+  figure(id='#{image.id}', class='image-card #{imageItemClass} js-flip-card')
+    .image-card-front
+      .flip-card-indicator
+        span.icon.icon-refresh
+      img.image-thumbnail(src='' data-src='#{image.thumbnailUrl}', alt='')
+      if !deleted
+        .image-settings
+          if image.kind == 'pass'
+            .image-setting.set-pass
+              button(disabled='disabled').button-icon.is-pass: span.icon.icon-thumbs-up
+            .image-setting.set-fail
+              button.button-icon.is-fail.js-change-image-kind: span.icon.icon-thumbs-o-down
+          if image.kind == 'fail'
+            .image-setting.set-pass
+              button.button-icon.is-pass.js-change-image-kind: span.icon.icon-thumbs-o-up
+            .image-setting.set-fail
+              button(disabled='disabled').button-icon.is-fail: span.icon.icon-thumbs-down
+    figcaption.image-card-back
+      ul.image-metadata
+        li
+          a(href='#{image.imageUrl}') #{image.imageUrl}
+        li #{image.addedBy}
+        li #{image.added}
+        li
+          button.button-link.js-delete-image Delete this image

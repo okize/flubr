@@ -6,12 +6,38 @@
   display: flex
   flex-wrap: wrap
   flex-direction: row
-  margin: -1rem
+  margin: -1rem // this is to remove the margin along the left & right of list
 
 .image-card
+  border-radius: 5px
+  box-shadow: 5px 5px 15px rgba($navShadowColor, .25)
   position: relative
   flex: 1 1 auto
   margin: 1rem
+  overflow: hidden
+  height: $imageCardHeight
+  min-width: $imageCardWidth
+
+.image-card-front
+  &:hover:not(.image-setting)
+    .flip-card-indicator
+      display: block
+
+.image-card-back
+  display: none
+  height: 100%
+  background-color: #aaa
+
+.flip-card-indicator
+  display: none
+  cursor: pointer
+  position: absolute
+  top: ($imageCardHeight / 4)
+  text-align: center
+  width: 100%
+  .icon
+    font-size: 5rem
+    color: rgba(0,0,0,.75)
 
 .image-card-pass
   // border-top: .25rem solid $pass
@@ -20,25 +46,22 @@
   // border-top: .25rem solid $fail
 
 .image-thumbnail
-  // a:focus &
-  //   box-shadow: $focusStyle
-  box-shadow: 5px 5px 15px rgba($navShadowColor, .25)
-  border-radius: 5px
+  cursor: pointer
   max-width: 100%
-  min-width: 10rem
   max-height: 100%
   width: 100%
-  height: 8rem
+  height: 100%
 
 .image-settings
   width: 100%
-  top: 4rem
+  top: ($imageCardHeight / 2)
   position: absolute
   font-size: 2rem
   margin: 0
   list-style: none
 
 .image-setting
+  cursor: default
   margin-top: -1.5rem
   background-color: $imageCardToggleBgColor
   padding: .5rem
@@ -52,6 +75,7 @@
     border-radius: 1rem 0 0 1rem
     right: 0
   .icon
+    cursor: pointer
     color: #333
 
 button[disabled=disabled].is-pass
@@ -63,4 +87,7 @@ button[disabled=disabled].is-fail
     color: $fail !important
 
 .image-metadata
-  display: none
+  color: #fff
+  font-size: .8rem
+  margin: 0
+  padding: 2rem 0 0 .5rem
