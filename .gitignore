@@ -1,6 +1,7 @@
 env.json
 .env
 dump/
+migrations/
 temp.coffee
 
 npm-debug.log
