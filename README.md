@@ -14,7 +14,10 @@ Before getting started you will need the following:
 * A running [Hubot](https://github.com/github/hubot) instance:
   * Flubr is meant to be paired with Hubot, which is accomplished with the [hubot-flubr](https://github.com/okize/hubot-flubr) plugin.
 * [Twitter App](https://apps.twitter.com/app/new) keys:
-  * ```Consumer Key (API Key), Consumer Secret (API Secret), Access Token, Access Token Secret```
+  * ``Consumer Key (API Key)``
+  * ``Consumer Secret (API Secret)``
+  * ```Access Token```
+  * ```Access Token Secret```
 * [Imgur app](https://api.imgur.com/oauth2/addclient) key:
   * ```Client ID```
 
