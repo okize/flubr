@@ -1,11 +1,10 @@
 env.json
 .env
+*.log
+
 dump/
 migrations/
-temp.coffee
-
-npm-debug.log
-builderror.log
+temp/
 
 node_modules/connect-mongostore/node_modules/mongodb/node_modules/bson/build/
 node_modules/connect-mongostore/node_modules/mongodb/node_modules/kerberos/build/
