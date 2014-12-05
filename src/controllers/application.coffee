@@ -1,5 +1,6 @@
 path = require 'path'
 moment = require 'moment'
+pak = require path.join('..', '..', 'package.json')
 help = require path.join('..', 'helpers')
 User = require path.join('..', 'models', 'user')
 Image = require path.join('..', 'models', 'image')
@@ -120,6 +121,8 @@ module.exports =
           passImagePercentage: passImagePercentage
           failImagePercentage: failImagePercentage
           deleted: false
+          appVersion: pak.version
+
     )
 
   # user management page
