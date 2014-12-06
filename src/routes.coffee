@@ -2,6 +2,7 @@ homepage = require './controllers/homepage'
 application = require './controllers/application'
 images = require './controllers/images'
 users = require './controllers/users'
+versions = require './controllers/versions'
 help = require './helpers'
 
 module.exports = (app, passport) ->
@@ -103,6 +104,14 @@ module.exports = (app, passport) ->
   # delete user
   app.delete '/api/users/:id', help.ensureAuthenticated, (req, res, next) ->
     users.delete req, res, next
+
+  # get local version of application
+  app.get '/api/localAppVersion', (req, res, next) ->
+    versions.getLocalVersion req, res, next
+
+  # get remote version of application
+  app.get '/api/remoteAppVersion', (req, res, next) ->
+    versions.getRemoteVersion req, res, next
 
   # unauthorized
   app.all '/401', (req, res) ->
