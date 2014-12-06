@@ -3,10 +3,14 @@ msg = require './messaging'
 imageCard = require './imageCards'
 user = require './users'
 image = require './images'
+stats = require './stats'
 
 module.exports = () ->
 
   $body = $('body')
+
+  versionEl = $('#app-version')
+  stats.getVersion(versionEl) if versionEl.length
 
   $body.on 'click', '.js-change-image-kind', (e) ->
     e.stopPropagation()
