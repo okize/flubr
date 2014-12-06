@@ -1,4 +1,4 @@
-var application, help, homepage, images, users;
+var application, help, homepage, images, users, versions;
 
 homepage = require('./controllers/homepage');
 
@@ -7,6 +7,8 @@ application = require('./controllers/application');
 images = require('./controllers/images');
 
 users = require('./controllers/users');
+
+versions = require('./controllers/versions');
 
 help = require('./helpers');
 
@@ -84,6 +86,12 @@ module.exports = function(app, passport) {
   });
   app["delete"]('/api/users/:id', help.ensureAuthenticated, function(req, res, next) {
     return users["delete"](req, res, next);
+  });
+  app.get('/api/localAppVersion', function(req, res, next) {
+    return versions.getLocalVersion(req, res, next);
+  });
+  app.get('/api/remoteAppVersion', function(req, res, next) {
+    return versions.getRemoteVersion(req, res, next);
   });
   app.all('/401', function(req, res) {
     res.statusCode = 401;
