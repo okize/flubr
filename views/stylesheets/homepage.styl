@@ -45,7 +45,7 @@
     background: $homepageLoginButtonBgColor
     border-bottom: .2rem solid darken($homepageLoginButtonBgColor, 25%)
     text-transform: uppercase
-    color: white
+    color: $homepageLoginButtonColor
     text-decoration: none
     padding: .5rem 1rem
     border-radius: .25rem
@@ -62,7 +62,7 @@
 
 .image-type-pass, .image-type-fail
   margin: 1rem auto 0
-  border: 1px solid #999
+  border: .5rem solid $textPrimaryColor
   position: relative
   overflow: hidden
   width: $homepageImageWidth * .75
@@ -86,15 +86,15 @@
     top: $homepageImageHeight * .25
     left: .25rem
     vertical-align: middle
-    width:100%
+    width: 100%
     text-align: center
     text-transform: uppercase
     letter-spacing: 1.5rem
     text-shadow:
-      -1px -1px 0 #fff,
-      1px -1px 0 #fff,
-      -1px 1px 0 #fff,
-      1px 1px 0 #fff
+      -1px -1px 0 $homepageTextShadowColor,
+      1px -1px 0 $homepageTextShadowColor,
+      -1px 1px 0 $homepageTextShadowColor,
+      1px 1px 0 $homepageTextShadowColor
   +from($medium-up)
     display: inline-block
     h3
@@ -102,12 +102,12 @@
 
 .image-type-pass
   h3
-    color: $pass
+    color: $passColor
   +from($medium-up)
     margin: 0 4rem 0 0
 
 .image-type-fail
   h3
-    color: $fail
+    color: $failColor
   +from($medium-up)
     margin: 0 0 0 4rem

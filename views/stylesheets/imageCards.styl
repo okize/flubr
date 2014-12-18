@@ -19,10 +19,10 @@
   min-width: $imageCardWidth
 
 .image-card-pass
-  // border-top: .25rem solid $pass
+  // border-top: .25rem solid $passColor
 
 .image-card-fail
-  // border-top: .25rem solid $fail
+  // border-top: .25rem solid $failColor
 
 .image-card
   &:hover
@@ -72,23 +72,23 @@
   .icon
     text-shadow: rgba(0,0,0,.25) 2px 2px
     cursor: pointer
-    color: #eee
+    color: $imageCardIconColor
 
 button[disabled=disabled].is-pass
   .icon
-    color: $pass !important
+    color: $passColor !important
 
 button[disabled=disabled].is-fail
   .icon
-    color: $fail !important
+    color: $failColor !important
 
 .image-card-back
   display: none
   height: 100%
-  background-color: #aaa
+  background-color: $imageCardBackBgColor
 
 .image-metadata
-  color: #fff
+  color: $textOnColor
   font-size: .75rem
   margin: 0
   padding: 0

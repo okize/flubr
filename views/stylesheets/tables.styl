@@ -1,5 +1,6 @@
 .table
   width: 100%
+  background: $tableBgColor
 
   th, td
     padding: .75rem .5rem
@@ -26,16 +27,13 @@
         td
           border-bottom: 0
 
-  .table
-    background: #ccc
-
   &.table-striped
     tbody tr:nth-child(even)
       background: $tableStripedEvenColor
     tbody tr:nth-child(odd)
       background: $tableStripedOddColor
     td
-      border-bottom: 1px solid white
+      border-bottom: 1px solid $tableStripedRowDivider
 
   &.table-bordered
     border: 1px $tableBorderedColor solid

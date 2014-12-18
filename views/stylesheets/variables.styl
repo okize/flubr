@@ -1,31 +1,42 @@
-// COLORS
-$flubr = #85d10d
-$flubrDark = #659E0A
-$pass = #2ECC40
-$fail = #FF4136
-
-// LINKS
-$linkColor = blue
-$linkVisitedColor = black
-
-// HOMEPAGE
-$homepageBgColorTop = #fafafa
-$homepageBgColorBottom = #aaa
-$homepageImageWidth = 18rem
-$homepageImageHeight = 12rem
-$homepageLoginButtonBgColor = #4099ff
-
-// RESPONSIVE
-$medium-up = 769px
-
 // FONTS
 $fontRegular = 'Lato-Regular', 'Trebuchet MS', Arial, sans-serif
 $fontLight = 'Lato-Hairline', 'Trebuchet MS', Arial, sans-serif
 $fontBold = 'Lato-Heavy', 'Trebuchet MS', Arial, sans-serif
 
-// APPLICATION
-$appBodyColor = #333
+// COLORS
+$primaryColor = #8BC34A
+$darkPrimaryColor = #689F38
+$lightPrimaryColor = #DCEDC8
+$textPrimaryColor = #212121
+$accentColor = #FFC107
+$primaryTextColor = #212121
+$secondaryTextColor = #727272
+$textOnColor = #fff
+$dividerColor = #B6B6B6
+
+
+$flubr = #85d10d
+$passColor = #4bae4f
+$failColor = #f34235
+
+// GLOBAL
 $appBodyBgColor = #f8f8f8
+
+// LINKS
+$linkColor = #fff
+$linkVisitedColor = $secondaryTextColor
+
+// HOMEPAGE
+$homepageBgColorTop = #fafafa
+$homepageBgColorBottom = #aaa
+$homepageTextShadowColor = #fff
+$homepageLoginButtonColor = #fff
+$homepageLoginButtonBgColor = #02a8f3
+$homepageImageWidth = 18rem
+$homepageImageHeight = 12rem
+
+// RESPONSIVE
+$medium-up = 769px
 
 // NAVIGATION
 $navigationWidth = 16rem
@@ -34,7 +45,7 @@ $navShadowColor = #333
 $navLinkBorderColor = #fafafa
 $navLinkColor = #333
 $navLinkBgColor = #efefef
-$navLinkHoverBgColor = $flubrDark
+$navLinkHoverBgColor = $darkPrimaryColor
 $navLinkHoverColor = #fff
 $navLinkIconHoverColor = $navLinkHoverColor
 $navLinkActiveColor = #333
@@ -45,7 +56,7 @@ $appMessagingWidth = 16rem
 $appMessagingBgColor = $navBgColor
 
 // FONT ICONS
-$fa-font-color = $flubrDark
+$fa-font-color = $darkPrimaryColor
 $fa-css-prefix = icon
 $fa-version = '4.1.0'
 $fa-border-color = #eee
@@ -53,30 +64,35 @@ $fa-inverse = #fff
 $fa-li-width = (30em / 14)
 
 // TABLES
-$tableHeadBgColor = $flubrDark
+$tableBgColor = #ccc
+$tableHeadBgColor = $darkPrimaryColor
 $tableHeadColor = #fafafa
-$tableHeadBorderColor = darken($flubrDark, 25%)
+$tableHeadBorderColor = darken($darkPrimaryColor, 25%)
 $tableRowBorderColor = #ddd
 $tableBorderedColor = #ccc
 $tableStripedOddColor = #fafafa
 $tableStripedEvenColor = #f5f5f5
+$tableStripedRowDivider = #fff
 
 // FLASH MESSAGES
+$flashMessageColor = $textOnColor
 $flashBgColorNotice = #0074d9
-$flashBgColorError = $fail
+$flashBgColorError = $failColor
 $flashBgColorWarning = #f39c12
-$flashBgColorSuccess = $pass
+$flashBgColorSuccess = $passColor
 
 // IMAGE CARDS
 $imageCardWidth = 12rem
 $imageCardHeight = 9rem
+$imageCardIconColor = #eee
+$imageCardBackBgColor = #aaa
 $imageCardToggleBgColor = rgba(255,255,255,.5)
 $imageCardToggleBgColorHover = rgba(255,255,255,1)
 
 // TOGGLE
 $toggleSwitchHeight = 2rem
 $toggleSwitchBgColor = #333
-$toggleSwitchActiveBgColor = #deca03
+$toggleSwitchActiveBgColor = $accentColor
 $toggleSwitchSpeed = 0.1s
 
 // FORMS
