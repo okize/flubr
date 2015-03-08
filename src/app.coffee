@@ -112,5 +112,6 @@ routes(app, passport)
 
 # await connections
 app.listen app.get('port'), ->
-  console.log "#{app.get('app name')} (#{app.get('app version')}) " +
-              "running on port #{app.get('port')} in [#{app.get('env')}]"
+  console.log "\n\n#{app.get('app name')} (#{app.get('app version')}) " +
+              "in [#{app.get('env')}] " +
+              "running on http://localhost:#{app.get('port')} \n\n"
