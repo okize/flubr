@@ -11,14 +11,14 @@ if image.kind == 'pass'
         .image-settings
           if image.kind == 'pass'
             .image-setting.set-pass
-              button(disabled='disabled').button-icon.is-pass: span.icon.icon-thumbs-up
+              button(disabled='disabled').button-icon.is-pass: span.icon.icon-like2
             .image-setting.set-fail
-              button.button-icon.is-fail.js-change-image-kind: span.icon.icon-thumbs-down
+              button.button-icon.is-fail.js-change-image-kind: span.icon.icon-like2.icon-rotate-180
           if image.kind == 'fail'
             .image-setting.set-pass
-              button.button-icon.is-pass.js-change-image-kind: span.icon.icon-thumbs-up
+              button.button-icon.is-pass.js-change-image-kind: span.icon.icon-like2
             .image-setting.set-fail
-              button(disabled='disabled').button-icon.is-fail: span.icon.icon-thumbs-down
+              button(disabled='disabled').button-icon.is-fail: span.icon.icon-like2.icon-rotate-180
     .image-card-back
       ul.image-metadata
         li

@@ -4,18 +4,18 @@ help = require './helpers'
 
 module.exports =
 
-  # this is so dumb
+  # TODO fix this awful code
   _getImageSetHtml: (newKind) ->
     if newKind == 'pass'
       '''
       <div class="image-setting set-pass">
         <button class="button-icon is-pass" disabled="disabled">
-          <span class="icon icon-thumbs-up"></span>
+          <span class="icon icon-like2"></span>
         </button>
       </div>
       <div class="image-setting set-fail js-change-image-kind">
         <button class="button-icon is-fail">
-          <span class="icon icon-thumbs-down"</span>
+          <span class="icon icon-like2 icon-rotate-180"</span>
         </button>
       </div>
       '''
@@ -23,12 +23,12 @@ module.exports =
       '''
       <div class="image-setting set-pass js-change-image-kind">
         <button class="button-icon is-pass">
-          <span class="icon icon-thumbs-up"</span>
+          <span class="icon icon-like2"</span>
         </button>
       </div>
       <div class="image-setting set-fail">
         <button class="button-icon is-fail" disabled="disabled">
-          <span class="icon icon-thumbs-down"</span>
+          <span class="icon icon-like2 icon-rotate-180"</span>
         </button>
       </div>
       '''
