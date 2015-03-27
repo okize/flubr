@@ -43,39 +43,6 @@ module.exports =
       .html('updated!')
       .html( @_getImageSetHtml newKind )
 
-  _getImageCountsByType: () ->
-    passBar = $('#js-image-stats-pass')
-    failBar = $('#js-image-stats-fail')
-    {
-      pass: parseInt(passBar.text(), 10),
-      fail: parseInt(failBar.text(), 10)
-    }
-
-  _updateBars: (values) ->
-    passBar = $('#js-image-stats-pass')
-    failBar = $('#js-image-stats-fail')
-    passWidth = (values.pass / (values.pass + values.fail)) * 100 + '%'
-    failWidth = (values.fail / (values.pass + values.fail)) * 100 + '%'
-    passBar.text(values.pass).css('width', passWidth)
-    failBar.text(values.fail).css('width', failWidth)
-
-  _updateImageStats: (operation, type) ->
-    values = @_getImageCountsByType()
-    if type == 'pass'
-      if operation == 'switch'
-        values.pass++
-        values.fail--
-      else if operation == 'delete'
-        values.pass--
-      @_updateBars values
-    else if type == 'fail'
-      if operation == 'switch'
-        values.pass--
-        values.fail++
-      else if operation == 'delete'
-        values.fail--
-      @_updateBars values
-
   _deleteImageInUi: ($el) ->
     msg.notice 'Image deleted!'
     help.animate $el, 'delete'
