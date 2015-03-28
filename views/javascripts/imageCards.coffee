@@ -65,6 +65,13 @@ module.exports =
       $('.image-card-front').hide()
       $('.image-card-back').show()
 
+  loadAnimation: ($el) ->
+    img = $el.find('img')
+    src = img.attr('src')
+    original = img.data('original')
+    unless (src == original)
+      img.attr('src', original)
+
   switchImageKind: ($el) ->
     card = $el.closest('.image-card')
     id = card.attr('id')

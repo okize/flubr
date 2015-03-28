@@ -6,7 +6,7 @@ if image.kind == 'pass'
     .image-card-front.js-flip-card
       .flip-card-overlay
         span.icon.icon-refresh
-      img.image-thumbnail(src='' data-src='#{image.thumbnailUrl}', alt='')
+      img.image-thumbnail(src='' data-src='#{image.thumbnailUrl}' data-original='#{image.imageUrl}' alt='')
       if !deleted
         .image-settings
           if image.kind == 'pass'
