@@ -70,7 +70,16 @@ module.exports =
     src = img.attr('src')
     original = img.data('original')
     unless (src == original)
-      img.attr('src', original)
+      $.ajax
+        type: 'get'
+        url: original
+        success: ->
+          img.attr('src', original)
+        error: (error) ->
+          if error.responseText
+            msg.error JSON.parse(error.responseText).error
+          else
+            msg.error 'Sorry, image kind could not be changed!'
 
   switchImageKind: ($el) ->
     card = $el.closest('.image-card')
