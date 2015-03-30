@@ -2,6 +2,22 @@ $ = require 'jquery'
 msg = require './messaging'
 help = require './helpers'
 
+# extend jQuery XHR with progress method
+(($) ->
+  originalXhr = $.ajaxSettings.xhr
+  $.ajaxSetup
+    progress: -> $.noop()
+    xhr: ->
+      req = originalXhr()
+      that = this
+      if req
+        if typeof req.addEventListener == 'function'
+          req.addEventListener 'progress', ((e) ->
+            that.progress e
+          ), false
+      req
+)(jQuery)
+
 module.exports =
 
   # TODO fix this awful code
@@ -70,12 +86,20 @@ module.exports =
     src = img.attr('src')
     original = img.data('original')
     unless (src == original)
+      $progress = $('<progress value="0" max="100" />')
       $.ajax
         type: 'get'
         url: original
+        progress: (e) ->
+          if e.lengthComputable
+            $el.prepend($progress)
+            complete = parseInt( (e.loaded / e.total * 100), 10)
+            $progress.val(complete)
         success: ->
           img.attr('src', original)
+          $progress.remove()
         error: (error) ->
+          $progress.remove()
           if error.responseText
             msg.error JSON.parse(error.responseText).error
           else
