@@ -85,7 +85,8 @@ module.exports =
     img = $el.find('img')
     src = img.attr('src')
     original = img.data('original')
-    unless (src == original)
+    if (src != original) and !$el.hasClass('loading')
+      $el.addClass('loading')
       $progress = $('<progress value="0" max="100" />')
       $.ajax
         type: 'get'
@@ -96,10 +97,12 @@ module.exports =
             complete = parseInt( (e.loaded / e.total * 100), 10)
             $progress.val(complete)
         success: ->
-          img.attr('src', original)
           $progress.remove()
+          $el.removeClass('loading')
+          img.attr('src', original)
         error: (error) ->
           $progress.remove()
+          $el.removeClass('loading')
           if error.responseText
             msg.error JSON.parse(error.responseText).error
           else
