@@ -82,9 +82,9 @@ module.exports =
       $('.image-card-back').show()
 
   loadAnimation: ($el) ->
-    img = $el.find('img')
-    src = img.attr('src')
-    original = img.data('original')
+    $img = $el.find('img')
+    src = $img.attr('src')
+    original = $img.data('original')
     if (src != original) and !$el.hasClass('loading')
       $el.addClass('loading')
       $progress = $('<progress value="0" max="100" />')
@@ -93,15 +93,16 @@ module.exports =
         url: original
         progress: (e) ->
           if e.lengthComputable
-            $el.prepend($progress)
+            $el.find('.js-flip-card').prepend($progress)
             complete = parseInt( (e.loaded / e.total * 100), 10)
             $progress.val(complete)
         success: ->
-          $progress.remove()
+          $el.find('progress').remove()
           $el.removeClass('loading')
-          img.attr('src', original)
+          $img.attr('src', original)
+          $img.attr('class', 'image-original')
         error: (error) ->
-          $progress.remove()
+          $el.find('progress').remove()
           $el.removeClass('loading')
           if error.responseText
             msg.error JSON.parse(error.responseText).error

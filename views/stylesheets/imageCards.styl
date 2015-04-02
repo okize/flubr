@@ -18,38 +18,15 @@
   height: $imageCardHeight
   min-width: $imageCardWidth
 
-progress
-  &:not(value)
-  &[value]
-    appearance: none
-    border: none
-    width: 100%
-
-  position: absolute
-  left: 0
-  right: 0
-  top: 0
+.image-thumbnail
+  max-height: 100%
+  max-width: 100%
   width: 100%
-  z-index: 10
-  height: .5rem
 
-  // ie
-  background-color: $progressBarBackgroundColor
-  color: $progressBarMeterColor
-  overflow: hidden
-
-  // chrome/safari/opera
-  &::-webkit-progress-bar
-    background-color: $progressBarBackgroundColor
-    overflow: hidden
-    transition: width 1s ease 0
-  &::-webkit-progress-value
-    transition: width 0.5s ease
-    background-color: $progressBarMeterColor
-
-  // firefox
-  &::-moz-progress-bar
-    background-color: $progressBarMeterColor
+.image-original
+  max-height: $imageCardHeight
+  max-width: $imageCardWidth
+  width: 100%
 
 .image-card-pass
   // border-top: .25rem solid $passColor
@@ -64,13 +41,14 @@ progress
 
 .image-card-front
   height: 100%
+  text-align: center
 
 .flip-card-overlay
   display: none
   position: absolute
   cursor: pointer
   text-align: center
-  background-color: rgba(0,0,0,.5)
+  background-color: rgba(0,0,0,.35)
   width: 100%
   height: 100%
   .icon
@@ -78,12 +56,6 @@ progress
     top: ($imageCardHeight / 4)
     font-size: 5rem
     color: rgba(255,255,255,.75)
-
-.image-thumbnail
-  cursor: pointer
-  max-width: 100%
-  max-height: 100%
-  width: 100%
 
 .image-settings
   width: 100%
@@ -129,3 +101,36 @@ button[disabled=disabled].is-fail
   padding: 1rem .5rem
   li
     margin-bottom: .5rem
+
+progress
+  &:not(value)
+  &[value]
+    appearance: none
+    border: none
+    width: 100%
+
+  position: absolute
+  left: 0
+  right: 0
+  top: 0
+  width: 100%
+  z-index: 10
+  height: .5rem
+
+  // ie
+  background-color: $progressBarBackgroundColor
+  color: $progressBarMeterColor
+  overflow: hidden
+
+  // chrome/safari/opera
+  &::-webkit-progress-bar
+    background-color: $progressBarBackgroundColor
+    overflow: hidden
+    transition: width 1s ease 0
+  &::-webkit-progress-value
+    transition: width 0.5s ease
+    background-color: $progressBarMeterColor
+
+  // firefox
+  &::-moz-progress-bar
+    background-color: $progressBarMeterColor

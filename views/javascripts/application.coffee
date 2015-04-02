@@ -21,8 +21,7 @@ module.exports = () ->
     e.preventDefault()
     imageCard.flipCard $(this)
 
-  $body.on 'mouseenter', '.js-flip-card', (e) ->
-    e.preventDefault()
+  $body.on 'mouseenter', '.js-image-card', (e) ->
     imageCard.loadAnimation $(this)
 
   $body.on 'click', '.js-delete-image', (e) ->

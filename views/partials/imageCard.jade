@@ -2,7 +2,7 @@ if image.kind == 'pass'
     - imageItemClass = 'image-card-pass'
   else
     - imageItemClass = 'image-card-fail'
-  figure(id='#{image.id}', class='image-card #{imageItemClass}')
+  figure.image-card.js-image-card(id='#{image.id}', class='#{imageItemClass}')
     .image-card-front.js-flip-card
       .flip-card-overlay
         span.icon.icon-refresh
