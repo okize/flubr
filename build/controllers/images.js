@@ -1,4 +1,4 @@
-var Image, async, checkUrlIsImage, errors, help, path, request, _;
+var Image, _, async, checkUrlIsImage, errors, help, path, request;
 
 path = require('path');
 
@@ -178,7 +178,7 @@ module.exports = {
           });
         }
         return res.send(200, {
-          success: "" + count + " rows have been updated"
+          success: count + " rows have been updated"
         });
       });
     } else {
@@ -203,7 +203,7 @@ module.exports = {
           });
         }
         return res.send(200, {
-          success: "" + count + " rows have been deleted"
+          success: count + " rows have been deleted"
         });
       });
     } else {

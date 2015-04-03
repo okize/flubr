@@ -1,4 +1,4 @@
-var Image, User, getThumbnail, help, moment, navigation, path, _;
+var Image, User, _, getThumbnail, help, moment, navigation, path;
 
 path = require('path');
 
@@ -16,23 +16,23 @@ navigation = [
   {
     title: "Add new image",
     href: "addImage",
-    icon: "upload"
+    icon: "icon-upload"
   }, {
     title: "Image list",
     href: "imageList",
-    icon: "photo"
+    icon: "icon-photo"
   }, {
     title: "Manage users",
     href: "users",
-    icon: "user"
+    icon: "icon-users"
   }, {
     title: "Statistics",
     href: "stats",
-    icon: "bar-chart-o"
+    icon: "icon-graph2"
   }, {
     title: "Log out",
     href: "logout",
-    icon: "power-off"
+    icon: "icon-power"
   }
 ];
 
