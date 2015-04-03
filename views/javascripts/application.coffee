@@ -7,6 +7,8 @@ stats = require './stats'
 
 module.exports = () ->
 
+  timer = undefined
+
   $body = $('body')
 
   versionEl = $('#app-version')
@@ -22,7 +24,12 @@ module.exports = () ->
     imageCard.flipCard $(this)
 
   $body.on 'mouseenter', '.js-image-card', (e) ->
-    imageCard.loadAnimation $(this)
+    timer = setTimeout( () =>
+      imageCard.loadAnimation $(this)
+    , 500)
+
+  $body.on 'mouseleave', '.js-image-card', (e) ->
+    clearTimeout(timer)
 
   $body.on 'click', '.js-delete-image', (e) ->
     e.preventDefault()
