@@ -1,6 +1,15 @@
+# 1.2.0 (2015-04-13)
+
+ * add progress events to downlodas
+ * make usable in webworkers
+ * add support for 308 redirects
+ * update node-form-data dependency
+ * update to work in react native
+ * update node-mime dependency
+
 # 1.1.0 (2015-03-13)
 
- * Fix responeType checks without xhr2 and ie9 tests (rase-)
+ * Fix responseType checks without xhr2 and ie9 tests (rase-)
  * errors have .status and .response fields if applicable (defunctzombie)
  * fix end callback called before saving cookies (rase-)
 
