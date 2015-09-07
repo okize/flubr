@@ -8,7 +8,7 @@ getPak = require '../helpers/getPackageJson'
 
 gulp.task 'deploy-app', ->
 
-  pak = getPak()
+  pak = getPak(true)
 
   git
     .push(

@@ -24,7 +24,7 @@ gulp.task 'release', (callback) ->
 # bumps version & commits new package.json
 gulp.task 'bump-version', ->
 
-  pak = getPak()
+  pak = getPak(true)
 
   # create a codename for app release
   pak.releaseCodename = codename.generate(
@@ -45,7 +45,7 @@ gulp.task 'bump-version', ->
 # bumps patch version and creates a new tag
 gulp.task 'tag-version', ->
 
-  pak = getPak()
+  pak = getPak(true)
 
   # creates new tag
   git
@@ -62,7 +62,7 @@ gulp.task 'push-updates', ->
 
   console.log 'push updates is broken'
 
-  # pak = getPak()
+  # pak = getPak(true)
 
   # git
   #   .push(
