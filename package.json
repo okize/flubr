@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "assert-dotenv": "*",
+    "cli-table": "*",
     "codename": "*",
     "connect-livereload": "*",
     "del": "*",
