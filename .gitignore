@@ -1,12 +1,9 @@
 env.json
 .env
+node_modules/
 *.log
 *.flags.json
 
 dump/
 migrations/
 temp/
-
-build/
-node_modules/npm-check-updates/node_modules/npm/node_modules/node-gyp/node_modules/.bin/
-node_modules/npm-check-updates/node_modules/npm/node_modules/request/node_modules/.bin/
