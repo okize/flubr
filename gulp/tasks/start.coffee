@@ -34,7 +34,6 @@ gulp.task 'start-app', ->
   log.info 'Starting application server'
   nodemon(
     script: config.main
-    ext: 'coffee'
     env: process.env
     nodeArgs: ["--debug=#{process.env.DEBUG_PORT or 5858}"]
     ignore: config.appIgnoreDirs
