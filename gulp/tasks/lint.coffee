@@ -16,7 +16,7 @@ gulp.task 'lint-coffeescript', ->
   gulp
     .src([config.src.app, config.src.coffee])
     .pipe(
-      coffeelint().on('error', log.error)
+      coffeelint("#{config.root}/.coffeelintrc").on('error', log.error)
     )
     .pipe(coffeelint.reporter())
 
