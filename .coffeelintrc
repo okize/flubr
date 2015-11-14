@@ -34,7 +34,7 @@
     "level": "ignore"
   },
   "no_plusplus": {
-    "level": "error"
+    "level": "ignore"
   },
   "no_throwing_strings": {
     "level": "error"
@@ -46,7 +46,7 @@
     "level": "ignore"
   },
   "no_empty_param_list": {
-    "level": "error"
+    "level": "ignore"
   },
   "no_stand_alone_at": {
     "level": "error"
