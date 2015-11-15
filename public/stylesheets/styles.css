@@ -953,7 +953,6 @@ th {
 }
 .icon-border {
   padding: 0.2em 0.25em 0.15em;
-  border: solid 0.08em #eee;
   -webkit-border-radius: 0.1em;
   border-radius: 0.1em;
   border: solid 0.08em #eaeaea;
@@ -1634,7 +1633,6 @@ button[disabled=disabled].is-fail .icon {
   color: #fff;
   font-size: 0.75rem;
   margin: 0;
-  padding: 0;
   list-style: none;
   padding: 1rem 0.5rem;
 }
@@ -1771,7 +1769,6 @@ a:visited {
   border: none;
   display: inline;
   font: inherit;
-  margin: 0;
   padding: 0;
   outline: none;
   outline-offset: 0;
