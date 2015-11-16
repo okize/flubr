@@ -51,7 +51,6 @@
     "velocity-animate": "~0.8.0"
   },
   "devDependencies": {
-    "assert-dotenv": "~3.0.0",
     "cli-table": "~0.3.1",
     "codename": "0.0.4",
     "del": "~2.0.2",
@@ -81,7 +80,6 @@
     "jquery": "~2.1.4",
     "mkdirp": "~0.5.1",
     "mocha": "~2.3.3",
-    "node-debug": "~0.1.0",
     "npm-check-updates": "~2.4.2",
     "pretty-hrtime": "~1.0.1",
     "run-sequence": "~1.1.4",
