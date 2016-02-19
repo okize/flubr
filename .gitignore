@@ -2,7 +2,6 @@ env.json
 .env
 node_modules/
 *.log
-*.flags.json
 
 dump/
 migrations/
