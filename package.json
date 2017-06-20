@@ -31,6 +31,7 @@
     "connect-livereload": "~0.6.0",
     "connect-mongostore": "~0.1.0",
     "cookie-parser": "~1.4.0",
+    "eslint": "^3.19.0",
     "express": "~4.15.0",
     "express-session": "~1.15.0",
     "fastclick": "~1.0.0",
