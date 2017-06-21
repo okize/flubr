@@ -10,6 +10,7 @@
   "main": "build/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ext .js,.jsx --cache . && echo \"eslint: no lint errors found\" || true",
     "start": "node build/app.js"
   },
   "repository": {
@@ -31,7 +32,6 @@
     "connect-livereload": "~0.6.0",
     "connect-mongostore": "~0.1.0",
     "cookie-parser": "~1.4.0",
-    "eslint": "^3.19.0",
     "express": "~4.15.0",
     "express-session": "~1.15.0",
     "fastclick": "~1.0.0",
@@ -57,6 +57,9 @@
     "del": "^2.2.0",
     "dotenv": "^4.0.0",
     "dotenv-assert": "^3.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0",
     "expect": "^1.20.0",
     "gift": "^0.10.0",
     "gulp": "^3.9.0",
