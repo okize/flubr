@@ -31,7 +31,7 @@ app.set 'port', process.env.PORT or 3333
 app.set 'app name', 'Flubr'
 app.set 'app version', pak.version
 app.set 'views', path.join(__dirname, '..', 'views')
-app.set 'view engine', 'jade'
+app.set 'view engine', 'pug'
 
 # dev/prod database location
 if app.get('env') == 'development'

@@ -19,7 +19,7 @@ refreshPage = (event) ->
 gulp.task 'watch', ->
   dirsToWatch = [
     config.src.app
-    config.src.jade
+    config.src.pug
     config.src.stylus
     config.src.coffee
   ]
