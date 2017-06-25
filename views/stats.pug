@@ -10,9 +10,9 @@ block page
     h2 Image type distribution (#{imageList.length} total images)
 
     .image-stats-graph
-      span.image-stats-bar.image-stats-pass#js-image-stats-pass(style='width: #{passImagePercentage}%')
+      span.image-stats-bar.image-stats-pass#js-image-stats-pass(style=`width: ${passImagePercentage}%`)
         | Pass (#{passImageCount})
-      span.image-stats-bar.image-stats-fail#js-image-stats-fail(style='width: #{failImagePercentage}%')
+      span.image-stats-bar.image-stats-fail#js-image-stats-fail(style=`width: ${failImagePercentage}%`)
         | Fail (#{failImageCount})
 
   else

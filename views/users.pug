@@ -24,10 +24,10 @@ block page
     each user in userList
       tr
         td
-          img.avatar(src='#{user.avatar}', alt='avatar image')
+          img.avatar(src=user.avatar, alt='avatar image')
         td
           strong= user.name
         td= user.twitterHandle
         td= user.dateAdded
         td.align-right
-          span.icon-trash.button-delete.js-delete-user(id='#{user.id}', title='Delete user')
+          span.icon-trash.button-delete.js-delete-user(id=user.id, title='Delete user')
