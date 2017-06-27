@@ -76,6 +76,7 @@
     "gulp-rimraf": "^0.2.0",
     "gulp-run": "^1.7.0",
     "gulp-shell": "^0.6.0",
+    "gulp-sourcemaps": "^2.6.0",
     "gulp-stylus": "^2.6.0",
     "gulp-uglify": "3.0.0",
     "gulp-uglifyjs": "^0.6.0",
