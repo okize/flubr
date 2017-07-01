@@ -10,7 +10,7 @@ module.exports =
   root: root
   tests: "#{root}/tests/**/*.coffee"
   taskDir: "#{root}/gulp/tasks/"
-  main: "#{root}/src/app.coffee"
+  main: "#{root}/src/app.js"
 
   # DO NOT restart node app when files change in these directories
   appIgnoreDirs: [
@@ -23,7 +23,7 @@ module.exports =
 
   # asset sources
   src:
-    app: "#{root}/src/**/*.coffee"
+    app: "#{root}/src/**/*.js"
     favicons: "#{root}/assets/favicons/"
     pug: "#{root}/views/**/**/*.pug"
     stylus: "#{stylusDir}**/*.styl"
