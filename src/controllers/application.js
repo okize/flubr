@@ -7,36 +7,36 @@ const _ = require('lodash');
 
 const navigation = [
   {
-    title: "Add new image",
-    href: "addImage",
-    icon: "icon-upload"
+    title: 'Add new image',
+    href: 'addImage',
+    icon: 'icon-upload',
   },
   {
-    title: "Image list",
-    href: "imageList",
-    icon: "icon-photo"
+    title: 'Image list',
+    href: 'imageList',
+    icon: 'icon-photo',
   },
   {
-    title: "Manage users",
-    href: "users",
-    icon: "icon-users"
+    title: 'Manage users',
+    href: 'users',
+    icon: 'icon-users',
   },
   {
-    title: "Statistics",
-    href: "stats",
-    icon: "icon-graph2"
+    title: 'Statistics',
+    href: 'stats',
+    icon: 'icon-graph2',
   },
   {
-    title: "Log out",
-    href: "logout",
-    icon: "icon-power"
-  }
+    title: 'Log out',
+    href: 'logout',
+    icon: 'icon-power',
+  },
 ];
 
-const getThumbnail = function(url) {
+const getThumbnail = function (url) {
   if (url != null) {
     let thumbnail;
-    return thumbnail = (url.substring(0, url.length - 4)) + 's.jpg';
+    return thumbnail = `${url.substring(0, url.length - 4)}s.jpg`;
   }
 };
 
@@ -49,28 +49,27 @@ module.exports = {
       title: 'Add new image',
       pageName: 'addImage',
       navigation,
-      user: req.user
-    }
-    );
+      user: req.user,
+    });
   },
 
   // view all images page
   imageList(req, res) {
-    return User.find({}, function(err, users) {
+    return User.find({}, (err, users) => {
       if (err) { throw err; }
-      return Image.find({deleted: false}).sort({created_at: 'descending'}).exec(
-        function(err, results) {
+      return Image.find({ deleted: false }).sort({ created_at: 'descending' }).exec(
+        (err, results) => {
           if (err) { throw err; }
-          const images = _.map(results, function(image) {
+          const images = _.map(results, (image) => {
             let newImage;
-            const user = _.find(users, { 'userid': image.added_by });
+            const user = _.find(users, { userid: image.added_by });
             return newImage = {
               id: image._id,
               imageUrl: image.image_url,
               thumbnailUrl: getThumbnail(image.image_url),
               kind: image.kind,
               added: moment(image.created_at).format('MM-DD-YYYY'),
-              addedBy: typeof user !== 'undefined' ? user.displayName : 'Unknown'
+              addedBy: typeof user !== 'undefined' ? user.displayName : 'Unknown',
             };
           });
           return res.render('imageList', {
@@ -80,24 +79,24 @@ module.exports = {
             navigation,
             user: req.user,
             imageList: images,
-            deleted: false
+            deleted: false,
           });
-      });
+        });
     });
   },
 
   // view all images page
   imageListDeleted(req, res) {
-    return Image.find({deleted: true}).sort({created_at: 'descending'}).exec(
-      function(err, results) {
+    return Image.find({ deleted: true }).sort({ created_at: 'descending' }).exec(
+      (err, results) => {
         if (err) { throw err; }
-        const images = _.map(results, function(image) {
+        const images = _.map(results, (image) => {
           let newImage;
           return newImage = {
             id: image._id,
             imageUrl: image.image_url,
             thumbnailUrl: getThumbnail(image.image_url),
-            kind: image.kind
+            kind: image.kind,
           };
         });
         return res.render('imageList', {
@@ -107,19 +106,19 @@ module.exports = {
           navigation,
           user: req.user,
           imageList: images,
-          deleted: true
+          deleted: true,
         });
-    });
+      });
   },
 
   // statistics page
   stats(req, res) {
-    return Image.find({deleted: false}).sort({created_at: 'descending'}).exec(
-      function(err, results) {
+    return Image.find({ deleted: false }).sort({ created_at: 'descending' }).exec(
+      (err, results) => {
         if (err) { throw err; }
         let passImageCount = 0;
         let failImageCount = 0;
-        const images = _.map(results, function(image) {
+        const images = _.map(results, (image) => {
           if (image.kind === 'pass') { passImageCount++; }
           if (image.kind === 'fail') { return failImageCount++; }
         });
@@ -137,23 +136,23 @@ module.exports = {
           failImageCount,
           passImagePercentage,
           failImagePercentage,
-          deleted: false
+          deleted: false,
         });
-    });
+      });
   },
 
   // user management page
   users(req, res) {
-    return User.find({}, function(err, users) {
+    return User.find({}, (err, users) => {
       if (err) { throw err; }
-      users = _.map(users, function(user) {
+      users = _.map(users, (user) => {
         let newUser;
         return newUser = {
           id: user.userid,
           name: user.displayName,
           twitterHandle: user.userName,
           avatar: user.avatar,
-          dateAdded: help.formatTime(user.created_at)
+          dateAdded: help.formatTime(user.created_at),
         };
       });
       return res.render('users', {
@@ -162,25 +161,22 @@ module.exports = {
         pageName: 'users',
         navigation,
         user: req.user,
-        userList: users
-      }
-      );
+        userList: users,
+      });
     });
   },
 
   // check if there are *any* users OR if not a registered user
   noUsers(req, res) {
-    return User.find({}, function(err, users) {
+    return User.find({}, (err, users) => {
       if (err) { throw err; }
       if (users.length === 0) {
         return res.render('noUsers', {
           title: 'No users found!',
-          pageName: 'users'
-        }
-        );
-      } else {
-        return res.redirect('/403');
+          pageName: 'users',
+        });
       }
+      return res.redirect('/403');
     });
-  }
+  },
 };

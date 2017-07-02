@@ -10,31 +10,28 @@ module.exports = {
   checkForUser(req, res) {
     if (req.user != null) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   },
 
   // ensure user has been authenticated
   ensureAuthenticated(req, res, next) {
-    if (!!req.isAuthenticated()) {
+    if (req.isAuthenticated()) {
       return next();
-    } else {
-      return res.status(401).render('401', {title: 'Unauthorized'});
     }
+    return res.status(401).render('401', { title: 'Unauthorized' });
   },
 
   // ensure that no users have been authorized
   ensureNoUsers(req, res, next) {
-    return User.find({}, function(err, results) {
+    return User.find({}, (err, results) => {
       if (err != null) {
-        res.status(500).render('500', {title: err});
+        res.status(500).render('500', { title: err });
       }
       if (results.length === 0) {
         return next();
-      } else {
-        return res.status(401).render('401', {title: 'Unauthorized'});
       }
+      return res.status(401).render('401', { title: 'Unauthorized' });
     });
-  }
+  },
 };

@@ -10,7 +10,7 @@ const Image = new mongoose.Schema({
   added_by: String,
   updated_by: String,
   deleted_by: String,
-  created_at: { type: Date, default: Date.now }
+  created_at: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model('Image', Image);

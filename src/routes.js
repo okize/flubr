@@ -5,15 +5,13 @@ const users = require('./controllers/users');
 const versions = require('./controllers/versions');
 const help = require('./helpers');
 
-module.exports = function(app, passport) {
-
+module.exports = function (app, passport) {
   // home page; redirects to addImage after auth
-  app.get('/', function(req, res, next) {
+  app.get('/', (req, res, next) => {
     if (!req.isAuthenticated()) {
       return homepage.index(req, res, next);
-    } else {
-      return res.redirect('/addImage');
     }
+    return res.redirect('/addImage');
   });
 
   // add new image
@@ -42,15 +40,13 @@ module.exports = function(app, passport) {
   app.get('/login', passport.authenticate('twitter'));
 
   // logout
-  app.all('/logout', function(req, res, next) {
+  app.all('/logout', (req, res, next) => {
     req.logout();
     return res.redirect('/');
   });
 
   // auth callback for twitter
-  app.get('/auth', passport.authenticate('twitter',
-    {failureRedirect: '/noUsers'}
-  ), (req, res) => res.redirect('/'));
+  app.get('/auth', passport.authenticate('twitter', { failureRedirect: '/noUsers' }), (req, res) => res.redirect('/'));
 
   // api
   app.all('/api', (req, res, next) => res.redirect('/'));
@@ -95,19 +91,19 @@ module.exports = function(app, passport) {
   app.get('/api/remoteAppVersion', (req, res, next) => versions.getRemoteVersion(req, res, next));
 
   // unauthorized
-  app.all('/401', function(req, res) {
+  app.all('/401', (req, res) => {
     res.statusCode = 401;
     return res.render('401', 401);
   });
 
   // forbidden
-  app.all('/403', function(req, res) {
+  app.all('/403', (req, res) => {
     res.statusCode = 403;
     return res.render('403', 403);
   });
 
   // page not found
-  return app.all('/*', function(req, res) {
+  return app.all('/*', (req, res) => {
     console.warn(`error 404: ${req.url}`);
     res.statusCode = 404;
     return res.render('404', 404);
