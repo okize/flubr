@@ -1,0 +1,33 @@
+extends application
+
+block page
+
+  form.add-new-user#js-add-user
+    .inputAddOn
+      input.inputAddOn-field(id='username', type='text', placeholder='Enter Twitter username to add new user')
+      button.inputAddOn-item(type='submit') Add User
+
+  table.table.table-striped.user-table
+    columns
+      col.col-avatar
+      col.col-name
+      col.col-username
+      col.col-dateAdded
+      col.col-deleteUser
+    thead
+      tr
+        th &nbsp;
+        th Name
+        th Username
+        th Date added
+        th &nbsp;
+    each user in userList
+      tr
+        td
+          img.avatar(src=user.avatar, alt='avatar image')
+        td
+          strong= user.name
+        td= user.twitterHandle
+        td= user.dateAdded
+        td.align-right
+          span.icon-trash.button-delete.js-delete-user(id=user.id, title='Delete user')

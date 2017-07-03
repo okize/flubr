@@ -1,0 +1,17 @@
+nav.app-navigation(role='navigation')
+
+  .navigation-top
+    .navigation-username
+      //- img.nav-icon.nav-avatar(src=user.avatar, alt='avatar image')
+      span(title=user.displayName)=user.userName
+
+    .navigation-mascot
+      include ../images/flubr-mascot-nav.svg
+
+  ul.navigation-links
+    each item in navigation
+      - var activeClass = pageName === item.href ? 'nav-active' : ''
+      li(class=`nav-${item.href} ${activeClass}`)
+        a.nav-link(href=`/${item.href}`, title=`${item.title}`)
+          span.nav-icon(class=`${item.icon} icon-fw`)
+          span.nav-text= item.title
