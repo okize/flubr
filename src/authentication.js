@@ -30,5 +30,5 @@ module.exports = passport.use(new passportTwitterStrategy(passportConfig, (token
     if (err) { return done(err); }
     if (user) { return done(null, user); }
     return done(null, null);
-  })),
+  });
 }));
