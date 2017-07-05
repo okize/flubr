@@ -5,7 +5,7 @@ const users = require('./controllers/users');
 const versions = require('./controllers/versions');
 const help = require('./helpers');
 
-module.exports = function (app, passport) {
+module.exports = (app, passport) => {
   // home page; redirects to addImage after auth
   app.get('/', (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -40,7 +40,7 @@ module.exports = function (app, passport) {
   app.get('/login', passport.authenticate('twitter'));
 
   // logout
-  app.all('/logout', (req, res, next) => {
+  app.all('/logout', (req, res) => {
     req.logout();
     return res.redirect('/');
   });
@@ -49,7 +49,7 @@ module.exports = function (app, passport) {
   app.get('/auth', passport.authenticate('twitter', { failureRedirect: '/noUsers' }), (req, res) => res.redirect('/'));
 
   // api
-  app.all('/api', (req, res, next) => res.redirect('/'));
+  app.all('/api', (req, res) => res.redirect('/'));
 
   // list all images
   app.get('/api/images', help.ensureAuthenticated, (req, res, next) => images.index(req, res, next));

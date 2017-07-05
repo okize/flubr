@@ -975,7 +975,7 @@ jQuery.fn = jQuery.prototype = {
 	// Get the Nth element in the matched element set OR
 	// Get the whole matched element set as a clean array
 	get: function( num ) {
-		return num != null ?
+		return num !== null ?
 
 			// Return just the one element from the set
 			( num < 0 ? this[ num + this.length ] : this[ num ] ) :
@@ -1070,7 +1070,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 
 	for ( ; i < length; i++ ) {
 		// Only deal with non-null/undefined values
-		if ( (options = arguments[ i ]) != null ) {
+		if ( (options = arguments[ i ]) !== null ) {
 			// Extend the base object
 			for ( name in options ) {
 				src = target[ name ];
@@ -1126,7 +1126,7 @@ jQuery.extend({
 	isArray: Array.isArray,
 
 	isWindow: function( obj ) {
-		return obj != null && obj === obj.window;
+		return obj !== null && obj === obj.window;
 	},
 
 	isNumeric: function( obj ) {
@@ -1269,7 +1269,7 @@ jQuery.extend({
 	makeArray: function( arr, results ) {
 		var ret = results || [];
 
-		if ( arr != null ) {
+		if ( arr !== null ) {
 			if ( isArraylike( Object(arr) ) ) {
 				jQuery.merge( ret,
 					typeof arr === "string" ?
@@ -1333,7 +1333,7 @@ jQuery.extend({
 			for ( ; i < length; i++ ) {
 				value = callback( elems[ i ], i, arg );
 
-				if ( value != null ) {
+				if ( value !== null ) {
 					ret.push( value );
 				}
 			}
@@ -1343,7 +1343,7 @@ jQuery.extend({
 			for ( i in elems ) {
 				value = callback( elems[ i ], i, arg );
 
-				if ( value != null ) {
+				if ( value !== null ) {
 					ret.push( value );
 				}
 			}
@@ -3035,7 +3035,7 @@ function condense( unmatched, map, filter, context, xml ) {
 		newUnmatched = [],
 		i = 0,
 		len = unmatched.length,
-		mapped = map != null;
+		mapped = map !== null;
 
 	for ( ; i < len; i++ ) {
 		if ( (elem = unmatched[i]) ) {
@@ -3226,7 +3226,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			// Keep `i` a string if there are no elements so `matchedCount` will be "00" below
 			// Support: IE<9, Safari
 			// Tolerate NodeList properties (IE: "length"; Safari: <number>) matching elements by id
-			for ( ; i !== len && (elem = elems[i]) != null; i++ ) {
+			for ( ; i !== len && (elem = elems[i]) !== null; i++ ) {
 				if ( byElement && elem ) {
 					j = 0;
 					while ( (matcher = elementMatchers[j++]) ) {
@@ -4137,7 +4137,7 @@ jQuery.extend({
 				// Get a promise for this deferred
 				// If obj is provided, the promise aspect is added to the object
 				promise: function( obj ) {
-					return obj != null ? jQuery.extend( obj, promise ) : promise;
+					return obj !== null ? jQuery.extend( obj, promise ) : promise;
 				}
 			},
 			deferred = {};
@@ -5376,7 +5376,7 @@ jQuery.event = {
 
 			// Add which for key events
 			if ( event.which == null ) {
-				event.which = original.charCode != null ? original.charCode : original.keyCode;
+				event.which = original.charCode !== null ? original.charCode : original.keyCode;
 			}
 
 			return event;
@@ -5390,7 +5390,7 @@ jQuery.event = {
 				button = original.button;
 
 			// Calculate pageX/Y if missing and clientX/Y available
-			if ( event.pageX == null && original.clientX != null ) {
+			if ( event.pageX == null && original.clientX !== null ) {
 				eventDoc = event.target.ownerDocument || document;
 				doc = eventDoc.documentElement;
 				body = eventDoc.body;
@@ -6120,7 +6120,7 @@ jQuery.fn.extend({
 			elems = selector ? jQuery.filter( selector, this ) : this,
 			i = 0;
 
-		for ( ; (elem = elems[i]) != null; i++ ) {
+		for ( ; (elem = elems[i]) !== null; i++ ) {
 			if ( !keepData && elem.nodeType === 1 ) {
 				jQuery.cleanData( getAll( elem ) );
 			}
@@ -6140,7 +6140,7 @@ jQuery.fn.extend({
 		var elem,
 			i = 0;
 
-		for ( ; (elem = this[i]) != null; i++ ) {
+		for ( ; (elem = this[i]) !== null; i++ ) {
 			if ( elem.nodeType === 1 ) {
 
 				// Prevent memory leaks
@@ -7077,7 +7077,7 @@ Tween.propHooks = {
 		get: function( tween ) {
 			var result;
 
-			if ( tween.elem[ tween.prop ] != null &&
+			if ( tween.elem[ tween.prop ] !== null &&
 				(!tween.elem.style || tween.elem.style[ tween.prop ] == null) ) {
 				return tween.elem[ tween.prop ];
 			}
@@ -7096,7 +7096,7 @@ Tween.propHooks = {
 			// Use .style if available and use plain properties where available.
 			if ( jQuery.fx.step[ tween.prop ] ) {
 				jQuery.fx.step[ tween.prop ]( tween );
-			} else if ( tween.elem.style && ( tween.elem.style[ jQuery.cssProps[ tween.prop ] ] != null || jQuery.cssHooks[ tween.prop ] ) ) {
+			} else if ( tween.elem.style && ( tween.elem.style[ jQuery.cssProps[ tween.prop ] ] !== null || jQuery.cssHooks[ tween.prop ] ) ) {
 				jQuery.style( tween.elem, tween.prop, tween.now + tween.unit );
 			} else {
 				tween.elem[ tween.prop ] = tween.now;
@@ -7613,7 +7613,7 @@ jQuery.fn.extend({
 
 		return this.each(function() {
 			var dequeue = true,
-				index = type != null && type + "queueHooks",
+				index = type !== null && type + "queueHooks",
 				timers = jQuery.timers,
 				data = data_priv.get( this );
 
@@ -7929,7 +7929,7 @@ jQuery.each( jQuery.expr.match.bool.source.match( /\w+/g ), function( i, name ) 
 			// Avoid an infinite loop by temporarily removing this function from the getter
 			handle = attrHandle[ name ];
 			attrHandle[ name ] = ret;
-			ret = getter( elem, name, isXML ) != null ?
+			ret = getter( elem, name, isXML ) !== null ?
 				name.toLowerCase() :
 				null;
 			attrHandle[ name ] = handle;
@@ -8253,7 +8253,7 @@ jQuery.extend({
 		option: {
 			get: function( elem ) {
 				var val = jQuery.find.attr( elem, "value" );
-				return val != null ?
+				return val !== null ?
 					val :
 					// Support: IE10-11+
 					// option.text throws exceptions (#14686, #14858)
@@ -9819,10 +9819,10 @@ jQuery.offset = {
 			options = options.call( elem, i, curOffset );
 		}
 
-		if ( options.top != null ) {
+		if ( options.top !== null ) {
 			props.top = ( options.top - curOffset.top ) + curTop;
 		}
-		if ( options.left != null ) {
+		if ( options.left !== null ) {
 			props.left = ( options.left - curOffset.left ) + curLeft;
 		}
 
@@ -10676,8 +10676,8 @@ return jQuery;
     // default.
     function dfl(a, b, c) {
         switch (arguments.length) {
-            case 2: return a != null ? a : b;
-            case 3: return a != null ? a : b != null ? b : c;
+            case 2: return a !== null ? a : b;
+            case 3: return a !== null ? a : b !== null ? b : c;
             default: throw new Error("Implement me");
         }
     }
@@ -10941,7 +10941,7 @@ return jQuery;
                 return method.call(moment.fn._lang, m, format || '');
             };
 
-            if (index != null) {
+            if (index !== null) {
                 return getter(index);
             }
             else {
@@ -11461,14 +11461,14 @@ return jQuery;
         switch (token) {
         // QUARTER
         case 'Q':
-            if (input != null) {
+            if (input !== null) {
                 datePartArray[MONTH] = (toInt(input) - 1) * 3;
             }
             break;
         // MONTH
         case 'M' : // fall through to MM
         case 'MM' :
-            if (input != null) {
+            if (input !== null) {
                 datePartArray[MONTH] = toInt(input) - 1;
             }
             break;
@@ -11476,7 +11476,7 @@ return jQuery;
         case 'MMMM' :
             a = getLangDefinition(config._l).monthsParse(input);
             // if we didn't find a month name, mark the date as invalid.
-            if (a != null) {
+            if (a !== null) {
                 datePartArray[MONTH] = a;
             } else {
                 config._pf.invalidMonth = input;
@@ -11485,19 +11485,19 @@ return jQuery;
         // DAY OF MONTH
         case 'D' : // fall through to DD
         case 'DD' :
-            if (input != null) {
+            if (input !== null) {
                 datePartArray[DATE] = toInt(input);
             }
             break;
         case 'Do' :
-            if (input != null) {
+            if (input !== null) {
                 datePartArray[DATE] = toInt(parseInt(input, 10));
             }
             break;
         // DAY OF YEAR
         case 'DDD' : // fall through to DDDD
         case 'DDDD' :
-            if (input != null) {
+            if (input !== null) {
                 config._dayOfYear = toInt(input);
             }
 
@@ -11556,7 +11556,7 @@ return jQuery;
         case 'dddd':
             a = getLangDefinition(config._l).weekdaysParse(input);
             // if we didn't get a weekday name, mark the date as invalid
-            if (a != null) {
+            if (a !== null) {
                 config._w = config._w || {};
                 config._w['d'] = a;
             } else {
@@ -11593,7 +11593,7 @@ return jQuery;
         var w, weekYear, week, weekday, dow, doy, temp, lang;
 
         w = config._w;
-        if (w.GG != null || w.W != null || w.E != null) {
+        if (w.GG !== null || w.W !== null || w.E !== null) {
             dow = 1;
             doy = 4;
 
@@ -11612,13 +11612,13 @@ return jQuery;
             weekYear = dfl(w.gg, config._a[YEAR], weekOfYear(moment(), dow, doy).year);
             week = dfl(w.w, 1);
 
-            if (w.d != null) {
+            if (w.d !== null) {
                 // weekday -- low day numbers are considered next week
                 weekday = w.d;
                 if (weekday < dow) {
                     ++week;
                 }
-            } else if (w.e != null) {
+            } else if (w.e !== null) {
                 // local weekday -- counting starts from begining of week
                 weekday = w.e + dow;
             } else {
@@ -11680,7 +11680,7 @@ return jQuery;
         config._d = (config._useUTC ? makeUTCDate : makeDate).apply(null, input);
         // Apply timezone offset from input. The actual zone can be changed
         // with parseZone.
-        if (config._tzm != null) {
+        if (config._tzm !== null) {
             config._d.setUTCMinutes(config._d.getUTCMinutes() + config._tzm);
         }
     }
@@ -12008,7 +12008,7 @@ return jQuery;
         var d = makeUTCDate(year, 0, 1).getUTCDay(), daysToAdd, dayOfYear;
 
         d = d === 0 ? 7 : d;
-        weekday = weekday != null ? weekday : firstDayOfWeek;
+        weekday = weekday !== null ? weekday : firstDayOfWeek;
         daysToAdd = firstDayOfWeek - d + (d > firstDayOfWeekOfYear ? 7 : 0) - (d < firstDayOfWeek ? 7 : 0);
         dayOfYear = 7 * (week - 1) + (weekday - firstDayOfWeek) + daysToAdd + 1;
 
@@ -12264,7 +12264,7 @@ return jQuery;
     // compare moment object
     moment.isMoment = function (obj) {
         return obj instanceof Moment ||
-            (obj != null &&  obj.hasOwnProperty('_isAMomentObject'));
+            (obj !== null &&  obj.hasOwnProperty('_isAMomentObject'));
     };
 
     // for typechecking Duration objects
@@ -12282,7 +12282,7 @@ return jQuery;
 
     moment.invalid = function (flags) {
         var m = moment.utc(NaN);
-        if (flags != null) {
+        if (flags !== null) {
             extend(m._pf, flags);
         }
         else {
@@ -12481,7 +12481,7 @@ return jQuery;
 
         day : function (input) {
             var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
-            if (input != null) {
+            if (input !== null) {
                 input = parseWeekday(input, this.lang());
                 return this.add({ d : input - day });
             } else {
@@ -12582,7 +12582,7 @@ return jQuery;
         // there is no such time in the given timezone.
         zone : function (input, keepTime) {
             var offset = this._offset || 0;
-            if (input != null) {
+            if (input !== null) {
                 if (typeof input === "string") {
                     input = timezoneMinutesFromString(input);
                 }
@@ -12747,7 +12747,7 @@ return jQuery;
 
     function makeAccessor(unit, keepTime) {
         return function (value) {
-            if (value != null) {
+            if (value !== null) {
                 rawSetter(this, unit, value);
                 moment.updateOffset(this, keepTime);
                 return this;
@@ -13263,7 +13263,7 @@ Velocity's structure:
         document.addEventListener("visibilitychange", function() {
             /* Reassign the rAF function (which the global tick() function uses) based on the tab's focus state. */
             if (document.hidden) {
-                rAF = function(callback) { 
+                rAF = function(callback) {
                     /* The tick function needs a truthy first argument to pass its internal timestamp check. */
                     return setTimeout(function() { callback(true) }, 16);
                 };
@@ -14609,13 +14609,13 @@ Velocity's structure:
             Promises
         ***************/
 
-        var promiseData = { 
+        var promiseData = {
                 promise: null,
                 resolver: null,
                 rejecter: null
             };
 
-        /* If this call was made via the utility function (which is the default method of invocation when jQuery/Zepto are not being used), and if 
+        /* If this call was made via the utility function (which is the default method of invocation when jQuery/Zepto are not being used), and if
            promise support was detected, create a promise object for this call and store references to its resolver and rejecter methods. The resolve
            method is used when a call completes naturally or is prematurely stopped by the user. In both cases, completeCall() handles the associated
            call cleanup and promise resolving logic. The reject method is used when an invalid set of arguments is passed into a Velocity call. */
@@ -14888,9 +14888,9 @@ Velocity's structure:
                     /* This is a flag used to indicate to the upcoming completeCall() function that this queue entry was initiated by Velocity. See completeCall() for further details. */
                     Velocity.velocityQueueEntryFlag = true;
 
-                    /* The ensuing queue item (which is assigned to the "next" argument that $.queue() automatically passes in) will be triggered after a setTimeout delay. 
+                    /* The ensuing queue item (which is assigned to the "next" argument that $.queue() automatically passes in) will be triggered after a setTimeout delay.
                        The setTimeout is stored so that it can be subjected to clearTimeout() if this animation is prematurely stopped via Velocity's "stop" command. */
-                    Data(element).delayTimer = { 
+                    Data(element).delayTimer = {
                         setTimeout: setTimeout(next, parseFloat(opts.delay)),
                         next: next
                     };
@@ -14995,7 +14995,7 @@ Velocity's structure:
                     /* We throw callbacks in a setTimeout so that thrown errors don't halt the execution of Velocity itself. */
                     try {
                         opts.begin.call(elements, elements);
-                    } catch (error) { 
+                    } catch (error) {
                         setTimeout(function() {
                             throw error;
                         }, 1);
@@ -15750,7 +15750,7 @@ Velocity's structure:
                         /* Do not continue with animation queueing. */
                         return true;
                     }
-                    
+
                     /* This flag indicates to the upcoming completeCall() function that this queue entry was initiated by Velocity.
                        See completeCall() for further details. */
                     Velocity.velocityQueueEntryFlag = true;
@@ -16147,7 +16147,7 @@ Velocity's structure:
                 /* We throw callbacks in a setTimeout so that thrown errors don't halt the execution of Velocity itself. */
                 try {
                     opts.complete.call(elements, elements);
-                } catch (error) { 
+                } catch (error) {
                     setTimeout(function() {
                         throw error;
                     }, 1);
@@ -16406,7 +16406,7 @@ Velocity's structure:
 * @license Copyright Julian Shapiro. MIT License: http://en.wikipedia.org/wiki/MIT_License
 * @license Indicated portions adapted from Animate.css, copyright Daniel Eden. MIT License: http://en.wikipedia.org/wiki/MIT_License
 * @license Indicated portions adapted from Magic.css, copyright Christian Pucci. MIT License: http://en.wikipedia.org/wiki/MIT_License
-*/   
+*/
 
 (function() {
 
@@ -16516,7 +16516,7 @@ Velocity's structure:
 
                 /* Special processing for the last effect call. */
                 if (callIndex === properties.calls.length - 1) {
-                    /* Append promise resolving onto the user's sequence callback. */ 
+                    /* Append promise resolving onto the user's sequence callback. */
                     function injectFinalCallbacks () {
                         if (sequenceOptions.display === undefined && /Out$/.test(effectName)) {
                             Container.Velocity.Utilities.each(elements, function(i, element) {
@@ -16549,7 +16549,7 @@ Velocity's structure:
                             /* Since the reset option uses up the complete callback, we trigger the user's complete callback at the end of ours. */
                             if (finalElement) {
                                 resetOptions.complete = injectFinalCallbacks;
-                            }  
+                            }
 
                             Container.Velocity.animate(element, properties.reset, resetOptions);
                         /* Only trigger the user's complete callback on the last effect call with the last element in the set. */
@@ -16573,8 +16573,8 @@ Velocity's structure:
     *********************/
 
     /* Externalize the packagedEffects data so that they can optionally be modified and re-registered. */
-    Container.Velocity.RegisterUI.packagedEffects = 
-        { 
+    Container.Velocity.RegisterUI.packagedEffects =
+        {
             /* Animate.css */
             "callout.bounce": {
                 defaultDuration: 550,
@@ -16588,7 +16588,7 @@ Velocity's structure:
             /* Animate.css */
             "callout.shake": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { translateX: -11 }, 0.125 ],
                     [ { translateX: 11 }, 0.125 ],
                     [ { translateX: -11 }, 0.125 ],
@@ -16602,7 +16602,7 @@ Velocity's structure:
             /* Animate.css */
             "callout.flash": {
                 defaultDuration: 1100,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, "easeInOutQuad", 1 ] }, 0.25 ],
                     [ { opacity: [ 1, "easeInOutQuad" ] }, 0.25 ],
                     [ { opacity: [ 0, "easeInOutQuad" ] }, 0.25 ],
@@ -16612,7 +16612,7 @@ Velocity's structure:
             /* Animate.css */
             "callout.pulse": {
                 defaultDuration: 825,
-                calls: [ 
+                calls: [
                     [ { scaleX: 1.1, scaleY: 1.1 }, 0.50 ],
                     [ { scaleX: 1, scaleY: 1 }, 0.50 ]
                 ]
@@ -16620,7 +16620,7 @@ Velocity's structure:
             /* Animate.css */
             "callout.swing": {
                 defaultDuration: 950,
-                calls: [ 
+                calls: [
                     [ { rotateZ: 15 }, 0.20 ],
                     [ { rotateZ: -10 }, 0.20 ],
                     [ { rotateZ: 5 }, 0.20 ],
@@ -16631,7 +16631,7 @@ Velocity's structure:
             /* Animate.css */
             "callout.tada": {
                 defaultDuration: 1000,
-                calls: [ 
+                calls: [
                     [ { scaleX: 0.9, scaleY: 0.9, rotateZ: -3 }, 0.10 ],
                     [ { scaleX: 1.1, scaleY: 1.1, rotateZ: 3 }, 0.10 ],
                     [ { scaleX: 1.1, scaleY: 1.1, rotateZ: -3 }, 0.10 ],
@@ -16658,7 +16658,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.flipXIn": {
                 defaultDuration: 700,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], transformPerspective: [ 800, 800 ], rotateY: [ 0, -55 ] } ]
                 ],
                 reset: { transformPerspective: 0 }
@@ -16666,7 +16666,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.flipXOut": {
                 defaultDuration: 700,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], transformPerspective: [ 800, 800 ], rotateY: 55 } ]
                 ],
                 reset: { transformPerspective: 0, rotateY: 0 }
@@ -16674,7 +16674,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.flipYIn": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], transformPerspective: [ 800, 800 ], rotateX: [ 0, -45 ] } ]
                 ],
                 reset: { transformPerspective: 0 }
@@ -16682,7 +16682,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.flipYOut": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], transformPerspective: [ 800, 800 ], rotateX: 25 } ]
                 ],
                 reset: { transformPerspective: 0, rotateX: 0 }
@@ -16691,7 +16691,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.flipBounceXIn": {
                 defaultDuration: 900,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0.725, 0 ], transformPerspective: [ 400, 400 ], rotateY: [ -10, 90 ] }, 0.50 ],
                     [ { opacity: 0.80, rotateY: 10 }, 0.25 ],
                     [ { opacity: 1, rotateY: 0 }, 0.25 ]
@@ -16702,7 +16702,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.flipBounceXOut": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0.9, 1 ], transformPerspective: [ 400, 400 ], rotateY: -10 }, 0.50 ],
                     [ { opacity: 0, rotateY: 90 }, 0.50 ]
                 ],
@@ -16712,7 +16712,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.flipBounceYIn": {
                 defaultDuration: 850,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0.725, 0 ], transformPerspective: [ 400, 400 ], rotateX: [ -10, 90 ] }, 0.50 ],
                     [ { opacity: 0.80, rotateX: 10 }, 0.25 ],
                     [ { opacity: 1, rotateX: 0 }, 0.25 ]
@@ -16723,7 +16723,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.flipBounceYOut": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0.9, 1 ], transformPerspective: [ 400, 400 ], rotateX: -15 }, 0.50 ],
                     [ { opacity: 0, rotateX: 90 }, 0.50 ]
                 ],
@@ -16732,7 +16732,7 @@ Velocity's structure:
             /* Magic.css */
             "transition.swoopIn": {
                 defaultDuration: 850,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], transformOriginX: [ "100%", "50%" ], transformOriginY: [ "100%", "100%" ], scaleX: [ 1, 0 ], scaleY: [ 1, 0 ], translateX: [ 0, -700 ], translateZ: 0 } ]
                 ],
                 reset: { transformOriginX: "50%", transformOriginY: "50%" }
@@ -16740,7 +16740,7 @@ Velocity's structure:
             /* Magic.css */
             "transition.swoopOut": {
                 defaultDuration: 850,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], transformOriginX: [ "50%", "100%" ], transformOriginY: [ "100%", "100%" ], scaleX: 0, scaleY: 0, translateX: -700, translateZ: 0 } ]
                 ],
                 reset: { transformOriginX: "50%", transformOriginY: "50%", scaleX: 1, scaleY: 1, translateX: 0 }
@@ -16749,7 +16749,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3. (Fades and scales only.) */
             "transition.whirlIn": {
                 defaultDuration: 900,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], transformOriginX: [ "50%", "50%" ], transformOriginY: [ "50%", "50%" ], scaleX: [ 1, 0 ], scaleY: [ 1, 0 ], rotateY: [ 0, 160 ] } ]
                 ]
             },
@@ -16757,33 +16757,33 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3. (Fades and scales only.) */
             "transition.whirlOut": {
                 defaultDuration: 900,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], transformOriginX: [ "50%", "50%" ], transformOriginY: [ "50%", "50%" ], scaleX: 0, scaleY: 0, rotateY: 160 } ]
                 ],
                 reset: { scaleX: 1, scaleY: 1, rotateY: 0 }
             },
             "transition.shrinkIn": {
                 defaultDuration: 700,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], transformOriginX: [ "50%", "50%" ], transformOriginY: [ "50%", "50%" ], scaleX: [ 1, 1.5 ], scaleY: [ 1, 1.5 ], translateZ: 0 } ]
                 ]
             },
             "transition.shrinkOut": {
                 defaultDuration: 650,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], transformOriginX: [ "50%", "50%" ], transformOriginY: [ "50%", "50%" ], scaleX: 1.3, scaleY: 1.3, translateZ: 0 } ]
                 ],
                 reset: { scaleX: 1, scaleY: 1 }
             },
             "transition.expandIn": {
                 defaultDuration: 700,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], transformOriginX: [ "50%", "50%" ], transformOriginY: [ "50%", "50%" ], scaleX: [ 1, 0.625 ], scaleY: [ 1, 0.625 ], translateZ: 0 } ]
                 ]
             },
             "transition.expandOut": {
                 defaultDuration: 700,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], transformOriginX: [ "50%", "50%" ], transformOriginY: [ "50%", "50%" ], scaleX: 0.5, scaleY: 0.5, translateZ: 0 } ]
                 ],
                 reset: { scaleX: 1, scaleY: 1 }
@@ -16791,7 +16791,7 @@ Velocity's structure:
             /* Animate.css */
             "transition.bounceIn": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], scaleX: [ 1.05, 0.3 ], scaleY: [ 1.05, 0.3 ] }, 0.40 ],
                     [ { scaleX: 0.9, scaleY: 0.9, translateZ: 0 }, 0.20 ],
                     [ { scaleX: 1, scaleY: 1 }, 0.50 ]
@@ -16800,7 +16800,7 @@ Velocity's structure:
             /* Animate.css */
             "transition.bounceOut": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { scaleX: 0.95, scaleY: 0.95 }, 0.40 ],
                     [ { scaleX: 1.1, scaleY: 1.1, translateZ: 0 }, 0.40 ],
                     [ { opacity: [ 0, 1 ], scaleX: 0.3, scaleY: 0.3 }, 0.20 ]
@@ -16810,7 +16810,7 @@ Velocity's structure:
             /* Animate.css */
             "transition.bounceUpIn": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateY: [ -30, 1000 ] }, 0.60, { easing: "easeOutCirc" } ],
                     [ { translateY: 10 }, 0.20 ],
                     [ { translateY: 0 }, 0.20 ]
@@ -16819,7 +16819,7 @@ Velocity's structure:
             /* Animate.css */
             "transition.bounceUpOut": {
                 defaultDuration: 1000,
-                calls: [ 
+                calls: [
                     [ { translateY: 20 }, 0.20 ],
                     [ { opacity: [ 0, "easeInCirc", 1 ], translateY: -1000 }, 0.80 ]
                 ],
@@ -16828,7 +16828,7 @@ Velocity's structure:
             /* Animate.css */
             "transition.bounceDownIn": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateY: [ 30, -1000 ] }, 0.60, { easing: "easeOutCirc" } ],
                     [ { translateY: -10 }, 0.20 ],
                     [ { translateY: 0 }, 0.20 ]
@@ -16837,7 +16837,7 @@ Velocity's structure:
             /* Animate.css */
             "transition.bounceDownOut": {
                 defaultDuration: 1000,
-                calls: [ 
+                calls: [
                     [ { translateY: -20 }, 0.20 ],
                     [ { opacity: [ 0, "easeInCirc", 1 ], translateY: 1000 }, 0.80 ]
                 ],
@@ -16846,7 +16846,7 @@ Velocity's structure:
             /* Animate.css */
             "transition.bounceLeftIn": {
                 defaultDuration: 750,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateX: [ 30, -1250 ] }, 0.60, { easing: "easeOutCirc" } ],
                     [ { translateX: -10 }, 0.20 ],
                     [ { translateX: 0 }, 0.20 ]
@@ -16855,7 +16855,7 @@ Velocity's structure:
             /* Animate.css */
             "transition.bounceLeftOut": {
                 defaultDuration: 750,
-                calls: [ 
+                calls: [
                     [ { translateX: 30 }, 0.20 ],
                     [ { opacity: [ 0, "easeInCirc", 1 ], translateX: -1250 }, 0.80 ]
                 ],
@@ -16864,7 +16864,7 @@ Velocity's structure:
             /* Animate.css */
             "transition.bounceRightIn": {
                 defaultDuration: 750,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateX: [ -30, 1250 ] }, 0.60, { easing: "easeOutCirc" } ],
                     [ { translateX: 10 }, 0.20 ],
                     [ { translateX: 0 }, 0.20 ]
@@ -16873,7 +16873,7 @@ Velocity's structure:
             /* Animate.css */
             "transition.bounceRightOut": {
                 defaultDuration: 750,
-                calls: [ 
+                calls: [
                     [ { translateX: -30 }, 0.20 ],
                     [ { opacity: [ 0, "easeInCirc", 1 ], translateX: 1250 }, 0.80 ]
                 ],
@@ -16881,104 +16881,104 @@ Velocity's structure:
             },
             "transition.slideUpIn": {
                 defaultDuration: 900,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateY: [ 0, 20 ], translateZ: 0 } ]
                 ]
             },
             "transition.slideUpOut": {
                 defaultDuration: 900,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], translateY: -20, translateZ: 0 } ]
                 ],
                 reset: { translateY: 0 }
             },
             "transition.slideDownIn": {
                 defaultDuration: 900,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateY: [ 0, -20 ], translateZ: 0 } ]
                 ]
             },
             "transition.slideDownOut": {
                 defaultDuration: 900,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], translateY: 20, translateZ: 0 } ]
                 ],
                 reset: { translateY: 0 }
             },
             "transition.slideLeftIn": {
                 defaultDuration: 1000,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateX: [ 0, -20 ], translateZ: 0 } ]
                 ]
             },
             "transition.slideLeftOut": {
                 defaultDuration: 1050,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], translateX: -20, translateZ: 0 } ]
                 ],
                 reset: { translateX: 0 }
             },
             "transition.slideRightIn": {
                 defaultDuration: 1000,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateX: [ 0, 20 ], translateZ: 0 } ]
                 ]
             },
             "transition.slideRightOut": {
                 defaultDuration: 1050,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], translateX: 20, translateZ: 0 } ]
                 ],
                 reset: { translateX: 0 }
             },
             "transition.slideUpBigIn": {
                 defaultDuration: 850,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateY: [ 0, 75 ], translateZ: 0 } ]
                 ]
             },
             "transition.slideUpBigOut": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], translateY: -75, translateZ: 0 } ]
                 ],
                 reset: { translateY: 0 }
             },
             "transition.slideDownBigIn": {
                 defaultDuration: 850,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateY: [ 0, -75 ], translateZ: 0 } ]
                 ]
             },
             "transition.slideDownBigOut": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], translateY: 75, translateZ: 0 } ]
                 ],
                 reset: { translateY: 0 }
             },
             "transition.slideLeftBigIn": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateX: [ 0, -75 ], translateZ: 0 } ]
                 ]
             },
             "transition.slideLeftBigOut": {
                 defaultDuration: 750,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], translateX: -75, translateZ: 0 } ]
                 ],
                 reset: { translateX: 0 }
             },
             "transition.slideRightBigIn": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], translateX: [ 0, 75 ], translateZ: 0 } ]
                 ]
             },
             "transition.slideRightBigOut": {
                 defaultDuration: 750,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], translateX: 75, translateZ: 0 } ]
                 ],
                 reset: { translateX: 0 }
@@ -16986,7 +16986,7 @@ Velocity's structure:
             /* Magic.css */
             "transition.perspectiveUpIn": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], transformPerspective: [ 800, 800 ], transformOriginX: [ 0, 0 ], transformOriginY: [ "100%", "100%" ], rotateX: [ 0, -180 ] } ]
                 ],
                 reset: { transformPerspective: 0, transformOriginX: "50%", transformOriginY: "50%" }
@@ -16995,7 +16995,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.perspectiveUpOut": {
                 defaultDuration: 850,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], transformPerspective: [ 800, 800 ], transformOriginX: [ 0, 0 ], transformOriginY: [ "100%", "100%" ], rotateX: -180 } ]
                 ],
                 reset: { transformPerspective: 0, transformOriginX: "50%", transformOriginY: "50%", rotateX: 0 }
@@ -17004,7 +17004,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.perspectiveDownIn": {
                 defaultDuration: 800,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], transformPerspective: [ 800, 800 ], transformOriginX: [ 0, 0 ], transformOriginY: [ 0, 0 ], rotateX: [ 0, 180 ] } ]
                 ],
                 reset: { transformPerspective: 0, transformOriginX: "50%", transformOriginY: "50%" }
@@ -17013,7 +17013,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.perspectiveDownOut": {
                 defaultDuration: 850,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], transformPerspective: [ 800, 800 ], transformOriginX: [ 0, 0 ], transformOriginY: [ 0, 0 ], rotateX: 180 } ]
                 ],
                 reset: { transformPerspective: 0, transformOriginX: "50%", transformOriginY: "50%", rotateX: 0 }
@@ -17022,7 +17022,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.perspectiveLeftIn": {
                 defaultDuration: 950,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], transformPerspective: [ 2000, 2000 ], transformOriginX: [ 0, 0 ], transformOriginY: [ 0, 0 ], rotateY: [ 0, -180 ] } ]
                 ],
                 reset: { transformPerspective: 0, transformOriginX: "50%", transformOriginY: "50%" }
@@ -17031,7 +17031,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.perspectiveLeftOut": {
                 defaultDuration: 950,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], transformPerspective: [ 2000, 2000 ], transformOriginX: [ 0, 0 ], transformOriginY: [ 0, 0 ], rotateY: -180 } ]
                 ],
                 reset: { transformPerspective: 0, transformOriginX: "50%", transformOriginY: "50%", rotateY: 0 }
@@ -17040,7 +17040,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.perspectiveRightIn": {
                 defaultDuration: 950,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 1, 0 ], transformPerspective: [ 2000, 2000 ], transformOriginX: [ "100%", "100%" ], transformOriginY: [ 0, 0 ], rotateY: [ 0, 180 ] } ]
                 ],
                 reset: { transformPerspective: 0, transformOriginX: "50%", transformOriginY: "50%" }
@@ -17049,7 +17049,7 @@ Velocity's structure:
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
             "transition.perspectiveRightOut": {
                 defaultDuration: 950,
-                calls: [ 
+                calls: [
                     [ { opacity: [ 0, 1 ], transformPerspective: [ 2000, 2000 ], transformOriginX: [ "100%", "100%" ], transformOriginY: [ 0, 0 ], rotateY: 180 } ]
                 ],
                 reset: { transformPerspective: 0, transformOriginX: "50%", transformOriginY: "50%", rotateY: 0 }

@@ -1,6 +1,6 @@
-const path = require('path');
 const request = require('request');
-const pak = require(path.join('..', '..', 'package.json'));
+
+const pak = require('../../package.json');
 
 module.exports = {
 
@@ -18,4 +18,5 @@ module.exports = {
       return res.send(null);
     });
   },
+
 };

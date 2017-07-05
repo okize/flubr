@@ -5,9 +5,9 @@ block page
   h2 Flubr version:
     span#app-version
 
-  if imageList.length > 0
+  if totalImageCount > 0
 
-    h2 Image type distribution (#{imageList.length} total images)
+    h2 Image type distribution (#{totalImageCount} total images)
 
     .image-stats-graph
       span.image-stats-bar.image-stats-pass#js-image-stats-pass(style=`width: ${passImagePercentage}%`)

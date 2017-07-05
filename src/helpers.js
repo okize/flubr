@@ -7,7 +7,7 @@ module.exports = {
     return moment(date).format('lll');
   },
 
-  checkForUser(req, res) {
+  checkForUser(req) {
     if (req.user != null) {
       return true;
     }

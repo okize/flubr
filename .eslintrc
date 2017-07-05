@@ -5,6 +5,8 @@
     'browser': true,
   },
   'rules': {
+    'max-len': [2, 150, 4],
     'no-console': 'off',
+    'no-underscore-dangle': 'off',
   },
 }

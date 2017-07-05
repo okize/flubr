@@ -1,9 +1,9 @@
-const path = require('path');
 const _ = require('lodash');
-const help = require(path.join('..', 'helpers'));
-const Image = require(path.join('..', 'models', 'image'));
 const request = require('request');
 const async = require('async');
+
+const help = require('../helpers');
+const Image = require('../models/image');
 
 const checkUrlIsImage = url => url.match(/\.(jpeg|jpg|gif|png)$/) !== null;
 
@@ -23,7 +23,7 @@ module.exports = {
   index(req, res) {
     return Image.find({ deleted: false }).sort({ created_at: 'descending' }).exec(
       (err, results) => {
-        if (err != null) { res.send(500, { error: err }); }
+        if (err !== null) { res.send(500, { error: err }); }
         return res.send(results);
       });
   },
@@ -32,7 +32,7 @@ module.exports = {
   indexDeleted(req, res) {
     return Image.find({ deleted: true }).sort({ created_at: 'descending' }).exec(
       (err, results) => {
-        if (err != null) { res.send(500, { error: err }); }
+        if (err !== null) { res.send(500, { error: err }); }
         return res.send(results);
       });
   },
@@ -40,7 +40,7 @@ module.exports = {
   // displays single image
   show(req, res) {
     return Image.findById(req.params.id, (err, result) => {
-      if (err != null) { res.send(500, { error: err }); }
+      if (err !== null) { res.send(500, { error: err }); }
       return res.send(result);
     });
   },
@@ -55,7 +55,7 @@ module.exports = {
       deleted: false,
     }
     , 'image_url', (err, results) => {
-      if (err != null) { res.send(500, { error: err }); }
+      if (err !== null) { res.send(500, { error: err }); }
       const randomImage = _.sample(results);
       if (!(randomImage == null)) {
         return res.send(randomImage.image_url);
@@ -75,7 +75,7 @@ module.exports = {
         return res.send(422, { error: errors.invalidImageUrl });
       }
       return async.series([
-        function (callback) {
+        (callback) => {
           if (!url.match(/imgur.com/)) {
             let data = {
               image: url,
@@ -108,15 +108,15 @@ module.exports = {
         },
 
       ], (err, results) => {
-        if (err != null) {
+        if (err !== null) {
           return res.send(500, { error: err });
         }
         req.body.added_by = req.user.userid;
         req.body.image_url = results[0];
         const img = new Image(req.body);
-        return img.save((err, results) => {
-          if (err != null) { res.send(500, { error: err }); }
-          return res.send(201, results);
+        return img.save((error, moreResults) => {
+          if (error !== null) { return res.send(500, { error }); }
+          return res.send(201, moreResults);
         });
       });
     }
@@ -131,7 +131,7 @@ module.exports = {
         updated_by: req.user.userid,
       };
       return Image.update({ _id: req.params.id }, updateData, (err, count) => {
-        if (err != null) { res.send(500, { error: err }); }
+        if (err !== null) { res.send(500, { error: err }); }
         return res.send(200, { success: `${count} rows have been updated` });
       });
     }
@@ -146,7 +146,7 @@ module.exports = {
         deleted_by: req.user.userid,
       };
       return Image.update({ _id: req.params.id }, updateData, (err, count) => {
-        if (err != null) { res.send(500, { error: err }); }
+        if (err !== null) { res.send(500, { error: err }); }
         return res.send(200, { success: `${count} rows have been deleted` });
       });
     }

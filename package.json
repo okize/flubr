@@ -10,7 +10,7 @@
   "main": "build/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --fix --ext .js,.jsx --cache . && echo \"eslint: no lint errors found\" || true",
+    "lint": "eslint --ext .js,.jsx --cache . && echo \"eslint: no lint errors found\" || true",
     "lint:watch": "onchange \"src/**/*.js*\" -e \"build/**/*.js\" -i -- yarn lint",
     "start": "node build/app.js"
   },

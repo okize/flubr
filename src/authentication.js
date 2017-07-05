@@ -1,5 +1,5 @@
 const passport = require('passport');
-const passportTwitterStrategy = require('passport-twitter').Strategy;
+const PassportTwitterStrategy = require('passport-twitter').Strategy;
 const User = require('./models/user');
 
 // passport session setup
@@ -24,7 +24,7 @@ const passportConfig = {
   callbackURL: '/auth',
 };
 
-module.exports = passport.use(new passportTwitterStrategy(passportConfig, (token, tokenSecret, profile, done) => {
+module.exports = passport.use(new PassportTwitterStrategy(passportConfig, (token, tokenSecret, profile, done) => {
   // make sure user is in list of allowed users
   User.findOne({ userid: profile.id }, (err, user) => {
     if (err) { return done(err); }

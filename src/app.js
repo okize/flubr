@@ -12,14 +12,13 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const livereload = require('connect-livereload');
-const coffee = require('coffee-script');
 const coffeeify = require('coffeeify');
 const browserify = require('browserify-middleware');
 const stylus = require('stylus');
 const nib = require('nib');
 const routes = require('./routes');
-const authentication = require('./authentication');
 const favicon = require('serve-favicon');
+require('./authentication');
 
 // create application instance
 const app = express();
@@ -41,26 +40,26 @@ if (app.get('env') === 'development') {
 
 // database connection
 mongoose.connect(app.get('db url'), { db: { safe: true } }, (err) => {
-  if (err == null) {
-    return console.log('Mongoose - connection OK');
-  } else if (err != null) { return console.log(`Mongoose - connection error: ${err}`); }
+  if (err !== null) {
+    return console.log(`Mongoose - connection error: ${err}`);
+  }
+  return console.log('Mongoose - connection OK');
 });
 
 // js and css for development
 if (app.get('env') === 'development') {
   // compiles stylus in memory
-  app.route('/stylesheets/styles.css')
-    .get((req, res, next) => {
-      const css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8'))
-              .set('filename', './views/stylesheets/')
-              .set('paths', ['./views/stylesheets/'])
-              .set('compress', false)
-              .set('linenos', true)
-              .use(nib())
-              .render();
-      res.set('Content-Type', 'text/css');
-      return res.send(css);
-    });
+  app.get('/stylesheets/styles.css', (req, res) => {
+    const css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8'))
+            .set('filename', './views/stylesheets/')
+            .set('paths', ['./views/stylesheets/'])
+            .set('compress', false)
+            .set('linenos', true)
+            .use(nib())
+            .render();
+    res.set('Content-Type', 'text/css');
+    return res.send(css);
+  });
 
   // compiles coffeescript in memory with Browserify
   browserify.settings('transform', [coffeeify]);
@@ -97,7 +96,7 @@ app.use(session({
   }),
 }));
 
-// passport config (see also authentication.coffee)
+// passport config
 app.use(passport.initialize());
 app.use(passport.session());
 
