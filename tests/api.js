@@ -1,6 +1,9 @@
 // server needs to be running for this test
 const superagent = require('superagent');
 const expect = require('expect');
+const mocha = require('mocha');
+
+const { describe, it } = mocha;
 const server = `http://localhost:${process.env.PORT}`;
 
 describe('rest api server', () => {
@@ -11,7 +14,7 @@ describe('rest api server', () => {
       expect(typeof res.text).toEqual('string');
       expect(res.text).toMatch(/imgur.com/);
       expect(res.text).toMatch(/\.(jpeg|jpg|gif|png)$/);
-    })
+    }),
   );
 
   it('retrieves a fail image url', () =>
@@ -21,6 +24,6 @@ describe('rest api server', () => {
       expect(typeof res.text).toEqual('string');
       expect(res.text).toMatch(/imgur.com/);
       expect(res.text).toMatch(/\.(jpeg|jpg|gif|png)$/);
-    })
+    }),
   );
 });

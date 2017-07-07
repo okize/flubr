@@ -11,7 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .js,.jsx --cache . && echo \"eslint: no lint errors found\" || true",
-    "lint:watch": "onchange \"src/**/*.js*\" -e \"build/**/*.js\" -i -- yarn lint",
+    "lint:watch": "onchange \"src/**/*.js*\" \"gulp/**/*.js*\" -e \"build/**/*.js\" -i -- yarn lint",
     "start": "node build/app.js"
   },
   "repository": {
