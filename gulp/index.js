@@ -10,4 +10,5 @@ const config = require('./config');
 const tasks = require('./helpers/getTaskList');
 
 // load all the gulp task modules
+// eslint-disable-next-line import/no-dynamic-require, global-require
 tasks().forEach(task => require(`${config.taskDir}${task}`));

@@ -1,5 +1,3 @@
-// starts up LiveReload server and the app with nodemon & mongo db
-
 const path = require('path');
 const gulp = require('gulp');
 const bg = require('gulp-bg');
@@ -9,12 +7,10 @@ const config = require('../config');
 const log = require('../helpers/log');
 
 // sends updated files to LiveReload server
-const refreshPage = function (event) {
+const refreshPage = (event) => {
   const fileName = path.relative(config.root, event.path);
   log.info(`${fileName} changed`);
-  return liveReload.changed({ body: {
-    files: [fileName],
-  } });
+  return liveReload.changed({ body: { files: [fileName] } });
 };
 
 // watches source files and triggers a page refresh on change
@@ -32,7 +28,7 @@ gulp.task('watch', () => {
 // starts up mongo
 gulp.task('start-mongo', bg('mongod', '--quiet'));
 
-// starts up application
+// starts up LiveReload server and the app with nodemon
 gulp.task('start-app', () => {
   log.info('Starting application server');
   return nodemon({
@@ -40,13 +36,12 @@ gulp.task('start-app', () => {
     env: process.env,
     nodeArgs: [`--debug=${process.env.DEBUG_PORT || 5858}`],
     ignore: config.appIgnoreDirs,
-  }).on('restart', files => log.info('app restarted')).on('start', () => {
+  }).on('restart', () => log.info('app restarted')).on('start', () => {
     const liveReloadPort = process.env.LIVE_RELOAD_PORT || 35729;
     liveReload.listen(liveReloadPort);
     return log.info(`livereload started on port ${liveReloadPort}`);
   }).on('quit', () => {
-    log.info('app closed');
     liveReload.close();
-    return gutil.beep();
+    return log.info('app closed');
   });
 });

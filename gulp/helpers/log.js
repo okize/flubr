@@ -1,11 +1,10 @@
-// small wrapper for gulp logging
-
 const gutil = require('gulp-util');
 const prettyHrtime = require('pretty-hrtime');
+
 let startTime;
 
+// small wrapper for gulp logging
 module.exports = {
-
   // info logging
   info(msg) {
     return gutil.log(gutil.colors.blue(msg));
@@ -13,14 +12,15 @@ module.exports = {
 
   // error logging
   error(err) {
+    let error = err;
     if (err.name && err.stack) {
-      err = `${gutil.colors.red(`${err.plugin}: ${err.name}: `) +
+      error = `${gutil.colors.red(`${err.plugin}: ${err.name}: `) +
             gutil.colors.bold.red(`${err.message}`)
             }\n${err.stack}`;
     } else {
-      err = gutil.colors.red(err);
+      error = gutil.colors.red(err);
     }
-    return gutil.log(err);
+    return gutil.log(error);
   },
 
   // outputs ascii logo
@@ -42,7 +42,6 @@ module.exports = {
   // displays task time since timer started
   end(task) {
     const taskTime = prettyHrtime(process.hrtime(startTime));
-    return gutil.log('Finished', gutil.colors.cyan(task),
-              'after', gutil.colors.magenta(taskTime));
+    return gutil.log('Finished', gutil.colors.cyan(task), 'after', gutil.colors.magenta(taskTime));
   },
 };

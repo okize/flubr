@@ -1,5 +1,3 @@
-// commits, tags & pushes master
-
 const fs = require('fs');
 const gulp = require('gulp');
 const runSequence = require('run-sequence');
@@ -7,20 +5,18 @@ const semver = require('semver');
 const codename = require('codename')();
 const git = require('gulp-git');
 const gift = require('gift');
-const repo = gift('./');
 
-const config = require('../config');
+const repo = gift('./');
 const getPak = require('../helpers/getPackageJson');
 const log = require('../helpers/log');
 
-gulp.task('release', callback =>
-  runSequence(
-    ['bump-version'],
-    ['tag-version'],
-    ['push-updates'],
-    callback,
-  ),
-);
+// commits, tags & pushes master
+gulp.task('release', callback => runSequence(
+  ['bump-version'],
+  ['tag-version'],
+  ['push-updates'],
+  callback,
+));
 
 // bumps version & commits new package.json
 gulp.task('bump-version', () => {
@@ -36,8 +32,8 @@ gulp.task('bump-version', () => {
   pak.version = semver.inc(pak.version, 'patch');
   fs.writeFileSync('./package.json', JSON.stringify(pak, null, '  '));
   const msg = `Built new release (v${pak.version}) codenamed ${pak.releaseCodename}`;
-  return repo.add('./', (err) => {
-    if (err) { throw err; }
+  return repo.add('./', (error) => {
+    if (error) { throw error; }
     return repo.commit(msg, { all: true }, (err) => {
       if (err) { throw err; }
       return log.info(`${msg} & committed to master`);

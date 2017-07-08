@@ -1,6 +1,7 @@
 // configuration file for Gulp tasks
 
 const path = require('path');
+
 const root = path.resolve(__dirname, '..');
 const assets = path.resolve(root, 'public');
 const coffeeDir = `${root}/views/javascripts/`;

@@ -1,6 +1,6 @@
 // parse mongodb connection url
-
-module.exports = function (url) {
+module.exports = (mongoUrl) => {
+  let url = mongoUrl;
   const prefix = 'mongodb://';
   if (url.indexOf(prefix) !== 0) {
     throw Error('Invalid mongodb URL');

@@ -1,8 +1,7 @@
-// open app in default browser
-
 const gulp = require('gulp');
 const open = require('gulp-open');
 
+// open app in default browser
 gulp.task('open', () =>
   gulp
     .src('./src/app.coffee')

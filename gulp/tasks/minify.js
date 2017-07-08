@@ -1,6 +1,3 @@
-// minifies css & js
-
-const path = require('path');
 const gulp = require('gulp');
 const rename = require('gulp-rename');
 const minifyCss = require('gulp-clean-css');
@@ -9,6 +6,7 @@ const sourcemaps = require('gulp-sourcemaps');
 
 const config = require('../config');
 
+// minifies css & js
 gulp.task('minify', [
   'minify-css',
   'minify-js',
