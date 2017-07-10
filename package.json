@@ -50,7 +50,8 @@
     "serve-favicon": "~2.4.0",
     "stylus": "~0.54.0",
     "twit": "~2.2.0",
-    "velocity-animate": "^1.5.0"
+    "velocity-animate": "^1.5.0",
+    "vinyl-buffer": "^1.0.0"
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
