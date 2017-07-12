@@ -12,8 +12,6 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const livereload = require('connect-livereload');
-const coffeeify = require('coffeeify');
-const browserify = require('browserify-middleware');
 const stylus = require('stylus');
 const nib = require('nib');
 const routes = require('./routes');
@@ -60,15 +58,6 @@ if (app.get('env') === 'development') {
     res.set('Content-Type', 'text/css');
     return res.send(css);
   });
-
-  // compiles coffeescript in memory with Browserify
-  browserify.settings('transform', [coffeeify]);
-  browserify.settings('debug', true);
-  app.get('/javascripts/scripts.js', browserify('./views/javascripts/scripts.coffee', {
-    extensions: ['.coffee'],
-    cache: false,
-    precompile: true,
-  }));
 }
 
 // gzip assets

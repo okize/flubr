@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const coffeelint = require('gulp-coffeelint');
 const csslint = require('gulp-csslint');
 const config = require('../config');
 const log = require('../helpers/log');
@@ -24,21 +23,9 @@ const cssLintConfig = {
   'known-properties': false,
 };
 
-// lints coffeescript & css
-gulp.task('lint', [
-  'lint-coffeescript',
-  'lint-css',
-]);
-
-gulp.task('lint-coffeescript', () => {
-  gulp
-    .src([config.src.app, config.src.coffee])
-    .pipe(coffeelint(`${config.root}/.coffeelintrc`).on('error', log.error))
-    .pipe(coffeelint.reporter());
-});
-
-gulp.task('lint-css', () => {
-  gulp
+// lint css
+gulp.task('lint', () => {
+  return gulp
     .src(`${config.dist.cssDir}/${config.dist.cssName}`)
     .pipe(csslint(cssLintConfig).on('error', log.error))
     .pipe(csslint.reporter());

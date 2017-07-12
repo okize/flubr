@@ -5,8 +5,7 @@ const config = require('../config');
 
 // removes distribution folder
 gulp.task('clean', () => {
-  clean([
-    config.dist.appDir,
+  return clean([
     config.dist.cssDir,
     config.dist.jsDir,
   ]);

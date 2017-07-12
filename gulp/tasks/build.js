@@ -1,32 +1,31 @@
+const path = require('path');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
-const source = require('vinyl-source-stream');
 const runSequence = require('run-sequence');
-const coffee = require('gulp-coffee');
-const browserify = require('browserify');
-const coffeeify = require('coffeeify');
 const stylus = require('gulp-stylus');
 const nib = require('nib');
+const browserify = require('browserify');
+const babelify = require('babelify');
+const source = require('vinyl-source-stream');
+const buff = require('vinyl-buffer');
+const sourcemaps = require('gulp-sourcemaps');
 
 const config = require('../config');
 
-// creates a build
-gulp.task('build', callback => runSequence(
-  ['clean'],
-  ['build-css', 'build-js', 'build-app'],
-  ['minify-css', 'minify-js'],
-  callback,
-));
+const browserifyOptions = {
+  entries: [path.join(config.src.jsDir, config.src.jsEntry)],
+  extensions: ['.js', '.jsx'],
+  debug: true,
+};
 
-// builds coffeescript source into deployable javascript
-gulp.task('build-app', () => {
-  gulp
-    .src(config.src.app)
-    .pipe(coffee({
-      bare: true,
-      sourceMap: false,
-    }).on('error', gutil.log))
-    .pipe(gulp.dest(config.dist.appDir));
+const sourcemapOptions = {
+  loadMaps: true,
+  debug: true,
+};
+
+// creates a build
+gulp.task('build', (callback) => {
+  return runSequence(['clean'], ['build-css', 'build-js'], ['minify-css', 'minify-js'], callback);
 });
 
 // builds the css
@@ -42,11 +41,15 @@ gulp.task('build-css', () => {
 
 // builds the front-end javascript
 gulp.task('build-js', () => {
-  browserify({ extensions: ['.coffee'], debug: true })
-    .add(`${config.src.coffeeDir}${config.src.coffeeEntry}`)
-    .transform(coffeeify)
+  return browserify(browserifyOptions)
+    .transform('babelify', {
+      presets: ['latest'],
+      plugins: ['babel-plugin-transform-class-properties'],
+    })
     .bundle()
-    .on('error', gutil.log)
-    .pipe(source('scripts.js'))
-    .pipe(gulp.dest(config.dist.jsDir));
+    .pipe(source(config.js.name))
+    .pipe(buff())
+    .pipe(sourcemaps.init(sourcemapOptions))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(config.js.dest));
 });

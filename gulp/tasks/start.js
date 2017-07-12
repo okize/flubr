@@ -13,13 +13,22 @@ const refreshPage = (event) => {
   return liveReload.changed({ body: { files: [fileName] } });
 };
 
+// DO NOT restart node app when files change in these directories
+const appIgnoreDirs = [
+  '.git',
+  'node_modules/**',
+  'gulp/**',
+  'views/**',
+  'tests/**',
+];
+
 // watches source files and triggers a page refresh on change
 gulp.task('watch', () => {
   const dirsToWatch = [
     config.src.app,
-    config.src.pug,
+    config.src.templates,
     config.src.stylus,
-    config.src.coffee,
+    config.src.js,
   ];
   return gulp
     .watch(dirsToWatch, refreshPage);
@@ -35,7 +44,7 @@ gulp.task('start-app', () => {
     script: config.main,
     env: process.env,
     nodeArgs: [`--debug=${process.env.DEBUG_PORT || 5858}`],
-    ignore: config.appIgnoreDirs,
+    ignore: appIgnoreDirs,
   }).on('restart', () => log.info('app restarted')).on('start', () => {
     const liveReloadPort = process.env.LIVE_RELOAD_PORT || 35729;
     liveReload.listen(liveReloadPort);
