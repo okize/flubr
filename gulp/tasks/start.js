@@ -18,8 +18,8 @@ const appIgnoreDirs = [
   '.git',
   'node_modules/**',
   'gulp/**',
-  'views/**',
   'tests/**',
+  'views/**',
 ];
 
 // watches source files and triggers a page refresh on change
@@ -30,8 +30,7 @@ gulp.task('watch', () => {
     config.src.stylus,
     config.src.js,
   ];
-  return gulp
-    .watch(dirsToWatch, refreshPage);
+  return gulp.watch(dirsToWatch, refreshPage);
 });
 
 // starts up mongo

@@ -11,22 +11,16 @@ const getPak = require('../helpers/getPackageJson');
 const log = require('../helpers/log');
 
 // commits, tags & pushes master
-gulp.task('release', callback => runSequence(
-  ['bump-version'],
-  ['tag-version'],
-  ['push-updates'],
-  callback,
-));
+gulp.task('release', (callback) => {
+  return runSequence(['bump-version'], ['tag-version'], ['push-updates'], callback);
+});
 
 // bumps version & commits new package.json
 gulp.task('bump-version', () => {
   const pak = getPak(true);
 
   // create a codename for app release
-  pak.releaseCodename = codename.generate(
-    ['alliterative', 'random'],
-    ['adjectives', 'animals'],
-  ).join('');
+  pak.releaseCodename = codename.generate(['alliterative', 'random'], ['adjectives', 'animals']).join('');
 
   // bump patch version of app
   pak.version = semver.inc(pak.version, 'patch');

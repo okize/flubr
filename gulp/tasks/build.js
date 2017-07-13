@@ -47,9 +47,9 @@ gulp.task('build-js', () => {
       plugins: ['babel-plugin-transform-class-properties'],
     })
     .bundle()
-    .pipe(source(config.js.name))
+    .pipe(source(config.src.jsEntry))
     .pipe(buff())
     .pipe(sourcemaps.init(sourcemapOptions))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(config.js.dest));
+    .pipe(gulp.dest(config.dist.jsDir));
 });
