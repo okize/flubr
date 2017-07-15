@@ -7,12 +7,12 @@
     "node": "6.11.0"
   },
   "description": "pass/fail images for chatrooms, moderated by your team members",
-  "main": "build/app.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .js,.jsx --cache . && echo \"eslint: no lint errors found\" || true",
-    "lint:watch": "onchange \"src/**/*.js*\" \"gulp/**/*.js*\" -e \"build/**/*.js\" -i -- yarn lint",
-    "start": "node build/app.js"
+    "lint:watch": "onchange \"src/**/*.js\" \"views/**/*.js*\" \"gulp/**/*.js*\" -i -- yarn lint",
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
