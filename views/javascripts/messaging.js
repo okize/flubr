@@ -35,5 +35,5 @@ export default {
 
   success(msg) {
     return this._send('success', msg);
-  }
+  },
 };

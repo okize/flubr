@@ -33,7 +33,7 @@ export default {
   },
 
   _deleteUserInUi($el, username) {
-    msg.notice(username + ' deleted!');
+    msg.notice(`${username} deleted!`);
     const $row = $el.closest('tr');
     return help.animate($row, 'deleteRow', () => $row.remove());
   },
@@ -45,39 +45,33 @@ export default {
       return $.ajax({
         type: 'DELETE',
         url: `api/users/${id}`,
-        success: response => {
-          return this._deleteUserInUi($el, response.userName);
-        },
+        success: response => this._deleteUserInUi($el, response.userName),
         error(error) {
           if (error.responseText) {
             return msg.error(JSON.parse(error.responseText).error);
-          } else {
-            return msg.error('Sorry, user could not be deleted');
           }
+          return msg.error('Sorry, user could not be deleted');
         },
-        contentType: 'application/json'
+        contentType: 'application/json',
       });
     }
   },
 
   addUser($el) {
     const data =
-      {user: $el.find('#username').val()};
+      { user: $el.find('#username').val() };
     return $.ajax({
       type: 'POST',
       url: '/api/users',
-      success: response => {
-        return this._showUserAdded(response);
-      },
+      success: response => this._showUserAdded(response),
       error(error) {
         if (error.responseText) {
           return msg.error(JSON.parse(error.responseText).error);
-        } else {
-          return msg.error('Sorry, user could not be added');
         }
+        return msg.error('Sorry, user could not be added');
       },
       contentType: 'application/json',
-      data: JSON.stringify(data)
+      data: JSON.stringify(data),
     });
-  }
+  },
 };

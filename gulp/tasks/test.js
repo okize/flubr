@@ -3,8 +3,6 @@ const mocha = require('gulp-mocha');
 const config = require('../config');
 
 // runs tests
-gulp.task('test', () => {
-  return gulp
+gulp.task('test', () => gulp
     .src(config.tests, { read: false })
-    .pipe(mocha({ reporter: 'spec' }));
-});
+    .pipe(mocha({ reporter: 'spec' })));

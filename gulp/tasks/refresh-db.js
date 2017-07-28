@@ -16,8 +16,6 @@ gulp.task('refresh-db', () => {
   const mongoRestoreCmd = `mongorestore --drop -d ${devDb.database} ${dumpDir}/${devDb.database}`;
   return mkdirp(dumpDir, (err) => {
     if (err) { throw err; }
-    return run(mongoDumpCmd).exec(() => {
-      return run(mongoRestoreCmd).exec(() => log.info('database downloaded from production and imported to development'));
-    });
+    return run(mongoDumpCmd).exec(() => run(mongoRestoreCmd).exec(() => log.info('database downloaded from production and imported to development')));
   });
 });

@@ -12,26 +12,23 @@ export default {
   addImage($el) {
     const data = {
       source_url: $el.find('#image-url').val(),
-      kind: $el.find('input[name=kind]:checked').val()
+      kind: $el.find('input[name=kind]:checked').val(),
     };
     return $.ajax({
       type: 'POST',
       url: '/api/images',
-      success: data => {
-        return this._showImageAdded(data.image_url);
-      },
+      success: data => this._showImageAdded(data.image_url),
       error(error) {
         if (error.responseText) {
           return msg.error(JSON.parse(error.responseText).error);
-        } else {
-          return msg.error('Sorry, image could not be added!');
         }
+        return msg.error('Sorry, image could not be added!');
       },
       complete() {
         return ($el).removeClass('disabled').find(':input').prop('disabled', false);
       },
       contentType: 'application/json',
-      data: JSON.stringify(data)
+      data: JSON.stringify(data),
     });
-  }
+  },
 };

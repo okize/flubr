@@ -24,9 +24,7 @@ const sourcemapOptions = {
 };
 
 // creates a build
-gulp.task('build', (callback) => {
-  return runSequence(['clean'], ['build-css', 'build-js'], ['minify-css', 'minify-js'], callback);
-});
+gulp.task('build', callback => runSequence(['clean'], ['build-css', 'build-js'], ['minify-css', 'minify-js'], callback));
 
 // builds the css
 gulp.task('build-css', () => {
@@ -40,8 +38,7 @@ gulp.task('build-css', () => {
 });
 
 // builds the front-end javascript
-gulp.task('build-js', () => {
-  return browserify(browserifyOptions)
+gulp.task('build-js', () => browserify(browserifyOptions)
     .transform('babelify', {
       presets: ['latest'],
       plugins: ['babel-plugin-transform-class-properties'],
@@ -51,5 +48,4 @@ gulp.task('build-js', () => {
     .pipe(buff())
     .pipe(sourcemaps.init(sourcemapOptions))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(config.dist.jsDir));
-});
+    .pipe(gulp.dest(config.dist.jsDir)));

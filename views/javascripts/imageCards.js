@@ -3,7 +3,7 @@ import msg from './messaging';
 import help from './helpers';
 
 // extend jQuery XHR with progress method
-(function($) {
+(function ($) {
   const originalXhr = $.ajaxSettings.xhr;
   return $.ajaxSetup({
     progress() { return $.noop(); },
@@ -16,8 +16,8 @@ import help from './helpers';
         }
       }
       return req;
-    }});
-})(jQuery);
+    } });
+}(jQuery));
 
 export default {
 
@@ -36,8 +36,8 @@ export default {
   </button>
 </div>\
 `;
-    } else {
-      return `\
+    }
+    return `\
 <div class="image-setting set-pass js-change-image-kind">
   <button class="button-icon is-pass">
     <span class="icon icon-like2"</span>
@@ -49,7 +49,6 @@ export default {
   </button>
 </div>\
 `;
-    }
   },
 
   _updateImageInUi(card, newKind, oldKind) {
@@ -60,7 +59,7 @@ export default {
     return card
       .find('.image-settings')
       .html('updated!')
-      .html( this._getImageSetHtml(newKind) );
+      .html(this._getImageSetHtml(newKind));
   },
 
   _deleteImageInUi($el) {
@@ -72,11 +71,10 @@ export default {
     if ($el.hasClass('image-card-front')) {
       $el.hide();
       return $el.closest('.image-card').find('.image-card-back').show();
-    } else {
-      const card = $el.closest('.image-card');
-      card.find('.image-card-back').hide();
-      return card.find('.image-card-front').show();
     }
+    const card = $el.closest('.image-card');
+    card.find('.image-card-back').hide();
+    return card.find('.image-card-front').show();
   },
 
   flipAllCards() {
@@ -84,10 +82,9 @@ export default {
     if (firstCard === 'none') {
       $('.image-card-front').show();
       return $('.image-card-back').hide();
-    } else {
-      $('.image-card-front').hide();
-      return $('.image-card-back').show();
     }
+    $('.image-card-front').hide();
+    return $('.image-card-back').show();
   },
 
   loadAnimation($el) {
@@ -103,7 +100,7 @@ export default {
         progress(e) {
           if (e.lengthComputable) {
             $el.find('.js-flip-card').prepend($progress);
-            const complete = parseInt( ((e.loaded / e.total) * 100), 10);
+            const complete = parseInt(((e.loaded / e.total) * 100), 10);
             return $progress.val(complete);
           }
         },
@@ -118,10 +115,9 @@ export default {
           $el.removeClass('loading');
           if (error.responseText) {
             return msg.error(JSON.parse(error.responseText).error);
-          } else {
-            return msg.error('Sorry, image kind could not be changed!');
           }
-        }
+          return msg.error('Sorry, image kind could not be changed!');
+        },
       });
     }
   },
@@ -132,7 +128,7 @@ export default {
     const oldKind = card.hasClass('image-card-pass') ? 'pass' : 'fail';
     const newKind = oldKind === 'pass' ? 'fail' : 'pass';
     const data =
-      {kind: newKind};
+      { kind: newKind };
     return $.ajax({
       type: 'PUT',
       url: `/api/images/${id}`,
@@ -143,12 +139,11 @@ export default {
       error(error) {
         if (error.responseText) {
           return msg.error(JSON.parse(error.responseText).error);
-        } else {
-          return msg.error('Sorry, image kind could not be changed!');
         }
+        return msg.error('Sorry, image kind could not be changed!');
       },
       contentType: 'application/json',
-      data: JSON.stringify(data)
+      data: JSON.stringify(data),
     });
   },
 
@@ -168,12 +163,11 @@ export default {
         error(error) {
           if (error.responseText) {
             return msg.error(JSON.parse(error.responseText).error);
-          } else {
-            return msg.error('Sorry, image could not be deleted!');
           }
+          return msg.error('Sorry, image could not be deleted!');
         },
-        contentType: 'application/json'
+        contentType: 'application/json',
       });
     }
-  }
+  },
 };

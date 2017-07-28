@@ -17,5 +17,5 @@ export default {
 
   formatTime(date) {
     return moment(date).format('lll');
-  }
+  },
 };
