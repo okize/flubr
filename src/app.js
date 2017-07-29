@@ -49,12 +49,12 @@ if (app.get('env') === 'development') {
   // compiles stylus in memory
   app.get('/stylesheets/styles.css', (req, res) => {
     const css = stylus(fs.readFileSync('./views/stylesheets/styles.styl', 'utf8'))
-            .set('filename', './views/stylesheets/')
-            .set('paths', ['./views/stylesheets/'])
-            .set('compress', false)
-            .set('linenos', true)
-            .use(nib())
-            .render();
+      .set('filename', './views/stylesheets/')
+      .set('paths', ['./views/stylesheets/'])
+      .set('compress', false)
+      .set('linenos', true)
+      .use(nib())
+      .render();
     res.set('Content-Type', 'text/css');
     return res.send(css);
   });

@@ -54,7 +54,7 @@ module.exports = {
       kind: req.params.id,
       deleted: false,
     }
-    , 'image_url', (err, results) => {
+      , 'image_url', (err, results) => {
       if (err !== null) { res.send(500, { error: err }); }
       const randomImage = _.sample(results);
       if (!(randomImage == null)) {
@@ -91,18 +91,18 @@ module.exports = {
             };
 
             return request.post(
-                options,
-                (err, response, body) => {
-                  data = JSON.parse(body);
-                  if (err) {
-                    return callback(err, null);
-                  } else if (!data.success) {
-                    return callback(data.data.error, null);
-                  } else if ((data.data.link == null)) {
-                    return callback(errors.noImageUrlReturned, null);
-                  }
-                  return callback(null, data.data.link);
-                }).form(data);
+              options,
+              (err, response, body) => {
+                data = JSON.parse(body);
+                if (err) {
+                  return callback(err, null);
+                } else if (!data.success) {
+                  return callback(data.data.error, null);
+                } else if ((data.data.link == null)) {
+                  return callback(errors.noImageUrlReturned, null);
+                }
+                return callback(null, data.data.link);
+              }).form(data);
           }
           return callback(null, url);
         },

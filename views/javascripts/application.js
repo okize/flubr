@@ -5,7 +5,7 @@ import user from './users';
 import image from './images';
 import stats from './stats';
 
-export default function () {
+const application = () => {
   let timer;
 
   const $body = $('body');
@@ -26,7 +26,7 @@ export default function () {
 
   $body.on('mouseenter', '.js-image-card', function (e) {
     return timer = setTimeout(() => imageCard.loadAnimation($(this))
-    , 500);
+      , 500);
   });
 
   $body.on('mouseleave', '.js-image-card', e => clearTimeout(timer));
@@ -51,4 +51,6 @@ export default function () {
     $(this).addClass('disabled').find(':input').prop('disabled', true);
     return image.addImage($(this));
   });
-}
+};
+
+export default application;

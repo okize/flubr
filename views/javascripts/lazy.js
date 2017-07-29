@@ -14,7 +14,7 @@ export default function (selector) {
   };
 
   // check if image has a class called 'loaded'
-  var imageLoaded = el => el.className.indexOf('loaded') > -1;
+  const imageLoaded = el => el.className.indexOf('loaded') > -1;
 
   // check if image is visible in viewport
   const imageInView = function (el) {
@@ -36,8 +36,7 @@ export default function (selector) {
           result.push(item);
         }
         return result;
-      })()
-    ;
+      })();
 
     processScroll();
 

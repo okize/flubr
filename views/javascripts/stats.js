@@ -10,6 +10,7 @@ export default {
         if (isNewer(localVersion, remoteVersion)) {
           return el.append(`<br><small>(newer version available: ${remoteVersion})</small>`);
         }
+        return null;
       });
     });
   },
