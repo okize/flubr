@@ -42,7 +42,7 @@ gulp.task('start-app', () => {
   return nodemon({
     script: config.main,
     env: process.env,
-    nodeArgs: [`--debug=${process.env.DEBUG_PORT || 5858}`],
+    nodeArgs: [`--inspect=${process.env.DEBUG_PORT || 5858}`],
     ignore: appIgnoreDirs,
   }).on('restart', () => log.info('app restarted')).on('start', () => {
     const liveReloadPort = process.env.LIVE_RELOAD_PORT || 35729;
