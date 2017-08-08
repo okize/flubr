@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import msg from './messaging';
-const lazy = require('./lazy')('image-thumbnail');
+
+require('./lazy')('image-thumbnail');
 
 export default {
-
   _showImageAdded(url) {
     msg.success(`<a href='${url}'>Image added!</a>`);
     return $('#js-add-image')[0].reset();
@@ -14,10 +14,13 @@ export default {
       source_url: $el.find('#image-url').val(),
       kind: $el.find('input[name=kind]:checked').val(),
     };
+
     return $.ajax({
       type: 'POST',
       url: '/api/images',
-      success: data => this._showImageAdded(data.image_url),
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: (data) => this._showImageAdded(data.image_url),
       error(error) {
         if (error.responseText) {
           return msg.error(JSON.parse(error.responseText).error);
@@ -27,8 +30,6 @@ export default {
       complete() {
         return ($el).removeClass('disabled').find(':input').prop('disabled', false);
       },
-      contentType: 'application/json',
-      data: JSON.stringify(data),
     });
   },
 };

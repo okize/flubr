@@ -39,12 +39,13 @@ export default {
   },
 
   deleteUser($el) {
-    const verify = confirm('Are you sure you want to delete this user?');
+    const verify = confirm('Are you sure you want to delete this user?'); // eslint-disable-line no-alert
     if (verify === true) {
       const id = $el.attr('id');
       return $.ajax({
         type: 'DELETE',
         url: `api/users/${id}`,
+        contentType: 'application/json',
         success: response => this._deleteUserInUi($el, response.userName),
         error(error) {
           if (error.responseText) {
@@ -52,9 +53,9 @@ export default {
           }
           return msg.error('Sorry, user could not be deleted');
         },
-        contentType: 'application/json',
       });
     }
+    return null;
   },
 
   addUser($el) {
