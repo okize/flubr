@@ -2,7 +2,7 @@ import $ from 'jquery';
 import key from 'keymaster';
 import cards from './imageCards';
 
-export default function () {
+const keyboard = () => {
   key('p', () => {
     if ($('#image-kind-pass').length) {
       return $('#image-kind-pass').click();
@@ -26,4 +26,6 @@ export default function () {
       return $('#image-url').focus();
     }
   });
-}
+};
+
+export default keyboard;

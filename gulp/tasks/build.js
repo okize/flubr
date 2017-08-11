@@ -37,13 +37,13 @@ gulp.task('build-css', () => {
 
 // builds the front-end javascript
 gulp.task('build-js', () => browserify(browserifyOptions)
-    .transform('babelify', {
-      presets: ['latest'],
-      plugins: ['babel-plugin-transform-class-properties'],
-    })
-    .bundle()
-    .pipe(source(config.src.jsEntry))
-    .pipe(buff())
-    .pipe(sourcemaps.init(sourcemapOptions))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(config.dist.jsDir)));
+  .transform('babelify', {
+    presets: ['latest'],
+    plugins: ['babel-plugin-transform-class-properties'],
+  })
+  .bundle()
+  .pipe(source(config.src.jsEntry))
+  .pipe(buff())
+  .pipe(sourcemaps.init(sourcemapOptions))
+  .pipe(sourcemaps.write('./'))
+  .pipe(gulp.dest(config.dist.jsDir)));

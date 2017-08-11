@@ -26,7 +26,7 @@ export default function () {
 
   $body.on('mouseenter', '.js-image-card', function (e) {
     return timer = setTimeout(() => imageCard.loadAnimation($(this))
-    , 500);
+      , 500);
   });
 
   $body.on('mouseleave', '.js-image-card', e => clearTimeout(timer));

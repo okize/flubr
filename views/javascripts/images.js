@@ -20,7 +20,7 @@ export default {
       url: '/api/images',
       contentType: 'application/json',
       data: JSON.stringify(data),
-      success: (data) => this._showImageAdded(data.image_url),
+      success: data => this._showImageAdded(data.image_url),
       error(error) {
         if (error.responseText) {
           return msg.error(JSON.parse(error.responseText).error);
