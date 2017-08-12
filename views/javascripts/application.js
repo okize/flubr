@@ -5,7 +5,7 @@ import user from './users';
 import image from './images';
 import stats from './stats';
 
-export default function () {
+const application = () => {
   let timer;
 
   const $body = $('body');
@@ -52,3 +52,5 @@ export default function () {
     return image.addImage($(this));
   });
 }
+
+export default application;
