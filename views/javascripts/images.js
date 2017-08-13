@@ -1,7 +1,8 @@
 import $ from 'jquery';
 import msg from './messaging';
+import lazy from './lazy';
 
-require('./lazy')('image-thumbnail');
+lazy('image-thumbnail');
 
 export default {
   _showImageAdded(url) {

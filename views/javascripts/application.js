@@ -51,6 +51,6 @@ const application = () => {
     $(this).addClass('disabled').find(':input').prop('disabled', true);
     return image.addImage($(this));
   });
-}
+};
 
 export default application;
