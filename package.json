@@ -80,7 +80,7 @@
     "gulp-stylus": "^2.6.0",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.0",
-    "jquery": "^3.1.0",
+    "jquery": "^3.5.0",
     "mkdirp": "^0.5.0",
     "mocha": "^3.0.0",
     "onchange": "^3.2.1",
