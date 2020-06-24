@@ -14,8 +14,8 @@ module.exports = {
   error(err) {
     let error = err;
     if (err.name && err.stack) {
-      error = `${gutil.colors.red(`${err.plugin}: ${err.name}: `) +
-            gutil.colors.bold.red(`${err.message}`)
+      error = `${gutil.colors.red(`${err.plugin}: ${err.name}: `)
+            + gutil.colors.bold.red(`${err.message}`)
       }\n${err.stack}`;
     } else {
       error = gutil.colors.red(err);

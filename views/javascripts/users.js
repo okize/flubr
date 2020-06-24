@@ -46,7 +46,7 @@ export default {
         type: 'DELETE',
         url: `api/users/${id}`,
         contentType: 'application/json',
-        success: response => this._deleteUserInUi($el, response.userName),
+        success: (response) => this._deleteUserInUi($el, response.userName),
         error(error) {
           if (error.responseText) {
             return msg.error(JSON.parse(error.responseText).error);
@@ -59,12 +59,11 @@ export default {
   },
 
   addUser($el) {
-    const data =
-      { user: $el.find('#username').val() };
+    const data = { user: $el.find('#username').val() };
     return $.ajax({
       type: 'POST',
       url: '/api/users',
-      success: response => this._showUserAdded(response),
+      success: (response) => this._showUserAdded(response),
       error(error) {
         if (error.responseText) {
           return msg.error(JSON.parse(error.responseText).error);

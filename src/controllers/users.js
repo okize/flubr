@@ -26,7 +26,7 @@ module.exports = {
       // https://dev.twitter.com/docs/error-codes-responses
       if ((error !== null) && (error.code === 34)) {
         return res.send(500, { error: `${req.body.user} is not a valid Twitter user` });
-      } else if (error !== null) {
+      } if (error !== null) {
         throw error;
       } else {
         const user = new User();

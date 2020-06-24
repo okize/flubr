@@ -5,7 +5,7 @@ const async = require('async');
 const help = require('../helpers');
 const Image = require('../models/image');
 
-const checkUrlIsImage = url => url.match(/\.(jpeg|jpg|gif|png)$/) !== null;
+const checkUrlIsImage = (url) => url.match(/\.(jpeg|jpg|gif|png)$/) !== null;
 
 const errors = {
   needToLogin: 'Action requires user to be authenticated',
@@ -25,7 +25,8 @@ module.exports = {
       (err, results) => {
         if (err !== null) { res.send(500, { error: err }); }
         return res.send(results);
-      });
+      },
+    );
   },
 
   // lists all deleted images
@@ -34,7 +35,8 @@ module.exports = {
       (err, results) => {
         if (err !== null) { res.send(500, { error: err }); }
         return res.send(results);
-      });
+      },
+    );
   },
 
   // displays single image
@@ -53,8 +55,8 @@ module.exports = {
     return Image.find({
       kind: req.params.id,
       deleted: false,
-    }
-      , 'image_url', (err, results) => {
+    },
+    'image_url', (err, results) => {
       if (err !== null) { res.send(500, { error: err }); }
       const randomImage = _.sample(results);
       if (!(randomImage == null)) {
@@ -71,7 +73,7 @@ module.exports = {
 
       if ((url === undefined) || (url === '')) {
         return res.send(422, { error: errors.noImageUrlSent });
-      } else if (!checkUrlIsImage(url)) {
+      } if (!checkUrlIsImage(url)) {
         return res.send(422, { error: errors.invalidImageUrl });
       }
       return async.series([
@@ -96,13 +98,14 @@ module.exports = {
                 data = JSON.parse(body);
                 if (err) {
                   return callback(err, null);
-                } else if (!data.success) {
+                } if (!data.success) {
                   return callback(data.data.error, null);
-                } else if ((data.data.link == null)) {
+                } if ((data.data.link == null)) {
                   return callback(errors.noImageUrlReturned, null);
                 }
                 return callback(null, data.data.link);
-              }).form(data);
+              },
+            ).form(data);
           }
           return callback(null, url);
         },

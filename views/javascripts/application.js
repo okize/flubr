@@ -25,11 +25,11 @@ const application = () => {
   });
 
   $body.on('mouseenter', '.js-image-card', function (e) {
-    return timer = setTimeout(() => imageCard.loadAnimation($(this))
-      , 500);
+    return timer = setTimeout(() => imageCard.loadAnimation($(this)),
+      500);
   });
 
-  $body.on('mouseleave', '.js-image-card', e => clearTimeout(timer));
+  $body.on('mouseleave', '.js-image-card', (e) => clearTimeout(timer));
 
   $body.on('click', '.js-delete-image', function (e) {
     e.preventDefault();

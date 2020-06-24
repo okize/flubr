@@ -22,7 +22,7 @@ const sourcemapOptions = {
 };
 
 // creates a build
-gulp.task('build', callback => runSequence(['clean'], ['build-css', 'build-js'], ['minify-css', 'minify-js'], callback));
+gulp.task('build', (callback) => runSequence(['clean'], ['build-css', 'build-js'], ['minify-css', 'minify-js'], callback));
 
 // builds the css
 gulp.task('build-css', () => {

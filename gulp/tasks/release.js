@@ -11,7 +11,7 @@ const getPak = require('../helpers/getPackageJson');
 const log = require('../helpers/log');
 
 // commits, tags & pushes master
-gulp.task('release', callback => runSequence(['bump-version'], ['tag-version'], ['push-updates'], callback));
+gulp.task('release', (callback) => runSequence(['bump-version'], ['tag-version'], ['push-updates'], callback));
 
 // bumps version & commits new package.json
 gulp.task('bump-version', () => {
@@ -43,7 +43,8 @@ gulp.task('tag-version', () => {
       `v${pak.version}`,
       `Release codename: ${pak.releaseCodename}`,
       { args: ' --annotate' },
-      () => log.info(`Tagged version ${pak.version}`));
+      () => log.info(`Tagged version ${pak.version}`),
+    );
 });
 
 // push commits to github

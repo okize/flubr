@@ -12,11 +12,12 @@ import help from './helpers';
       const that = this;
       if (req) {
         if (typeof req.addEventListener === 'function') {
-          req.addEventListener('progress', (e => that.progress(e)), false);
+          req.addEventListener('progress', ((e) => that.progress(e)), false);
         }
       }
       return req;
-    } });
+    },
+  });
 }(jQuery));
 
 export default {
@@ -127,8 +128,7 @@ export default {
     const id = card.attr('id');
     const oldKind = card.hasClass('image-card-pass') ? 'pass' : 'fail';
     const newKind = oldKind === 'pass' ? 'fail' : 'pass';
-    const data =
-      { kind: newKind };
+    const data = { kind: newKind };
     return $.ajax({
       type: 'PUT',
       url: `/api/images/${id}`,

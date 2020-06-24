@@ -1,7 +1,6 @@
 // modules
 const path = require('path');
 const fs = require('fs');
-const pak = require('../package.json');
 const express = require('express');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
@@ -14,8 +13,9 @@ const passport = require('passport');
 const livereload = require('connect-livereload');
 const stylus = require('stylus');
 const nib = require('nib');
-const routes = require('./routes');
 const favicon = require('serve-favicon');
+const routes = require('./routes');
+const pak = require('../package.json');
 require('./authentication');
 
 // create application instance

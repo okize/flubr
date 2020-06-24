@@ -12,11 +12,10 @@ export default {
       case 'warning': icon = 'exclamation-circle'; break;
       case 'success': icon = 'check-circle'; break;
     }
-    const $html =
-      $('<li />')
-        .addClass(`flash-${type} flag`)
-        .append(`<span class='icon icon-${icon} flag-image'></span>`)
-        .append(`<span class='flag-body'>${msg}</span>`);
+    const $html = $('<li />')
+      .addClass(`flash-${type} flag`)
+      .append(`<span class='icon icon-${icon} flag-image'></span>`)
+      .append(`<span class='flag-body'>${msg}</span>`);
     $('#messaging').prepend($html);
     return help.animate($html, 'pop');
   },

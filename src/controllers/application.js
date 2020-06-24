@@ -88,7 +88,7 @@ module.exports = {
     return Image.find({ deleted: true }).sort({ created_at: 'descending' }).exec(
       (err, results) => {
         if (err) { throw err; }
-        const images = _.map(results, image => ({
+        const images = _.map(results, (image) => ({
           id: image._id,
           imageUrl: image.image_url,
           thumbnailUrl: getThumbnail(image.image_url),
@@ -103,7 +103,8 @@ module.exports = {
           imageList: images,
           deleted: true,
         });
-      });
+      },
+    );
   },
 
   // statistics page
@@ -141,7 +142,7 @@ module.exports = {
   users(req, res) {
     return User.find({}, (err, users) => {
       if (err) { throw err; }
-      const userList = _.map(users, user => ({
+      const userList = _.map(users, (user) => ({
         id: user.userid,
         name: user.displayName,
         twitterHandle: user.userName,

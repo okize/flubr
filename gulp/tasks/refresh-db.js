@@ -9,7 +9,9 @@ const parseMongoUrl = require('../helpers/parseMongoUrl');
 // download production db and import to localdb (logout first)
 gulp.task('refresh-db', () => {
   const devDb = parseMongoUrl(process.env.MONGODB_DEV_URL);
-  const { host, port, database, username, password } = parseMongoUrl(process.env.MONGODB_PROD_URL || process.env.MONGOHQ_URL);
+  const {
+    host, port, database, username, password,
+  } = parseMongoUrl(process.env.MONGODB_PROD_URL || process.env.MONGOHQ_URL);
   const dateStamp = moment().format('YYYYMMDD-hhmmss');
   const dumpDir = `${config.root}/dump/${dateStamp}`;
   const mongoDumpCmd = `mongodump --host ${host}:${port} --db ${database} -u ${username} -p${password} -o ${dumpDir}`;

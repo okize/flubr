@@ -3,7 +3,7 @@ import $ from 'jquery';
 export default function () {
   // homepage random images
   const getRandomImage = (el, type) => {
-    $.get(`/api/images/random/${type}`, data => el.append(`<img src='${data}' />`));
+    $.get(`/api/images/random/${type}`, (data) => el.append(`<img src='${data}' />`));
   };
 
   const randomPassImage = $('#random-pass-image');

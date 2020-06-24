@@ -14,7 +14,7 @@ export default function (selector) {
   };
 
   // check if image has a class called 'loaded'
-  const imageLoaded = el => el.className.indexOf('loaded') > -1;
+  const imageLoaded = (el) => el.className.indexOf('loaded') > -1;
 
   // check if image is visible in viewport
   const imageInView = function (el) {
@@ -25,18 +25,17 @@ export default function (selector) {
   return window.addEventListener('load', () => {
     const images = document.querySelectorAll(`img.${selector || 'lazy'}`);
 
-    const processScroll = () =>
-      (() => {
-        const result = [];
-        for (const image of Array.from(images)) {
-          let item;
-          if (imageInView(image)) {
-            item = loadImage(image);
-          }
-          result.push(item);
+    const processScroll = () => (() => {
+      const result = [];
+      for (const image of Array.from(images)) {
+        let item;
+        if (imageInView(image)) {
+          item = loadImage(image);
         }
-        return result;
-      })();
+        result.push(item);
+      }
+      return result;
+    })();
 
     processScroll();
 
