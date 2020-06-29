@@ -9,7 +9,7 @@
   "description": "pass/fail images for chatrooms, moderated by your team members",
   "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./tests/**/*.js",
     "lint": "eslint --ext .js,.jsx --cache . && echo \"eslint: no lint errors found\" || true",
     "lint:fix": "eslint --ext .js,.jsx --cache . --fix",
     "lint:watch": "onchange \"src/**/*.js\" \"views/**/*.js*\" \"gulp/**/*.js*\" -i -- yarn lint",
