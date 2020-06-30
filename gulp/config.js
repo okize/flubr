@@ -9,7 +9,6 @@ const stylusDir = `${root}/views/stylesheets/`;
 
 module.exports = {
   root,
-  tests: `${root}/tests/**/*.js`,
   taskDir: `${root}/gulp/tasks/`,
   main: `${root}/src/app.js`,
 

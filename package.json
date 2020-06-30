@@ -70,7 +70,6 @@
     "gulp-bg": "^0.0.9",
     "gulp-clean-css": "^3.4.1",
     "gulp-git": "^2.0.0",
-    "gulp-mocha": "^4.0.0",
     "gulp-nodemon": "^2.2.0",
     "gulp-open": "^2.0.0",
     "gulp-rename": "^1.2.0",
