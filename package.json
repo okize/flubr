@@ -59,7 +59,7 @@
     "cli-table": "^0.3.0",
     "codename": "^0.0.6",
     "del": "4.0.0",
-    "dotenv": "^4.0.0",
+    "dotenv": "^5.0.0",
     "dotenv-assert": "^3.0.0",
     "eslint": "^7.0.0",
     "eslint-config-airbnb-base": "^14.0.0",
