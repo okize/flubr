@@ -46,7 +46,7 @@
     "nib": "^1.1.0",
     "passport": "^0.3.0",
     "passport-twitter": "^1.0.0",
-    "pug": "^2.0.0-rc.2",
+    "pug": "^3.0.1",
     "request": "^2.81.0",
     "serve-favicon": "^2.4.0",
     "stylus": "^0.54.0",
