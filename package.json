@@ -24,7 +24,7 @@
   "bugs": "https://github.com/okize/flubr/issues",
   "license": "MIT",
   "dependencies": {
-    "async": "^2.4.1",
+    "async": "^3.2.2",
     "body-parser": "^1.17.0",
     "browserify": "^14.4.0",
     "browserify-middleware": "^7.1.0",
